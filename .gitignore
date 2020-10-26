@@ -1,4 +1,6 @@
 *.class
+token.*
 bin/
 target/
 .settings/
+.vscode/
