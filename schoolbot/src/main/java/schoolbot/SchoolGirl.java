@@ -44,7 +44,7 @@ public class SchoolGirl extends ListenerAdapter {
         // All other events will be disabled.
         JDABuilder.createLight(cum, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
             .addEventListeners(new SchoolGirl())
-            .setActivity(Activity.playing("Type !ping"))
+            .setActivity(Activity.playing("with school textbooks"))
             .build();
     }
     
@@ -52,14 +52,14 @@ public class SchoolGirl extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event)
     {
         Message msg = event.getMessage();
-        if (msg.getContentRaw().equals("school.ping"))
+        if (msg.getContentRaw().equals("++ping"))
         {
             MessageChannel channel = event.getChannel();
             long time = System.currentTimeMillis();
             channel.sendMessage("Pong!") /* => RestAction<Message> */
                    .queue(response -> {
                        response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue();
-                   });
+                    });
         }
     }
 }
