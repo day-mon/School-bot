@@ -3,6 +3,8 @@ package schoolbot;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
 
 import javax.security.auth.login.LoginException;
 
@@ -20,22 +22,27 @@ import net.dv8tion.jda.api.hooks.*;
 
 public class SchoolGirl extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
-        if (args.length < 1) {
-            System.out.println("You have to provide a token as first argument!");
-            System.exit(1);
-        }
+        // if (args.length < 1) {
+        //     System.out.println("You have to provide a token as first argument!");
+        //     System.exit(1);
+        // }
+
+        String cum = "fuck off";
 
         try {
-            FileReader fr = new FileReader(new File("schoolbot\\src\\main\\files\\token.txt"));
+            BufferedReader fr = new BufferedReader(new FileReader( new File("schoolbot\\src\\main\\files\\token.txt")));
+            cum = fr.readLine();
+            System.out.println(cum);
         } catch (FileNotFoundException e) {
-            System.out.println("Wow you're shit at coding");
             e.printStackTrace();
+        } catch (IOException iox){
+            iox.printStackTrace();
         }
 
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.
-        JDABuilder.createLight(args[0], GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
+        JDABuilder.createLight(cum, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
             .addEventListeners(new SchoolGirl())
             .setActivity(Activity.playing("Type !ping"))
             .build();
