@@ -1,4 +1,4 @@
-package schoolbot;
+package schoolbot.natives;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -66,7 +66,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
      * @return 
      */
     public void addClass(Classroom clazz){
-        this.myClasses.put(clazz.getClassID(), clazz);
+        this.myClasses.putIfAbsent(clazz.getClassID(), clazz);
     }
 
     /** 

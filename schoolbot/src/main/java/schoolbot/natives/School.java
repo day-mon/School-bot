@@ -1,4 +1,4 @@
-package schoolbot;
+package schoolbot.natives;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -106,7 +106,7 @@ public class School {
         pretyifyEmbed.setDescription("School name: " + schoolName + "\n" + 
                                      "Number of students: " + listOfClasses.size() + "\n" + 
                                      "Number of Classes: " + listOfStudents.size());
-        pretyifyEmbed.setFooter("Generated on: " +  dateGenerated.getMonth() + "/" + dateGenerated.getDay() + "/" + dateGenerated.getYear())
+        pretyifyEmbed.setFooter("Generated on: " +  dateGenerated.getMonth() + "/" + dateGenerated.getDay() + "/" + dateGenerated.getYear());
         return pretyifyEmbed;
           
       }
@@ -161,8 +161,7 @@ public class School {
 
       @Override
       public String toString() {
-          return "School [listOfClasses= " + listOfClasses + ", listOfStudents= " + listOfStudents + ", schoolName= " 
-                  + schoolName + "]";
+          return "School [listOfClasses= " + listOfClasses + ", listOfStudents= " + listOfStudents + ", schoolName= " + schoolName + "]";
       }
 
       @Override

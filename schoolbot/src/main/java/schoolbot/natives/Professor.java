@@ -1,4 +1,4 @@
-package schoolbot;
+package schoolbot.natives;
 
 import java.util.HashMap;
 
