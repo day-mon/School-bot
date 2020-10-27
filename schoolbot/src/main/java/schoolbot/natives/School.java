@@ -17,6 +17,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class School {
 
     private String schoolName;
+    private String emailSuffix;
     private HashMap<String, Classroom> listOfClasses;
     private HashMap<String, Student> listOfStudents;
     
@@ -28,8 +29,9 @@ public class School {
         this.schoolName = schoolName;
     }
 
-    public School(String schoolname, HashMap<String, Classroom> listOfClasses, HashMap<String, Student> listOfStudents) {
+    public School(String schoolname, String emailSuffix, HashMap<String, Classroom> listOfClasses, HashMap<String, Student> listOfStudents) {
         this.schoolName = schoolname;
+        this.emailSuffix = emailSuffix;
         this.listOfClasses = listOfClasses;
         this.listOfStudents = listOfStudents;
     }
@@ -159,45 +161,52 @@ public class School {
         }
       
 
-      @Override
-      public String toString() {
-          return "School [listOfClasses= " + listOfClasses + ", listOfStudents= " + listOfStudents + ", schoolName= " + schoolName + "]";
-      }
+        @Override
+        public String toString() {
+            return "School [emailSuffix=" + emailSuffix + ", listOfClasses=" + listOfClasses + ", listOfStudents="
+                    + listOfStudents + ", schoolName=" + schoolName + "]";
+        }
 
-      @Override
-      public int hashCode() {
-          final int prime = 31;
-          int result = 1;
-          result = prime * result + ((listOfClasses == null) ? 0 : listOfClasses.hashCode());
-          result = prime * result + ((listOfStudents == null) ? 0 : listOfStudents.hashCode());
-          result = prime * result + ((schoolName == null) ? 0 : schoolName.hashCode());
-          return result;
-      }
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((emailSuffix == null) ? 0 : emailSuffix.hashCode());
+            result = prime * result + ((listOfClasses == null) ? 0 : listOfClasses.hashCode());
+            result = prime * result + ((listOfStudents == null) ? 0 : listOfStudents.hashCode());
+            result = prime * result + ((schoolName == null) ? 0 : schoolName.hashCode());
+            return result;
+        }
 
-      @Override
-      public boolean equals(Object obj) {
-          if (this == obj)
-              return true;
-          if (obj == null)
-              return false;
-          if (getClass() != obj.getClass())
-              return false;
-          School other = (School) obj;
-          if (listOfClasses == null) {
-              if (other.listOfClasses != null)
-                  return false;
-          } else if (!listOfClasses.equals(other.listOfClasses))
-              return false;
-          if (listOfStudents == null) {
-              if (other.listOfStudents != null)
-                  return false;
-          } else if (!listOfStudents.equals(other.listOfStudents))
-              return false;
-          if (schoolName == null) {
-              if (other.schoolName != null)
-                  return false;
-          } else if (!schoolName.equals(other.schoolName))
-              return false;
-          return true;
-      }
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            School other = (School) obj;
+            if (emailSuffix == null) {
+                if (other.emailSuffix != null)
+                    return false;
+            } else if (!emailSuffix.equals(other.emailSuffix))
+                return false;
+            if (listOfClasses == null) {
+                if (other.listOfClasses != null)
+                    return false;
+            } else if (!listOfClasses.equals(other.listOfClasses))
+                return false;
+            if (listOfStudents == null) {
+                if (other.listOfStudents != null)
+                    return false;
+            } else if (!listOfStudents.equals(other.listOfStudents))
+                return false;
+            if (schoolName == null) {
+                if (other.schoolName != null)
+                    return false;
+            } else if (!schoolName.equals(other.schoolName))
+                return false;
+            return true;
+        }
 }
