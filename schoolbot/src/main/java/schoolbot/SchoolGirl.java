@@ -23,8 +23,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.*;
 
 
-/** SchoolGirl is a bot designed to be 
- * 
+/** 
+ * Alias: Mesukousei, only by Elsklivet. :}
  */
 public class SchoolGirl extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
