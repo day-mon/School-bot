@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 
 import javax.security.auth.login.LoginException;
@@ -26,11 +27,17 @@ public class SchoolGirl extends ListenerAdapter {
         //     System.out.println("You have to provide a token as first argument!");
         //     System.exit(1);
         // }
-
+        
+        String username = System.getProperty("user.name");
         String cum = "fuck off";
 
-        try {
-            BufferedReader fr = new BufferedReader(new FileReader( new File("schoolbot\\src\\main\\files\\token.txt")));
+
+    
+        try {       
+
+            //School-Bot\schoolbot\src\main\files\token.txt
+        
+            BufferedReader fr = new BufferedReader(new FileReader( new File(username.charAt(0) < 'd' ?  "schoolbot\\src\\main\\files\\token.txt" : "School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
             cum = fr.readLine();
             System.out.println(cum);
         } catch (FileNotFoundException e) {
