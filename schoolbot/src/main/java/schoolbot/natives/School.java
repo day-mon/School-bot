@@ -106,7 +106,7 @@ public class School {
         pretyifyEmbed.setDescription("School name: " + schoolName + "\n" + 
                                      "Number of students: " + listOfClasses.size() + "\n" + 
                                      "Number of Classes: " + listOfStudents.size());
-        pretyifyEmbed.setFooter("Generated on: " +  dateGenerated.getMonth() + "/" + dateGenerated.getDay() + "/" + dateGenerated.getYear())
+        pretyifyEmbed.setFooter("Generated on: " +  dateGenerated.getMonth() + "/" + dateGenerated.getDay() + "/" + dateGenerated.getYear());
         return pretyifyEmbed;
           
       }
