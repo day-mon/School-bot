@@ -1,12 +1,13 @@
 package schoolbot;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 
-/** A student: Mesukousei's way of handling users.
+/** A student: Joshigakusei's way of handling users.
  * @author Elsklivet#8867
  */
 public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
@@ -19,7 +20,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
      * List of classes this student is in.
      * 
      */
-    private ArrayList<Classroom> myClasses; // We're gonna make this a hashmap<string, classroom>
+    private HashMap<String, Classroom> myClasses; 
     /**
      * Student's GPA.
      * 
@@ -29,7 +30,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
      * List of student's majors/minors
      * 
      */
-    private ArrayList<String> majors;
+    private LinkedList<String> majors;
     /**
      * Student's real name
      * 
@@ -43,15 +44,29 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
      */
     public Student(GuildImpl guild, User user) {
         super(guild, user);
+        this.myClasses = null;
+        this.mySchool = null;
+        this.GPA = -1.0;
+        this.majors = null;
+        this.realName = "John Doe";
     }
 
-    public Student(GuildImpl guild, User user, School mySch, double GPA, String major, String realName) {
+    public Student(GuildImpl guild, User user, School mySch, double GPA, String[] major, String realName) {
         super(guild, user);
-
+        this.myClasses = new HashMap<String, Classroom>();
+        this.mySchool = mySch;
+        this.GPA = GPA;
+        this.majors = new LinkedList<String>();
+        for(String maj : major) this.majors.add(maj);
+        this.realName = realName;
     }
 
+    /** Remove a class from this student's schedule.
+     * @param clazz Class ({@code Classroom}) to remove
+     * @return 
+     */
     public void addClass(Classroom clazz){
-        this.myClasses.add(clazz);
+        this.myClasses.put(clazz.getClassID(), clazz);
     }
 
     /** 
@@ -62,16 +77,13 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
     }
 
     /** Remove a class from this student's schedule.
-     * @deprecated This is not finished: will use hashmap later.
      * @param clazz Class ({@code Classroom}) to remove
      * @return 
      */
     public boolean removeClass(Classroom clazz){
-        for(Classroom clazzy : myClasses){
-            if(clazz.equals(clazzy)){
-                myClasses.remove(clazzy);
-                return true;
-            }
+        if(myClasses.containsKey(clazz.getClassID())){
+            myClasses.remove(clazz.getClassID());
+            return true;
         }
         return false;
     }
@@ -85,11 +97,11 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
         this.mySchool = mySchool;
     }
 
-    public ArrayList<Classroom> getClasses() {
+    public HashMap<String, Classroom> getClasses() {
         return myClasses;
     }
 
-    public void setClasses(ArrayList<Classroom> myClasses) {
+    public void setClasses(HashMap<String, Classroom> myClasses) {
         this.myClasses = myClasses;
     }
 
@@ -101,11 +113,11 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
         GPA = gPA;
     }
 
-    public ArrayList<String> getMajors() {
+    public LinkedList<String> getMajors() {
         return majors;
     }
 
-    public void setMajors(ArrayList<String> majors) {
+    public void setMajors(LinkedList<String> majors) {
         this.majors = majors;
     }
 

@@ -24,7 +24,7 @@ import net.dv8tion.jda.api.hooks.*;
 
 
 /** 
- * Alias: Mesukousei, only by Elsklivet. :}
+ * Alias: Joshigakusei, only by Elsklivet. :}
  */
 public class SchoolGirl extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {

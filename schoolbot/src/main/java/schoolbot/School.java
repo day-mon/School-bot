@@ -1,6 +1,7 @@
 package schoolbot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -10,19 +11,18 @@ public class School {
      * 
      */
     private String schoolName;
-    private ArrayList<Classroom> listOfClasses;
-    private ArrayList<Student> listOfStudents;
-    private 
+    private HashMap<String, Classroom> listOfClasses;
+    private HashMap<String, Student> listOfStudents;
     
-    School() {
+    public School() {
         
     }
 
-    School(String schoolName) {
+    public School(String schoolName) {
         this.schoolName = schoolName;
     }
 
-    School(String schoolname,  ArrayList<Classroom> listOfClasses, ArrayList<Student> listOfStudents) {
+    School(String schoolname,  HashMap<String, Classroom> listOfClasses, HashMap<String, Student> listOfStudents) {
         this.schoolName = schoolname;
         this.listOfClasses = listOfClasses;
         this.listOfStudents = listOfStudents;
@@ -36,7 +36,7 @@ public class School {
      /**
       * @return list of all classes at the university
       */
-     public ArrayList<Classroom> getListOfClasses() {
+     public HashMap<String, Classroom> getListOfClasses() {
          return listOfClasses;
      }
      
@@ -52,7 +52,7 @@ public class School {
       * 
       * @return
       */
-     public ArrayList<Student> getListOfStudents() {
+     public HashMap<String,Student> getListOfStudents() {
          return listOfStudents;
      }
 
@@ -60,7 +60,7 @@ public class School {
        * 
        * @param listOfClasses
        */
-      public void setListOfClasses(ArrayList<Classroom> listOfClasses) {
+      public void setListOfClasses(HashMap<String, Classroom> listOfClasses) {
           this.listOfClasses = listOfClasses;
       }
       
@@ -68,7 +68,7 @@ public class School {
        * 
        * @param listOfStudents
        */
-      public void setListOfStudents(ArrayList<Student> listOfStudents) {
+      public void setListOfStudents(HashMap<String, Student> listOfStudents) {
           this.listOfStudents = listOfStudents;
       }
 
@@ -85,7 +85,6 @@ public class School {
       }
 
       public boolean removeStudent(Student student) {
-         for ()
       } 
 
 
