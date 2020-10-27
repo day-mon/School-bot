@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.EnumSet;
 import java.io.BufferedReader;
 
 import javax.security.auth.login.LoginException;
@@ -20,6 +21,10 @@ import net.dv8tion.jda.api.events.channel.text.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.*;
 
+
+/** SchoolGirl is a bot designed to be 
+ * 
+ */
 public class SchoolGirl extends ListenerAdapter {
     public static void main(String[] args) throws LoginException {
         // if (args.length < 1) {
@@ -30,7 +35,7 @@ public class SchoolGirl extends ListenerAdapter {
         String cum = "fuck off";
 
         try {
-            BufferedReader fr = new BufferedReader(new FileReader( new File("schoolbot\\src\\main\\files\\token.txt")));
+            BufferedReader fr = new BufferedReader(new FileReader(new File("schoolbot\\src\\main\\files\\token.txt")));
             cum = fr.readLine();
             System.out.println(cum);
         } catch (FileNotFoundException e) {
@@ -42,7 +47,7 @@ public class SchoolGirl extends ListenerAdapter {
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.
-        JDABuilder.createLight(cum, GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
+        JDABuilder.createLight(cum, EnumSet.allOf(GatewayIntent.class))
             .addEventListeners(new SchoolGirl())
             .setActivity(Activity.playing("with school textbooks"))
             .build();
