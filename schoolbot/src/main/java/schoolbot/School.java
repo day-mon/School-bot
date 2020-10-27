@@ -1,28 +1,30 @@
 package schoolbot;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.awt.Color;
+import java.awt.color.*;
+
+import com.iwebpp.crypto.TweetNaclFast.Hash;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.events.Event;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class School {
-    /**
-     * 
-     */
+
     private String schoolName;
-    private ArrayList<Classroom> listOfClasses;
-    private ArrayList<Student> listOfStudents;
-    private 
+    private HashMap<String, Classroom> listOfClasses;
+    private HashMap<String, Student> listOfStudents;
     
-    School() {
-        
-    }
 
     School(String schoolName) {
         this.schoolName = schoolName;
     }
 
-    School(String schoolname,  ArrayList<Classroom> listOfClasses, ArrayList<Student> listOfStudents) {
+    School(String schoolname, HashMap<String, Classroom> listOfClasses, HashMap<String, Student> listOfStudents) {
         this.schoolName = schoolname;
         this.listOfClasses = listOfClasses;
         this.listOfStudents = listOfStudents;
@@ -36,7 +38,7 @@ public class School {
      /**
       * @return list of all classes at the university
       */
-     public ArrayList<Classroom> getListOfClasses() {
+     public HashMap<String, Classroom> getListOfClasses() {
          return listOfClasses;
      }
      
@@ -52,7 +54,7 @@ public class School {
       * 
       * @return
       */
-     public ArrayList<Student> getListOfStudents() {
+     public HashMap<String, Student> getListOfStudents() {
          return listOfStudents;
      }
 
@@ -60,7 +62,7 @@ public class School {
        * 
        * @param listOfClasses
        */
-      public void setListOfClasses(ArrayList<Classroom> listOfClasses) {
+      public void setListOfClasses(HashMap<String, Classroom> listOfClasses) {
           this.listOfClasses = listOfClasses;
       }
       
@@ -68,7 +70,7 @@ public class School {
        * 
        * @param listOfStudents
        */
-      public void setListOfStudents(ArrayList<Student> listOfStudents) {
+      public void setListOfStudents(HashMap<String, Student> listOfStudents) {
           this.listOfStudents = listOfStudents;
       }
 
@@ -81,19 +83,77 @@ public class School {
       }
 
       public void addStudent(Student student) {
-          listOfStudents.add(student);
+          listOfStudents.put(student.getRealName() ,student);
       }
 
       public boolean removeStudent(Student student) {
-         for ()
+          if (!listOfStudents.containsKey(student.getRealName())) return false;
+          else listOfClasses.remove(student.getRealName()); return true;
+
       } 
 
 
       public EmbedBuilder getAsEmbed() {
+        Date dateGenerated = new Date();
         EmbedBuilder pretyifyEmbed = new EmbedBuilder();
-        p; 
+        pretyifyEmbed.setTitle(":books: " + captializer(schoolName) + " :books:");
+        pretyifyEmbed.setColor(Color.blue);
+        pretyifyEmbed.setTitle(":books: University Information :books:");
+        pretyifyEmbed.setDescription("School name: " + schoolName + "\n" + 
+                                     "Number of students: " + listOfClasses.size() + "\n" + 
+                                     "Number of Classes: " + listOfStudents.size());
+        pretyifyEmbed.setFooter("Generated on: " +  dateGenerated.getMonth() + "/" + dateGenerated.getDay() + "/" + dateGenerated.getYear())
+        return pretyifyEmbed;
           
       }
+
+      private String captializer(String str) {
+            //if string is null or empty, return empty string
+            if(str == null || str.length() == 0)
+                return "";
+            
+            /* 
+             * if string contains only one char,
+             * make it capital and return 
+             */
+            if(str.length() == 1)
+                return str.toUpperCase();
+            
+            
+            /*
+             * Split the string by space
+             */
+            String[] words = str.split(" ");
+            
+            //create empty StringBuilder with same length as string
+            StringBuilder sbCapitalizedWords = new StringBuilder(str.length());
+            
+            /*
+             * For each word, 
+             *     1. get first character using substring
+             *     2. Make it upper case and append to string builder
+             *     3. append the rest of the characters as-is to string builder
+             *     4. append space to string builder
+             */
+            for(String word : words){            
+                
+                if(word.length() > 1)
+                    sbCapitalizedWords
+                        .append(word.substring(0, 1).toUpperCase())
+                        .append(word.substring(1));
+                else
+                    sbCapitalizedWords.append(word.toUpperCase());
+                
+                sbCapitalizedWords.append(" ");
+            }
+            
+            /*
+             * convert StringBuilder to string, also
+             * remove last space from it using trim method
+             */
+            return sbCapitalizedWords.toString().trim();
+        }
+      
 
       @Override
       public String toString() {
