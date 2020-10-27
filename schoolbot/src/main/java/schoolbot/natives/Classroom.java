@@ -8,6 +8,7 @@ public class Classroom {
     private Date time;
     private String year;
     private int credits;
+    private Professor professor;
 
     public Classroom() {
 
