@@ -41,14 +41,14 @@ public class SchoolGirl extends ListenerAdapter {
         // }
         
         String username = System.getProperty("user.name");
-        String cum = "fuck off";
+        String ian = "no <3";
 
 
     
         try {       
             BufferedReader fr = new BufferedReader(new FileReader( new File(username.charAt(0) < 'd' ?  "schoolbot\\src\\main\\files\\token.txt" : "School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
-            cum = fr.readLine();
-            System.out.println(cum);
+            ian = fr.readLine();
+            System.out.println(ian);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException iox){
@@ -58,7 +58,7 @@ public class SchoolGirl extends ListenerAdapter {
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.
-        JDABuilder.createLight(cum, EnumSet.allOf(GatewayIntent.class))
+        JDABuilder.createLight(ian, EnumSet.allOf(GatewayIntent.class))
             .addEventListeners(new SchoolGirl())
             .setStatus(OnlineStatus.DO_NOT_DISTURB)
             .setActivity(Activity.playing("with school textbooks"))
