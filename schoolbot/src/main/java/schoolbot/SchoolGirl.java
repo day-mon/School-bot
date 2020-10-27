@@ -16,6 +16,7 @@ import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.*;
 import net.dv8tion.jda.annotations.*;
 import net.dv8tion.jda.api.requests.*;
@@ -38,6 +39,7 @@ public class SchoolGirl extends ListenerAdapter {
     private final static String damonID = "105141507996061696";
     private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
 
+    public static TextChannel channel;
 
 
     public static void main(String[] args) throws LoginException {
@@ -78,6 +80,19 @@ public class SchoolGirl extends ListenerAdapter {
         hashmap get command by id:
             command.run
     */
+
+    /**
+     * Intilizies a text channel so we dont have to grab in every file.
+     * @param tc
+     */
+    public static void init (TextChannel tc) {
+        channel = tc;
+    }
+
+    public static void sendMsg(String message) {
+        channel.sendTyping().queue();
+        channel.sendMessage(message).queue();
+    }
     
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
