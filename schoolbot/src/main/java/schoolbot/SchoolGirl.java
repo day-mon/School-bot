@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.*;
 import net.dv8tion.jda.annotations.*;
 import net.dv8tion.jda.api.requests.*;
@@ -32,6 +33,7 @@ public class SchoolGirl extends ListenerAdapter {
     private final static String gavinID = "348235152972972042";
     private final static String damonID = "105141507996061696";
 
+    public static TextChannel channel;
 
 
     public static void main(String[] args) throws LoginException {
@@ -63,6 +65,20 @@ public class SchoolGirl extends ListenerAdapter {
             .setStatus(OnlineStatus.DO_NOT_DISTURB)
             .setActivity(Activity.playing("with school textbooks"))
             .build();
+    }
+
+
+    /**
+     * Intilizies a text channel so we dont have to grab in every file.
+     * @param tc
+     */
+    public static void init (TextChannel tc) {
+        channel = tc;
+    }
+
+    public static void sendMsg(String message) {
+        channel.sendTyping().queue();
+        channel.sendMessage(message).queue();
     }
     
     @Override
