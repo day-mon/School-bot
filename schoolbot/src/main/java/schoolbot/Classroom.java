@@ -8,12 +8,13 @@ public class Classroom {
     private Date time;
     private String year;
     private int credits;
+    private Professor professor;
 
     public Classroom() {
 
     }
 
-    public Classroom(String classID, Date time, String year, int credits) {
+    public Classroom(String classID, Date time, String year, int credits, Professor professor) {
         this.classID = classID;
         this.time = time;
         if (!year.equalsIgnoreCase("freshman") || (!year.equalsIgnoreCase("sophmore") || !year.equalsIgnoreCase("junior") || (!year.equalsIgnoreCase("senior")) {
@@ -24,6 +25,7 @@ public class Classroom {
         }
         this.year = year;
         this.credits = credits;
+        this.professor = professor;
     }
 
     public String getClassID() {

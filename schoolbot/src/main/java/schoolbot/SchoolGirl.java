@@ -53,6 +53,7 @@ public class SchoolGirl extends ListenerAdapter {
         // All other events will be disabled.
         JDABuilder.createLight(cum, EnumSet.allOf(GatewayIntent.class))
             .addEventListeners(new SchoolGirl())
+            .setStatus(OnlineStatus.DO_NOT_DISTURB)
             .setActivity(Activity.playing("with school textbooks"))
             .build();
     }
