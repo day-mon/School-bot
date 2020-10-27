@@ -1,6 +1,5 @@
 package schoolbot;
 
-java.lang.Throwable;
 /** Basic String operations that will be useful for a bot.
  * @author Elsklivet#8867
  */
