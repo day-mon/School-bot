@@ -87,7 +87,7 @@ public class School {
       }
 
       public void addStudent(Student student) {
-          listOfStudents.put(student.getRealName() ,student);
+          listOfStudents.putIfAbsent(student.getRealName(), student);
       }
 
       public boolean removeStudent(Student student) {
