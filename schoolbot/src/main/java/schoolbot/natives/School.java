@@ -107,7 +107,7 @@ public class School {
         pretyifyEmbed.setTitle(":books: University Information :books:");
         pretyifyEmbed.setDescription("School name: " + schoolName + "\n" + 
                                      "Number of students: " + listOfClasses.size() + "\n" + 
-                                     "Number of Classes: " + listOfStudents.size());
+                                     "Number of classes: " + listOfStudents.size());
         pretyifyEmbed.setFooter("Generated on: " +  dateGenerated.getMonth() + "/" + dateGenerated.getDay() + "/" + dateGenerated.getYear());
         return pretyifyEmbed;
           

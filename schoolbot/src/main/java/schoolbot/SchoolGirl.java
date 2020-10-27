@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.awt.Desktop;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.io.BufferedReader;
 
 import javax.security.auth.login.LoginException;
@@ -22,6 +23,10 @@ import net.dv8tion.jda.api.events.channel.text.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.*;
 
+import schoolbot.commands.*;
+import schoolbot.natives.*;
+import schoolbot.natives.util.*;
+
 
 /** 
  * Alias: Joshigakusei, only by Elsklivet. :}
@@ -31,6 +36,7 @@ public class SchoolGirl extends ListenerAdapter {
     private final static String PREFIX = "++";
     private final static String gavinID = "348235152972972042";
     private final static String damonID = "105141507996061696";
+    private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
 
 
 
@@ -55,6 +61,8 @@ public class SchoolGirl extends ListenerAdapter {
             iox.printStackTrace();
         }
 
+        // init commands from commands folder here  ^^^^^^^^^^^^^^^^^ commands hashmap
+
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.
@@ -64,6 +72,12 @@ public class SchoolGirl extends ListenerAdapter {
             .setActivity(Activity.playing("with school textbooks"))
             .build();
     }
+
+    /*
+    onGuildMessage:
+        hashmap get command by id:
+            command.run
+    */
     
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
@@ -71,12 +85,8 @@ public class SchoolGirl extends ListenerAdapter {
         Message msg = event.getMessage();
         if (msg.getContentRaw().equals(PREFIX+"ping"))
         {
-            MessageChannel channel = event.getChannel();
-            long time = System.currentTimeMillis();
-            channel.sendMessage("Pong!") /* => RestAction<Message> */
-                   .queue(response -> {
-                       response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue();
-                    });
+            Command cmd = new Ping();
+            cmd.run(event);
         }
     }
 }
