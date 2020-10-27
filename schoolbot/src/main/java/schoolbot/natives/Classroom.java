@@ -17,7 +17,7 @@ public class Classroom {
     public Classroom(String classID, Date time, String year, int credits, Professor professor) {
         this.classID = classID;
         this.time = time;
-        if (!year.equalsIgnoreCase("freshman") || (!year.equalsIgnoreCase("sophmore") || !year.equalsIgnoreCase("junior") || (!year.equalsIgnoreCase("senior")) {
+        if (!year.equalsIgnoreCase("freshman") || (!year.equalsIgnoreCase("sophmore") || !year.equalsIgnoreCase("junior") || (!year.equalsIgnoreCase("senior")))) {
             if (year.startsWith("f")) year = "Freshman";
             else if (year.startsWith("so")) year = "Sophmore";
             else if (year.startsWith("j")) year = "Junior";

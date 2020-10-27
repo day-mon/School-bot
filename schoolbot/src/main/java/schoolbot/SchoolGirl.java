@@ -27,6 +27,9 @@ import net.dv8tion.jda.api.hooks.*;
  * Alias: Joshigakusei, only by Elsklivet. :}
  */
 public class SchoolGirl extends ListenerAdapter {
+
+    private final static String PREFIX = "++";
+
     public static void main(String[] args) throws LoginException {
         // if (args.length < 1) {
         //     System.out.println("You have to provide a token as first argument!");
@@ -62,7 +65,7 @@ public class SchoolGirl extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event)
     {
         Message msg = event.getMessage();
-        if (msg.getContentRaw().equals("++ping"))
+        if (msg.getContentRaw().equals(PREFIX+"ping"))
         {
             MessageChannel channel = event.getChannel();
             long time = System.currentTimeMillis();
