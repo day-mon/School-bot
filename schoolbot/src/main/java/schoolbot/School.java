@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.color.*;
 
 import com.iwebpp.crypto.TweetNaclFast.Hash;
+import java.util.HashMap;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -19,12 +20,15 @@ public class School {
     private HashMap<String, Classroom> listOfClasses;
     private HashMap<String, Student> listOfStudents;
     
+    public School() {
+        
+    }
 
-    School(String schoolName) {
+    public School(String schoolName) {
         this.schoolName = schoolName;
     }
 
-    School(String schoolname, HashMap<String, Classroom> listOfClasses, HashMap<String, Student> listOfStudents) {
+    public School(String schoolname, HashMap<String, Classroom> listOfClasses, HashMap<String, Student> listOfStudents) {
         this.schoolName = schoolname;
         this.listOfClasses = listOfClasses;
         this.listOfStudents = listOfStudents;
