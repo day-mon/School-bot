@@ -1,4 +1,4 @@
-package schoolbot;
+package schoolbot.natives;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,23 +81,22 @@ public class School {
       }
 
       public void addStudent(Student student) {
-          listOfStudents.add(student);
+          listOfStudents.putIfAbsent(student.getRealName(), student);
       }
 
       public boolean removeStudent(Student student) {
+          return false;
       } 
 
 
       public EmbedBuilder getAsEmbed() {
-        EmbedBuilder pretyifyEmbed = new EmbedBuilder();
-        p; 
-          
+        EmbedBuilder prettifyEmbed = new EmbedBuilder();
+        return prettifyEmbed;
       }
 
       @Override
       public String toString() {
-          return "School [listOfClasses= " + listOfClasses + ", listOfStudents= " + listOfStudents + ", schoolName= " 
-                  + schoolName + "]";
+          return "School [listOfClasses= " + listOfClasses + ", listOfStudents= " + listOfStudents + ", schoolName= " + schoolName + "]";
       }
 
       @Override

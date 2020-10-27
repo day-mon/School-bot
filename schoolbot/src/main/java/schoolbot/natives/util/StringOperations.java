@@ -1,4 +1,4 @@
-package schoolbot;
+package schoolbot.natives.util;
 
 /** Basic String operations that will be useful for a bot.
  * @author Elsklivet#8867
