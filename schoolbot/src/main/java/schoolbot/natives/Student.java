@@ -36,6 +36,10 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
      * 
      */
     private String realName;
+    /**
+     * Amount of time a user wants to be mentioned for an Event occuringx
+     */
+    private int frequencies;
 
     /**
      * 
@@ -93,6 +97,10 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
         return mySchool;
     }
 
+    public int getFrequencies() {
+        return frequencies;
+    }
+
     public void setSchool(School mySchool) {
         this.mySchool = mySchool;
     }
@@ -127,6 +135,10 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+    public void setFrequencies(int frequencies) {
+        this.frequencies = frequencies;
     }
     // ----------------------------------------------------------------------
 

@@ -29,6 +29,10 @@ import net.dv8tion.jda.api.hooks.*;
 public class SchoolGirl extends ListenerAdapter {
 
     private final static String PREFIX = "++";
+    private final static String gavinID = "348235152972972042";
+    private final static String damonID = "105141507996061696";
+
+
 
     public static void main(String[] args) throws LoginException {
         // if (args.length < 1) {
