@@ -1,6 +1,8 @@
 package schoolbot.natives.util;
 
 import java.util.ArrayList;
+
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import schoolbot.commands.*;
 
 /** Basic String operations that will be useful for a bot.
@@ -45,6 +47,15 @@ public class StringOperations{
 	    }
 
         return (String[])args.toArray();
+    }
+
+    /** Turn a documentation file into a MessageEmbed.
+     * @param relativePath Path to the documentation file.
+     * @return {@code MessageEmbed} version of the documentation file.
+     */
+    public static MessageEmbed parseDoc(String relativePath){
+        // TODO Method body
+        return null;
     }
 
     /*
