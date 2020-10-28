@@ -66,8 +66,10 @@ public class SchoolGirl extends ListenerAdapter {
             iox.printStackTrace();
         }
 
-        // Commands initialization
-        // commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
+        // Commands initialization; needs fixed. JDA threading is so remarkably ass-backwards that it can't initialize variables
+        // in combination with threading. 
+        commands = new HashMap<>();
+        commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
 
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
