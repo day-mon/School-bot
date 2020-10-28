@@ -59,8 +59,11 @@ public class StringOperations {
             if (argu.charAt(i) == ' ' && !quote && tempstr.trim().length() > 0) {
                 args.add(tempstr.trim());
                 tempstr = "";
-            } else if (i!=0 && argu.charAt(i) == '"' && argu.charAt(i - 1) != '\\') {
-                quote = !quote;
+            } else if (argu.charAt(i) == '"') {
+                if(i==0)
+                    quote = !quote;
+                else if(argu.charAt(i-1) != '\\')
+                    quote = !quote;
             } else {
                 if (argu.charAt(i) == '\\' && argu.charAt(i + 1) == '"')
                     continue;
@@ -68,6 +71,7 @@ public class StringOperations {
             }
         }
         if (tempstr.trim().length() > 0) {
+            System.out.println(tempstr.trim());
             args.add(tempstr.trim());
         }
 
