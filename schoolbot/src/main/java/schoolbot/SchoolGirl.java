@@ -24,6 +24,7 @@ import net.dv8tion.jda.annotations.*;
 import net.dv8tion.jda.api.requests.*;
 import net.dv8tion.jda.api.events.channel.text.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.*;
 
 import schoolbot.commands.*;
@@ -66,7 +67,7 @@ public class SchoolGirl extends ListenerAdapter {
         }
 
         // Commands initialization
-        commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
+        // commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
 
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
@@ -88,15 +89,7 @@ public class SchoolGirl extends ListenerAdapter {
      * Intilizies a text channel so we dont have to grab in every file.
      * @param tc
      */
-    public static void init (TextChannel tc) {
-        channel = tc;
-    }
 
-    public static void sendMsg(String message) {
-        channel.sendTyping().queue();
-        channel.sendMessage(message).queue();
-    }
-    
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
@@ -123,4 +116,5 @@ public class SchoolGirl extends ListenerAdapter {
         }
         */
     }
+
 }
