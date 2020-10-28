@@ -7,6 +7,6 @@
 # 
 # 
 Ping
-p,ping
+++p, ++ping
 No flags
 The `ping` command is a simple command designed to test if the bot is currently responsive.

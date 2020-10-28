@@ -45,9 +45,9 @@ public class StringOperations {
      * @param str String to remove all quotations from
      * @return String without any quotation marks
      */
-    public static String removeBounds(String str) throws Exception {
+    public static String removeBounds(String str) {
         if (str == null || str.length() <= 2)
-            throw new Exception("String is not sized correctly to manipulate: " + str);
+            return str;
         return str.substring(1, str.length() - 1);
     }
 

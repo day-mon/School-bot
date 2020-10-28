@@ -59,7 +59,7 @@ public class SchoolGirl extends ListenerAdapter {
         try {       
             BufferedReader fr = new BufferedReader(new FileReader( new File(username.charAt(0) < 'd' ?  "schoolbot\\src\\main\\files\\token.txt" : "School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
             ian = fr.readLine();
-            System.out.println(ian);
+            // System.out.println(ian);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException iox){
@@ -71,6 +71,7 @@ public class SchoolGirl extends ListenerAdapter {
         // in combination with threading. 
         commands = new HashMap<>();
         commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
+        commands.put(new String[]{"h","help"}, new Help());
 
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
@@ -110,6 +111,10 @@ public class SchoolGirl extends ListenerAdapter {
                 }
             }
         }
+    }
+
+    public static HashMap<String[], ? extends Command> getCommands(){
+        return commands;
     }
 
 }
