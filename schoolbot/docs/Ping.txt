@@ -1,0 +1,12 @@
+# Lines that begin with a pound sign are ignored in documentation files.
+# I will make this use regexes later.
+# First uncommented line should be command name
+# Second should be aliases
+# Third should be flags
+# Fourth should be usage
+# 
+# 
+Ping
+p,ping
+No flags
+The `ping` command is a simple command designed to test if the bot is currently responsive.

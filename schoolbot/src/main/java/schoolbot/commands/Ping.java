@@ -1,6 +1,7 @@
 package schoolbot.commands;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import schoolbot.natives.util.StringOperations;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 
@@ -22,6 +23,7 @@ public class Ping extends Command {
                    .queue(response -> {
                        response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue();
                     });
+            channel.sendMessage(StringOperations.parseDoc("schoolbot\\docs\\Ping.txt")).queue();
     }
 
     @Override
