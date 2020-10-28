@@ -67,6 +67,8 @@ public class SchoolGirl extends ListenerAdapter {
         }
 
         // Commands initialization
+        // Commands initialization; needs fixed. JDA threading is so remarkably ass-backwards that it can't initialize variables
+        // in combination with threading. 
         commands = new HashMap<>();
         commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
 
