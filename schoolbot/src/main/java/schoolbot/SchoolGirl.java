@@ -67,7 +67,8 @@ public class SchoolGirl extends ListenerAdapter {
         }
 
         // Commands initialization
-        // commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
+        commands = new HashMap<>();
+        commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
 
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
@@ -107,14 +108,6 @@ public class SchoolGirl extends ListenerAdapter {
                 }
             }
         }
-        // Old code
-        /*
-        if (msg.getContentRaw().startsWith(PREFIX+"ping"))
-        {
-            Command cmd = new Ping();
-            cmd.run(event);
-        }
-        */
     }
 
 }
