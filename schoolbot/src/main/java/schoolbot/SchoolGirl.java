@@ -100,12 +100,12 @@ public class SchoolGirl extends ListenerAdapter {
     {
         Message msg = event.getMessage();
         String comCall = StringOperations.removePrefix(msg.getContentRaw());
+        String[] callAndFlags = comCall.split(" ",2);
         String[] comParts = comCall.split(" ");
-        String[] flags = null;
+        String[] flags = (callAndFlags.length > 1) ? StringOperations.parseArgs(callAndFlags[1]) : null;
         for (Command com : commands.values()) {
             if(com.isInCalls(comParts[0])){
-                if(comParts.length > 1){
-                    flags = Arrays.copyOfRange(comParts, 1, comParts.length);
+                if(flags != null){
                     com.run(event, flags);
                 }else{
                     com.run(event);
