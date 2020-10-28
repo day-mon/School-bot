@@ -72,6 +72,7 @@ public class SchoolGirl extends ListenerAdapter {
         commands = new HashMap<>();
         commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
         commands.put(new String[]{"h","help"}, new Help());
+        commands.put(new String[]{"wolf", "wolframe"}, new Wolfram());
 
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
