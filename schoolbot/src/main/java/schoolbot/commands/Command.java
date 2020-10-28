@@ -99,6 +99,23 @@ public abstract class Command {
         return this.enabled;
     }
 
+    /** {@code calls} getter.
+     * @return Array of calls
+     */
+    public String[] getCalls(){
+        return this.calls;
+    }
+
+    /** Check whether a test String is found in this command's calls.
+     * @param test String to search {@code calls} for.
+     * @return {@code true} if the test string is found in {@code calls}, {@code false} otherwise.
+     */
+    public boolean isInCalls(String test){
+        for(String call : calls)
+            if(call.equals(test)) return true;
+        return false;
+    }
+
     /**
      * Set this command to be enabled or disabled.
      * 

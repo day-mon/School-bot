@@ -5,8 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.awt.Desktop;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.function.BiConsumer;
 import java.io.BufferedReader;
 
 import javax.security.auth.login.LoginException;
@@ -34,7 +36,7 @@ import schoolbot.natives.util.*;
  */
 public class SchoolGirl extends ListenerAdapter {
 
-    private final static String PREFIX = "++";
+    public final static String PREFIX = "++";
     private final static String gavinID = "348235152972972042";
     private final static String damonID = "105141507996061696";
     private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
@@ -63,7 +65,8 @@ public class SchoolGirl extends ListenerAdapter {
             iox.printStackTrace();
         }
 
-        // init commands from commands folder here  ^^^^^^^^^^^^^^^^^ commands hashmap
+        // Commands initialization
+        commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
 
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
@@ -98,10 +101,26 @@ public class SchoolGirl extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event)
     {
         Message msg = event.getMessage();
-        if (msg.getContentRaw().equals(PREFIX+"ping"))
+        String comCall = StringOperations.removePrefix(msg.getContentRaw());
+        String[] comParts = comCall.split(" ");
+        String[] flags = null;
+        for (Command com : commands.values()) {
+            if(com.isInCalls(comParts[0])){
+                if(comParts.length > 1){
+                    flags = Arrays.copyOfRange(comParts, 1, comParts.length);
+                    com.run(event, flags);
+                }else{
+                    com.run(event);
+                }
+            }
+        }
+        // Old code
+        /*
+        if (msg.getContentRaw().startsWith(PREFIX+"ping"))
         {
             Command cmd = new Ping();
             cmd.run(event);
         }
+        */
     }
 }

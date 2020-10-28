@@ -3,6 +3,7 @@ package schoolbot.natives.util;
 import java.util.ArrayList;
 
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import schoolbot.SchoolGirl;
 import schoolbot.commands.*;
 
 /** Basic String operations that will be useful for a bot.
@@ -47,6 +48,11 @@ public class StringOperations{
 	    }
 
         return (String[])args.toArray();
+    }
+
+    public static String removePrefix(String command){
+        StringBuilder sb = new StringBuilder(command);
+        return sb.delete(0, SchoolGirl.PREFIX.length()).toString();
     }
 
     /** Turn a documentation file into a MessageEmbed.
