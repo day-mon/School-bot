@@ -59,7 +59,7 @@ public class StringOperations {
             if (argu.charAt(i) == ' ' && !quote && tempstr.trim().length() > 0) {
                 args.add(tempstr.trim());
                 tempstr = "";
-            } else if (argu.charAt(i) == '"' && argu.charAt(i - 1) != '\\') {
+            } else if (i!=0 && argu.charAt(i) == '"' && argu.charAt(i - 1) != '\\') {
                 quote = !quote;
             } else {
                 if (argu.charAt(i) == '\\' && argu.charAt(i + 1) == '"')
@@ -71,7 +71,12 @@ public class StringOperations {
             args.add(tempstr.trim());
         }
 
-        return (String[]) args.toArray();
+        String[] returnArray = new String[args.size()];
+        for(int i = 0; i<returnArray.length; i++){
+            returnArray[i] = args.get(i);
+        }
+
+        return returnArray;
     }
 
     public static String removePrefix(String command) {
