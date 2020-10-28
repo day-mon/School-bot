@@ -66,6 +66,7 @@ public class SchoolGirl extends ListenerAdapter {
             iox.printStackTrace();
         }
 
+        // Commands initialization
         // Commands initialization; needs fixed. JDA threading is so remarkably ass-backwards that it can't initialize variables
         // in combination with threading. 
         commands = new HashMap<>();
@@ -109,14 +110,6 @@ public class SchoolGirl extends ListenerAdapter {
                 }
             }
         }
-        // Old code
-        /*
-        if (msg.getContentRaw().startsWith(PREFIX+"ping"))
-        {
-            Command cmd = new Ping();
-            cmd.run(event);
-        }
-        */
     }
 
 }
