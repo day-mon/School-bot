@@ -99,10 +99,12 @@ public class SchoolGirl extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event)
     {
         Message msg = event.getMessage();
+        if(!msg.getContentRaw().startsWith(PREFIX)) return;
         String comCall = StringOperations.removePrefix(msg.getContentRaw());
         String[] callAndFlags = comCall.split(" ",2);
         String[] comParts = comCall.split(" ");
         String[] flags = (callAndFlags.length > 1) ? StringOperations.parseArgs(callAndFlags[1]) : null;
+        System.out.println("FLAGS WE SHOULD SEND"+Arrays.toString(flags));
         for (Command com : commands.values()) {
             if(com.isInCalls(comParts[0])){
                 if(flags != null){
