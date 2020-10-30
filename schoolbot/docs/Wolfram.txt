@@ -1,0 +1,10 @@
+# First uncommented line should be command name
+# Second should be aliases
+# Third should be flags
+# Fourth should be usage
+# 
+# 
+Wolfram
+++wolf, ++wolfram
+One argument, in quotes = search query.
+The `wolfram` command is designed to allow users to query the Wolfram|Alpha database directly from within discord.\nSend one query in as the only argument to search that query on W|A and have the link be sent directly to you.

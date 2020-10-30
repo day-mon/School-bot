@@ -1,0 +1,10 @@
+# First uncommented line should be command name
+# Second should be aliases
+# Third should be flags
+# Fourth should be usage
+# 
+# 
+Help
+++h, ++help
+One argument, name of command to get docs for.
+The `help` command allows users to retrieve these help files for different commands that Genius uses. 
