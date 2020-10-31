@@ -2,9 +2,7 @@ package schoolbot.commands;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.natives.util.StringOperations;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 
 public class Ping extends Command {
 

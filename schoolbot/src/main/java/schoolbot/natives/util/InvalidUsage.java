@@ -27,14 +27,15 @@ public class InvalidUsage {
         String authorOfMessage = msg.getAuthor().getName();
         EmbedType type = EmbedType.RICH;
         OffsetDateTime time = OffsetDateTime.now();
-        int color = 1;
+        int color = 0;
         Thumbnail thumbnail = null;
         Provider siteProvider = null;
         AuthorInfo author = new AuthorInfo("SchoolBot", "https://github.com/tykoooo/School-bot/tree/master/schoolbot", null, null);
         VideoInfo videoInfo = null;
-        Footer footer = new Footer("Report errors to damon#9999 or Elsklivet#8867", null, null);
+        Footer footer = new Footer("Incorrect usage by: " + authorOfMessage, null, null);
         ImageInfo image = null;
         List<Field> fields = new ArrayList<MessageEmbed.Field>();
+        fields.add(new Field("Usage issue!", problemWithUsage, true));
 
         MessageEmbed embed = new MessageEmbed(urlToCommand,
         commandName,

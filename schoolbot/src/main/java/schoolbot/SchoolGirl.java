@@ -13,21 +13,17 @@ import java.io.BufferedReader;
 
 import javax.security.auth.login.LoginException;
 
-import net.dv8tion.jda.*;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.*;
-import net.dv8tion.jda.annotations.*;
 import net.dv8tion.jda.api.requests.*;
-import net.dv8tion.jda.api.events.channel.text.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.*;
 
 import schoolbot.commands.*;
+import schoolbot.commands.school.AddSchool;
 import schoolbot.natives.*;
 import schoolbot.natives.util.*;
 
@@ -41,7 +37,7 @@ public class SchoolGirl extends ListenerAdapter {
     private final static String gavinID = "348235152972972042";
     private final static String damonID = "105141507996061696";
     private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
-
+    public static HashMap<String , School> schools = new HashMap<String, School>();
     public static TextChannel channel;
 
 
@@ -73,7 +69,7 @@ public class SchoolGirl extends ListenerAdapter {
         commands.put(new String[]{"ping", "p"}, new Ping()); // Ping
         commands.put(new String[]{"h","help"}, new Help());
         commands.put(new String[]{"wolf", "wolframe"}, new Wolfram());
-
+        commands.put(new String[]{"addschool", "as"}, new AddSchool());
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.

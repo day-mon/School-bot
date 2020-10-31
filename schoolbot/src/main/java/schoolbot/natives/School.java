@@ -4,29 +4,34 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.awt.Color;
-import java.awt.color.*;
-
-import com.iwebpp.crypto.TweetNaclFast.Hash;
-import java.util.HashMap;
-
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.Event;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class School {
 
     private String schoolName;
+    private Role serverRole;
     private String emailSuffix;
     private HashMap<String, Classroom> listOfClasses;
     private HashMap<String, Student> listOfStudents;
+    protected ArrayList<School> listOfSchools;
     
     public School() {
-        
+        listOfSchools.add(this);
+
     }
 
     public School(String schoolName) {
         this.schoolName = schoolName;
+
+    }
+
+    public School(String schoolName, String emailSuffix) {
+        this.schoolName = schoolName;
+        this.emailSuffix = emailSuffix;
     }
 
     public School(String schoolname, String emailSuffix, HashMap<String, Classroom> listOfClasses, HashMap<String, Student> listOfStudents) {

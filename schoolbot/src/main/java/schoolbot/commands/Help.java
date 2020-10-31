@@ -1,11 +1,8 @@
 package schoolbot.commands;
 
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.SchoolGirl;
-import schoolbot.natives.util.StringOperations;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
-
 import schoolbot.natives.util.StringOperations;
 
 public class Help extends Command {
