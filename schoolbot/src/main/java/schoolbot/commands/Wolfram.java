@@ -14,7 +14,7 @@ import schoolbot.natives.util.StringOperations;
 public class Wolfram extends Command {
 
     public Wolfram() {
-        super(new String[] { "wolf", "wolframe", "wf"});
+        super(new String[] { "wolf", "wolfram", "wf"});
         this.documentation = StringOperations.parseDoc("schoolbot\\docs\\Wolfram.txt");
     }
 

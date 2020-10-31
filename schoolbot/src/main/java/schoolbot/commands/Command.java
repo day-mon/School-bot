@@ -109,8 +109,9 @@ public abstract class Command {
      */
     public boolean isInCalls(String test){
         for(String call : calls){
-            System.out.println(call);
-            if(call.strip().equals(test)) return true;
+            if(call.strip().equals(test)){
+                return true;
+            }
         }
         return false;
     }

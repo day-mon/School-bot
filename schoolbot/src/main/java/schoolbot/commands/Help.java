@@ -30,7 +30,6 @@ public class Help extends Command {
         if(args.length >= 1){
             String commandID = StringOperations.removeBounds(args[0]);
             for (Command com : SchoolGirl.getCommands().values()) {
-                System.out.println(Arrays.toString(com.calls));
                 if(com.isInCalls(commandID)){
                     channel.sendMessage(com.getDocumentation()).queue();
                 }

@@ -46,8 +46,9 @@ public class StringOperations {
      * @return String without any quotation marks
      */
     public static String removeBounds(String str) {
-        if (str == null || str.length() <= 2)
+        if (str == null || str.length() <= 2 || str.charAt(0) != '"' || str.charAt(str.length()-1) != '"')
             return str;
+        
         return str.substring(1, str.length() - 1);
     }
 
