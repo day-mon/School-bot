@@ -108,8 +108,10 @@ public abstract class Command {
      * @return {@code true} if the test string is found in {@code calls}, {@code false} otherwise.
      */
     public boolean isInCalls(String test){
-        for(String call : calls)
-            if(call.equals(test)) return true;
+        for(String call : calls){
+            System.out.println(call);
+            if(call.strip().equals(test)) return true;
+        }
         return false;
     }
 

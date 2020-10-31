@@ -50,8 +50,9 @@ public class InvalidUsage {
         footer,
         image,
         fields);
-        } 
-        
+
+        InvalidUsage = embed;
+        }         
 
         public MessageEmbed getInvalidUsage() {
             return InvalidUsage;

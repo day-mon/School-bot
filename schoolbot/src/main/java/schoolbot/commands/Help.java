@@ -1,5 +1,7 @@
 package schoolbot.commands;
 
+import java.util.Arrays;
+
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.SchoolGirl;
@@ -9,6 +11,7 @@ public class Help extends Command {
 
     public Help(){
         super(new String[]{"help","h"});
+        this.documentation = StringOperations.parseDoc("schoolbot\\docs\\Help.txt");
     }
 
     public Help(String[] aliases){
@@ -27,6 +30,7 @@ public class Help extends Command {
         if(args.length >= 1){
             String commandID = StringOperations.removeBounds(args[0]);
             for (Command com : SchoolGirl.getCommands().values()) {
+                System.out.println(Arrays.toString(com.calls));
                 if(com.isInCalls(commandID)){
                     channel.sendMessage(com.getDocumentation()).queue();
                 }

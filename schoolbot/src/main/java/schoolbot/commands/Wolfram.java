@@ -9,11 +9,13 @@ import org.jsoup.nodes.Document;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.natives.util.InvalidUsage;
+import schoolbot.natives.util.StringOperations;
 
 public class Wolfram extends Command {
 
     public Wolfram() {
-        super(new String[] { "wolf", "wolframe", "wf" });
+        super(new String[] { "wolf", "wolframe", "wf"});
+        this.documentation = StringOperations.parseDoc("schoolbot\\docs\\Wolfram.txt");
     }
 
     public Wolfram(String[] aliases) {
