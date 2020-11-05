@@ -31,15 +31,21 @@ public class AddSchool extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
 
-        //args[0] is Full 
-        //args[1] is 
-        //args[1] is
+        boolean valid = true;
+
+        if (args[0].length() < 10) {
+            valid = false;
+        }
+
+        //args[0] is full schoolname
+        //args[1] is school email suffix
+        //args[2] is name that used to refrence the school
+        //TODO: fix usage "look below for correct usage"
             if (args.length != 3) {
-                InvalidUsage usage = new InvalidUsage("https://google.com", "AddSchool", "Incorrect usage: 'Correct usage: ++addschool <schoolname> <school email> <school refrence>" , event.getMessage());
+                InvalidUsage usage = new InvalidUsage("https://github.com/tykoooo/School-bot/blob/master/schoolbot/src/main/java/schoolbot/commands/school/AddSchool.java", "AddSchool", "Incorrect usage: **Look below for correct usage", event.getMessage(), this);
                 event.getChannel().sendMessage(usage.getInvalidUsage()).queue();
-            } else {
-                if (args[0].length() < 10) 
-                    channel.sendMessage("That is not a valid school name.");
+            } else if (valid) { 
+                SchoolGirl.schoolCalls.add(args[2]);
                 SchoolGirl.schools.putIfAbsent(args[2], new School(args[0], args[1]));
             }
     }

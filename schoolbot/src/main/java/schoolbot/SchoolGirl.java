@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.awt.Desktop;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import net.dv8tion.jda.api.hooks.*;
 
 import schoolbot.commands.*;
 import schoolbot.commands.school.AddSchool;
+import schoolbot.commands.school.AddStudent;
 import schoolbot.natives.*;
 import schoolbot.natives.util.*;
 
@@ -37,7 +39,9 @@ public class SchoolGirl extends ListenerAdapter {
     private final static String gavinID = "348235152972972042";
     private final static String damonID = "105141507996061696";
     private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
+    public static ArrayList<String> schoolCalls = new ArrayList<String>();
     public static HashMap<String , School> schools = new HashMap<String, School>();
+    public static ArrayList<Student> students = new ArrayList<Student>();
     public static TextChannel channel;
 
 
@@ -70,6 +74,7 @@ public class SchoolGirl extends ListenerAdapter {
         commands.put(new String[]{"h","help"}, new Help());
         commands.put(new String[]{"wolf", "wolframe"}, new Wolfram());
         commands.put(new String[]{"addschool", "as"}, new AddSchool());
+        commands.put(new String[]{"addstudent"}, new AddStudent());
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.

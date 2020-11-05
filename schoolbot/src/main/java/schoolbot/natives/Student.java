@@ -10,7 +10,7 @@ import net.dv8tion.jda.internal.entities.GuildImpl;
 /** A student: Joshigakusei's way of handling users.
  * @author Elsklivet#8867
  */
-public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
+public class Student{
     /**
      * School this student is attending.
      * 
@@ -47,7 +47,6 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
      * @param user  User account.
      */
     public Student(GuildImpl guild, User user) {
-        super(guild, user);
         this.myClasses = null;
         this.mySchool = null;
         this.GPA = -1.0;
@@ -55,8 +54,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
         this.realName = "John Doe";
     }
 
-    public Student(GuildImpl guild, User user, School mySch, double GPA, String[] major, String realName) {
-        super(guild, user);
+    public Student(GuildImpl guild, School mySch, double GPA, String[] major, String realName) {
         this.myClasses = new HashMap<String, Classroom>();
         this.mySchool = mySch;
         this.GPA = GPA;
@@ -64,6 +62,9 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
         for(String maj : major) this.majors.add(maj);
         this.realName = realName;
     }
+
+
+
 
     /** Remove a class from this student's schedule.
      * @param clazz Class ({@code Classroom}) to remove
