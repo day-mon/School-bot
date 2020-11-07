@@ -34,6 +34,7 @@ public abstract class Command {
      */
     public Command() {
         this.enabled = false;
+        this.initDocumentation();
     }
 
     /**
@@ -46,6 +47,7 @@ public abstract class Command {
         for (int i = 0; i < aliases.length; i++)
             calls[i] = aliases[i];
         this.enabled = true;
+        this.initDocumentation();
     }
 
     /**
@@ -84,6 +86,20 @@ public abstract class Command {
      * @see schoolbot.natives.util.StringOperations#parseDoc(String)
      */
     public void initDocumentation(String relativePath){
+        this.documentation = schoolbot.natives.util.StringOperations.parseDoc(relativePath);
+    }
+
+    /** Method to initialize the documentation for this command without providing a path.
+     * <p>
+     * Implementation Note:<br></br>
+     * This shouldn't really handle parsing itself. StringOperations will do that.
+     * </p>
+     * @see schoolbot.natives.util.StringOperations#parseDoc(String)
+     */
+    public void initDocumentation(){
+        String className = this.getClass().getName();
+        String name = className.substring(className.lastIndexOf(".")+1);
+        String relativePath = "schoolbot\\docs\\"+name+".txt";
         this.documentation = schoolbot.natives.util.StringOperations.parseDoc(relativePath);
     }
 

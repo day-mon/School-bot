@@ -15,7 +15,6 @@ public class Wolfram extends Command {
 
     public Wolfram() {
         super(new String[] { "wolf", "wolfram", "wf"});
-        this.documentation = StringOperations.parseDoc("schoolbot\\docs\\Wolfram.txt");
     }
 
     public Wolfram(String[] aliases) {
@@ -35,7 +34,7 @@ public class Wolfram extends Command {
 
         if (args.length < 1) {
 
-            new InvalidUsage("n.com", "n", "n", event.getMessage());
+            new InvalidUsage("n.com", "n", "n", event.getMessage(), this);
         } else {
 
             args[0] = args[0].replaceAll("%", "%25").replaceAll("\\+", "%2B").replaceAll("\\s", "+")

@@ -1,0 +1,4 @@
+AddStudent
+++addstudent
+server, username, school, GPA, majors, real name
+The AddStudent command is used to add a student to the bot for events, homework updates and more.

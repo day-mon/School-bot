@@ -43,7 +43,8 @@ public class AddStudent extends Command {
             event.getChannel().sendMessage(new InvalidUsage("https://google.com", "AddStudent", "School does not exist", event.getMessage(), this).getInvalidUsage()).queue();
         } 
         else {
-            SchoolGirl.students.add(new Student(guild, event.getMessage().getMentionedUsers().get(0) ,SchoolGirl.schools.get(args[2]), Double.parseDouble(args[3]), Majors., args[1]));        
+            // TODO
+            SchoolGirl.students.add(new Student(guild, event.getMessage().getMentionedUsers().get(0) ,SchoolGirl.schools.get(args[2]), Double.parseDouble(args[3]), Majors.values(), args[1]));        
             channel.sendMessage(":white_check_mark: Student added succesfully :white_check_mark: ").queue();
 
         }

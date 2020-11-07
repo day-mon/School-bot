@@ -12,13 +12,10 @@ public class AddSchool extends Command {
 
     public AddSchool() {
         super(new String[] {"addschool", "as"});
-        this.documentation = StringOperations.parseDoc("schoolbot\\docs\\AddSchool.txt");
-
     }
 
     public AddSchool(String[] aliases) {
         super(aliases);
-        this.documentation = StringOperations.parseDoc("schoolbot\\docs\\AddSchool.txt");
     }
 
     @Override

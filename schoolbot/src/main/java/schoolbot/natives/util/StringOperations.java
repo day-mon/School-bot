@@ -149,6 +149,20 @@ public class StringOperations {
         return embed;
     }
 
+    public static String normalizeCapitals(String str){
+        StringBuilder newStr = new StringBuilder();
+
+        for(int i = 0; i < str.length(); i++){
+            char curr = str.charAt(i);
+            if(i==0 && curr != ' ') { newStr.append(str.substring(i, i+1).toUpperCase()); }
+            else if(curr != ' ' && str.charAt(i-1) != ' ') { newStr.append(str.substring(i, i+1).toLowerCase()); }
+            else if(str.charAt(i-1) == ' ') { newStr.append(str.substring(i, i+1).toUpperCase()); }
+            else { newStr.append(str.substring(i, i+1)); }
+        }
+
+        return newStr.toString();
+    }
+
     /*
         Add some "correctXYZ" methods here
     */ 

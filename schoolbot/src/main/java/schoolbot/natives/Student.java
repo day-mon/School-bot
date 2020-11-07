@@ -74,7 +74,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
      * @param major Major to add to this student's list
      */
     public void addMajor(String major){
-        this.majors.add(major);
+        this.majors.add(Majors.valueOf(major.toUpperCase()));
     }
 
     /** Remove a class from this student's schedule.
@@ -114,11 +114,11 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
         GPA = gPA;
     }
 
-    public LinkedList<String> getMajors() {
+    public LinkedList<Majors> getMajors() {
         return majors;
     }
 
-    public void setMajors(LinkedList<String> majors) {
+    public void setMajors(LinkedList<Majors> majors) {
         this.majors = majors;
     }
 

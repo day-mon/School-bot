@@ -8,7 +8,6 @@ public class Ping extends Command {
 
     public Ping(){
         super(new String[]{"ping","p"});
-        this.documentation = StringOperations.parseDoc("schoolbot\\docs\\Ping.txt");
     }
 
     public Ping(String[] aliases){

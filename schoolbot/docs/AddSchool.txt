@@ -1,11 +1,3 @@
-# Lines that begin with a pound sign are ignored in documentation files.
-# I will make this use regexes later.
-# First uncommented line should be command name
-# Second should be aliases
-# Third should be flags
-# Fourth should be usage
-# 
-# 
 AddSchool
 ++as, ++addschool
 No flags

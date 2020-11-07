@@ -11,7 +11,6 @@ public class Help extends Command {
 
     public Help(){
         super(new String[]{"help","h"});
-        this.documentation = StringOperations.parseDoc("schoolbot\\docs\\Help.txt");
     }
 
     public Help(String[] aliases){
@@ -35,7 +34,7 @@ public class Help extends Command {
                     channel.sendMessage(com.getDocumentation()).queue();
                     } catch (IllegalArgumentException e) {
                         if (e.toString().startsWith("java.lang.IllegalArgumentException: Provided emb"))  {
-                            channel.sendMessage("There is no documentation for this command..\n\t\t\t\t **Contact  damon#9999 or Elsklivet#886**").queue();
+                            channel.sendMessage("There is no documentation for this command..\n**Contact  damon#9999 or Elsklivet#886**").queue();
                         }
                     }
                 }
