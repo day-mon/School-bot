@@ -31,7 +31,13 @@ public class Help extends Command {
             String commandID = StringOperations.removeBounds(args[0]);
             for (Command com : SchoolGirl.getCommands().values()) {
                 if(com.isInCalls(commandID)){
+                    try {
                     channel.sendMessage(com.getDocumentation()).queue();
+                    } catch (IllegalArgumentException e) {
+                        if (e.toString().startsWith("java.lang.IllegalArgumentException: Provided emb"))  {
+                            channel.sendMessage("There is no documentation for this command..\n\t\t\t\t **Contact  damon#9999 or Elsklivet#886**").queue();
+                        }
+                    }
                 }
             }    
         }

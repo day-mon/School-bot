@@ -6,11 +6,12 @@ import java.util.LinkedList;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.internal.entities.GuildImpl;
+import schoolbot.natives.util.Majors;
 
 /** A student: Joshigakusei's way of handling users.
  * @author Elsklivet#8867
  */
-public class Student{
+public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
     /**
      * School this student is attending.
      * 
@@ -30,16 +31,12 @@ public class Student{
      * List of student's majors/minors
      * 
      */
-    private LinkedList<String> majors;
+    private LinkedList<Majors> majors;
     /**
      * Student's real name
      * 
      */
     private String realName;
-    /**
-     * Amount of time a user wants to be mentioned for an Event occuringx
-     */
-    private int frequencies;
 
     /**
      * 
@@ -47,6 +44,7 @@ public class Student{
      * @param user  User account.
      */
     public Student(GuildImpl guild, User user) {
+        super(guild, user);
         this.myClasses = null;
         this.mySchool = null;
         this.GPA = -1.0;
@@ -54,17 +52,15 @@ public class Student{
         this.realName = "John Doe";
     }
 
-    public Student(GuildImpl guild, School mySch, double GPA, String[] major, String realName) {
+    public Student(GuildImpl guild, User user, School mySch, double GPA, Majors[] major, String realName) {
+        super(guild, user);
         this.myClasses = new HashMap<String, Classroom>();
         this.mySchool = mySch;
         this.GPA = GPA;
-        this.majors = new LinkedList<String>();
-        for(String maj : major) this.majors.add(maj);
+        this.majors = new LinkedList<Majors>();
+        for(Majors maj : major) this.majors.add(maj);
         this.realName = realName;
     }
-
-
-
 
     /** Remove a class from this student's schedule.
      * @param clazz Class ({@code Classroom}) to remove
@@ -96,10 +92,6 @@ public class Student{
     // GETTER SETTERS -------------------------------------------------------
     public School getSchool() {
         return mySchool;
-    }
-
-    public int getFrequencies() {
-        return frequencies;
     }
 
     public void setSchool(School mySchool) {
@@ -136,10 +128,6 @@ public class Student{
 
     public void setRealName(String realName) {
         this.realName = realName;
-    }
-
-    public void setFrequencies(int frequencies) {
-        this.frequencies = frequencies;
     }
     // ----------------------------------------------------------------------
 

@@ -9,6 +9,7 @@ import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.Student;
 import schoolbot.natives.util.InvalidUsage;
+import schoolbot.natives.util.Majors;
 
 public class AddStudent extends Command {
 
@@ -34,13 +35,17 @@ public class AddStudent extends Command {
          * TODO: fix usage "look below for correct usage"
          * TODO: fix command (half finished)
          */
-        if (args.length != 4) {
+        
+         
+        if (args.length != 5) {
             event.getChannel().sendMessage(new InvalidUsage("https://google.com", "AddStudent", "Incorrect usage ** Look below for correct usage**", event.getMessage(), this).getInvalidUsage()).queue();
         } else if (!SchoolGirl.schoolCalls.contains(args[2])) {
             event.getChannel().sendMessage(new InvalidUsage("https://google.com", "AddStudent", "School does not exist", event.getMessage(), this).getInvalidUsage()).queue();
         } 
         else {
-            SchoolGirl.students.add(new Student(guild, SchoolGirl.schools.get(args[1]), Double.parseDouble(args[2]), new String[] {args[3]}, args[0]));        
+            SchoolGirl.students.add(new Student(guild, event.getMessage().getMentionedUsers().get(0) ,SchoolGirl.schools.get(args[2]), Double.parseDouble(args[3]), Majors., args[1]));        
+            channel.sendMessage(":white_check_mark: Student added succesfully :white_check_mark: ").queue();
+
         }
 
     }

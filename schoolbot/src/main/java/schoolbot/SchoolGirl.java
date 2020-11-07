@@ -26,6 +26,7 @@ import net.dv8tion.jda.api.hooks.*;
 import schoolbot.commands.*;
 import schoolbot.commands.school.AddSchool;
 import schoolbot.commands.school.AddStudent;
+import schoolbot.commands.school.ListMajors;
 import schoolbot.natives.*;
 import schoolbot.natives.util.*;
 
@@ -75,6 +76,7 @@ public class SchoolGirl extends ListenerAdapter {
         commands.put(new String[]{"wolf", "wolframe"}, new Wolfram());
         commands.put(new String[]{"addschool", "as"}, new AddSchool());
         commands.put(new String[]{"addstudent"}, new AddStudent());
+        commands.put(new String[]{"listmajors", "majors"}, new ListMajors());
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.

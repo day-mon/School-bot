@@ -31,10 +31,11 @@ public class AddSchool extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
 
-        boolean valid = true;
+        boolean validName = true;
 
+         
         if (args[0].length() < 10) {
-            valid = false;
+            validName = false;
         }
 
         //args[0] is full schoolname
@@ -44,9 +45,12 @@ public class AddSchool extends Command {
             if (args.length != 3) {
                 InvalidUsage usage = new InvalidUsage("https://github.com/tykoooo/School-bot/blob/master/schoolbot/src/main/java/schoolbot/commands/school/AddSchool.java", "AddSchool", "Incorrect usage: **Look below for correct usage", event.getMessage(), this);
                 event.getChannel().sendMessage(usage.getInvalidUsage()).queue();
-            } else if (valid) { 
+            } else if (validName) { 
                 SchoolGirl.schoolCalls.add(args[2]);
                 SchoolGirl.schools.putIfAbsent(args[2], new School(args[0], args[1]));
+                channel.sendMessage(":white_check_mark: School added succesfully :white_check_mark: ").queue();;
+            } else {
+                event.getChannel().sendMessage(new InvalidUsage("https://github.com/tykoooo/School-bot/blob/master/schoolbot/src/main/java/schoolbot/commands/school/AddSchool.java", "AddSchool", "That is not a valid school", event.getMessage(), this).getInvalidUsage()).queue();;
             }
     }
 
