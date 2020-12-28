@@ -54,11 +54,9 @@ public class SchoolGirl extends ListenerAdapter {
         
         String username = System.getProperty("user.name");
         String ian = "no <3";
-
-
     
         try {       
-            BufferedReader fr = new BufferedReader(new FileReader( new File(username.charAt(0) < 'd' ?  "schoolbot\\src\\main\\files\\token.txt" : "School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
+            BufferedReader fr = new BufferedReader(new FileReader( new File(username.charAt(0) != 'd' ?  "G:\\DiscordBots\\SchoolGirl\\schoolbot\\src\\main\\files\\token.txt" : "School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
             ian = fr.readLine();
             // System.out.println(ian);
         } catch (FileNotFoundException e) {
@@ -80,7 +78,7 @@ public class SchoolGirl extends ListenerAdapter {
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.
-        JDABuilder.createLight(ian, EnumSet.allOf(GatewayIntent.class))
+        JDABuilder.createLight(ian, EnumSet.allOf(GatewayIntent.class)) // <- "allOf(GI.class)" => The method allOf(Class<E>) in the type EnumSet is not applicable for the arguments (Class<GatewayIntent>) Java(67108979)
             .addEventListeners(new SchoolGirl())
             .setStatus(OnlineStatus.DO_NOT_DISTURB)
             .setActivity(Activity.playing("with school textbooks"))

@@ -89,7 +89,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
         return false;
     }
 
-    // GETTER SETTERS -------------------------------------------------------
+    // #region GETTER SETTERS -------------------------------------------------------
     public School getSchool() {
         return mySchool;
     }
@@ -129,13 +129,20 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
     public void setRealName(String realName) {
         this.realName = realName;
     }
-    // ----------------------------------------------------------------------
+    // #endregion ----------------------------------------------------------------------
+
+    /** Saves this instance to its respective save file by writing a comma-separated line of the variable values.
+     * @implNote Variables are written out in order they appear in class.
+     */
+    public void save(){
+        //pass
+    }
 
     /** Get this student's data as a pretty MessageEmbed.
      * @return {@code MessageEmbed} to send in discord messages.
      */
     public MessageEmbed getAsEmbed(){
-        return null; // this fat cock nibbler will be from {JDA/src/main/java/net/dv8tion/jda/api/entities/MessageEmbed.java}
+        return null; // this fat cock will be from {JDA/src/main/java/net/dv8tion/jda/api/entities/MessageEmbed.java}
     }
 
     // DEFAULT OVERRIDES
