@@ -10,18 +10,21 @@ public class Professor {
     private String email;
     private String prefix;
     private String name;
+    private int age;
+    private String officeHours;
+    private School professorsSchool;
 
 
 
 
-    Professor() {
+    public Professor() {
 
     }
 
-    public Professor(String prefix, String name, String email) {
+    public Professor(String name, String email, School professorsSchool) {
         this.email = email;
         this.name = name;
-        this.prefix = prefix;
+        this.professorsSchool = professorsSchool;
     }
 
     public void setEmail(String email) {
@@ -81,4 +84,75 @@ public class Professor {
     }
 
     
+
+    /**
+     * @return String return the prefix
+     */
+    public String getPrefix() {
+        return prefix;
+    }
+
+    /**
+     * @param prefix the prefix to set
+     */
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    /**
+     * @return String return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return int return the age
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    /**
+     * @return String return the officeHours
+     */
+    public String getOfficeHours() {
+        return officeHours;
+    }
+
+    /**
+     * @param officeHours the officeHours to set
+     */
+    public void setOfficeHours(String officeHours) {
+        this.officeHours = officeHours;
+    }
+
+    /**
+     * @return School return the professorsSchool
+     */
+    public School getProfessorsSchool() {
+        return professorsSchool;
+    }
+
+    /**
+     * @param professorsSchool the professorsSchool to set
+     */
+    public void setProfessorsSchool(School professorsSchool) {
+        this.professorsSchool = professorsSchool;
+    }
+
 }
