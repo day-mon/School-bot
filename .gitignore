@@ -1,5 +1,6 @@
 *.class
 token.*
+old-token.*
 bin/
 target/
 .settings/
