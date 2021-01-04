@@ -26,7 +26,11 @@ import net.dv8tion.jda.api.hooks.*;
 import schoolbot.commands.*;
 import schoolbot.commands.school.AddSchool;
 import schoolbot.commands.school.AddStudent;
+import schoolbot.commands.school.EditClass;
+import schoolbot.commands.school.ListClasses;
 import schoolbot.commands.school.ListMajors;
+import schoolbot.commands.school.ListProfessors;
+import schoolbot.commands.school.AddClass;
 import schoolbot.commands.school.AddProfessor;
 import schoolbot.commands.school.ListSchools;
 import schoolbot.natives.*;
@@ -46,6 +50,7 @@ public class SchoolGirl extends ListenerAdapter {
     public static HashMap<String , School> schools = new HashMap<String, School>();
     public static ArrayList<Student> students = new ArrayList<Student>();
     public static ArrayList<Professor> professors = new ArrayList<>();
+    public static HashMap<String, Classroom> classes  = new HashMap<>();
     public static TextChannel channel;
 
 
@@ -59,7 +64,7 @@ public class SchoolGirl extends ListenerAdapter {
         String ian = "no <3";
     
         try {       
-            BufferedReader fr = new BufferedReader(new FileReader( new File(username.charAt(0) != 'd' ?  "G:\\DiscordBots\\SchoolGirl\\schoolbot\\src\\main\\files\\token.txt" : "School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
+            BufferedReader fr = new BufferedReader(new FileReader( new File(username.charAt(0) != 'd' ?  "G:\\DiscordBots\\SchoolGirl\\schoolbot\\src\\main\\files\\token.txt" : "C:\\Users\\damon\\Desktop\\School-Bot-ReClone\\School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
             ian = fr.readLine();
             // System.out.println(ian);
         } catch (FileNotFoundException e) {
@@ -80,6 +85,10 @@ public class SchoolGirl extends ListenerAdapter {
         commands.put(new String[]{"listmajors", "majors"}, new ListMajors());
         commands.put(new String[]{"listschools", "schools"}, new ListSchools());
         commands.put(new String[]{"addprofessor", "addprof", "profadd"}, new AddProfessor());
+        commands.put(new String[]{"addclass"}, new AddClass());
+        commands.put(new String[]{"listprofessors", "listprofs"}, new ListProfessors()); 
+        commands.put(new String[]{"editclass", "classedit"}, new EditClass());
+        commands.put(new String[]{"classes", "listclasses"}, new ListClasses());
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.

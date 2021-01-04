@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.Professor;
+import schoolbot.natives.School;
 import schoolbot.natives.util.InvalidUsage;
 
 public class AddProfessor extends Command {
@@ -32,19 +33,24 @@ public class AddProfessor extends Command {
         MessageChannel channel = event.getChannel();
 
 
-        if (args.length != 3) {
-            channel.sendMessage(new InvalidUsage("google.com", "AddProfessor", ":x: One or more arguments are missing", event.getMessage(), this).getInvalidUsage());
+        if (args.length != 4) {
+            channel.sendMessage(new InvalidUsage("google.com", "AddProfessor", ":x: One or more arguments are missing", event.getMessage(), this).getInvalidUsage()).queue();;
         } else {
             for (String schools : SchoolGirl.schoolCalls) {
                 /**
                  * Very inefficent way to do it, will find a better way l8er.
                  */
                 if (schools.equals(args[3])) {
-                    SchoolGirl.professors.add(new Professor(args[0], args[1], SchoolGirl.schools.get(args[3])));
-                } else {
-                    channel.sendMessage(new InvalidUsage("https://google.com", "AddProfessor", "Invalid school!", event.getMessage(), this).getInvalidUsage());
+                    School school = SchoolGirl.schools.get(args[3]);
+                    Professor prof = new Professor(args[0], args[1], args[2], school);
+                    SchoolGirl.professors.add(prof);
+                    school.addProfessor(prof);
+                    
+                    channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();;
+                    break;
                 }
             }
+            channel.sendMessage(new InvalidUsage("https://google.com", "AddProfessor", "Invalid school!", event.getMessage(), this).getInvalidUsage());
         }
 
                         /* Where args[0] = name  &
