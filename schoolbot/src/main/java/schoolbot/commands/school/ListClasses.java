@@ -34,23 +34,29 @@ public class ListClasses extends Command {
 
         MessageChannel channel = event.getChannel();
         /**
-         * To avoid spaming hte chat we will only ask for classes that from a specific school, subject or professor
+         * To avoid spaming the chat we will only ask for classes that are from a specific school, subject or professor
          * args[0] = school
          * args[1] (optional) = subject / professor 
          */
 
 
-         // if school exist
-        if (SchoolGirl.schools.containsKey(args[0])) {
-            if (args.length == 1) {
+        if (args.length == 1) { // check lengths first
+            if (SchoolGirl.schools.containsKey(args[0])) { // if school exist
                 School school = SchoolGirl.schools.get(args[0]);
                 StringBuilder Classes = new StringBuilder("```");
-                for (Classroom clazz : school.getListOfClasses().values()) {
-                    System.out.println(clazz.getProfessor());
-                    Classes.append(clazz.toString());
-                    if (Classes.length() >= 1750) {
-                        StringOperations.messageExtender(Classes, channel);
+                for (Classroom clazz : school.getListOfClasses().values()) { // we need a better way to catch a class by attribute
+                    System.out.println(clazz.getProfessor() + " <- profcheck");
+                    
+                    try {
+                        Classes.append(clazz.toString());
+                        if (Classes.length() >= 1750) {
+                            StringOperations.messageExtender(Classes, channel);
+                        }  
+                    } catch (Exception e) {
+                        System.out.println("[DEBUG] A field of the given class was null for some reason.");
+                        channel.sendMessage("*Yikes!* Something went wrong, I'll get back to you!").queue();
                     }
+                    
                 }
                 Classes.append("```");
                 if (Classes.toString().length() < 8)  channel.sendMessage("**There are no professors for this school at the moment...**").queue(); else channel.sendMessage(Classes).queue();   
@@ -59,7 +65,7 @@ public class ListClasses extends Command {
             }
             
         } else {
-            System.out.println("School doesnt exit");
+            System.out.println("School doesn't exit");
         }
     }
     

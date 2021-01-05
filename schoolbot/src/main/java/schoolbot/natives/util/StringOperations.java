@@ -168,7 +168,7 @@ public class StringOperations {
         s.append("```");
         channel.sendMessage(s).queue();
         s.setLength(0);
-        s.append("````");
+        s.append("````"); // should there be four ticks here?
     }
 
 
