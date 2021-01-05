@@ -1,4 +1,4 @@
 AddSchool
 ++as, ++addschool
-No flags
+school name, email suffix, school call sign
 The AddSchool command is used to add a school to the bot for events, homework updates and more.

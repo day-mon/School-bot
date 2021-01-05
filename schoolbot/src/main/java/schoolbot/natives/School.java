@@ -17,21 +17,26 @@ public class School {
     private String emailSuffix;
     private HashMap<String, Classroom> listOfClasses;
     private HashMap<String, Student> listOfStudents;
-    protected ArrayList<School> listOfSchools;
+    private HashMap<String, Professor> listOfProfessors;
     
     public School() {
-        listOfSchools.add(this);
 
     }
 
     public School(String schoolName) {
         this.schoolName = schoolName;
+        listOfClasses = new HashMap<>();
+        listOfProfessors = new HashMap<>();
+        listOfStudents = new HashMap<>();
 
     }
 
     public School(String schoolName, String emailSuffix) {
         this.schoolName = schoolName;
         this.emailSuffix = emailSuffix;
+        listOfClasses = new HashMap<>();
+        listOfProfessors = new HashMap<>();
+        listOfStudents = new HashMap<>();
     }
 
     public School(String schoolname, String emailSuffix, HashMap<String, Classroom> listOfClasses, HashMap<String, Student> listOfStudents) {
@@ -60,6 +65,14 @@ public class School {
      public String getSchoolName() {
          return schoolName;
      }
+
+     public HashMap<String, Professor> getListOfProfessors() {
+         return listOfProfessors;
+     }
+
+     public String getEmailSuffix() {
+        return emailSuffix;
+    }
 
      /**
       * 
@@ -93,6 +106,14 @@ public class School {
           this.schoolName = schoolName;
       }
 
+      public void setEmailSuffix(String emailSuffix) {
+          this.emailSuffix = emailSuffix;
+      }
+
+      public void setListOfProfessors(HashMap<String, Professor> listOfProfessors) {
+          this.listOfProfessors = listOfProfessors;
+      }
+
       public void addStudent(Student student) {
           listOfStudents.putIfAbsent(student.getRealName(), student);
       }
@@ -101,7 +122,25 @@ public class School {
           if (!listOfStudents.containsKey(student.getRealName())) return false;
           else listOfClasses.remove(student.getRealName()); return true;
 
-      } 
+      }
+      
+      public void addClazz(Classroom clazz) {
+          listOfClasses.putIfAbsent(clazz.getClassNum(), clazz);
+      }
+
+      public boolean removeClazz(Classroom clazz) {
+          if (!listOfClasses.containsKey(clazz.getClassNum())) return false;
+          else listOfClasses.remove(clazz.getClassNum()); return true;
+      }
+
+      public void addProfessor(Professor prof) {
+        listOfProfessors.putIfAbsent(prof.getLastName(), prof);
+      }
+
+      public boolean removeProfessor(Professor prof) {
+         if (!listOfProfessors.containsKey(prof.getLastName())) return false;
+         else listOfProfessors.remove(prof.getLastName()); return true;
+      }
 
 
       public EmbedBuilder getAsEmbed() {
@@ -178,8 +217,10 @@ public class School {
             int result = 1;
             result = prime * result + ((emailSuffix == null) ? 0 : emailSuffix.hashCode());
             result = prime * result + ((listOfClasses == null) ? 0 : listOfClasses.hashCode());
+            result = prime * result + ((listOfProfessors == null) ? 0 : listOfProfessors.hashCode());
             result = prime * result + ((listOfStudents == null) ? 0 : listOfStudents.hashCode());
             result = prime * result + ((schoolName == null) ? 0 : schoolName.hashCode());
+            result = prime * result + ((serverRole == null) ? 0 : serverRole.hashCode());
             return result;
         }
 
@@ -202,6 +243,11 @@ public class School {
                     return false;
             } else if (!listOfClasses.equals(other.listOfClasses))
                 return false;
+            if (listOfProfessors == null) {
+                if (other.listOfProfessors != null)
+                    return false;
+            } else if (!listOfProfessors.equals(other.listOfProfessors))
+                return false;
             if (listOfStudents == null) {
                 if (other.listOfStudents != null)
                     return false;
@@ -212,6 +258,15 @@ public class School {
                     return false;
             } else if (!schoolName.equals(other.schoolName))
                 return false;
+            if (serverRole == null) {
+                if (other.serverRole != null)
+                    return false;
+            } else if (!serverRole.equals(other.serverRole))
+                return false;
             return true;
         }
+
+ 
+
+
 }

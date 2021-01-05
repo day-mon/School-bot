@@ -6,25 +6,32 @@ import java.util.HashMap;
 public class Classroom {
 
     private String classID;
-    private Date time;
+    private String classNum;
+    private String className;
+    private String time;
     private String year;
+    private String subject;
     private int credits;
     private Professor professor;
+    private School school;
     private HashMap<String, Student> classList;
 
     public Classroom() {
 
     }
 
-    public Classroom(String classID, Date time, String year, int credits, Professor professor) {
+    public Classroom(String className, String classID, String classNum, String time, String year, int credits, Professor professor, School school) {
         this.classID = classID;
         this.time = time;
+        this.school = school;
+        this.className = className;
+        this.classNum = classNum;
         if (!year.equalsIgnoreCase("freshman") || (!year.equalsIgnoreCase("sophomore") || !year.equalsIgnoreCase("junior") || (!year.equalsIgnoreCase("senior")))) {
             if (year.startsWith("f")) year = "Freshman";
             else if (year.startsWith("so")) year = "Sophomore";
             else if (year.startsWith("j")) year = "Junior";
             else if (year.startsWith("se")) year = "Senior";
-            else year = "Freshman";
+            else year = "Unknown";
         }
         this.year = year;
         this.credits = credits;
@@ -35,6 +42,18 @@ public class Classroom {
         return this.classID;
     }
 
+    public String getClassName() {
+        return className;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public School getSchool() {
+		return this.school;
+	}
+
     public HashMap<String, Student> getClassList() {
         return classList;
     }
@@ -42,6 +61,7 @@ public class Classroom {
     public int getCredits() {
         return credits;
     }
+
 
     public Professor getProfessor() {
         return professor;
@@ -51,7 +71,7 @@ public class Classroom {
         return year;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return this.time;
     }
 
@@ -75,8 +95,20 @@ public class Classroom {
         this.year = year;
     }
 
-    public void setTime(Date time) {
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    public void setTime(String time) {
         this.time = time;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public void addStudent(Student student) {
@@ -91,12 +123,29 @@ public class Classroom {
         return false;
     }
 
+
+
+    /**
+     * @return String return the classNum
+     */
+    public String getClassNum() {
+        return classNum;
+    }
+
+    /**
+     * @param classNum the classNum to set
+     */
+    public void setClassNum(String classNum) {
+        this.classNum = classNum;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((classID == null) ? 0 : classID.hashCode());
         result = prime * result + ((classList == null) ? 0 : classList.hashCode());
+        result = prime * result + ((classNum == null) ? 0 : classNum.hashCode());
         result = prime * result + credits;
         result = prime * result + ((professor == null) ? 0 : professor.hashCode());
         result = prime * result + ((time == null) ? 0 : time.hashCode());
@@ -123,6 +172,11 @@ public class Classroom {
                 return false;
         } else if (!classList.equals(other.classList))
             return false;
+        if (classNum == null) {
+            if (other.classNum != null)
+                return false;
+        } else if (!classNum.equals(other.classNum))
+            return false;
         if (credits != other.credits)
             return false;
         if (professor == null) {
@@ -145,9 +199,17 @@ public class Classroom {
 
     @Override
     public String toString() {
-        return "Classroom [classID= " + classID + ", classList= " + classList + ", credits= " + credits + ", professor= "
-                + professor + ", time=" + time + ", year=" + year + "]";
+        return   "ClassID: " + classID +  "\n" +
+                 "ClassList: " + classList + "\n" +
+                 "ClassNum: " + classNum +  "\n" +
+                 "Credits: " + credits +  "\n" + 
+                 "Professor: " + professor.getLastName() + ", " + professor.getFirstName() + "\n" +
+                 "Time: " + time + "\n" +
+                 "Year: " + year; 
     }
+
+
+
 }
 
 

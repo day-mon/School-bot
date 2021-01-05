@@ -2,34 +2,50 @@ package schoolbot.natives;
 
 import java.util.HashMap;
 
+import javax.print.DocFlavor.STRING;
+
+import schoolbot.natives.util.Majors;
+
 public class Professor {
 
     private HashMap<String, Classroom> professorsClasses;
     private HashMap<Student, Classroom> studentsInClasses;
     
     private String email;
-    private String prefix;
-    private String name;
+    private String firstName;
+    private String lastName;
+    private int age;
+    private String officeHours;
+    private Majors department;
+    private School professorsSchool;
 
 
 
 
-    Professor() {
-
+    public Professor() {
+        professorsClasses = new HashMap<>();
+        studentsInClasses = new HashMap<>();
     }
 
-    public Professor(String prefix, String name, String email) {
+    public Professor(String firstName, String lastName, String email, School professorsSchool) {
         this.email = email;
-        this.name = name;
-        this.prefix = prefix;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.professorsSchool = professorsSchool;
+        professorsClasses = new HashMap<>();
+        studentsInClasses = new HashMap<>();
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setFirstName(String name) {
-        this.name = name;
+    public void setFirstName(String firstNameme) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setProfessorsClasses(HashMap<String, Classroom> professorsClasses) {
@@ -41,11 +57,15 @@ public class Professor {
     }
 
     public String getEmail() {
-        return email;
+        return email + professorsSchool.getEmailSuffix();
     }
 
-    public String name() {
-        return name;
+    public String getfirstName() {
+        return firstName;
+    }
+
+    public String getLastName () {
+        return lastName;
     }
 
     public HashMap<String, Classroom> getProfessorsClasses() {
@@ -57,7 +77,7 @@ public class Professor {
     }
 
     public void addClass(Classroom clazz) {
-        professorsClasses.putIfAbsent(clazz.getClassID(), clazz);
+        professorsClasses.putIfAbsent(clazz.getClassNum(), clazz);
     }
 
     public void addStudent(Student student, Classroom clazz) {
@@ -81,4 +101,75 @@ public class Professor {
     }
 
     
+
+
+    /**
+     * @return String return the name
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+
+
+    /**
+     * @param name the name to set
+     */
+    public void setfirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    /**
+     * @return int return the age
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    /**
+     * @return String return the officeHours
+     */
+    public String getOfficeHours() {
+        return officeHours;
+    }
+
+    /**
+     * @param officeHours the officeHours to set
+     */
+    public void setOfficeHours(String officeHours) {
+        this.officeHours = officeHours;
+    }
+
+    /**
+     * @return School return the professorsSchool
+     */
+    public School getProfessorsSchool() {
+        return professorsSchool;
+    }
+
+    /**
+     * @param professorsSchool the professorsSchool to set
+     */
+    public void setProfessorsSchool(School professorsSchool) {
+        this.professorsSchool = professorsSchool;
+    }
+
+    @Override
+    public String toString() {
+        return lastName + "'s Current University Employer: " + getProfessorsSchool().getSchoolName()+ "\n"
+        + lastName + "'s Last Name: " +  getLastName() + "\n"
+        + lastName + "'s First Name: " + getFirstName() + "\n"
+        + lastName + "'s Email: " + getEmail() + "\n" 
+        + lastName + "'s Office Hours: " + getOfficeHours() + "\n"
+        + "-------------------------------------------------------------\n";
+    }
+
 }
