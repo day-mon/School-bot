@@ -6,6 +6,10 @@ import schoolbot.commands.Command;
 
 public class AddAssignment extends Command {
 
+    public AddAssignment() {
+        super(new String[]{"addassignment"}, "AddAssignment");
+    }
+
     @Override
     public void run(MessageReceivedEvent event) {
         // new invalid usage

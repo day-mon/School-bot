@@ -12,6 +12,7 @@ import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
 import schoolbot.natives.util.InvalidUsage;
+import schoolbot.natives.util.MessageOperations;
 
 public class AddClass extends Command {
 
@@ -21,7 +22,7 @@ public class AddClass extends Command {
 
 
     public AddClass() {
-        super(new String[] {"addclass"});  
+        super(new String[] {"addclass"}, "AddClass");  
     }
 
     public AddClass(String [] aliases) {
@@ -84,9 +85,7 @@ public class AddClass extends Command {
            }
 
             if (prof == null) {
-                // invalid usage
-                System.out.println("bad3");
-
+                MessageOperations.invalidUsageShortner("https://google.com", "Professor doesnt exist.", event.getMessage(), this, channel);
             }
 
 
@@ -100,10 +99,10 @@ public class AddClass extends Command {
                         schoolToAdd.addClazz(classToAdd);
                         channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:").queue();
                     } else {
-                        channel.sendMessage("")
+                       MessageOperations.invalidUsageShortner("https://google.com", "That school does not exist in **this** server!", event.getMessage(), this, channel);
                     }
                 } else {
-                    channel.sendMessage(new InvalidUsage("https://google.com", "AddClass", "Professor is not at this school", event.getMessage(), this).getInvalidUsage()).queue();
+                    MessageOperations.invalidUsageShortner("https://google.com", "Professor is not at this school", event.getMessage(), this, channel);
                 }
 
             }

@@ -6,6 +6,7 @@ import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
+import schoolbot.natives.util.MessageOperations;
 import schoolbot.natives.util.StringOperations;
 
 public class ListProfessors extends Command {
@@ -35,7 +36,7 @@ public class ListProfessors extends Command {
                     professors.append(prof.toString());
                     
                     if (professors.length() >= 1750) {
-                        StringOperations.messageExtender(professors, channel);
+                        MessageOperations.messageExtender(professors, channel);
                     }
                 }
 

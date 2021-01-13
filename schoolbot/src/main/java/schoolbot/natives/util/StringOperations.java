@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 
 import net.dv8tion.jda.api.entities.EmbedType;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed.AuthorInfo;
@@ -164,12 +165,6 @@ public class StringOperations {
         return newStr.toString();
     }
 
-    public static void messageExtender(StringBuilder s, MessageChannel channel) {
-        s.append("```");
-        channel.sendMessage(s).queue();
-        s.setLength(0);
-        s.append("````");
-    }
     /*
         Add some "correctXYZ" methods here
     */ 

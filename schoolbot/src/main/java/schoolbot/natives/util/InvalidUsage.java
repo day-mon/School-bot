@@ -26,7 +26,14 @@ public class InvalidUsage {
 
     protected MessageEmbed InvalidUsage;
 
-    public InvalidUsage(String urlToCommand, String commandName, String problemWithUsage, Message msg, Command com) {
+    /**
+     *
+     * @param urlToCommand
+     * @param problemWithUsage
+     * @param msg
+     * @param com
+     */
+    public InvalidUsage(String urlToCommand, String problemWithUsage, Message msg, Command com) {
         String authorOfMessage = msg.getAuthor().getName();
         EmbedType type = EmbedType.RICH;
         OffsetDateTime time = OffsetDateTime.now();
@@ -41,7 +48,7 @@ public class InvalidUsage {
         fields.add(new Field("Aliases", Arrays.toString(com.getCalls()), true));
 
         MessageEmbed embed = new MessageEmbed(urlToCommand,
-        commandName,
+        com.getName(),
         problemWithUsage,
         type,
         time,

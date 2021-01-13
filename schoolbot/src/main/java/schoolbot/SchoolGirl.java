@@ -65,17 +65,17 @@ public class SchoolGirl extends ListenerAdapter {
         // }
         
         String username = System.getProperty("user.name");
-        String ian = "no <3";
+        String token = "no <3";
     
-        try {       
-            BufferedReader fr = new BufferedReader(new FileReader( new File(username.charAt(0) != 'd' ?  "G:\\DiscordBots\\SchoolGirl\\schoolbot\\src\\main\\files\\token.txt" : "C:\\Users\\damon\\Desktop\\School-Bot-ReClone\\School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
-            ian = fr.readLine();
+      /* try {       
+            BufferedReader fr = new BufferedReader(new FileReader( new File(username.charAt(0) != 'd' ?  "G:\\DiscordBots\\SchoolGirl\\schoolbot\\src\\main\\files\\token.txt" : "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\")));
+            token = fr.readLine();
             // System.out.println(ian);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException iox){
             iox.printStackTrace();
-        }
+        } */
 
         // Commands initialization
         // Commands initialization; needs fixed. JDA threading is so remarkably ass-backwards that it can't initialize variables
@@ -96,9 +96,10 @@ public class SchoolGirl extends ListenerAdapter {
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.
-        JDABuilder.createLight(ian, EnumSet.allOf(GatewayIntent.class)) // <- "allOf(GI.class)" => The method allOf(Class<E>) in the type EnumSet is not applicable for the arguments (Class<GatewayIntent>) Java(67108979)
+        JDABuilder.createLight(token, EnumSet.allOf(GatewayIntent.class)) // <- "allOf(GI.class)" => The method allOf(Class<E>) in the type EnumSet is not applicable for the arguments (Class<GatewayIntent>) Java(67108979)
             .addEventListeners(new SchoolGirl())
             .setStatus(OnlineStatus.DO_NOT_DISTURB)
+            .setToken("NzcwNDI3OTE3ODIxOTM1NjY3.X5da6Q.7_YZLVtxNOXDe7JKoEd-0ysw9Ck")
             .setActivity(Activity.playing("with school textbooks"))
             .build();
     }
@@ -108,11 +109,6 @@ public class SchoolGirl extends ListenerAdapter {
         hashmap get command by id:
             command.run
     */
-
-    /**
-     * Intilizies a text channel so we dont have to grab in every file.
-     * @param tc
-     */
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event)

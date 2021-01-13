@@ -28,6 +28,11 @@ public abstract class Command {
     protected MessageEmbed documentation;
 
     /**
+     * This will make it easier for invalid usage
+     */
+    protected String name;
+
+    /**
      * Empty constructor.
      * 
      * @apiNote This will set the command to {@code disabled}.
@@ -43,6 +48,14 @@ public abstract class Command {
      * @param aliases command aliases
      */
     public Command(String[] aliases) {
+        calls = new String[aliases.length];
+        for (int i = 0; i < aliases.length; i++)
+            calls[i] = aliases[i];
+        this.enabled = true;
+        this.initDocumentation();
+    }
+
+    public Command(String[] aliases, String name) {
         calls = new String[aliases.length];
         for (int i = 0; i < aliases.length; i++)
             calls[i] = aliases[i];
@@ -146,6 +159,23 @@ public abstract class Command {
      */
     public MessageEmbed getDocumentation(){
         return this.documentation;
+    }
+
+    /** Function to get the name of the command
+     *  @return the name of the command
+     */
+    public String getName() {
+        return name;
+    }
+
+
+    /**
+     *
+     * @param name
+     * @return 
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

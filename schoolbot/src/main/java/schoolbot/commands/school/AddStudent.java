@@ -36,36 +36,42 @@ public class AddStudent extends Command {
         MessageChannel channel = event.getChannel();
         GuildImpl guild = (GuildImpl)event.getGuild();
         /**
-         * args[0] = school call
-         * args[1] =   
+         * args[0] = Real Name
+         * args[1] = User
+         * args[2] = School
+         * args[3] = Major
+         * args[4] = GPA
+         * 
          * 
          */
         
-        if (args.length != 4) {
+        if (args.length != 5) {
             //invalid usage
+            System.out.println("not long enough!");
         }  else {
-            if(SchoolGirl.schools.containsKey(args[0])) {
-                School school = SchoolGirl.schools.get(args[0]);
+            if(SchoolGirl.schools.containsKey(args[2])) {
+                School school = SchoolGirl.schools.get(args[2]);
                 double num = 0.0;
                 Majors major = Majors.UNDECIDED;
                 User studentToAddUsr = event.getMessage().getMentionedUsers().get(0);
 
                 try {
-                    num = Double.parseDouble(args[1]);
+                    num = Double.parseDouble(args[4]);
                 } catch (NumberFormatException e) {};
 
-                args[2] = args[2].toUpperCase().replace(" ", "_");
+                args[3] = args[3].toUpperCase().replace(" ", "_");
                 for (Majors majors : Majors.values()) {
-                    if (args[2].equals(majors.toString())) {
+                    if (args[3].equals(majors.toString())) {
                         major = majors;
                         break;
                     }
                 }
-                Student studentToAdd = new Student(guild, studentToAddUsr, school, num, new Majors[] {major}, args[3]);
-                channel.sendMessage("Student " + studentToAddUsr.getAsMention() + " sucesfully added!");
-                
+                Student studentToAdd = new Student(guild, studentToAddUsr, school, num, new Majors[] {major}, args[0]);
+                school.addStudent(studentToAdd);
+                channel.sendMessage("Student " + studentToAddUsr.getAsMention() + " sucesfully added!").queue();
+            
             } else {
-                // school doesnt exist;
+                System.out.println("no school!");
             }
         }
 
