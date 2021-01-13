@@ -22,6 +22,12 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
      * 
      */
     private HashMap<String, Classroom> myClasses; 
+  
+    /**
+     * List of assignments and status of those assignwemnts
+     */
+    private HashMap<Assignment, Boolean> assignemts;
+    
     /**
      * Student's GPA.
      * 
@@ -108,6 +114,12 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
 
     public double getGPA() {
         return GPA;
+    }
+
+    @Override
+    public User getUser() {
+        // TODO Auto-generated method stub
+        return super.getUser();
     }
 
     public void setGPA(double gPA) {

@@ -1,5 +1,8 @@
 package schoolbot.commands.school;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -7,6 +10,7 @@ import net.dv8tion.jda.internal.entities.GuildImpl;
 import net.dv8tion.jda.internal.entities.UserImpl;
 import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
+import schoolbot.natives.School;
 import schoolbot.natives.Student;
 import schoolbot.natives.util.InvalidUsage;
 import schoolbot.natives.util.Majors;
@@ -32,21 +36,37 @@ public class AddStudent extends Command {
         MessageChannel channel = event.getChannel();
         GuildImpl guild = (GuildImpl)event.getGuild();
         /**
-         * TODO: fix usage "look below for correct usage"
-         * TODO: fix command (half finished)
+         * args[0] = school call
+         * args[1] =   
+         * 
          */
         
-         
-        if (args.length != 5) {
-            event.getChannel().sendMessage(new InvalidUsage("https://google.com", "AddStudent", "Incorrect usage ** Look below for correct usage**", event.getMessage(), this).getInvalidUsage()).queue();
-        } else if (!SchoolGirl.schoolCalls.contains(args[2])) {
-            event.getChannel().sendMessage(new InvalidUsage("https://google.com", "AddStudent", "School does not exist", event.getMessage(), this).getInvalidUsage()).queue();
-        } 
-        else {
-            // TODO
-            SchoolGirl.students.add(new Student(guild, event.getMessage().getMentionedUsers().get(0) ,SchoolGirl.schools.get(args[2]), Double.parseDouble(args[3]), Majors.values(), args[1]));        
-            channel.sendMessage(":white_check_mark: Student added succesfully :white_check_mark: ").queue();
+        if (args.length != 4) {
+            //invalid usage
+        }  else {
+            if(SchoolGirl.schools.containsKey(args[0])) {
+                School school = SchoolGirl.schools.get(args[0]);
+                double num = 0.0;
+                Majors major = Majors.UNDECIDED;
+                User studentToAddUsr = event.getMessage().getMentionedUsers().get(0);
 
+                try {
+                    num = Double.parseDouble(args[1]);
+                } catch (NumberFormatException e) {};
+
+                args[2] = args[2].toUpperCase().replace(" ", "_");
+                for (Majors majors : Majors.values()) {
+                    if (args[2].equals(majors.toString())) {
+                        major = majors;
+                        break;
+                    }
+                }
+                Student studentToAdd = new Student(guild, studentToAddUsr, school, num, new Majors[] {major}, args[3]);
+                channel.sendMessage("Student " + studentToAddUsr.getAsMention() + " sucesfully added!");
+                
+            } else {
+                // school doesnt exist;
+            }
         }
 
     }

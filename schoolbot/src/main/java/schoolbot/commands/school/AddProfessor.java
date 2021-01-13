@@ -1,9 +1,11 @@
 package schoolbot.commands.school;
 
 
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.Professor;
@@ -24,6 +26,7 @@ public class AddProfessor extends Command {
     @Override
     public void run(MessageReceivedEvent event) {
         MessageChannel channel = event.getChannel();
+        
         channel.sendMessage(new InvalidUsage("https://google.com", "AddProfessor", "Correct usage: ++addprofessor **<professor name> <professor email>**", event.getMessage(), this).getInvalidUsage());
 
     }
@@ -31,6 +34,7 @@ public class AddProfessor extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
+        GuildImpl guild = (GuildImpl)event.getGuild();
 
 
         if (args.length != 4) {
@@ -42,12 +46,16 @@ public class AddProfessor extends Command {
                  */
                 if (schools.equals(args[3])) {
                     School school = SchoolGirl.schools.get(args[3]);
-                    Professor prof = new Professor(args[0], args[1], args[2], school);
-                    SchoolGirl.professors.add(prof);
-                    school.addProfessor(prof);
-                    
-                    channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();;
-                    break;
+                    if (school.getGuild() == event.getGuild()) {
+                        Professor prof = new Professor(guild, args[0], args[1], args[2], school);
+                        SchoolGirl.professors.add(prof);
+                        school.addProfessor(prof);
+                        channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();;
+                        break;
+                    } else {
+                        // school does not belong in guild
+                        break;
+                    }
                 }
             }
             channel.sendMessage(new InvalidUsage("https://google.com", "AddProfessor", "Invalid school!", event.getMessage(), this).getInvalidUsage());

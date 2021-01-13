@@ -170,8 +170,6 @@ public class StringOperations {
         s.setLength(0);
         s.append("````");
     }
-
-
     /*
         Add some "correctXYZ" methods here
     */ 

@@ -2,6 +2,7 @@ package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
@@ -27,6 +28,7 @@ public class AddSchool extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
+        GuildImpl guild = (GuildImpl)event.getGuild();
 
         boolean validName = true;
 
@@ -44,7 +46,7 @@ public class AddSchool extends Command {
                 event.getChannel().sendMessage(usage.getInvalidUsage()).queue();
             } else if (validName) { 
                 SchoolGirl.schoolCalls.add(args[2]);
-                SchoolGirl.schools.putIfAbsent(args[2], new School(args[0], args[1]));
+                SchoolGirl.schools.putIfAbsent(args[2], new School(guild, args[0], args[1]));
                 channel.sendMessage(":white_check_mark: School added succesfully :white_check_mark: ").queue();;
             } else {
                 event.getChannel().sendMessage(new InvalidUsage("https://github.com/tykoooo/School-bot/blob/master/schoolbot/src/main/java/schoolbot/commands/school/AddSchool.java", "AddSchool", "That is not a valid school", event.getMessage(), this).getInvalidUsage()).queue();;

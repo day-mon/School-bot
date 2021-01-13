@@ -3,8 +3,11 @@ package schoolbot.natives;
 import java.util.Date;
 import java.util.HashMap;
 
+import net.dv8tion.jda.internal.entities.GuildImpl;
+
 public class Classroom {
 
+    private GuildImpl guild;
     private String classID;
     private String classNum;
     private String className;
@@ -20,7 +23,8 @@ public class Classroom {
 
     }
 
-    public Classroom(String className, String classID, String classNum, String time, String year, int credits, Professor professor, School school) {
+    public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, String year, int credits, Professor professor, School school) {
+        this.guild = guild;
         this.classID = classID;
         this.time = time;
         this.school = school;
@@ -62,6 +66,9 @@ public class Classroom {
         return credits;
     }
 
+    public GuildImpl getGuild() {
+        return guild;
+    }
 
     public Professor getProfessor() {
         return professor;
@@ -121,6 +128,11 @@ public class Classroom {
             return true;
         }
         return false;
+    }
+
+    public boolean containsStudent(Student student) {
+        return classList.containsValue(student);
+
     }
 
 

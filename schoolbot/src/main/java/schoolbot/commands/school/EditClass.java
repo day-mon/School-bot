@@ -33,11 +33,9 @@ public class EditClass extends Command {
 
 
 
-            for (Classroom clazz : SchoolGirl.classes.values()) {
-                System.out.println(clazz);
-            }
 
-            if (SchoolGirl.classes.containsKey(args[0]) && SchoolGirl.classes.get(args[0]).getSchool() == SchoolGirl.schools.get(args[1])) {
+
+            if (SchoolGirl.classes.containsKey(args[0]) && SchoolGirl.classes.get(args[0]).getSchool() == SchoolGirl.schools.get(args[1]) && SchoolGirl.schools.get(args[1]).getGuild() == event.getGuild()) {
             switch (args[2]) {
                 case "classid":
                     SchoolGirl.classes.get(args[0]).setClassID(args[3]);

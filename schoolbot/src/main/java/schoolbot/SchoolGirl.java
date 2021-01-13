@@ -1,40 +1,44 @@
 package schoolbot;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.awt.Desktop;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.function.BiConsumer;
-import java.io.BufferedReader;
 
 import javax.security.auth.login.LoginException;
 
-import net.dv8tion.jda.api.*;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.requests.*;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.*;
-
-import schoolbot.commands.*;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import schoolbot.commands.Command;
+import schoolbot.commands.Help;
+import schoolbot.commands.Ping;
+import schoolbot.commands.Wolfram;
+import schoolbot.commands.school.AddClass;
+import schoolbot.commands.school.AddProfessor;
 import schoolbot.commands.school.AddSchool;
 import schoolbot.commands.school.AddStudent;
 import schoolbot.commands.school.EditClass;
 import schoolbot.commands.school.ListClasses;
 import schoolbot.commands.school.ListMajors;
 import schoolbot.commands.school.ListProfessors;
-import schoolbot.commands.school.AddClass;
-import schoolbot.commands.school.AddProfessor;
 import schoolbot.commands.school.ListSchools;
-import schoolbot.natives.*;
-import schoolbot.natives.util.*;
+import schoolbot.natives.Classroom;
+import schoolbot.natives.Professor;
+import schoolbot.natives.School;
+import schoolbot.natives.Student;
+import schoolbot.natives.util.StringOperations;
 
 
 /** 
@@ -48,7 +52,7 @@ public class SchoolGirl extends ListenerAdapter {
     private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
     public static ArrayList<String> schoolCalls = new ArrayList<String>();
     public static HashMap<String , School> schools = new HashMap<String, School>();
-    public static ArrayList<Student> students = new ArrayList<Student>();
+    public static HashMap<User, Student> students = new HashMap<>();
     public static ArrayList<Professor> professors = new ArrayList<>();
     public static HashMap<String, Classroom> classes  = new HashMap<>();
     public static TextChannel channel;
@@ -133,6 +137,7 @@ public class SchoolGirl extends ListenerAdapter {
 
     public static HashMap<String[], ? extends Command> getCommands(){
         return commands;
-    }
+    } 
+
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.Classroom;
@@ -36,6 +37,7 @@ public class AddClass extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
        MessageChannel channel = event.getChannel();
+       GuildImpl guild = (GuildImpl)event.getGuild();
        
         /**
         * Args:
@@ -62,9 +64,9 @@ public class AddClass extends Command {
             Professor prof = null;
             boolean numeric = args[5].matches("-?\\d+(\\.\\d+)?");
    
-            int credits = 0; // if credits is 0 on bot its because regex didnt work.
+            int credits = 0;
             for (Professor profs : SchoolGirl.professors) {
-                if (profs.getLastName().equalsIgnoreCase(args[6])) {
+                if (profs.getLastName().equalsIgnoreCase(args[6]) && profs.getGuild() == event.getGuild()) {
                     prof = profs;
                 }
 
@@ -92,10 +94,14 @@ public class AddClass extends Command {
             if (numeric && prof != null) {
              School schoolToAdd =  SchoolGirl.schools.get(args[7]);
                 if (schoolToAdd.getListOfProfessors().containsKey(args[6])) {
-                    Classroom classToAdd = new Classroom(args[0], args[1], args[2], args[3], args[4], credits, prof, schoolToAdd);
-                    SchoolGirl.classes.put(args[2], classToAdd);
-                    schoolToAdd.addClazz(classToAdd);
-                    channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:").queue();
+                    if (schoolToAdd.getGuild() == event.getGuild()) {
+                        Classroom classToAdd = new Classroom(guild, args[0], args[1], args[2], args[3], args[4], credits, prof, schoolToAdd);
+                        SchoolGirl.classes.put(args[2], classToAdd);
+                        schoolToAdd.addClazz(classToAdd);
+                        channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:").queue();
+                    } else {
+                        channel.sendMessage("")
+                    }
                 } else {
                     channel.sendMessage(new InvalidUsage("https://google.com", "AddClass", "Professor is not at this school", event.getMessage(), this).getInvalidUsage()).queue();
                 }

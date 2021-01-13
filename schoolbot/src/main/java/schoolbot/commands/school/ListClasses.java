@@ -46,8 +46,10 @@ public class ListClasses extends Command {
                 School school = SchoolGirl.schools.get(args[0]);
                 StringBuilder Classes = new StringBuilder("```");
                 for (Classroom clazz : school.getListOfClasses().values()) {
-                    System.out.println(clazz.getProfessor());
-                    Classes.append(clazz.toString());
+                    if (clazz.getGuild() == event.getGuild()) {
+                        System.out.println(clazz.getProfessor());
+                        Classes.append(clazz.toString());
+                    }
                     if (Classes.length() >= 1750) {
                         StringOperations.messageExtender(Classes, channel);
                     }

@@ -2,8 +2,7 @@ package schoolbot.natives;
 
 import java.util.HashMap;
 
-import javax.print.DocFlavor.STRING;
-
+import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.natives.util.Majors;
 
 public class Professor {
@@ -12,6 +11,7 @@ public class Professor {
     private HashMap<Student, Classroom> studentsInClasses;
     
     private String email;
+    private GuildImpl guild;
     private String firstName;
     private String lastName;
     private int age;
@@ -27,8 +27,9 @@ public class Professor {
         studentsInClasses = new HashMap<>();
     }
 
-    public Professor(String firstName, String lastName, String email, School professorsSchool) {
+    public Professor(GuildImpl guild, String firstName, String lastName, String email, School professorsSchool) {
         this.email = email;
+        this.guild = guild;
         this.firstName = firstName;
         this.lastName = lastName;
         this.professorsSchool = professorsSchool;
@@ -46,6 +47,10 @@ public class Professor {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setGuild(GuildImpl guild) {
+        this.guild = guild;
     }
 
     public void setProfessorsClasses(HashMap<String, Classroom> professorsClasses) {
@@ -66,6 +71,10 @@ public class Professor {
 
     public String getLastName () {
         return lastName;
+    }
+
+    public GuildImpl getGuild() {
+        return guild;
     }
 
     public HashMap<String, Classroom> getProfessorsClasses() {

@@ -9,12 +9,14 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.Event;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.internal.entities.GuildImpl;
 
 public class School {
 
     private String schoolName;
     private Role serverRole;
     private String emailSuffix;
+    private GuildImpl guild;
     private HashMap<String, Classroom> listOfClasses;
     private HashMap<String, Student> listOfStudents;
     private HashMap<String, Professor> listOfProfessors;
@@ -31,8 +33,9 @@ public class School {
 
     }
 
-    public School(String schoolName, String emailSuffix) {
+    public School(GuildImpl guild, String schoolName, String emailSuffix) {
         this.schoolName = schoolName;
+        this.guild = guild;
         this.emailSuffix = emailSuffix;
         listOfClasses = new HashMap<>();
         listOfProfessors = new HashMap<>();
@@ -72,6 +75,10 @@ public class School {
 
      public String getEmailSuffix() {
         return emailSuffix;
+    }
+
+    public GuildImpl getGuild() {
+        return guild;
     }
 
      /**
