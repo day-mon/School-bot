@@ -55,7 +55,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
         this.mySchool = null;
         this.GPA = -1.0;
         this.majors = null;
-        this.realName = "John Doe";
+        this.realName = "N/A";
     }
 
     public Student(GuildImpl guild, User user, School mySch, double GPA, Majors[] major, String realName) {

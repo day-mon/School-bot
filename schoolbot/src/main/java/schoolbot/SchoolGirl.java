@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import javax.security.auth.login.LoginException;
 
@@ -30,6 +31,7 @@ import schoolbot.commands.school.AddProfessor;
 import schoolbot.commands.school.AddSchool;
 import schoolbot.commands.school.AddStudent;
 import schoolbot.commands.school.EditClass;
+import schoolbot.commands.school.JoinSchool;
 import schoolbot.commands.school.ListClasses;
 import schoolbot.commands.school.ListMajors;
 import schoolbot.commands.school.ListProfessors;
@@ -93,6 +95,7 @@ public class SchoolGirl extends ListenerAdapter {
         commands.put(new String[]{"listprofessors", "listprofs"}, new ListProfessors()); 
         commands.put(new String[]{"editclass", "classedit"}, new EditClass());
         commands.put(new String[]{"classes", "listclasses"}, new ListClasses());
+        commands.put(new String[]{"joinschool", "schooljoin"}, new JoinSchool());
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.

@@ -38,7 +38,7 @@ public class AddProfessor extends Command {
 
 
         if (args.length != 4) {
-            channel.sendMessage(new InvalidUsage("google.com", "AddProfessor", ":x: One or more arguments are missing", event.getMessage(), this).getInvalidUsage()).queue();;
+            channel.sendMessage(new InvalidUsage("google.com", ":x: One or more arguments are missing", event.getMessage(), this).getInvalidUsage()).queue();;
         } else {
             for (String schools : SchoolGirl.schoolCalls) {
                 /**
@@ -58,7 +58,7 @@ public class AddProfessor extends Command {
                     }
                 }
             }
-            channel.sendMessage(new InvalidUsage("https://google.com", "AddProfessor", "Invalid school!", event.getMessage(), this).getInvalidUsage());
+            channel.sendMessage(new InvalidUsage("https://google.com","Invalid school!", event.getMessage(), this).getInvalidUsage());
         }
 
                         /* Where args[0] = name  &

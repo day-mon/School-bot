@@ -24,8 +24,8 @@ public class MessageOperations {
      * @param channel
      * @return void
      */
-    public static void invalidUsageShortner(String link, String usageIssue, Message msg, Command com, MessageChannel channel) {
-        channel.sendTyping();
-        channel.sendMessage(new InvalidUsage(link, usageIssue, msg, com).getInvalidUsage()).queue();
+    public static void invalidUsageShortner(String link, String usageIssue, Message msg, Command com) {
+        msg.getChannel().sendTyping();
+        msg.getChannel().sendMessage(new InvalidUsage(link, usageIssue, msg, com).getInvalidUsage()).queue();
     }
 }

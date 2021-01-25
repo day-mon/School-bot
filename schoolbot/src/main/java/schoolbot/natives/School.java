@@ -147,6 +147,7 @@ public class School {
       public boolean removeProfessor(Professor prof) {
          if (!listOfProfessors.containsKey(prof.getLastName())) return false;
          else listOfProfessors.remove(prof.getLastName()); return true;
+
       }
 
 

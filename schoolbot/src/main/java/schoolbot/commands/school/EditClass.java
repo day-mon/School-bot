@@ -90,6 +90,8 @@ public class EditClass extends Command {
                         // school doesnt exsit.
                     }
                     break;
+                    default: 
+                    //invalid usage.
             }
         }
     }

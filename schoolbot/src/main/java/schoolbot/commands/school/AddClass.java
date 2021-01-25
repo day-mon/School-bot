@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.HashMap;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.SchoolGirl;
@@ -56,11 +57,12 @@ public class AddClass extends Command {
          */
 
         if (args.length != 8) {
-            channel.sendMessage(new InvalidUsage("https://google.com", "AddClass", "Too many args!", event.getMessage(), this).getInvalidUsage()).queue();
+            channel.sendMessage(new InvalidUsage("https://google.com", "Too many args!", event.getMessage(), this).getInvalidUsage()).queue();
         } else if (!SchoolGirl.schools.containsKey(args[7])) {
             // invalid usage here.
             System.out.println(args[7]);
         } else {
+            User messageUser = event.getAuthor();
             // TODO: finish
             Professor prof = null;
             boolean numeric = args[5].matches("-?\\d+(\\.\\d+)?");
@@ -73,7 +75,7 @@ public class AddClass extends Command {
 
             }
 
-  
+ 
 
 
            if (numeric) {
@@ -85,13 +87,13 @@ public class AddClass extends Command {
            }
 
             if (prof == null) {
-                MessageOperations.invalidUsageShortner("https://google.com", "Professor doesnt exist.", event.getMessage(), this, channel);
+                MessageOperations.invalidUsageShortner("https://google.com", "Professor doesnt exist.", event.getMessage(), this);
             }
 
 
 
             if (numeric && prof != null) {
-             School schoolToAdd =  SchoolGirl.schools.get(args[7]);
+             School schoolToAdd = SchoolGirl.schools.get(args[7]);
                 if (schoolToAdd.getListOfProfessors().containsKey(args[6])) {
                     if (schoolToAdd.getGuild() == event.getGuild()) {
                         Classroom classToAdd = new Classroom(guild, args[0], args[1], args[2], args[3], args[4], credits, prof, schoolToAdd);
@@ -99,10 +101,10 @@ public class AddClass extends Command {
                         schoolToAdd.addClazz(classToAdd);
                         channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:").queue();
                     } else {
-                       MessageOperations.invalidUsageShortner("https://google.com", "That school does not exist in **this** server!", event.getMessage(), this, channel);
+                       MessageOperations.invalidUsageShortner("https://google.com", "That school does not exist in **this** server!", event.getMessage(), this);
                     }
                 } else {
-                    MessageOperations.invalidUsageShortner("https://google.com", "Professor is not at this school", event.getMessage(), this, channel);
+                    MessageOperations.invalidUsageShortner("https://google.com", "Professor is not at this school", event.getMessage(), this);
                 }
 
             }

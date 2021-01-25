@@ -72,6 +72,7 @@ public class AddStudent extends Command {
             
             } else {
                 System.out.println("no school!");
+                // invalid usage goes here
             }
         }
 
