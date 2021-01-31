@@ -1,7 +1,6 @@
 package schoolbot.natives;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashMap;
 
 import net.dv8tion.jda.internal.entities.GuildImpl;

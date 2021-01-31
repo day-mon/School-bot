@@ -67,6 +67,8 @@ public class SchoolGirl extends ListenerAdapter {
         String username = System.getProperty("user.name");
         String token = "no <3";
 
+        Chousei.tasks(username);
+
         try {
             ArrayList<File> files = FileOperations.getAllFilesWithExt(
                     new File("C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\"), "ser"); // C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\ is Damon's absolute path
