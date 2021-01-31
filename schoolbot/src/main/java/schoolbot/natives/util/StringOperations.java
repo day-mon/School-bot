@@ -54,6 +54,11 @@ public class StringOperations {
         return str.substring(1, str.length() - 1);
     }
 
+    /** Splits a single string of CLI arguments into their respective parts as a list based on ' ' spaces and quotation marks.
+     * 
+     * @param argu Arguments list to send
+     * @return Split arguments without quotation marks
+     */
     public static String[] parseArgs(String argu) {
         boolean quote = false;
         String tempstr = "";

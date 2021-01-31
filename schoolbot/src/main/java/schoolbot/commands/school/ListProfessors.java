@@ -25,9 +25,11 @@ public class ListProfessors extends Command {
         MessageChannel channel = event.getChannel();
         // TODO Auto-generated method stub
         if (args.length != 1) {
-            // invalid usage
+            MessageOperations.invalidUsageShortner("https://google.com",
+                "Correct usage: ++listprofessors **\"<school name>\"**", event.getMessage(), this);
         } else if (!SchoolGirl.schools.containsKey(args[0])) {
-            // invalid usage school doesnt exist
+            MessageOperations.invalidUsageShortner("https://google.com", "School doesnt exist", event.getMessage(),
+            this);
         } else {
             StringBuilder professors = new StringBuilder("```");
             School school = SchoolGirl.schools.get(args[0]);

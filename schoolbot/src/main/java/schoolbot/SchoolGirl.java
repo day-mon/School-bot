@@ -69,8 +69,14 @@ public class SchoolGirl extends ListenerAdapter {
 
         try {
             ArrayList<File> files = FileOperations.getAllFilesWithExt(
-                    new File("C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\"), "ser");
-            int serFiles = files.size();
+                    new File("C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\"), "ser"); // C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\ is Damon's absolute path
+            int serFiles = 0;
+            try {
+                serFiles = files.size();
+            } catch (NullPointerException npex) {
+                System.out.println("No files exist and serializer input failed.");
+            }
+           
 
             for (int i = 0; i < serFiles; i++) {
                 FileInputStream fis = new FileInputStream(files.get(i).getAbsolutePath());
