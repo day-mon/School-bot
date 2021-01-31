@@ -82,7 +82,7 @@ public abstract class Command {
     /**
      * What the command will do on call.
      */
-    public void run(MessageReceivedEvent event);
+    public abstract void run(MessageReceivedEvent event);
 
     /**
      * What the command will do on call.

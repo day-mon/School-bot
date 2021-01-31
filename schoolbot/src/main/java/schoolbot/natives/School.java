@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.awt.Color;
+import java.io.Serializable;
+
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.Role;
@@ -11,12 +13,16 @@ import net.dv8tion.jda.api.events.Event;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 
-public class School {
+public class School implements Serializable{
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7699216426153116210L;
     private String schoolName;
     private Role serverRole;
     private String emailSuffix;
-    private GuildImpl guild;
+    private transient GuildImpl guild;
     private HashMap<String, Classroom> listOfClasses;
     private HashMap<String, Student> listOfStudents;
     private HashMap<String, Professor> listOfProfessors;

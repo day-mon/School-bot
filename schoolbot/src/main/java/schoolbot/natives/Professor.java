@@ -1,26 +1,28 @@
 package schoolbot.natives;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.natives.util.Majors;
 
-public class Professor {
+public class Professor implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3024391926657713863L;
     private HashMap<String, Classroom> professorsClasses;
     private HashMap<Student, Classroom> studentsInClasses;
-    
+
     private String email;
-    private GuildImpl guild;
+    private transient GuildImpl guild;
     private String firstName;
     private String lastName;
     private int age;
     private String officeHours;
     private Majors department;
     private School professorsSchool;
-
-
-
 
     public Professor() {
         professorsClasses = new HashMap<>();
@@ -69,7 +71,7 @@ public class Professor {
         return firstName;
     }
 
-    public String getLastName () {
+    public String getLastName() {
         return lastName;
     }
 
@@ -95,22 +97,19 @@ public class Professor {
 
     public boolean removeClass(Classroom clazz) {
         if (professorsClasses.containsKey(clazz.getClassID())) {
-            professorsClasses.remove(clazz.getClassID()); 
+            professorsClasses.remove(clazz.getClassID());
             return true;
         }
-            return false;
+        return false;
     }
 
     public boolean removeStudent(Student student) {
         if (studentsInClasses.containsKey(student.getRealName())) {
             studentsInClasses.remove(student.getRealName());
             return true;
-        } 
+        }
         return false;
     }
-
-    
-
 
     /**
      * @return String return the name
@@ -119,15 +118,12 @@ public class Professor {
         return firstName;
     }
 
-
-
     /**
      * @param name the name to set
      */
     public void setfirstName(String firstName) {
         this.firstName = firstName;
     }
-
 
     /**
      * @return int return the age
@@ -173,12 +169,10 @@ public class Professor {
 
     @Override
     public String toString() {
-        return lastName + "'s Current University Employer: " + getProfessorsSchool().getSchoolName()+ "\n"
-        + lastName + "'s Last Name: " +  getLastName() + "\n"
-        + lastName + "'s First Name: " + getFirstName() + "\n"
-        + lastName + "'s Email: " + getEmail() + "\n" 
-        + lastName + "'s Office Hours: " + getOfficeHours() + "\n"
-        + "-------------------------------------------------------------\n";
+        return lastName + "'s Current University Employer: " + getProfessorsSchool().getSchoolName() + "\n" + lastName
+                + "'s Last Name: " + getLastName() + "\n" + lastName + "'s First Name: " + getFirstName() + "\n"
+                + lastName + "'s Email: " + getEmail() + "\n" + lastName + "'s Office Hours: " + getOfficeHours() + "\n"
+                + "-------------------------------------------------------------\n";
     }
 
 }

@@ -1,5 +1,6 @@
 package schoolbot.natives;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -11,7 +12,11 @@ import schoolbot.natives.util.Majors;
 /** A student: Joshigakusei's way of handling users.
  * @author Elsklivet#8867
  */
-public class Student extends net.dv8tion.jda.internal.entities.MemberImpl {
+public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implements Serializable  {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -7534317990933684475L;
     /**
      * School this student is attending.
      * 

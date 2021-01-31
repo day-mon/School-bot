@@ -6,8 +6,12 @@ import java.util.HashMap;
 
 import net.dv8tion.jda.internal.entities.GuildImpl;
 
-public class Classroom {
+public class Classroom implements Serializable{
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6721439396011219354L;
     private GuildImpl guild;
     private String classID;
     private String classNum;
