@@ -36,6 +36,8 @@ import schoolbot.commands.school.ListClasses;
 import schoolbot.commands.school.ListMajors;
 import schoolbot.commands.school.ListProfessors;
 import schoolbot.commands.school.ListSchools;
+import schoolbot.commands.school.RemoveProfessor;
+import schoolbot.commands.school.RemoveSchool;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
@@ -66,7 +68,8 @@ public class SchoolGirl extends ListenerAdapter {
         String token = "no <3";
 
         try {
-            ArrayList<File> files = FileOperations.getAllFilesWithExt(new File("C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\"), "ser");
+            ArrayList<File> files = FileOperations.getAllFilesWithExt(
+                    new File("C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\"), "ser");
             int serFiles = files.size();
 
             for (int i = 0; i < serFiles; i++) {
@@ -126,15 +129,15 @@ public class SchoolGirl extends ListenerAdapter {
         commands.put(new String[] { "editclass", "classedit" }, new EditClass());
         commands.put(new String[] { "classes", "listclasses" }, new ListClasses());
         commands.put(new String[] { "joinschool", "schooljoin" }, new JoinSchool());
+        commands.put(new String[] { "removeschool", "schoolremove", "rschool" }, new RemoveSchool());
+        commands.put(new String[] { "removeprofessor", "profremove", "profrem" }, new RemoveProfessor());
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and
         // private channels.
         // All other events will be disabled.
         JDABuilder.createLight(token, EnumSet.allOf(GatewayIntent.class)) // <- "allOf(GI.class)" => The method
-                .addEventListeners(new SchoolGirl())
-                .setStatus(OnlineStatus.DO_NOT_DISTURB)
-                .setActivity(Activity.playing("with school textbooks"))
-                .build();
+                .addEventListeners(new SchoolGirl()).setStatus(OnlineStatus.DO_NOT_DISTURB)
+                .setActivity(Activity.playing("with school textbooks")).build();
     }
 
     /*

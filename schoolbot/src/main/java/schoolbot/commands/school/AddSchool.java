@@ -1,10 +1,6 @@
 package schoolbot.commands.school;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -13,9 +9,7 @@ import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.util.FileOperations;
-import schoolbot.natives.util.InvalidUsage;
 import schoolbot.natives.util.MessageOperations;
-import schoolbot.natives.util.StringOperations;
 
 public class AddSchool extends Command {
 

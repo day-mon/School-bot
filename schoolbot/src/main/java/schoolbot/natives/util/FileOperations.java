@@ -44,4 +44,30 @@ public class FileOperations {
         }
     }
 
+    public static void writeToFile(File[] dir, Object[] objToWrite) {
+        for (int i = 0; i < dir.length; i++) {
+            try {
+                FileOutputStream fos = new FileOutputStream(dir[i]);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+                oos.writeObject(objToWrite);
+                System.out.println(objToWrite.getClass().getSimpleName() + " sucessfully written!");
+
+                if (i == dir.length - 1) {
+                    fos.close();
+                    oos.close();
+                    return;
+                }
+
+                /**
+                 * If files or something are not writing the last object or something remove -1.
+                 */
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

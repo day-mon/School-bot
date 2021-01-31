@@ -8,13 +8,12 @@ import org.jsoup.nodes.Document;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.natives.util.InvalidUsage;
-import schoolbot.natives.util.StringOperations;
+import schoolbot.natives.util.MessageOperations;
 
 public class Wolfram extends Command {
 
     public Wolfram() {
-        super(new String[] { "wolf", "wolfram", "wf"});
+        super(new String[] { "wolf", "wolfram", "wf" });
     }
 
     public Wolfram(String[] aliases) {
@@ -23,7 +22,7 @@ public class Wolfram extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        MessageChannel channel = event.getChannel();
+        // MessageChannel channel = event.getChannel();
     }
 
     @Override
@@ -34,7 +33,7 @@ public class Wolfram extends Command {
 
         if (args.length < 1) {
 
-            new InvalidUsage("n.com", "n", "n", event.getMessage(), this);
+            MessageOperations.invalidUsageShortner("link", "You are missing on or many args", event.getMessage(), this);
         } else {
 
             args[0] = args[0].replaceAll("%", "%25").replaceAll("\\+", "%2B").replaceAll("\\s", "+")
@@ -44,14 +43,13 @@ public class Wolfram extends Command {
                     .replaceAll("\\|", "%7C").replaceAll("=", "%3D").replaceAll(":", "%3A").replaceAll("<", "%3C")
                     .replaceAll("\\(", "%28").replaceAll("\\)", "%29").replaceAll(">", "%3E").replaceAll(";", "%3B")
                     .replaceAll("~", "%7E").replaceAll("@", "%40");
-            
+
             Document document = null;
             String link = "https://google.com";
             try {
-                 document = Jsoup.connect(link).get();
+                document = Jsoup.connect(link).get();
 
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             channel.sendMessage("```" + document.text() + "```");
@@ -60,5 +58,5 @@ public class Wolfram extends Command {
         }
 
     }
-    
+
 }

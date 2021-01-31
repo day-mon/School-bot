@@ -2,8 +2,6 @@ package schoolbot.commands.school;
 
 import java.io.File;
 
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
@@ -12,12 +10,12 @@ import schoolbot.commands.Command;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
 import schoolbot.natives.util.FileOperations;
-import schoolbot.natives.util.InvalidUsage;
+import schoolbot.natives.util.MessageOperations;
 
 public class AddProfessor extends Command {
 
     public AddProfessor() {
-        super(new String[] { "addprofessor", "addprof", "profadd" });
+        super(new String[] { "addprofessor", "addprof", "profadd" }, "AddProfessor");
     }
 
     public AddProfessor(String[] aliases) {
@@ -26,11 +24,9 @@ public class AddProfessor extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        MessageChannel channel = event.getChannel();
 
-        channel.sendMessage(new InvalidUsage("https://google.com", "AddProfessor",
-                "Correct usage: ++addprofessor **<professor name> <professor email>**", event.getMessage(), this)
-                        .getInvalidUsage());
+        MessageOperations.invalidUsageShortner("https://google.com",
+                "Correct usage: ++addprofessor **<professor name> <professor email>**", event.getMessage(), this);
 
     }
 
@@ -40,34 +36,29 @@ public class AddProfessor extends Command {
         GuildImpl guild = (GuildImpl) event.getGuild();
 
         if (args.length != 4) {
-            channel.sendMessage(
-                    new InvalidUsage("google.com", ":x: One or more arguments are missing", event.getMessage(), this)
-                            .getInvalidUsage())
-                    .queue();
-            ;
+            MessageOperations.invalidUsageShortner("https://google.com", ":x: One or more of your args are missing :x:",
+                    event.getMessage(), this);
         } else {
-
             if (SchoolGirl.schools.containsKey(args[3])) {
-
                 School school = SchoolGirl.schools.get(args[3]);
-                if (school.getGuild() == event.getGuild()) {
-                    Professor prof = new Professor(guild, args[0], args[1], args[2], school);
-                    SchoolGirl.professors.add(prof);
-                    school.addProfessor(prof);
 
-                    File professor = new File(
-                            "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\professor.ser");
+                Professor prof = new Professor(guild, args[0], args[1], args[2], school);
+                SchoolGirl.professors.add(prof);
+                school.addProfessor(prof);
 
-                    FileOperations.writeToFile(professor, SchoolGirl.professors);
+                File professor = new File(
+                        "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\professors.ser");
 
-                    channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();
-                }
+                FileOperations.writeToFile(professor, SchoolGirl.professors);
+
+                channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();
+
             } else {
-                // new invalid usage that school doesnt exist
+                MessageOperations.invalidUsageShortner("https://google.com", "School doesnt exist", event.getMessage(),
+                        this);
+
             }
         }
-        channel.sendMessage(
-                new InvalidUsage("https://google.com", "Invalid school!", event.getMessage(), this).getInvalidUsage());
     }
 
     /*

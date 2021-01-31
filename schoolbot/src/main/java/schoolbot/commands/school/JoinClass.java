@@ -7,16 +7,13 @@ import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
-import schoolbot.natives.School;
 import schoolbot.natives.Student;
-import schoolbot.natives.util.Majors;
 
 public class JoinClass extends Command {
 
     public JoinClass() {
-        super(new String[]{"jClass", "joinclass", "classjoin"});
+        super(new String[] { "jClass", "joinclass", "classjoin" });
     }
-
 
     @Override
     public void run(MessageReceivedEvent event) {
@@ -33,25 +30,24 @@ public class JoinClass extends Command {
 
         } else {
             if (SchoolGirl.classes.containsKey(args[0])) {
-                Classroom clazz = SchoolGirl.classes.get(args[0]); 
-                    if (SchoolGirl.students.containsKey(userTyping)) {
-                        Student student = SchoolGirl.students.get(userTyping);
-                        if (student.getSchool() == clazz.getSchool()) {
-                            Professor prof = clazz.getProfessor();
-                            prof.addStudent(student, clazz);
-                            student.addClass(clazz);
-                            channel.sendMessage(":white_check_mark: Joined class sucessfully :white_check_mark: ").queue();
-                        } else {
-                            // class doesnt belong to school
-                        }
+                Classroom clazz = SchoolGirl.classes.get(args[0]);
+                if (SchoolGirl.students.containsKey(userTyping)) {
+                    Student student = SchoolGirl.students.get(userTyping);
+                    if (student.getSchool() == clazz.getSchool()) {
+                        Professor prof = clazz.getProfessor();
+                        prof.addStudent(student, clazz);
+                        student.addClass(clazz);
+                        channel.sendMessage(":white_check_mark: Joined class sucessfully :white_check_mark: ").queue();
                     } else {
-                        // student doesnt exist
-                    } 
+                        // class doesnt belong to school
+                    }
+                } else {
+                    // student doesnt exist
+                }
             } else {
                 // class doesnt exist;
             }
         }
     }
-    
-    
+
 }
