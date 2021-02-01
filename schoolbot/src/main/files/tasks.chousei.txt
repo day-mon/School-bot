@@ -1,5 +1,5 @@
 Bring all files up to good practices with CLI usage (i.e. "args")
-Finish serialization
-REMOVE ABSOLUTE PATHS (BAD BAD BAD)
+Finish serialization - DONE
+REMOVE ABSOLUTE PATHS (BAD BAD BAD) - DONE
 Databasing?
 Introduce token obfuscation and publishing readiness

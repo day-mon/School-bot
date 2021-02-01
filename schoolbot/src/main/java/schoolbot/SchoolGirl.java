@@ -31,6 +31,7 @@ import schoolbot.commands.school.AddProfessor;
 import schoolbot.commands.school.AddSchool;
 import schoolbot.commands.school.AddStudent;
 import schoolbot.commands.school.EditClass;
+import schoolbot.commands.school.EditSelf;
 import schoolbot.commands.school.JoinSchool;
 import schoolbot.commands.school.ListClasses;
 import schoolbot.commands.school.ListMajors;
@@ -70,15 +71,17 @@ public class SchoolGirl extends ListenerAdapter {
         Chousei.tasks(username);
 
         try {
-            ArrayList<File> files = FileOperations.getAllFilesWithExt(
-                    new File("C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\"), "ser"); // C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\ is Damon's absolute path
+            ArrayList<File> files = FileOperations.getAllFilesWithExt(new File("schoolbot\\src\\main\\files\\"), "ser"); // C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\
+                                                                                                                         // is
+                                                                                                                         // Damon's
+                                                                                                                         // absolute
+                                                                                                                         // path
             int serFiles = 0;
             try {
                 serFiles = files.size();
             } catch (NullPointerException npex) {
                 System.out.println("No files exist and serializer input failed.");
             }
-           
 
             for (int i = 0; i < serFiles; i++) {
                 FileInputStream fis = new FileInputStream(files.get(i).getAbsolutePath());
@@ -111,9 +114,7 @@ public class SchoolGirl extends ListenerAdapter {
         ;
 
         try {
-            BufferedReader fr = new BufferedReader(new FileReader(new File(
-                    username.charAt(0) != 'd' ? "G:\\DiscordBots\\SchoolGirl\\schoolbot\\src\\main\\files\\token.txt"
-                            : "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
+            BufferedReader fr = new BufferedReader(new FileReader(new File("schoolbot\\src\\main\\files\\token.txt")));
             token = fr.readLine();
         } catch (IOException e) {
 
@@ -139,6 +140,7 @@ public class SchoolGirl extends ListenerAdapter {
         commands.put(new String[] { "joinschool", "schooljoin" }, new JoinSchool());
         commands.put(new String[] { "removeschool", "schoolremove", "rschool" }, new RemoveSchool());
         commands.put(new String[] { "removeprofessor", "profremove", "profrem" }, new RemoveProfessor());
+        commands.put(new String[] { "editself", "selfedit" }, new EditSelf());
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and
         // private channels.

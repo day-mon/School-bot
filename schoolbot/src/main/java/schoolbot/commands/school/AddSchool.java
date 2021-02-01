@@ -50,10 +50,8 @@ public class AddSchool extends Command {
             SchoolGirl.schoolCalls.add(args[2]);
             SchoolGirl.schools.putIfAbsent(args[2], new School(guild, args[0], args[1]));
 
-            File schools = new File(
-                    "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\schools.ser");
-            File schoolsCalls = new File(
-                    "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\schoolCalls.ser");
+            File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
+            File schoolsCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
 
             FileOperations.writeToFile(schools, (Object) SchoolGirl.schools);
             FileOperations.writeToFile(schoolsCalls, (Object) SchoolGirl.schoolCalls);

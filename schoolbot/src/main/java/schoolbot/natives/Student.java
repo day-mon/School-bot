@@ -9,10 +9,12 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.natives.util.Majors;
 
-/** A student: Joshigakusei's way of handling users.
+/**
+ * A student: Joshigakusei's way of handling users.
+ * 
  * @author Elsklivet#8867
  */
-public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implements Serializable  {
+public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implements Serializable {
     /**
      *
      */
@@ -26,13 +28,13 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
      * List of classes this student is in.
      * 
      */
-    private HashMap<String, Classroom> myClasses; 
-  
+    private HashMap<String, Classroom> myClasses;
+
     /**
      * List of assignments and status of those assignwemnts
      */
     private HashMap<Assignment, Boolean> assignemts;
-    
+
     /**
      * Student's GPA.
      * 
@@ -48,6 +50,17 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
      * 
      */
     private String realName;
+
+    /**
+     * Students email prefix
+     */
+    private String emailPrefix;
+
+    /**
+     * 
+     * @param guild
+     * @param user
+     */
 
     /**
      * 
@@ -69,38 +82,44 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
         this.mySchool = mySch;
         this.GPA = GPA;
         this.majors = new LinkedList<Majors>();
-        for(Majors maj : major) this.majors.add(maj);
+        for (Majors maj : major)
+            this.majors.add(maj);
         this.realName = realName;
     }
 
-    /** Remove a class from this student's schedule.
+    /**
+     * Remove a class from this student's schedule.
+     * 
      * @param clazz Class ({@code Classroom}) to remove
-     * @return 
+     * @return
      */
-    public void addClass(Classroom clazz){
+    public void addClass(Classroom clazz) {
         this.myClasses.putIfAbsent(clazz.getClassID(), clazz);
     }
 
-    /** 
+    /**
      * @param major Major to add to this student's list
      */
-    public void addMajor(String major){
+    public void addMajor(String major) {
         this.majors.add(Majors.valueOf(major.toUpperCase()));
     }
 
-    /** Remove a class from this student's schedule.
+    /**
+     * Remove a class from this student's schedule.
+     * 
      * @param clazz Class ({@code Classroom}) to remove
-     * @return 
+     * @return
      */
-    public boolean removeClass(Classroom clazz){
-        if(myClasses.containsKey(clazz.getClassID())){
+    public boolean removeClass(Classroom clazz) {
+        if (myClasses.containsKey(clazz.getClassID())) {
             myClasses.remove(clazz.getClassID());
             return true;
         }
         return false;
     }
 
-    // #region GETTER SETTERS -------------------------------------------------------
+    // #region GETTER SETTERS
+    // -------------------------------------------------------
     public School getSchool() {
         return mySchool;
     }
@@ -119,6 +138,10 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
 
     public double getGPA() {
         return GPA;
+    }
+
+    public String getEmailPrefix() {
+        return emailPrefix;
     }
 
     @Override
@@ -143,30 +166,42 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
         return realName;
     }
 
+    public void setEmailPrefix(String emailPrefix) {
+        this.emailPrefix = emailPrefix;
+    }
+
     public void setRealName(String realName) {
         this.realName = realName;
     }
-    // #endregion ----------------------------------------------------------------------
+    // #endregion
+    // ----------------------------------------------------------------------
 
-    /** Saves this instance to its respective save file by writing a comma-separated line of the variable values.
+    /**
+     * Saves this instance to its respective save file by writing a comma-separated
+     * line of the variable values.
+     * 
      * @implNote Variables are written out in order they appear in class.
      */
-    public void save(){
-        //pass
+    public void save() {
+        // pass
     }
 
-    /** Get this student's data as a pretty MessageEmbed.
+    /**
+     * Get this student's data as a pretty MessageEmbed.
+     * 
      * @return {@code MessageEmbed} to send in discord messages.
      */
-    public MessageEmbed getAsEmbed(){
-        return null; // this fat cock will be from {JDA/src/main/java/net/dv8tion/jda/api/entities/MessageEmbed.java}
+    public MessageEmbed getAsEmbed() {
+        return null; // this fat cock will be from
+                     // {JDA/src/main/java/net/dv8tion/jda/api/entities/MessageEmbed.java}
     }
 
     // DEFAULT OVERRIDES
     @Override
     public String toString() {
-        return "Student [GPA=" + GPA + ", majors=" + majors + ", myClasses=" + myClasses + ", mySchool=" + mySchool
-                + ", realName=" + realName + "]";
+        return "Name: " + realName + "\n" + "School" + mySchool.getSchoolName() + "\n" + "Major: " + majors.getFirst()
+                + "\n" + "GPA: " + GPA + "\n" + "Contact: " + emailPrefix + mySchool.getEmailSuffix() + "\n"
+                + "Amount of classes" + myClasses.size() + "\n" + "-------------------------------------------------";
     }
 
     @Override

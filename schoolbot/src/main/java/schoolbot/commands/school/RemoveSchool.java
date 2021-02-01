@@ -22,9 +22,8 @@ public class RemoveSchool extends Command {
         // TODO Auto-generated method stub
         MessageChannel channel = event.getChannel();
         Message msg = event.getMessage();
-        File schools = new File("C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\schools.ser");
-        File schoolCalls = new File(
-                "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\schoolCalls.ser");
+        File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
+        File schoolCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
 
         if (args.length != 1) {
 

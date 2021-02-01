@@ -26,7 +26,8 @@ public class AddProfessor extends Command {
     public void run(MessageReceivedEvent event) {
 
         MessageOperations.invalidUsageShortner("https://google.com",
-                "Correct usage: ++addprofessor **\"<professor name>\" \"<professor email>\"**", event.getMessage(), this);
+                "Correct usage: ++addprofessor **\"<professor name>\" \"<professor email>\"**", event.getMessage(),
+                this);
 
     }
 
@@ -45,46 +46,43 @@ public class AddProfessor extends Command {
 
                 String fName = (args[0].contains(" ") ? args[0].split(" ")[0] : "Professor");
                 String lName = (args[0].contains(" ") ? args[0].split(" ")[1] : args[0]);
-                fName = fName.substring(0,1).toUpperCase() + fName.substring(1);
-                lName = lName.substring(0,1).toUpperCase() + lName.substring(1);
-                
+                fName = fName.substring(0, 1).toUpperCase() + fName.substring(1);
+                lName = lName.substring(0, 1).toUpperCase() + lName.substring(1);
 
                 Professor prof = new Professor(guild, fName, lName, args[1], school);
                 SchoolGirl.professors.add(prof);
                 school.addProfessor(prof);
 
-                File professor = new File(
-                        "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\professors.ser");
+                File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
 
                 FileOperations.writeToFile(professor, SchoolGirl.professors);
 
                 channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();
 
-            }else {
-            MessageOperations.invalidUsageShortner("https://google.com", "School doesnt exist", event.getMessage(),
-                    this);
+            } else {
+                MessageOperations.invalidUsageShortner("https://google.com", "School doesnt exist", event.getMessage(),
+                        this);
 
             }
-        } else if (args.length >= 4){
-                if (SchoolGirl.schools.containsKey(args[3])) {
-                    School school = SchoolGirl.schools.get(args[3]);
+        } else if (args.length >= 4) {
+            if (SchoolGirl.schools.containsKey(args[3])) {
+                School school = SchoolGirl.schools.get(args[3]);
 
-                    String fName = args[0];
-                    String lName = args[1];
-                    fName = fName.substring(0,1).toUpperCase() + fName.substring(1);
-                    lName = lName.substring(0,1).toUpperCase() + lName.substring(1);
-    
-                    Professor prof = new Professor(guild, fName, lName, args[2], school);
-                    SchoolGirl.professors.add(prof);
-                    school.addProfessor(prof);
-    
-                    File professor = new File(
-                            "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\professors.ser");
-    
-                    FileOperations.writeToFile(professor, SchoolGirl.professors);
-    
-                    channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();
-            }else {
+                String fName = args[0];
+                String lName = args[1];
+                fName = fName.substring(0, 1).toUpperCase() + fName.substring(1);
+                lName = lName.substring(0, 1).toUpperCase() + lName.substring(1);
+
+                Professor prof = new Professor(guild, fName, lName, args[2], school);
+                SchoolGirl.professors.add(prof);
+                school.addProfessor(prof);
+
+                File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
+
+                FileOperations.writeToFile(professor, SchoolGirl.professors);
+
+                channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();
+            } else {
                 MessageOperations.invalidUsageShortner("https://google.com", "School doesnt exist", event.getMessage(),
                         this);
 

@@ -10,7 +10,7 @@ import schoolbot.natives.School;
 public class EditClass extends Command {
 
     public EditClass() {
-        super(new String[] { "editclass", "classedit" });
+        super(new String[] { "editclass", "classedit" }, "EditClass");
     }
 
     @Override
