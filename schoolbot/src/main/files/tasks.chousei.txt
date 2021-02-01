@@ -1,4 +1,5 @@
 Bring all files up to good practices with CLI usage (i.e. "args")
+URGENT Create StudentUser and have it consume deserialized Student objects
 Finish serialization
 REMOVE ABSOLUTE PATHS (BAD BAD BAD)
 Databasing?
