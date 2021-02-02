@@ -1,17 +1,15 @@
 package schoolbot.natives.util;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.dv8tion.jda.api.entities.EmbedType;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed.AuthorInfo;
 import net.dv8tion.jda.api.entities.MessageEmbed.Field;
@@ -21,7 +19,6 @@ import net.dv8tion.jda.api.entities.MessageEmbed.Provider;
 import net.dv8tion.jda.api.entities.MessageEmbed.Thumbnail;
 import net.dv8tion.jda.api.entities.MessageEmbed.VideoInfo;
 import schoolbot.SchoolGirl;
-import schoolbot.commands.*;
 
 /**
  * Basic String operations that will be useful for a bot.
@@ -48,13 +45,15 @@ public class StringOperations {
      * @return String without any quotation marks
      */
     public static String removeBounds(String str) {
-        if (str == null || str.length() <= 2 || str.charAt(0) != '"' || str.charAt(str.length()-1) != '"')
+        if (str == null || str.length() <= 2 || str.charAt(0) != '"' || str.charAt(str.length() - 1) != '"')
             return str;
-        
+
         return str.substring(1, str.length() - 1);
     }
 
-    /** Splits a single string of CLI arguments into their respective parts as a list based on ' ' spaces and quotation marks.
+    /**
+     * Splits a single string of CLI arguments into their respective parts as a list
+     * based on ' ' spaces and quotation marks.
      * 
      * @param argu Arguments list to send
      * @return Split arguments without quotation marks
@@ -68,9 +67,9 @@ public class StringOperations {
                 args.add(tempstr.trim());
                 tempstr = "";
             } else if (argu.charAt(i) == '"') {
-                if(i==0)
+                if (i == 0)
                     quote = !quote;
-                else if(argu.charAt(i-1) != '\\')
+                else if (argu.charAt(i - 1) != '\\')
                     quote = !quote;
             } else {
                 if (argu.charAt(i) == '\\' && argu.charAt(i + 1) == '"')
@@ -84,7 +83,7 @@ public class StringOperations {
         }
 
         String[] returnArray = new String[args.size()];
-        for(int i = 0; i<returnArray.length; i++){
+        for (int i = 0; i < returnArray.length; i++) {
             returnArray[i] = args.get(i);
         }
 
@@ -117,7 +116,8 @@ public class StringOperations {
         String line;
         try {
             while ((line = reader.readLine()) != null) {
-                if(!line.startsWith("#")) lines.add(line);
+                if (!line.startsWith("#"))
+                    lines.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -131,46 +131,41 @@ public class StringOperations {
         int color = 0;
         Thumbnail thumbnail = null;
         Provider siteProvider = null;
-        AuthorInfo author = new AuthorInfo("SchoolBot", "https://github.com/tykoooo/School-bot/tree/master/schoolbot", null, null);
+        AuthorInfo author = new AuthorInfo("SchoolBot", "https://github.com/tykoooo/School-bot/tree/master/schoolbot",
+                null, null);
         VideoInfo videoInfo = null;
         Footer footer = new Footer("Report errors to damon#9999 or Elsklivet#8867", null, null);
         ImageInfo image = null;
         List<Field> fields = new ArrayList<MessageEmbed.Field>();
-        fields.add(new Field("Aliases",lines.get(1),true));
-        fields.add(new Field("Flags",lines.get(2),true));
+        fields.add(new Field("Aliases", lines.get(1), true));
+        fields.add(new Field("Flags", lines.get(2), true));
 
-        MessageEmbed embed = new MessageEmbed(url,
-        title,
-        description,
-        type,
-        timestamp,
-        color,
-        thumbnail,
-        siteProvider,
-        author,
-        videoInfo,
-        footer,
-        image,
-        fields);
-        
+        MessageEmbed embed = new MessageEmbed(url, title, description, type, timestamp, color, thumbnail, siteProvider,
+                author, videoInfo, footer, image, fields);
+
         return embed;
     }
 
-    public static String normalizeCapitals(String str){
+    public static String normalizeCapitals(String str) {
         StringBuilder newStr = new StringBuilder();
 
-        for(int i = 0; i < str.length(); i++){
+        for (int i = 0; i < str.length(); i++) {
             char curr = str.charAt(i);
-            if(i==0 && curr != ' ') { newStr.append(str.substring(i, i+1).toUpperCase()); }
-            else if(curr != ' ' && str.charAt(i-1) != ' ') { newStr.append(str.substring(i, i+1).toLowerCase()); }
-            else if(str.charAt(i-1) == ' ') { newStr.append(str.substring(i, i+1).toUpperCase()); }
-            else { newStr.append(str.substring(i, i+1)); }
+            if (i == 0 && curr != ' ') {
+                newStr.append(str.substring(i, i + 1).toUpperCase());
+            } else if (curr != ' ' && str.charAt(i - 1) != ' ') {
+                newStr.append(str.substring(i, i + 1).toLowerCase());
+            } else if (str.charAt(i - 1) == ' ') {
+                newStr.append(str.substring(i, i + 1).toUpperCase());
+            } else {
+                newStr.append(str.substring(i, i + 1));
+            }
         }
 
         return newStr.toString();
     }
 
     /*
-        Add some "correctXYZ" methods here
-    */ 
+     * Add some "correctXYZ" methods here
+     */
 }

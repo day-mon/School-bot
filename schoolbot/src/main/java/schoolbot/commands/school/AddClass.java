@@ -55,49 +55,43 @@ public class AddClass extends Command {
             // invalid usage here.
             System.out.println(args[7]);
         } else {
-            // User messageUser = event.getAuthor();
-            Professor prof = null;
+            // Regex matches to see if the 5th arg is a number
             boolean numeric = args[5].matches("-?\\d+(\\.\\d+)?");
+            String creditsCheck = "";
 
+            // Stores credits in variable
             int credits = 0;
-            for (Professor profs : SchoolGirl.professors) {
-                if (profs.getLastName().equalsIgnoreCase(args[6]) && profs.getGuild() == event.getGuild()) {
-                    prof = profs;
+
+            // Checking if professor is a valid professor
+            if (SchoolGirl.professors.containsKey(args[6])) {
+                Professor profForClass = SchoolGirl.professors.get(args[6]);
+
+                // Checks again if its a numeric and then parses the string to an int
+                if (numeric) {
+                    credits = Integer.parseInt(args[5]);
+                } else {
+                    creditsCheck = ", you may have to reset your credits, the data you input for your credits was not a number!";
+                    credits = 0;
                 }
 
-            }
+                School schoolToAdd = SchoolGirl.schools.get(args[7]);
 
-            if (numeric) {
-                credits = Integer.parseInt(args[5]);
+                if (schoolToAdd.getListOfProfessors().containsKey(args[6])) {
+                    Classroom classToAdd = new Classroom(guild, args[0], args[1], args[2], args[3], args[4], credits,
+                            profForClass, schoolToAdd);
+                    SchoolGirl.classes.put(args[2], classToAdd);
+                    schoolToAdd.addClazz(classToAdd);
+                    channel.sendMessage(
+                            ":white_check_mark: Class added sucesfully :white_check_mark:" + creditsCheck == "" ? ""
+                                    : creditsCheck)
+                            .queue();
+                } else {
+                    MessageOperations.invalidUsageShortner("https://google.com",
+                            "That school does not exist in **this** server!", event.getMessage(), this);
+                }
             } else {
-                // invalid usage
-                System.out.println("bad2");
-
-            }
-
-            if (prof == null) {
                 MessageOperations.invalidUsageShortner("https://google.com", "Professor doesnt exist.",
                         event.getMessage(), this);
-            }
-
-            if (numeric && prof != null) {
-                School schoolToAdd = SchoolGirl.schools.get(args[7]);
-                if (schoolToAdd.getListOfProfessors().containsKey(args[6])) {
-                    if (schoolToAdd.getGuild() == event.getGuild()) {
-                        Classroom classToAdd = new Classroom(guild, args[0], args[1], args[2], args[3], args[4],
-                                credits, prof, schoolToAdd);
-                        SchoolGirl.classes.put(args[2], classToAdd);
-                        schoolToAdd.addClazz(classToAdd);
-                        channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:").queue();
-                    } else {
-                        MessageOperations.invalidUsageShortner("https://google.com",
-                                "That school does not exist in **this** server!", event.getMessage(), this);
-                    }
-                } else {
-                    MessageOperations.invalidUsageShortner("https://google.com", "Professor is not at this school",
-                            event.getMessage(), this);
-                }
-
             }
 
         }

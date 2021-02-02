@@ -45,6 +45,8 @@ public class FileOperations {
     }
 
     public static void writeToFile(File[] dir, Object[] objToWrite) {
+        if (dir.length != objToWrite.length)
+            return;
         for (int i = 0; i < dir.length; i++) {
             try {
                 FileOutputStream fos = new FileOutputStream(dir[i]);

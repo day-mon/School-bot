@@ -41,7 +41,6 @@ public class AddSchool extends Command {
         // args[0] is full schoolname
         // args[1] is school email suffix
         // args[2] is name that used to refrence the school
-        // TODO: fix usage "look below for correct usage"
         if (args.length != 3) {
             MessageOperations.invalidUsageShortner(
                     "https://github.com/tykoooo/School-bot/blob/master/schoolbot/src/main/java/schoolbot/commands/school/AddSchool.java",

@@ -17,7 +17,7 @@ public class JoinClass extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        // TODO Auto-generated method stub
+        //
 
     }
 

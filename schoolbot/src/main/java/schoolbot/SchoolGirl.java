@@ -58,7 +58,7 @@ public class SchoolGirl extends ListenerAdapter {
     public static ArrayList<String> schoolCalls = new ArrayList<String>();
     public static HashMap<String, School> schools = new HashMap<String, School>();
     public static HashMap<User, Student> students = new HashMap<>();
-    public static ArrayList<Professor> professors = new ArrayList<>();
+    public static HashMap<String, Professor> professors = new HashMap<>();
     public static HashMap<String, Classroom> classes = new HashMap<>();
 
     public static TextChannel channel;
@@ -71,11 +71,7 @@ public class SchoolGirl extends ListenerAdapter {
         Chousei.tasks(username);
 
         try {
-            ArrayList<File> files = FileOperations.getAllFilesWithExt(new File("schoolbot\\src\\main\\files\\"), "ser"); // C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\
-                                                                                                                         // is
-                                                                                                                         // Damon's
-                                                                                                                         // absolute
-                                                                                                                         // path
+            ArrayList<File> files = FileOperations.getAllFilesWithExt(new File("schoolbot\\src\\main\\files\\"), "ser");
             int serFiles = 0;
             try {
                 serFiles = files.size();
@@ -97,7 +93,7 @@ public class SchoolGirl extends ListenerAdapter {
                         schoolCalls = (ArrayList<String>) ois.readObject();
                         break;
                     case "professors":
-                        professors = (ArrayList<Professor>) ois.readObject();
+                        professors = (HashMap<String, Professor>) ois.readObject();
                         break;
                     case "students":
                         students = (HashMap<User, Student>) ois.readObject();

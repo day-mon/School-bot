@@ -16,20 +16,18 @@ public class ListProfessors extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
-        // TODO Auto-generated method stub
         if (args.length != 1) {
             MessageOperations.invalidUsageShortner("https://google.com",
-                "Correct usage: ++listprofessors **\"<school name>\"**", event.getMessage(), this);
+                    "Correct usage: ++listprofessors **\"<school name>\"**", event.getMessage(), this);
         } else if (!SchoolGirl.schools.containsKey(args[0])) {
             MessageOperations.invalidUsageShortner("https://google.com", "School doesnt exist", event.getMessage(),
-            this);
+                    this);
         } else {
             StringBuilder professors = new StringBuilder("```");
             School school = SchoolGirl.schools.get(args[0]);
