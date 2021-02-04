@@ -31,7 +31,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
     /**
      * List of assignments and status of those assignwemnts
      */
-    private HashMap<Assignment, Boolean> assignemts;
+    private HashMap<Assignment, Boolean> assignments;
     
     /**
      * Student's GPA.
