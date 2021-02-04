@@ -115,8 +115,7 @@ public class Assignment extends TimerTask implements Serializable {
 
     @Override
     public void run() {
-        long time = System.currentTimeMillis();
-        if (dueDate.compareTo(time))
+
     }
 
 }

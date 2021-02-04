@@ -33,7 +33,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
     /**
      * List of assignments and status of those assignwemnts
      */
-    private HashMap<Assignment, Boolean> assignemts;
+    private HashMap<Assignment, Boolean> assignments;
 
     /**
      * Student's GPA.
@@ -74,6 +74,8 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
         this.GPA = -1.0;
         this.majors = null;
         this.realName = "N/A";
+        assignments = new HashMap<>();
+
     }
 
     public Student(GuildImpl guild, User user, School mySch, double GPA, Majors[] major, String realName) {
@@ -85,6 +87,7 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
         for (Majors maj : major)
             this.majors.add(maj);
         this.realName = realName;
+        assignments = new HashMap<>();
     }
 
     /**
@@ -119,12 +122,12 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
     }
 
     public void addAssignment(Assignment assignemnt) {
-        assignemts.putIfAbsent(assignemnt, false);
+        assignments.putIfAbsent(assignemnt, false);
     }
 
     public boolean removeAssignment(Assignment assignemnt) {
-        if (assignemts.containsKey(assignemnt)) {
-            assignemts.remove(assignemnt);
+        if (assignments.containsKey(assignemnt)) {
+            assignments.remove(assignemnt);
             return true;
         }
         return false;

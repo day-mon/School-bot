@@ -49,9 +49,6 @@ import schoolbot.natives.Student;
 import schoolbot.natives.util.FileOperations;
 import schoolbot.natives.util.StringOperations;
 
-/**
- * Alias: Joshigakusei, only by Elsklivet. :}
- */
 public class Ryan extends ListenerAdapter {
 
     public final static String PREFIX = "++";
