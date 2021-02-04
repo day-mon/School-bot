@@ -1,5 +1,7 @@
 package schoolbot.commands.school;
 
+import java.io.File;
+
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -8,6 +10,7 @@ import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
+import schoolbot.natives.util.FileOperations;
 import schoolbot.natives.util.Majors;
 
 public class AddStudent extends Command {
@@ -29,6 +32,7 @@ public class AddStudent extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
+        File students = new File("schoolbot\\src\\main\\files\\students.ser");
         GuildImpl guild = (GuildImpl) event.getGuild();
         /**
          * args[0] = Real Name args[1] = User args[2] = School args[3] = Major args[4] =
@@ -38,8 +42,7 @@ public class AddStudent extends Command {
          */
 
         if (args.length != 5) {
-            // invalid usage
-            System.out.println("not long enough!");
+
         } else {
             if (SchoolGirl.schools.containsKey(args[2])) {
                 School school = SchoolGirl.schools.get(args[2]);
@@ -64,6 +67,7 @@ public class AddStudent extends Command {
                 Student studentToAdd = new Student(guild, studentToAddUsr, school, num, new Majors[] { major },
                         args[0]);
                 school.addStudent(studentToAdd);
+                FileOperations.writeToFile(students, SchoolGirl.students);
                 channel.sendMessage("Student " + studentToAddUsr.getAsMention() + " sucesfully added!").queue();
 
             } else {

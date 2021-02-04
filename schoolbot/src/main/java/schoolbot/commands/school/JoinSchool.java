@@ -30,39 +30,59 @@ public class JoinSchool extends Command {
         User userTyping = event.getAuthor();
         GuildImpl guild = (GuildImpl) event.getGuild();
         MessageChannel channel = event.getChannel();
-        File students = new File(
-                "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\students.ser");
+        File students = new File("schoolbot\\src\\main\\files\\students.ser");
 
         if (args.length != 1) {
             System.out.println("lmao");
 
         } else {
             if (SchoolGirl.schools.containsKey(args[0])) {
+                // Grabs the school if it exist
                 School school = SchoolGirl.schools.get(args[0]);
+
                 if (SchoolGirl.students.containsKey(userTyping)) {
+                    // Grabs student if they already exist
                     Student student = SchoolGirl.students.get(userTyping);
+
                     if (student.getSchool() == null) {
+
+                        // Writing to students.ser
                         FileOperations.writeToFile(students, SchoolGirl.students);
+
+                        // Setting & adding
                         student.setSchool(school);
                         school.addStudent(student);
+                        SchoolGirl.students.put(event.getAuthor(), student);
+
+                        // Sucess message
                         channel.sendMessage("Sucessfully added student").queue();
 
                     } else {
+                        // Error message for when student already belongs to a school
                         String studentSchoolName = student.getSchool().getSchoolName();
                         MessageOperations.invalidUsageShortner("https://google.com",
                                 "You already goto: " + studentSchoolName, event.getMessage(), this);
                     }
                 } else {
+                    // Declaring
                     Student studentToAdd = new Student(guild, userTyping);
+
+                    // Setting and adding student
                     studentToAdd.setSchool(school);
                     school.addStudent(studentToAdd);
+                    SchoolGirl.students.put(event.getAuthor(), studentToAdd);
+
+                    // Writing to students to file
                     FileOperations.writeToFile(students, SchoolGirl.students);
+
+                    // Sucess message
                     channel.sendMessage("Sucessfully added student"
                             + " \n\t\t\t Some of your student settings are not configured please use the editself command to configure!")
                             .queue();
                 }
 
             } else {
+                // Error Message for school not existing
                 MessageOperations.invalidUsageShortner("https://google.com", "School does not exist",
                         event.getMessage(), this);
             }

@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.SchoolGirl;
 import schoolbot.commands.Command;
 import schoolbot.natives.Professor;
+import schoolbot.natives.School;
 import schoolbot.natives.util.FileOperations;
 import schoolbot.natives.util.MessageOperations;
 
@@ -28,28 +29,49 @@ public class RemoveProfessor extends Command {
 
         File professor = new File(
                 "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\professors.ser");
+        /**
+         * Had to add relative path back because if I didnt it wouldnt work for some
+         * reason TODO: figure out why this doesnt work with a relative path!
+         */
 
-        if (args.length != 1) {
+        /**
+         * Args: [0] = Professor's Last Name (String) Length of args need to be 1
+         *
+         * To remove a professor we must first: 1) Check to see if the professor they
+         * input even exist. (We will do this by checking if the hashmap contains the
+         * key of the professors last name) 2) Check to see if that professor has any
+         * classes 2a) If they do throw a InvalidUsage 2b) If they dont remove them,
+         * update ser file and send message
+         * 
+         */
 
-        } else {
-            Professor empty = new Professor();
-            for (Professor prof : SchoolGirl.professors) {
-                if (prof.getLastName().equalsIgnoreCase(args[0])) {
-                    prof = empty;
+        if (args.length == 1) {
+            /**
+             * Check to see if the professor exist
+             */
+            if (SchoolGirl.professors.containsKey(args[0])) {
+                Professor prof = SchoolGirl.professors.get(args[0]);
+                School profsSchool = prof.getProfessorsSchool();
+                int numberOfClasses = prof.getProfessorsClasses().size();
+                /**
+                 * If the professor has no classes it is okay to delete
+                 */
+                if (numberOfClasses <= 0) {
+
+                    SchoolGirl.professors.remove(args[0]);
+                    profsSchool.removeProfessor(prof);
+                    FileOperations.writeToFile(professor, SchoolGirl.professors);
+                    channel.sendMessage(":white_check_mark: Professor is sucesfully deleted! :white_check_mark:")
+                            .queue();
+                } else {
+                    MessageOperations.invalidUsageShortner("https://google.com",
+                            "You cannot delete a professor who has classes", event.getMessage(), this);
                 }
-            }
-
-            if (empty.getLastName() == null) {
-                MessageOperations.invalidUsageShortner("https:/", "Professor doesnt exist!", event.getMessage(), this);
             } else {
-                SchoolGirl.professors.remove(empty);
-                FileOperations.writeToFile(professor, SchoolGirl.professors);
-                channel.sendMessage(":white_check_mark: Professor removed :white_check_mark:").queue();
-
+                MessageOperations.invalidUsageShortner("https://google.com",
+                        "There is no professor with that last name", event.getMessage(), this);
             }
-
         }
 
     }
-
 }

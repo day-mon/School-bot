@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import net.dv8tion.jda.internal.entities.GuildImpl;
 
-public class Classroom implements Serializable{
+public class Classroom implements Serializable {
 
     /**
      *
@@ -27,19 +27,26 @@ public class Classroom implements Serializable{
 
     }
 
-    public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, String year, int credits, Professor professor, School school) {
+    public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, String year,
+            int credits, Professor professor, School school) {
         this.guild = guild;
         this.classID = classID;
         this.time = time;
         this.school = school;
         this.className = className;
         this.classNum = classNum;
-        if (!year.equalsIgnoreCase("freshman") || (!year.equalsIgnoreCase("sophomore") || !year.equalsIgnoreCase("junior") || (!year.equalsIgnoreCase("senior")))) {
-            if (year.startsWith("f")) year = "Freshman";
-            else if (year.startsWith("so")) year = "Sophomore";
-            else if (year.startsWith("j")) year = "Junior";
-            else if (year.startsWith("se")) year = "Senior";
-            else year = "Unknown";
+        if (!year.equalsIgnoreCase("freshman") || (!year.equalsIgnoreCase("sophomore")
+                || !year.equalsIgnoreCase("junior") || (!year.equalsIgnoreCase("senior")))) {
+            if (year.startsWith("f"))
+                year = "Freshman";
+            else if (year.startsWith("so"))
+                year = "Sophomore";
+            else if (year.startsWith("j"))
+                year = "Junior";
+            else if (year.startsWith("se"))
+                year = "Senior";
+            else
+                year = "Unknown";
         }
         this.year = year;
         this.credits = credits;
@@ -59,8 +66,8 @@ public class Classroom implements Serializable{
     }
 
     public School getSchool() {
-		return this.school;
-	}
+        return this.school;
+    }
 
     public HashMap<String, Student> getClassList() {
         return classList;
@@ -75,7 +82,7 @@ public class Classroom implements Serializable{
     }
 
     public Professor getProfessor() {
-        return professor;
+        return this.professor;
     }
 
     public String getYear() {
@@ -93,7 +100,7 @@ public class Classroom implements Serializable{
     public void setClassList(HashMap<String, Student> classList) {
         this.classList = classList;
     }
-    
+
     public void setCredits(int credits) {
         this.credits = credits;
     }
@@ -138,8 +145,6 @@ public class Classroom implements Serializable{
         return classList.containsValue(student);
 
     }
-
-
 
     /**
      * @return String return the classNum
@@ -215,17 +220,9 @@ public class Classroom implements Serializable{
 
     @Override
     public String toString() {
-        return   "ClassID: " + classID +  "\n" +
-                 "ClassList: " + classList + "\n" +
-                 "ClassNum: " + classNum +  "\n" +
-                 "Credits: " + credits +  "\n" + 
-                 "Professor: " + professor.getLastName() + ", " + professor.getFirstName() + "\n" +
-                 "Time: " + time + "\n" +
-                 "Year: " + year; 
+        return "ClassID: " + classID + "\n" + "ClassList: " + classList + "\n" + "ClassNum: " + classNum + "\n"
+                + "Credits: " + credits + "\n" + "Professor: " + professor.getLastName() + ", "
+                + professor.getFirstName() + "\n" + "Time: " + time + "\n" + "Year: " + year;
     }
 
-
-
 }
-
-

@@ -19,12 +19,10 @@ public class RemoveSchool extends Command {
 
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
-        // TODO Auto-generated method stub
         MessageChannel channel = event.getChannel();
         Message msg = event.getMessage();
-        File schools = new File("C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\schools.ser");
-        File schoolCalls = new File(
-                "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\schoolCalls.ser");
+        File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
+        File schoolCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
 
         if (args.length != 1) {
 
@@ -33,15 +31,15 @@ public class RemoveSchool extends Command {
             return;
         } else {
             School school = SchoolGirl.schools.get(args[0]);
-            if (school.getListOfProfessors().size() <= 0) {
+            if (school.getListOfProfessors().size() >= 0) {
                 MessageOperations.invalidUsageShortner("https://google.com",
                         "There are still **professors** at this school", msg, this);
                 return;
-            } else if (school.getListOfClasses().size() <= 0) {
+            } else if (school.getListOfClasses().size() >= 0) {
                 MessageOperations.invalidUsageShortner("https://google.com",
                         "There are still **classes** at this school", msg, this);
                 return;
-            } else if (school.getListOfStudents().size() <= 0) {
+            } else if (school.getListOfStudents().size() >= 0) {
                 MessageOperations.invalidUsageShortner("https://google.com",
                         "There are still **professors** at this school", msg, this);
                 return;
@@ -59,7 +57,6 @@ public class RemoveSchool extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        // TODO Auto-generated method stub
 
     }
 

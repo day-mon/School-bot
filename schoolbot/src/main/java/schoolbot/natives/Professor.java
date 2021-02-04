@@ -63,6 +63,10 @@ public class Professor implements Serializable {
         this.studentsInClasses = studentsInClasses;
     }
 
+    public String getEmailPrefix() {
+        return email;
+    }
+
     public String getEmail() {
         return email + professorsSchool.getEmailSuffix();
     }
