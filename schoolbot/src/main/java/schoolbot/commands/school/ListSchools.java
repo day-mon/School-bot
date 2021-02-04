@@ -2,7 +2,7 @@ package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.commands.Command;
 
 public class ListSchools extends Command {
@@ -16,8 +16,8 @@ public class ListSchools extends Command {
         MessageChannel channel = event.getChannel();
         StringBuilder schools = new StringBuilder("```");
 
-        for (String school : SchoolGirl.schoolCalls) {
-            schools.append("School name: " + SchoolGirl.schools.get(school).toString() + "\n" + "School refrence:  "
+        for (String school : SchoolBot.schoolCalls) {
+            schools.append("School name: " + SchoolBot.schools.get(school).toString() + "\n" + "School refrence:  "
                     + school + "\n\n");
         }
 

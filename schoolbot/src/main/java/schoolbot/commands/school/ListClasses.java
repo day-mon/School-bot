@@ -2,7 +2,7 @@ package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.commands.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.School;
@@ -36,8 +36,8 @@ public class ListClasses extends Command {
          */
 
         if (args.length == 1) { // check lengths first
-            if (SchoolGirl.schools.containsKey(args[0])) { // if school exist
-                School school = SchoolGirl.schools.get(args[0]);
+            if (SchoolBot.schools.containsKey(args[0])) { // if school exist
+                School school = SchoolBot.schools.get(args[0]);
                 StringBuilder Classes = new StringBuilder("```");
                 for (Classroom clazz : school.getListOfClasses().values()) { // we need a better way to catch a class by
                                                                              // attribute

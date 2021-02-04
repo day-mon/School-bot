@@ -3,7 +3,7 @@ package schoolbot.commands.school;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
@@ -37,8 +37,8 @@ public class EditSelf extends Command {
          * "-------------------------------------------------"; }
          */
 
-        if (SchoolGirl.students.containsKey(usertyping)) {
-            Student studentToEdit = SchoolGirl.students.get(usertyping);
+        if (SchoolBot.students.containsKey(usertyping)) {
+            Student studentToEdit = SchoolBot.students.get(usertyping);
             switch (args[0]) {
                 case "name":
                     break;
@@ -49,8 +49,8 @@ public class EditSelf extends Command {
                     if (!(studentToEdit.getSchool() == null)) {
                         int numberOfClasses = studentToEdit.getClasses().size();
                         if (numberOfClasses <= 0) {
-                            if (SchoolGirl.schools.containsKey(args[1])) {
-                                School schoolToJoin = SchoolGirl.schools.get(args[1]);
+                            if (SchoolBot.schools.containsKey(args[1])) {
+                                School schoolToJoin = SchoolBot.schools.get(args[1]);
                                 School schoolToRemoveStudent = studentToEdit.getSchool();
 
                                 schoolToRemoveStudent.removeStudent(studentToEdit);

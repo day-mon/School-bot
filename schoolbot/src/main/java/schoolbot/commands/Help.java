@@ -2,7 +2,7 @@ package schoolbot.commands;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.natives.util.StringOperations;
 
 public class Help extends Command {
@@ -26,7 +26,7 @@ public class Help extends Command {
         MessageChannel channel = event.getChannel();
         if (args.length >= 1) {
             String commandID = StringOperations.removeBounds(args[0]);
-            for (Command com : SchoolGirl.getCommands().values()) {
+            for (Command com : SchoolBot.getCommands().values()) {
                 if (com.isInCalls(commandID)) {
                     try {
                         channel.sendMessage(com.getDocumentation()).queue();

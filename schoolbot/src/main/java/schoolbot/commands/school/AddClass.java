@@ -3,7 +3,7 @@ package schoolbot.commands.school;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.commands.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
@@ -51,7 +51,7 @@ public class AddClass extends Command {
         if (args.length != 8) {
             channel.sendMessage(new InvalidUsage("https://google.com", "Too many args!", event.getMessage(), this)
                     .getInvalidUsage()).queue();
-        } else if (!SchoolGirl.schools.containsKey(args[7])) {
+        } else if (!SchoolBot.schools.containsKey(args[7])) {
             // invalid usage here.
             System.out.println(args[7]);
         } else {
@@ -63,8 +63,8 @@ public class AddClass extends Command {
             int credits = 0;
 
             // Checking if professor is a valid professor
-            if (SchoolGirl.professors.containsKey(args[6])) {
-                Professor profForClass = SchoolGirl.professors.get(args[6]);
+            if (SchoolBot.professors.containsKey(args[6])) {
+                Professor profForClass = SchoolBot.professors.get(args[6]);
 
                 // Checks again if its a numeric and then parses the string to an int
                 if (numeric) {
@@ -74,12 +74,12 @@ public class AddClass extends Command {
                     credits = 0;
                 }
 
-                School schoolToAdd = SchoolGirl.schools.get(args[7]);
+                School schoolToAdd = SchoolBot.schools.get(args[7]);
 
                 if (schoolToAdd.getListOfProfessors().containsKey(args[6])) {
                     Classroom classToAdd = new Classroom(guild, args[0], args[1], args[2], args[3], args[4], credits,
                             profForClass, schoolToAdd);
-                    SchoolGirl.classes.put(args[2], classToAdd);
+                    SchoolBot.classes.put(args[2], classToAdd);
                     schoolToAdd.addClazz(classToAdd);
                     channel.sendMessage(
                             ":white_check_mark: Class added sucesfully :white_check_mark:" + creditsCheck == "" ? ""

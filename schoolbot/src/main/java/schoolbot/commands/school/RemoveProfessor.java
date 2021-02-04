@@ -4,7 +4,7 @@ import java.io.File;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.commands.Command;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
@@ -49,8 +49,8 @@ public class RemoveProfessor extends Command {
             /**
              * Check to see if the professor exist
              */
-            if (SchoolGirl.professors.containsKey(args[0])) {
-                Professor prof = SchoolGirl.professors.get(args[0]);
+            if (SchoolBot.professors.containsKey(args[0])) {
+                Professor prof = SchoolBot.professors.get(args[0]);
                 School profsSchool = prof.getProfessorsSchool();
                 int numberOfClasses = prof.getProfessorsClasses().size();
                 /**
@@ -58,9 +58,9 @@ public class RemoveProfessor extends Command {
                  */
                 if (numberOfClasses <= 0) {
 
-                    SchoolGirl.professors.remove(args[0]);
+                    SchoolBot.professors.remove(args[0]);
                     profsSchool.removeProfessor(prof);
-                    FileOperations.writeToFile(professor, SchoolGirl.professors);
+                    FileOperations.writeToFile(professor, SchoolBot.professors);
                     channel.sendMessage(":white_check_mark: Professor is sucesfully deleted! :white_check_mark:")
                             .queue();
                 } else {

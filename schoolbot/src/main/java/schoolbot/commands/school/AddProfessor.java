@@ -5,7 +5,7 @@ import java.io.File;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.commands.Command;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
@@ -43,15 +43,15 @@ public class AddProfessor extends Command {
                     event.getMessage(), this);
         } else if (args.length == 3) {
 
-            if (SchoolGirl.schools.containsKey(args[2])) {
-                School school = SchoolGirl.schools.get(args[2]);
+            if (SchoolBot.schools.containsKey(args[2])) {
+                School school = SchoolBot.schools.get(args[2]);
                 String fName = (args[0].contains(" ") ? args[0].split(" ")[0] : "Professor");
                 String lName = (args[0].contains(" ") ? args[0].split(" ")[1] : args[0]);
                 fName = fName.substring(0, 1).toUpperCase() + fName.substring(1);
                 lName = lName.substring(0, 1).toUpperCase() + lName.substring(1);
 
-                if (SchoolGirl.professors.containsKey(args[1])) {
-                    Professor professorInQuestion = SchoolGirl.professors.get(args[1]);
+                if (SchoolBot.professors.containsKey(args[1])) {
+                    Professor professorInQuestion = SchoolBot.professors.get(args[1]);
                     if (professorInQuestion.getFirstName().equalsIgnoreCase(fName)) {
                         sameProfessor = true;
                     }
@@ -59,12 +59,12 @@ public class AddProfessor extends Command {
 
                 if (!sameProfessor) {
                     Professor prof = new Professor(guild, fName, lName, args[1], school);
-                    SchoolGirl.professors.put(args[1], prof);
+                    SchoolBot.professors.put(args[1], prof);
                     school.addProfessor(prof);
 
                     File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
 
-                    FileOperations.writeToFile(professor, SchoolGirl.professors);
+                    FileOperations.writeToFile(professor, SchoolBot.professors);
 
                     channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();
                 } else {
@@ -76,16 +76,16 @@ public class AddProfessor extends Command {
                         this);
             }
         } else if (args.length >= 4) {
-            if (SchoolGirl.schools.containsKey(args[3])) {
-                School school = SchoolGirl.schools.get(args[3]);
+            if (SchoolBot.schools.containsKey(args[3])) {
+                School school = SchoolBot.schools.get(args[3]);
 
                 String fName = args[0];
                 String lName = args[1];
                 fName = fName.substring(0, 1).toUpperCase() + fName.substring(1);
                 lName = lName.substring(0, 1).toUpperCase() + lName.substring(1);
 
-                if (SchoolGirl.professors.containsKey(args[2])) {
-                    Professor professorInQuestion = SchoolGirl.professors.get(args[2]);
+                if (SchoolBot.professors.containsKey(args[2])) {
+                    Professor professorInQuestion = SchoolBot.professors.get(args[2]);
                     if (professorInQuestion.getFirstName().equalsIgnoreCase(fName)) {
                         sameProfessor = true;
                     }
@@ -93,12 +93,12 @@ public class AddProfessor extends Command {
 
                 if (!sameProfessor) {
                     Professor prof = new Professor(guild, fName, lName, args[2], school);
-                    SchoolGirl.professors.put(args[2], prof);
+                    SchoolBot.professors.put(args[2], prof);
                     school.addProfessor(prof);
 
                     File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
 
-                    FileOperations.writeToFile(professor, SchoolGirl.professors);
+                    FileOperations.writeToFile(professor, SchoolBot.professors);
 
                     channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();
                 } else {

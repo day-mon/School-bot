@@ -5,7 +5,7 @@ import java.io.File;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.util.FileOperations;
@@ -26,11 +26,11 @@ public class RemoveSchool extends Command {
 
         if (args.length != 1) {
 
-        } else if (!SchoolGirl.schools.containsKey(args[0])) {
+        } else if (!SchoolBot.schools.containsKey(args[0])) {
             MessageOperations.invalidUsageShortner("https://google.com", "That school doesnt exist!", msg, this);
             return;
         } else {
-            School school = SchoolGirl.schools.get(args[0]);
+            School school = SchoolBot.schools.get(args[0]);
             if (school.getListOfProfessors().size() >= 0) {
                 MessageOperations.invalidUsageShortner("https://google.com",
                         "There are still **professors** at this school", msg, this);
@@ -45,10 +45,10 @@ public class RemoveSchool extends Command {
                 return;
             }
 
-            SchoolGirl.schools.remove(args[0]);
-            SchoolGirl.schoolCalls.remove(args[0]);
-            FileOperations.writeToFile(schoolCalls, SchoolGirl.schoolCalls);
-            FileOperations.writeToFile(schools, SchoolGirl.schools);
+            SchoolBot.schools.remove(args[0]);
+            SchoolBot.schoolCalls.remove(args[0]);
+            FileOperations.writeToFile(schoolCalls, SchoolBot.schoolCalls);
+            FileOperations.writeToFile(schools, SchoolBot.schools);
             channel.sendMessage(":white_check_mark: School removed :white_check_mark:").queue();
 
         }

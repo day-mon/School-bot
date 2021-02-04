@@ -46,10 +46,7 @@ import schoolbot.natives.Student;
 import schoolbot.natives.util.FileOperations;
 import schoolbot.natives.util.StringOperations;
 
-/**
- * Alias: Joshigakusei, only by Elsklivet. :}
- */
-public class SchoolGirl extends ListenerAdapter {
+public class SchoolBot extends ListenerAdapter {
 
     public final static String PREFIX = "++";
     private final static String gavinID = "348235152972972042";
@@ -142,7 +139,7 @@ public class SchoolGirl extends ListenerAdapter {
         // private channels.
         // All other events will be disabled.
         JDABuilder.createLight(token, EnumSet.allOf(GatewayIntent.class)) // <- "allOf(GI.class)" => The method
-                .addEventListeners(new SchoolGirl()).setStatus(OnlineStatus.DO_NOT_DISTURB)
+                .addEventListeners(new SchoolBot()).setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .setActivity(Activity.playing("with school textbooks")).build();
     }
 

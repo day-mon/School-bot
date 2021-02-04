@@ -1,7 +1,7 @@
 package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.commands.Command;
 
 public class AddAssignment extends Command {
@@ -30,7 +30,7 @@ public class AddAssignment extends Command {
         if (args.length != 6) {
             // new invalid usgae
         } else {
-            if (SchoolGirl.classes.containsKey(args[0])) {
+            if (SchoolBot.classes.containsKey(args[0])) {
 
             }
         }

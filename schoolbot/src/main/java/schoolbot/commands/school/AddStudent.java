@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
-import schoolbot.SchoolGirl;
+import schoolbot.SchoolBot;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
@@ -44,8 +44,8 @@ public class AddStudent extends Command {
         if (args.length != 5) {
 
         } else {
-            if (SchoolGirl.schools.containsKey(args[2])) {
-                School school = SchoolGirl.schools.get(args[2]);
+            if (SchoolBot.schools.containsKey(args[2])) {
+                School school = SchoolBot.schools.get(args[2]);
                 double num = 0.0;
                 Majors major = Majors.UNDECIDED;
                 User studentToAddUsr = event.getMessage().getMentionedUsers().get(0);
@@ -67,7 +67,7 @@ public class AddStudent extends Command {
                 Student studentToAdd = new Student(guild, studentToAddUsr, school, num, new Majors[] { major },
                         args[0]);
                 school.addStudent(studentToAdd);
-                FileOperations.writeToFile(students, SchoolGirl.students);
+                FileOperations.writeToFile(students, SchoolBot.students);
                 channel.sendMessage("Student " + studentToAddUsr.getAsMention() + " sucesfully added!").queue();
 
             } else {
