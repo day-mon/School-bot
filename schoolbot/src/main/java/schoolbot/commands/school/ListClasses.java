@@ -2,7 +2,7 @@ package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.Ryan;
 import schoolbot.commands.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.School;
@@ -20,7 +20,6 @@ public class ListClasses extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        // TODO Auto-generated method stub
         System.out.println("School doesnt exit");
 
     }
@@ -36,35 +35,32 @@ public class ListClasses extends Command {
          */
 
         if (args.length == 1) { // check lengths first
-            if (SchoolGirl.schools.containsKey(args[0])) { // if school exist
-                School school = SchoolGirl.schools.get(args[0]);
-                StringBuilder Classes = new StringBuilder("```");
-                for (Classroom clazz : school.getListOfClasses().values()) { // we need a better way to catch a class by
-                                                                             // attribute
-                    System.out.println(clazz.getProfessor() + " <- profcheck");
+            if (Ryan.schools.containsKey(args[0])) {
+                School schoolToGetClasses = Ryan.schools.get(args[0]);
+                int schoolsClasses = schoolToGetClasses.getListOfClasses().size();
+                if (schoolsClasses > 0) {
+                    StringBuilder classes = new StringBuilder("");
+                    classes.append("Classes at: ***" + schoolToGetClasses.getSchoolName() + "*** \n");
+                    classes.append("```");
+                    for (Classroom clazz : schoolToGetClasses.getListOfClasses().values()) {
+                        classes.append(clazz.toString() + "\n");
 
-                    try {
-                        Classes.append(clazz.toString());
-                        if (Classes.length() >= 1750) {
-                            MessageOperations.messageExtender(Classes, channel);
+                        if (classes.length() >= 1750) {
+                            MessageOperations.messageExtender(classes, channel);
                         }
-                    } catch (Exception e) {
-                        System.out.println("[DEBUG] A field of the given class was null for some reason.");
-                        channel.sendMessage("*Yikes!* Something went wrong, I'll get back to you!").queue();
                     }
 
+                    classes.append("```");
+                    channel.sendMessage(classes).queue();
+                } else {
+                    MessageOperations.invalidUsageShortner("https://google.com", "There are no classes at this school!",
+                            event.getMessage(), this);
                 }
-                Classes.append("```");
-                if (Classes.toString().length() < 8)
-                    channel.sendMessage("**There are no professors for this school at the moment...**").queue();
-                else
-                    channel.sendMessage(Classes).queue();
-
+            } else {
+                MessageOperations.invalidUsageShortner("https://google.com", "School does not exist!",
+                        event.getMessage(), this);
             }
-
-        } else {
-            System.out.println("School doesn't exit");
         }
-    }
 
+    }
 }

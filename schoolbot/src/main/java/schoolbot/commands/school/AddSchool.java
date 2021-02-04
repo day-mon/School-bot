@@ -5,7 +5,7 @@ import java.io.File;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
-import schoolbot.SchoolGirl;
+import schoolbot.Ryan;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.util.FileOperations;
@@ -23,7 +23,6 @@ public class AddSchool extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -34,7 +33,7 @@ public class AddSchool extends Command {
 
         boolean valid = true;
 
-        if (args[0].length() < 10 || SchoolGirl.schools.containsKey(args[2])) {
+        if (args[0].length() < 10 || Ryan.schools.containsKey(args[2])) {
             valid = false;
         }
 
@@ -46,14 +45,14 @@ public class AddSchool extends Command {
                     "https://github.com/tykoooo/School-bot/blob/master/schoolbot/src/main/java/schoolbot/commands/school/AddSchool.java",
                     "Incorrect usage: **Look below for correct usage", event.getMessage(), this);
         } else if (valid) {
-            SchoolGirl.schoolCalls.add(args[2]);
-            SchoolGirl.schools.putIfAbsent(args[2], new School(guild, args[0], args[1]));
+            Ryan.schoolCalls.add(args[2]);
+            Ryan.schools.putIfAbsent(args[2], new School(guild, args[0], args[1]));
 
             File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
             File schoolsCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
 
-            FileOperations.writeToFile(schools, (Object) SchoolGirl.schools);
-            FileOperations.writeToFile(schoolsCalls, (Object) SchoolGirl.schoolCalls);
+            FileOperations.writeToFile(schools, (Object) Ryan.schools);
+            FileOperations.writeToFile(schoolsCalls, (Object) Ryan.schoolCalls);
 
             channel.sendMessage(":white_check_mark: School added succesfully :white_check_mark: ").queue();
         } else {

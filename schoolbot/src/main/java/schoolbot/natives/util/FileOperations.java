@@ -36,15 +36,14 @@ public class FileOperations {
             fileOutputStream.close();
             System.out.println(objToWrite.getClass().getSimpleName() + " sucessfully written!");
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     public static void writeToFile(File[] dir, Object[] objToWrite) {
+
         if (dir.length != objToWrite.length)
             return;
         for (int i = 0; i < dir.length; i++) {
@@ -68,6 +67,8 @@ public class FileOperations {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+
             }
         }
     }

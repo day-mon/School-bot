@@ -11,7 +11,7 @@ public class Classroom implements Serializable {
      *
      */
     private static final long serialVersionUID = -6721439396011219354L;
-    private GuildImpl guild;
+    private transient GuildImpl guild;
     private String classID;
     private String classNum;
     private String className;
@@ -22,6 +22,7 @@ public class Classroom implements Serializable {
     private Professor professor;
     private School school;
     private HashMap<String, Student> classList;
+    private HashMap<String, Assignment> assignments;
 
     public Classroom() {
 
@@ -34,6 +35,7 @@ public class Classroom implements Serializable {
         this.time = time;
         this.school = school;
         this.className = className;
+        this.professor = professor;
         this.classNum = classNum;
         if (!year.equalsIgnoreCase("freshman") || (!year.equalsIgnoreCase("sophomore")
                 || !year.equalsIgnoreCase("junior") || (!year.equalsIgnoreCase("senior")))) {
@@ -50,6 +52,8 @@ public class Classroom implements Serializable {
         }
         this.year = year;
         this.credits = credits;
+        classList = new HashMap<>();
+        assignments = new HashMap<>();
         professor.addClass(this);
     }
 
@@ -141,9 +145,27 @@ public class Classroom implements Serializable {
         return false;
     }
 
+    public void addToAllStudents(Assignment assignment) {
+        for (Student students : classList.values()) {
+            students.addAssignment(assignment);
+        }
+    }
+
     public boolean containsStudent(Student student) {
         return classList.containsValue(student);
 
+    }
+
+    public void addAssignment(Assignment assignemnt) {
+        assignments.putIfAbsent(assignemnt.getAssignmentRef(), assignemnt);
+    }
+
+    public boolean removeAssignment(Assignment assignemnt) {
+        if (assignments.containsKey(assignemnt.getAssignmentRef())) {
+            assignments.remove(assignemnt.getAssignmentRef());
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -151,6 +173,14 @@ public class Classroom implements Serializable {
      */
     public String getClassNum() {
         return classNum;
+    }
+
+    public HashMap<String, Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(HashMap<String, Assignment> assignments) {
+        this.assignments = assignments;
     }
 
     /**
@@ -220,9 +250,10 @@ public class Classroom implements Serializable {
 
     @Override
     public String toString() {
-        return "ClassID: " + classID + "\n" + "ClassList: " + classList + "\n" + "ClassNum: " + classNum + "\n"
-                + "Credits: " + credits + "\n" + "Professor: " + professor.getLastName() + ", "
-                + professor.getFirstName() + "\n" + "Time: " + time + "\n" + "Year: " + year;
+        return "Class Name: " + className + "\n" + "ClassID: " + classID + "\n" + "Class size: " + classList.size()
+                + "\n" + "ClassNum: " + classNum + "\n" + "Credits: " + credits + "\n" + "Professor: "
+                + professor.getLastName() + ", " + professor.getFirstName() + "\n" + "Time: " + time + "\n" + "Year: "
+                + year + "\n" + "===============================";
     }
 
 }

@@ -2,7 +2,7 @@ package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.Ryan;
 import schoolbot.commands.Command;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
@@ -16,6 +16,21 @@ public class ListProfessors extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+        StringBuilder professors = new StringBuilder("```");
+        for (Professor prof : Ryan.professors.values()) {
+            professors.append(prof.toString());
+
+            if (professors.length() >= 1750) {
+                MessageOperations.messageExtender(professors, channel);
+            }
+        }
+
+        professors.append("```");
+        if (professors.toString().length() < 8)
+            channel.sendMessage("**There are no professors for this school at the moment...**").queue();
+        else
+            channel.sendMessage(professors).queue();
 
     }
 
@@ -25,12 +40,12 @@ public class ListProfessors extends Command {
         if (args.length != 1) {
             MessageOperations.invalidUsageShortner("https://google.com",
                     "Correct usage: ++listprofessors **\"<school name>\"**", event.getMessage(), this);
-        } else if (!SchoolGirl.schools.containsKey(args[0])) {
+        } else if (!Ryan.schools.containsKey(args[0])) {
             MessageOperations.invalidUsageShortner("https://google.com", "School doesnt exist", event.getMessage(),
                     this);
         } else {
             StringBuilder professors = new StringBuilder("```");
-            School school = SchoolGirl.schools.get(args[0]);
+            School school = Ryan.schools.get(args[0]);
             for (Professor prof : school.getListOfProfessors().values()) {
                 professors.append(prof.toString());
 

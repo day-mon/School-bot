@@ -118,6 +118,18 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
         return false;
     }
 
+    public void addAssignment(Assignment assignemnt) {
+        assignemts.putIfAbsent(assignemnt, false);
+    }
+
+    public boolean removeAssignment(Assignment assignemnt) {
+        if (assignemts.containsKey(assignemnt)) {
+            assignemts.remove(assignemnt);
+            return true;
+        }
+        return false;
+    }
+
     // #region GETTER SETTERS
     // -------------------------------------------------------
     public School getSchool() {

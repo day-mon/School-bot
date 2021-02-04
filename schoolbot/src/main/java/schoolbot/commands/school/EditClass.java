@@ -2,7 +2,7 @@ package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.Ryan;
 import schoolbot.commands.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
@@ -12,7 +12,7 @@ import schoolbot.natives.util.MessageOperations;
 public class EditClass extends Command {
 
     public EditClass() {
-        super(new String[] { "editclass", "classedit" }, "EditClass");
+        super(new String[] { "editclass", "classedit" });
     }
 
     @Override
@@ -29,10 +29,9 @@ public class EditClass extends Command {
          * First check if the school and the class even exist;
          */
 
-        if (SchoolGirl.classes.containsKey(args[0])
-                && SchoolGirl.classes.get(args[0]).getSchool() == SchoolGirl.schools.get(args[1])
-                && SchoolGirl.schools.get(args[1]).getGuild() == event.getGuild()) {
-            Classroom classToEdit = SchoolGirl.classes.get(0);
+        if (Ryan.classes.containsKey(args[0]) && Ryan.classes.get(args[0]).getSchool() == Ryan.schools.get(args[1])
+                && Ryan.schools.get(args[1]).getGuild() == event.getGuild()) {
+            Classroom classToEdit = Ryan.classes.get(0);
 
             switch (args[2]) {
                 case "classid":
@@ -56,7 +55,7 @@ public class EditClass extends Command {
                     boolean numeric = args[3].matches("-?\\d+(\\.\\d+)?");
 
                     if (numeric) {
-                        SchoolGirl.classes.get(args[0]).setYear(args[3]);
+                        Ryan.classes.get(args[0]).setYear(args[3]);
                         channel.sendMessage("Credits sucessfully changed to: " + args[3]).queue();
                     } else {
                         // invalid usage
@@ -64,8 +63,8 @@ public class EditClass extends Command {
                     break;
                 case "professor":
 
-                    if (SchoolGirl.professors.containsKey(args[3])) {
-                        Professor prof = SchoolGirl.professors.get(args[3]);
+                    if (Ryan.professors.containsKey(args[3])) {
+                        Professor prof = Ryan.professors.get(args[3]);
                         classToEdit.setProfessor(prof);
                         channel.sendMessage(
                                 "Credits sucessfully changed to: " + prof.getLastName() + ", " + prof.getFirstName())
@@ -76,8 +75,8 @@ public class EditClass extends Command {
                     }
                     break;
                 case "school":
-                    if (SchoolGirl.schools.containsKey(args[0])) {
-                        School school = SchoolGirl.schools.get(args[0]);
+                    if (Ryan.schools.containsKey(args[0])) {
+                        School school = Ryan.schools.get(args[0]);
                         classToEdit.setSchool(school);
                         channel.sendMessage("School sucessfully changed to: " + school.getSchoolName()).queue();
                     } else {

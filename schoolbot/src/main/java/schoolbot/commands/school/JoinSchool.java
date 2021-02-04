@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
-import schoolbot.SchoolGirl;
+import schoolbot.Ryan;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
@@ -21,7 +21,6 @@ public class JoinSchool extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -36,23 +35,23 @@ public class JoinSchool extends Command {
             System.out.println("lmao");
 
         } else {
-            if (SchoolGirl.schools.containsKey(args[0])) {
+            if (Ryan.schools.containsKey(args[0])) {
                 // Grabs the school if it exist
-                School school = SchoolGirl.schools.get(args[0]);
+                School school = Ryan.schools.get(args[0]);
 
-                if (SchoolGirl.students.containsKey(userTyping)) {
+                if (Ryan.students.containsKey(userTyping)) {
                     // Grabs student if they already exist
-                    Student student = SchoolGirl.students.get(userTyping);
+                    Student student = Ryan.students.get(userTyping);
 
                     if (student.getSchool() == null) {
 
                         // Writing to students.ser
-                        FileOperations.writeToFile(students, SchoolGirl.students);
+                        FileOperations.writeToFile(students, Ryan.students);
 
                         // Setting & adding
                         student.setSchool(school);
                         school.addStudent(student);
-                        SchoolGirl.students.put(event.getAuthor(), student);
+                        Ryan.students.put(event.getAuthor(), student);
 
                         // Sucess message
                         channel.sendMessage("Sucessfully added student").queue();
@@ -70,10 +69,10 @@ public class JoinSchool extends Command {
                     // Setting and adding student
                     studentToAdd.setSchool(school);
                     school.addStudent(studentToAdd);
-                    SchoolGirl.students.put(event.getAuthor(), studentToAdd);
+                    Ryan.students.put(event.getAuthor(), studentToAdd);
 
                     // Writing to students to file
-                    FileOperations.writeToFile(students, SchoolGirl.students);
+                    FileOperations.writeToFile(students, Ryan.students);
 
                     // Sucess message
                     channel.sendMessage("Sucessfully added student"

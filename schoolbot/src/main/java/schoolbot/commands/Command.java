@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import schoolbot.Ryan;
 
 /**
  * Command interface for all commands to implement.
@@ -22,7 +23,9 @@ public abstract class Command {
      * Enabled status. Commands which are not enabled should not run.
      */
     protected boolean enabled;
-    /** Documentation embed for asking {@code ++help "comand name"}
+    /**
+     * Documentation embed for asking {@code ++help "comand name"}
+     * 
      * @see net.dv8tion.jda.api.entities.MessageEmbed;
      */
     protected MessageEmbed documentation;
@@ -53,14 +56,7 @@ public abstract class Command {
             calls[i] = aliases[i];
         this.enabled = true;
         this.initDocumentation();
-    }
-
-    public Command(String[] aliases, String name) {
-        calls = new String[aliases.length];
-        for (int i = 0; i < aliases.length; i++)
-            calls[i] = aliases[i];
-        this.enabled = true;
-        this.initDocumentation();
+        this.name = this.getClass().getSimpleName();
     }
 
     /**
@@ -77,6 +73,7 @@ public abstract class Command {
             calls[i] = aliases[i];
         this.enabled = true;
         runCode.accept(flags);
+
     }
 
     /**
@@ -91,28 +88,35 @@ public abstract class Command {
      */
     public abstract void run(MessageReceivedEvent event, String[] args);
 
-    /** Method to initialize the documentation for this command.
+    /**
+     * Method to initialize the documentation for this command.
      * <p>
-     * Implementation Note:<br></br>
+     * Implementation Note:<br>
+     * </br>
      * This shouldn't really handle parsing itself. StringOperations will do that.
      * </p>
+     * 
      * @see schoolbot.natives.util.StringOperations#parseDoc(String)
      */
-    public void initDocumentation(String relativePath){
+    public void initDocumentation(String relativePath) {
         this.documentation = schoolbot.natives.util.StringOperations.parseDoc(relativePath);
     }
 
-    /** Method to initialize the documentation for this command without providing a path.
+    /**
+     * Method to initialize the documentation for this command without providing a
+     * path.
      * <p>
-     * Implementation Note:<br></br>
+     * Implementation Note:<br>
+     * </br>
      * This shouldn't really handle parsing itself. StringOperations will do that.
      * </p>
+     * 
      * @see schoolbot.natives.util.StringOperations#parseDoc(String)
      */
-    public void initDocumentation(){
+    public void initDocumentation() {
         String className = this.getClass().getName();
-        String name = className.substring(className.lastIndexOf(".")+1);
-        String relativePath = "schoolbot\\docs\\"+name+".txt";
+        String name = className.substring(className.lastIndexOf(".") + 1);
+        String relativePath = "schoolbot\\docs\\" + name + ".txt";
         this.documentation = schoolbot.natives.util.StringOperations.parseDoc(relativePath);
     }
 
@@ -125,20 +129,25 @@ public abstract class Command {
         return this.enabled;
     }
 
-    /** {@code calls} getter.
+    /**
+     * {@code calls} getter.
+     * 
      * @return Array of calls
      */
-    public String[] getCalls(){
+    public String[] getCalls() {
         return this.calls;
     }
 
-    /** Check whether a test String is found in this command's calls.
+    /**
+     * Check whether a test String is found in this command's calls.
+     * 
      * @param test String to search {@code calls} for.
-     * @return {@code true} if the test string is found in {@code calls}, {@code false} otherwise.
+     * @return {@code true} if the test string is found in {@code calls},
+     *         {@code false} otherwise.
      */
-    public boolean isInCalls(String test){
-        for(String call : calls){
-            if(call.strip().equals(test)){
+    public boolean isInCalls(String test) {
+        for (String call : calls) {
+            if (call.strip().equals(test)) {
                 return true;
             }
         }
@@ -154,25 +163,28 @@ public abstract class Command {
         this.enabled = enabled;
     }
 
-    /** Function to get the documentation JSON for this command as a MessageEmbed.
+    /**
+     * Function to get the documentation JSON for this command as a MessageEmbed.
+     * 
      * @return {@code MessageEmbed} of the command's documentation
      */
-    public MessageEmbed getDocumentation(){
+    public MessageEmbed getDocumentation() {
         return this.documentation;
     }
 
-    /** Function to get the name of the command
-     *  @return the name of the command
+    /**
+     * Function to get the name of the command
+     * 
+     * @return the name of the command
      */
     public String getName() {
         return name;
     }
 
-
     /**
      *
      * @param name
-     * @return 
+     * @return
      */
     public void setName(String name) {
         this.name = name;

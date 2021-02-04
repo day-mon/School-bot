@@ -18,7 +18,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed.ImageInfo;
 import net.dv8tion.jda.api.entities.MessageEmbed.Provider;
 import net.dv8tion.jda.api.entities.MessageEmbed.Thumbnail;
 import net.dv8tion.jda.api.entities.MessageEmbed.VideoInfo;
-import schoolbot.SchoolGirl;
+import schoolbot.Ryan;
 
 /**
  * Basic String operations that will be useful for a bot.
@@ -92,7 +92,7 @@ public class StringOperations {
 
     public static String removePrefix(String command) {
         StringBuilder sb = new StringBuilder(command);
-        return sb.delete(0, SchoolGirl.PREFIX.length()).toString();
+        return sb.delete(0, Ryan.PREFIX.length()).toString();
     }
 
     /**

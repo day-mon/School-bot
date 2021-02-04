@@ -14,6 +14,7 @@ public class Professor implements Serializable {
     private static final long serialVersionUID = 3024391926657713863L;
     private HashMap<String, Classroom> professorsClasses;
     private HashMap<Student, Classroom> studentsInClasses;
+    private HashMap<String, Assignment> assignments;
 
     private String email;
     private transient GuildImpl guild;
@@ -27,6 +28,7 @@ public class Professor implements Serializable {
     public Professor() {
         professorsClasses = new HashMap<>();
         studentsInClasses = new HashMap<>();
+        assignments = new HashMap<>();
     }
 
     public Professor(GuildImpl guild, String firstName, String lastName, String email, School professorsSchool) {
@@ -37,6 +39,8 @@ public class Professor implements Serializable {
         this.professorsSchool = professorsSchool;
         professorsClasses = new HashMap<>();
         studentsInClasses = new HashMap<>();
+        assignments = new HashMap<>();
+
     }
 
     public void setEmail(String email) {
@@ -115,6 +119,18 @@ public class Professor implements Serializable {
         return false;
     }
 
+    public void addAssignment(Assignment assignemnt) {
+        assignments.putIfAbsent(assignemnt.getAssignmentRef(), assignemnt);
+    }
+
+    public boolean removeAssignment(Assignment assignemnt) {
+        if (assignments.containsKey(assignemnt.getAssignmentRef())) {
+            assignments.remove(assignemnt.getAssignmentRef());
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return String return the name
      */
@@ -162,6 +178,10 @@ public class Professor implements Serializable {
      */
     public School getProfessorsSchool() {
         return professorsSchool;
+    }
+
+    public HashMap<String, Assignment> getAssignments() {
+        return assignments;
     }
 
     /**

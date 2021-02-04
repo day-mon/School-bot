@@ -3,7 +3,7 @@ package schoolbot.commands.school;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.SchoolGirl;
+import schoolbot.Ryan;
 import schoolbot.commands.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
@@ -29,10 +29,10 @@ public class JoinClass extends Command {
         if (args.length != 1) {
 
         } else {
-            if (SchoolGirl.classes.containsKey(args[0])) {
-                Classroom clazz = SchoolGirl.classes.get(args[0]);
-                if (SchoolGirl.students.containsKey(userTyping)) {
-                    Student student = SchoolGirl.students.get(userTyping);
+            if (Ryan.classes.containsKey(args[0])) {
+                Classroom clazz = Ryan.classes.get(args[0]);
+                if (Ryan.students.containsKey(userTyping)) {
+                    Student student = Ryan.students.get(userTyping);
                     if (student.getSchool() == clazz.getSchool()) {
                         Professor prof = clazz.getProfessor();
                         prof.addStudent(student, clazz);

@@ -7,9 +7,8 @@ Introduce token obfuscation and publishing readiness
 
 
 02/01/21 @ 10:51
-FIX ListProfessors.java
 Make SchoolGirl.java less cluttered
     - i.e Store commands somewhere external and read from them when bot starts
-Find out why professors dont appear on list but will be in the hashmap secertly
-Add Role checks for majority of add commands
+Find out why professors dont appear on list but will be in the hashmap secertly (FIXED: 2/2/21)
+Add Role checks for majority of add commands 
     - i.e (AddSchool and Addstudent)

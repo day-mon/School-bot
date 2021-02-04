@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
-import schoolbot.SchoolGirl;
+import schoolbot.Ryan;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
@@ -25,7 +25,6 @@ public class AddStudent extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -33,6 +32,8 @@ public class AddStudent extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
         File students = new File("schoolbot\\src\\main\\files\\students.ser");
+        File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
+
         GuildImpl guild = (GuildImpl) event.getGuild();
         /**
          * args[0] = Real Name args[1] = User args[2] = School args[3] = Major args[4] =
@@ -44,8 +45,8 @@ public class AddStudent extends Command {
         if (args.length != 5) {
 
         } else {
-            if (SchoolGirl.schools.containsKey(args[2])) {
-                School school = SchoolGirl.schools.get(args[2]);
+            if (Ryan.schools.containsKey(args[2])) {
+                School school = Ryan.schools.get(args[2]);
                 double num = 0.0;
                 Majors major = Majors.UNDECIDED;
                 User studentToAddUsr = event.getMessage().getMentionedUsers().get(0);
@@ -67,7 +68,14 @@ public class AddStudent extends Command {
                 Student studentToAdd = new Student(guild, studentToAddUsr, school, num, new Majors[] { major },
                         args[0]);
                 school.addStudent(studentToAdd);
-                FileOperations.writeToFile(students, SchoolGirl.students);
+
+                /**
+                 * Writes to schools.ser and students.ser because we add a student to the school
+                 * and we add a new student
+                 */
+                FileOperations.writeToFile(schools, Ryan.schools);
+                FileOperations.writeToFile(students, Ryan.students);
+
                 channel.sendMessage("Student " + studentToAddUsr.getAsMention() + " sucesfully added!").queue();
 
             } else {
