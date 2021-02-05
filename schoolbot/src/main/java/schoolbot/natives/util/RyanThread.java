@@ -19,7 +19,7 @@ public class RyanThread implements Runnable {
         try {
             do {
                 Thread.sleep(msWait);
-                if (true/*now() - time >= Ryan.interval*/) {
+                if (true) {
                     for (Classroom c : Ryan.classes.values()) {
                         if (c.getAssignments().size() > 0) {
                             for (Assignment a : c.getAssignments().values()) {
@@ -32,7 +32,8 @@ public class RyanThread implements Runnable {
                                     }
                                     if (a.getLdt().getDayOfYear() == Ryan.today.getDayOfYear() && timeDue <= Ryan.onehour) {
                                         System.out.println(a.getAssignmentName() + " is due in " + timeDue + " seconds");
-                                        Ryan.jda.getTextChannelsByName("testing-grounds", true).get(0).sendMessage(a.getAssignmentName() + " is due in " + formatTime(timeDue)).queue();
+                                        Ryan.jda.getTextChannelsByName("testing-grounds", true).get(0).sendMessage(a.getAssignmentName() + " is due in " + 
+                                        StringOperations.formatTime(timeDue)).queue();
                                         //Ryan.tc.sendMessage(a.getAssignmentName() + " is due in " + formatTime(timeDue)).queue();
                                     }
                                 }
@@ -45,16 +46,6 @@ public class RyanThread implements Runnable {
 
         }
 
-    }
-
-    public String formatTime(long seconds) {
-        String out = "";
-        int mins = (int)seconds / 60;
-        seconds -= (mins * 60);
-        int hours = mins / 60;
-        mins -= (hours * 60);
-        out += (hours > 0 ? hours + " hours, " : "") + (mins > 0 ? mins + " minutes and " : "") + seconds + " seconds.";
-        return out;
     }
 
     public long now(){

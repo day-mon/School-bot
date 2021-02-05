@@ -14,6 +14,7 @@ import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.util.FileOperations;
 import schoolbot.natives.util.MessageOperations;
+import schoolbot.natives.util.StringOperations;
 
 public class AddAssignment extends Command {
 
@@ -78,7 +79,8 @@ public class AddAssignment extends Command {
                 FileOperations.writeToFile(professor, Ryan.professors);
                 FileOperations.writeToFile(schools, Ryan.schools);
                 channel.sendMessage(":white_check_mark: Assignment added :white_check_mark:").queue();
-                Ryan.tc = event.getTextChannel();
+                channel.sendMessage(assignmentName + " is due in: " + StringOperations.formatTime(date.getTime())).queue();
+                //Ryan.tc = event.getTextChannel();
 
             } else {
                 MessageOperations.invalidUsageShortner("https://google.com", "Class doesnt exist", event.getMessage(),

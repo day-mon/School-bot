@@ -197,6 +197,6 @@ public class Ryan extends ListenerAdapter {
 
 	public static HashMap<String[], ? extends Command> getCommands() {
 		return commands;
-	}
+    }
 
 }

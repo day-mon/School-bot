@@ -165,6 +165,21 @@ public class StringOperations {
         return newStr.toString();
     }
 
+    public static String formatTime(long seconds) {
+        String out = "";
+        int mins = (int)seconds / 60;
+        seconds -= (mins * 60);
+        int hours = mins / 60;
+        mins -= (hours * 60);
+        int days = hours / 24;
+        hours -= (days * 24);
+        int weeks = days / 7;
+        days -= (weeks * 7);
+        out +=  (weeks > 0 ? weeks + " weeks, " : "") + (days > 0 ? days + " days, " : "") + (hours > 0 ? hours + " hours, " : "")
+         + (mins > 0 ? mins + " minutes and " : "") + seconds + " seconds.";
+        return out;
+    }
+
     /*
      * Add some "correctXYZ" methods here
      */
