@@ -32,6 +32,7 @@ public class RemoveClass extends Command {
 
         File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
         File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
+        File classes = new File("schoolboy\\src\\main\\files\\classes.ser");
 
         MessageChannel channel = event.getChannel();
 
@@ -50,6 +51,7 @@ public class RemoveClass extends Command {
 
                         FileOperations.writeToFile(professor, Ryan.professors);
                         FileOperations.writeToFile(schools, Ryan.schools);
+                        FileOperations.writeToFile(classes, Ryan.classes);
                     } else {
                         MessageOperations.invalidUsageShortner("https://google.com",
                                 "This class still has students in it!", event.getMessage(), this);
