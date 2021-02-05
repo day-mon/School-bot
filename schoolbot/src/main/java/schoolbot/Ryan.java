@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.Date;
+import java.lang.Thread;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.security.auth.login.LoginException;
 
@@ -42,11 +46,13 @@ import schoolbot.commands.school.ListProfessors;
 import schoolbot.commands.school.ListSchools;
 import schoolbot.commands.school.RemoveProfessor;
 import schoolbot.commands.school.RemoveSchool;
+import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
 import schoolbot.natives.util.FileOperations;
+import schoolbot.natives.util.RyanThread;
 import schoolbot.natives.util.StringOperations;
 
 public class Ryan extends ListenerAdapter {
@@ -60,11 +66,25 @@ public class Ryan extends ListenerAdapter {
     public static HashMap<User, Student> students = new HashMap<>();
     public static HashMap<String, Professor> professors = new HashMap<>();
     public static HashMap<String, Classroom> classes = new HashMap<>();
+<<<<<<< HEAD
 
     public static TextChannel channel;
 
     public static void main(String[] args) throws LoginException, ClassNotFoundException {
         long time = System.currentTimeMillis();
+=======
+    public static long startTime;
+    public static final long interval = 900; //15 minutes
+    public static final long onehour = interval * 4;
+    public static LocalDateTime today;
+    public static TextChannel tc;
+    public static HashMap<Classroom, TextChannel> alert = new HashMap<Classroom, TextChannel>();
+    public static JDA jda;
+
+    public static void main(String[] args) throws LoginException, ClassNotFoundException, InterruptedException {
+        startTime = System.currentTimeMillis();
+        today = LocalDateTime.now();
+>>>>>>> 421a6049af51e424d187b0af006ad27c67d6ba3b
 
         String username = System.getProperty("user.name");
         String token = "no <3";
@@ -144,9 +164,17 @@ public class Ryan extends ListenerAdapter {
         // We only need 2 intents in this bot. We only respond to messages in guilds and
         // private channels.
         // All other events will be disabled.
-        JDABuilder.createLight(token, EnumSet.allOf(GatewayIntent.class)) // <- "allOf(GI.class)" => The method
+        jda = JDABuilder.createLight(token, EnumSet.allOf(GatewayIntent.class)) // <- "allOf(GI.class)" => The method
                 .addEventListeners(new Ryan()).setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .setActivity(Activity.playing("with school textbooks")).build();
+                jda.awaitReady();
+                RyanThread ryanThread = new RyanThread(startTime);
+                Thread thr = new Thread(ryanThread);
+                thr.start();
+    }
+
+    public static long timeNow() {
+        return System.currentTimeMillis();
     }
 
     /*
