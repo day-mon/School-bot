@@ -40,7 +40,7 @@ public abstract class Command {
     protected String name;
 
     /**
-     * Path to the documenation File
+     * Path to the documenation
      */
     protected File documentationFile;
 
@@ -68,6 +68,7 @@ public abstract class Command {
         this.name = this.getClass().getSimpleName();
         this.documentationFile = new File("schoolbot\\docs\\" + name + ".txt");
         FileOperations.writeDocumentation(this);
+        Ryan.test.add(this);
     }
 
     /**

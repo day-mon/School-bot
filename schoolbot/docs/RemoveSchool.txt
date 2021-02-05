@@ -1,4 +1,4 @@
 RemoveSchool
 ++removeschool, ++schoolremove, ++rschool
-PLACEHOLDER
-The `RemoveSchool` command
+school reference
+The `RemoveSchool` command will remove a school given there is no students
