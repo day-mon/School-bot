@@ -1,13 +1,12 @@
 package schoolbot.natives;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import schoolbot.natives.util.AssignmentType;
 
-public class Assignment extends TimerTask implements Serializable {
+public class Assignment implements Serializable {
 
     /**
      *
@@ -16,12 +15,12 @@ public class Assignment extends TimerTask implements Serializable {
     private Professor assignedProfessor;
     private Classroom clazz;
     private Date dueDate;
+    private LocalDateTime ldt;
     private String assignmentName;
     private double pointsAmount;
     private AssignmentType assigmentType;
     private String assignmentRef;
-    private Timer timer;
-    TimerTask task;
+    private boolean expired = false;
 
     public Assignment() {
 
@@ -46,7 +45,7 @@ public class Assignment extends TimerTask implements Serializable {
         this.dueDate = dueDate;
         this.assignmentRef = clazz.getClassID() + assigmentType + "_" + clazz.getAssignments().size();
         assignedProfessor = clazz.getProfessor();
-        timer.schedule(task, dueDate);
+        ldt = LocalDateTime.now();
 
     }
 
@@ -76,6 +75,18 @@ public class Assignment extends TimerTask implements Serializable {
 
     public double getPointsAmount() {
         return pointsAmount;
+    }
+
+    public LocalDateTime getLdt() {
+        return ldt;
+    }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean e) {
+        expired = e;
     }
 
     public void setAssigmentType(AssignmentType assigmentType) {

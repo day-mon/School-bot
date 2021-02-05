@@ -78,6 +78,7 @@ public class AddAssignment extends Command {
                 FileOperations.writeToFile(professor, Ryan.professors);
                 FileOperations.writeToFile(schools, Ryan.schools);
                 channel.sendMessage(":white_check_mark: Assignment added :white_check_mark:").queue();
+                Ryan.tc = event.getTextChannel();
 
             } else {
                 MessageOperations.invalidUsageShortner("https://google.com", "Class doesnt exist", event.getMessage(),
