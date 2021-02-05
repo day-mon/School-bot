@@ -1,6 +1,4 @@
 ListProfessors
-++listprofessors, 
+++listprofessors, ++listprofs
 PLACEHOLDER
-PLACEHOLDER++listprofs 
-PLACEHOLDER
-PLACEHOLDER
+The `ListProfessors` command

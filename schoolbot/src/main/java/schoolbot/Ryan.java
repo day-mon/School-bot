@@ -121,7 +121,7 @@ public class Ryan extends ListenerAdapter {
         // ass-backwards that it can't initialize variables
         // in combination with threading.
         commands = new HashMap<>();
-        // commands.put(new String[] { "ping", "p" }, new Ping()); // Ping
+        commands.put(new String[] { "ping", "p" }, new Ping()); // Ping
         commands.put(new String[] { "h", "help" }, new Help());
         commands.put(new String[] { "wolf", "wolframe" }, new Wolfram());
         commands.put(new String[] { "addschool", "as" }, new AddSchool());

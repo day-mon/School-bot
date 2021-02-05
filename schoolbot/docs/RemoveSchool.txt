@@ -1,8 +1,4 @@
 RemoveSchool
-++removeschool, 
+++removeschool, ++schoolremove, ++rschool
 PLACEHOLDER
-PLACEHOLDER++schoolremove, 
-PLACEHOLDER
-PLACEHOLDER++rschool 
-PLACEHOLDER
-PLACEHOLDER
+The `RemoveSchool` command

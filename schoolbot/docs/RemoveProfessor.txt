@@ -1,8 +1,4 @@
 RemoveProfessor
-++removeprofessor, 
+++removeprofessor, ++profremove, ++profrem
 PLACEHOLDER
-PLACEHOLDER++profremove, 
-PLACEHOLDER
-PLACEHOLDER++profrem 
-PLACEHOLDER
-PLACEHOLDER
+The `RemoveProfessor` command

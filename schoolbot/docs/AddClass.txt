@@ -1,4 +1,4 @@
 AddClass
 ++addclass 
 PLACEHOLDER
-PLACEHOLDER
+The `AddClass` command

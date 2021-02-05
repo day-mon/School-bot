@@ -126,14 +126,15 @@ public class FileOperations {
                 PrintWriter write = new PrintWriter(documentationFile);
                 write.print(name + "\n");
                 for (int i = 0; i < aliases.length; i++) {
-                    String comma = ",";
+                    String comma = ", ";
                     if (i == aliases.length - 1) {
-                        comma = "";
+                        comma = "" + "\n";
                     }
-                    write.print(Ryan.PREFIX + aliases[i] + comma + " " + "\n");
-                    write.print("PLACEHOLDER" + "\n");
-                    write.print("The `" + com.getName() + "` command");
+                    write.print(Ryan.PREFIX + aliases[i] + comma);
                 }
+                write.print("PLACEHOLDER" + "\n");
+                write.print("The `" + com.getName() + "` command");
+
                 write.close();
             } catch (FileNotFoundException e) {
                 e.getLocalizedMessage();
