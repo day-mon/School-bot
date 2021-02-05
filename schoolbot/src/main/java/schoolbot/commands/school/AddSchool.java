@@ -30,6 +30,7 @@ public class AddSchool extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
         GuildImpl guild = (GuildImpl) event.getGuild();
+        int amountOfArgs = args.length;
 
         boolean valid = true;
 
@@ -43,7 +44,8 @@ public class AddSchool extends Command {
         if (args.length != 3) {
             MessageOperations.invalidUsageShortner(
                     "https://github.com/tykoooo/School-bot/blob/master/schoolbot/src/main/java/schoolbot/commands/school/AddSchool.java",
-                    "Incorrect usage: **Look below for correct usage", event.getMessage(), this);
+                    "This command only takes 3 arguments \n Arguments you entered: " + amountOfArgs + " arguments!",
+                    event.getMessage(), this);
         } else if (valid) {
             Ryan.schoolCalls.add(args[2]);
             Ryan.schools.putIfAbsent(args[2], new School(guild, args[0], args[1]));
@@ -51,8 +53,8 @@ public class AddSchool extends Command {
             File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
             File schoolsCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
 
-            FileOperations.writeToFile(schools, (Object) Ryan.schools);
-            FileOperations.writeToFile(schoolsCalls, (Object) Ryan.schoolCalls);
+            FileOperations.writeToFile(schools, Ryan.schools);
+            FileOperations.writeToFile(schoolsCalls, Ryan.schoolCalls);
 
             channel.sendMessage(":white_check_mark: School added succesfully :white_check_mark: ").queue();
         } else {

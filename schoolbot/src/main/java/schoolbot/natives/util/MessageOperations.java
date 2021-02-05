@@ -5,14 +5,13 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import schoolbot.commands.Command;
 
 public class MessageOperations {
-    
+
     public static void messageExtender(StringBuilder s, MessageChannel channel) {
         s.append("```");
         channel.sendMessage(s).queue();
         s.setLength(0);
         s.append("````"); // should there be four ticks here?
     }
-
 
     /**
      * Added just to make code look a little more clean.

@@ -1,5 +1,10 @@
 package schoolbot.natives.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +34,8 @@ public class InvalidUsage {
      * @param com
      */
     public InvalidUsage(String urlToCommand, String problemWithUsage, Message msg, Command com) {
+
+        ArrayList<String> lines = FileOperations.parseDoc(com);
         String authorOfMessage = msg.getAuthor().getName();
         EmbedType type = EmbedType.RICH;
         OffsetDateTime time = OffsetDateTime.now();
@@ -42,6 +49,7 @@ public class InvalidUsage {
         ImageInfo image = null;
         List<Field> fields = new ArrayList<MessageEmbed.Field>();
         fields.add(new Field("Aliases", Arrays.toString(com.getCalls()), true));
+        fields.add(new Field("Flags", lines.get(2), true));
 
         MessageEmbed embed = new MessageEmbed(urlToCommand, com.getName(), problemWithUsage, type, time, color,
                 thumbnail, siteProvider, author, videoInfo, footer, image, fields);

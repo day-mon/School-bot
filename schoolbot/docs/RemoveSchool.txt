@@ -1,0 +1,8 @@
+RemoveSchool
+++removeschool, 
+PLACEHOLDER
+PLACEHOLDER++schoolremove, 
+PLACEHOLDER
+PLACEHOLDER++rschool 
+PLACEHOLDER
+PLACEHOLDER

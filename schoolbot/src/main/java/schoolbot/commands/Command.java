@@ -1,11 +1,15 @@
 package schoolbot.commands;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
+import schoolbot.natives.util.FileOperations;
 
 /**
  * Command interface for all commands to implement.
@@ -36,6 +40,11 @@ public abstract class Command {
     protected String name;
 
     /**
+     * Path to the documenation File
+     */
+    protected File documentationFile;
+
+    /**
      * Empty constructor.
      * 
      * @apiNote This will set the command to {@code disabled}.
@@ -57,6 +66,8 @@ public abstract class Command {
         this.enabled = true;
         this.initDocumentation();
         this.name = this.getClass().getSimpleName();
+        this.documentationFile = new File("schoolbot\\docs\\" + name + ".txt");
+        FileOperations.writeDocumentation(this);
     }
 
     /**
@@ -179,6 +190,10 @@ public abstract class Command {
      */
     public String getName() {
         return name;
+    }
+
+    public File getDocumentationFile() {
+        return documentationFile;
     }
 
     /**

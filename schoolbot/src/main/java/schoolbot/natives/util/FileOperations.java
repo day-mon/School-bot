@@ -1,11 +1,17 @@
 package schoolbot.natives.util;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import schoolbot.Ryan;
+import schoolbot.commands.Command;
 
 public class FileOperations {
 
@@ -70,6 +76,69 @@ public class FileOperations {
             } finally {
 
             }
+        }
+    }
+
+    public static ArrayList<String> parseDoc(Command com) {
+        String className = com.getName();
+        String name = className.substring(className.lastIndexOf(".") + 1);
+        String relativePath = "schoolbot\\docs\\" + name + ".txt";
+
+        File file = new File(relativePath);
+        FileReader fileRead;
+        BufferedReader reader = null;
+
+        ArrayList<String> lines = new ArrayList<String>(); // or queue
+        try {
+            fileRead = new FileReader(file);
+            reader = new BufferedReader(fileRead);
+        } catch (FileNotFoundException fnfx) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                if (!line.startsWith("#"))
+                    lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return lines;
+    }
+
+    public static void writeDocumentation(Command com) {
+        String[] aliases = com.getCalls();
+        String name = com.getName();
+        File documentationFile = com.getDocumentationFile();
+
+        if (documentationFile.exists()) {
+            return;
+        } else {
+            try {
+                PrintWriter write = new PrintWriter(documentationFile);
+                write.print(name + "\n");
+                for (int i = 0; i < aliases.length; i++) {
+                    String comma = ",";
+                    if (i == aliases.length - 1) {
+                        comma = "";
+                    }
+                    write.print(Ryan.PREFIX + aliases[i] + comma + " " + "\n");
+                    write.print("PLACEHOLDER" + "\n");
+                    write.print("The `" + com.getName() + "` command");
+                }
+                write.close();
+            } catch (FileNotFoundException e) {
+                e.getLocalizedMessage();
+            }
+
         }
     }
 

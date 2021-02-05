@@ -1,0 +1,4 @@
+JoinSchool
+++joinschool, ++schooljoin
+school reference
+The `JoinSchool` command allows a user to join a school without admin intervention

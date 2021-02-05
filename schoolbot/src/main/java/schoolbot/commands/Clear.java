@@ -2,6 +2,7 @@ package schoolbot.commands;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -17,7 +18,7 @@ public class Clear extends Command {
     @Override
     public void run(MessageReceivedEvent event) {
         MessageChannel channel = event.getChannel();
-        int messagesToRemove = 100;
+        int messagesToRemove = 99;
 
         /**
          * Retrives the last 100 messages
@@ -36,7 +37,8 @@ public class Clear extends Command {
         channel.purgeMessages(msg);
 
         channel.sendMessage("Commencing the purge").queue(response -> {
-            response.editMessage("Purge completed!").queue();
+            response.editMessage("Purge completed!")
+                    .queue(purgeMessage -> purgeMessage.delete().queueAfter(10, TimeUnit.SECONDS));
             return;
         });
 
@@ -55,6 +57,7 @@ public class Clear extends Command {
                 MessageOperations.invalidUsageShortner("https://google.com",
                         "You cannot delete more than 100 messages at a time \n" + "Blame discord not me :(",
                         event.getMessage(), this);
+
                 return;
             }
 
@@ -68,16 +71,17 @@ public class Clear extends Command {
              */
             channel.purgeMessages(msg);
 
+            //
             channel.sendMessage("Commencing the purge").queue(response -> {
-                response.editMessage("Purge completed!").queue();
+                response.editMessage("Purge completed!")
+                        .queue(purgeMessage -> purgeMessage.delete().queueAfter(10, TimeUnit.SECONDS));
                 return;
             });
 
         } else {
             MessageOperations.invalidUsageShortner("https://google.com",
                     "'" + args[0] + "'" + " is not a not a number!", event.getMessage(), this);
-            channel.sendMessage(getDocumentation()).queue();
-            ;
+
         }
 
     }
