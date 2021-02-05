@@ -39,6 +39,7 @@ public class AddClass extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
         File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
+        File classes = new File("schoolboy\\src\\main\\files\\classes.ser");
         GuildImpl guild = (GuildImpl) event.getGuild();
 
         /**
@@ -87,11 +88,24 @@ public class AddClass extends Command {
 
                 if (schoolToAdd.getListOfProfessors().containsKey(args[6])) {
 
+                    /**
+                     * Making the classroom object to add to hashmaps
+                     */
                     Classroom classToAdd = new Classroom(guild, args[0], args[1], args[2], args[3], args[4], credits,
                             profForClass, schoolToAdd);
+
+                    /**
+                     * Adding to HashMaps
+                     */
                     Ryan.classes.put(args[2], classToAdd);
                     schoolToAdd.addClazz(classToAdd);
+
+                    /**
+                     * File writing
+                     */
                     FileOperations.writeToFile(schools, Ryan.schools);
+                    FileOperations.writeToFile(classes, Ryan.classes);
+
                     channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:" + creditsCheck)
                             .queue();
                 } else {
