@@ -66,18 +66,15 @@ public class Ryan extends ListenerAdapter {
     public static HashMap<User, Student> students = new HashMap<>();
     public static HashMap<String, Professor> professors = new HashMap<>();
     public static HashMap<String, Classroom> classes = new HashMap<>();
-    public static long startTime;
+    public static long startTime = System.currentTimeMillis();;
     public static final long interval = 900; // 15 minutes
     public static final long onehour = interval * 4;
-    public static LocalDateTime today;
+    public static LocalDateTime today = LocalDateTime.now();
     public static TextChannel tc;
     public static HashMap<Classroom, TextChannel> alert = new HashMap<Classroom, TextChannel>();
     public static JDA jda;
 
     public static void main(String[] args) throws LoginException, ClassNotFoundException, InterruptedException {
-        startTime = System.currentTimeMillis();
-        today = LocalDateTime.now();
-
         String username = System.getProperty("user.name");
         String token = "no <3";
 

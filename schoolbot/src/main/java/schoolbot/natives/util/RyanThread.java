@@ -25,13 +25,15 @@ public class RyanThread implements Runnable {
                             for (Assignment a : c.getAssignments().values()) {
                                 if (!a.isExpired()) {
                                     long timeDue = (a.getDueDate().getTime() / 1000) - now();
-                                    if (a.getLdt().getDayOfYear() == Ryan.today.getDayOfYear() && timeDue <= Ryan.onehour) {
-                                        System.out.println(a.getAssignmentName() + " is due in " + timeDue + " seconds");
-                                        Ryan.tc.sendMessage(a.getAssignmentName() + " is due in " + timeDue + " seconds").queue();
-                                    }
                                     if (timeDue <= 0) {
                                         System.out.println("X is due now !!!");
                                         a.setExpired(true);
+                                        continue;
+                                    }
+                                    if (a.getLdt().getDayOfYear() == Ryan.today.getDayOfYear() && timeDue <= Ryan.onehour) {
+                                        System.out.println(a.getAssignmentName() + " is due in " + timeDue + " seconds");
+                                        Ryan.jda.getTextChannelsByName("testing-grounds", true).get(0).sendMessage(a.getAssignmentName() + " is due in " + formatTime(timeDue)).queue();
+                                        //Ryan.tc.sendMessage(a.getAssignmentName() + " is due in " + formatTime(timeDue)).queue();
                                     }
                                 }
                             }
@@ -43,6 +45,16 @@ public class RyanThread implements Runnable {
 
         }
 
+    }
+
+    public String formatTime(long seconds) {
+        String out = "";
+        int mins = (int)seconds / 60;
+        seconds -= (mins * 60);
+        int hours = mins / 60;
+        mins -= (hours * 60);
+        out += (hours > 0 ? hours + " hours, " : "") + (mins > 0 ? mins + " minutes and " : "") + seconds + " seconds.";
+        return out;
     }
 
     public long now(){

@@ -68,7 +68,6 @@ public abstract class Command {
         this.name = this.getClass().getSimpleName();
         this.documentationFile = new File("schoolbot\\docs\\" + name + ".txt");
         FileOperations.writeDocumentation(this);
-        Ryan.test.add(this);
     }
 
     /**
