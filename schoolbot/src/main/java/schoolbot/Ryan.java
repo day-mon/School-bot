@@ -66,15 +66,8 @@ public class Ryan extends ListenerAdapter {
     public static HashMap<User, Student> students = new HashMap<>();
     public static HashMap<String, Professor> professors = new HashMap<>();
     public static HashMap<String, Classroom> classes = new HashMap<>();
-<<<<<<< HEAD
-
-    public static TextChannel channel;
-
-    public static void main(String[] args) throws LoginException, ClassNotFoundException {
-        long time = System.currentTimeMillis();
-=======
     public static long startTime;
-    public static final long interval = 900; //15 minutes
+    public static final long interval = 900; // 15 minutes
     public static final long onehour = interval * 4;
     public static LocalDateTime today;
     public static TextChannel tc;
@@ -84,7 +77,6 @@ public class Ryan extends ListenerAdapter {
     public static void main(String[] args) throws LoginException, ClassNotFoundException, InterruptedException {
         startTime = System.currentTimeMillis();
         today = LocalDateTime.now();
->>>>>>> 421a6049af51e424d187b0af006ad27c67d6ba3b
 
         String username = System.getProperty("user.name");
         String token = "no <3";
@@ -167,10 +159,10 @@ public class Ryan extends ListenerAdapter {
         jda = JDABuilder.createLight(token, EnumSet.allOf(GatewayIntent.class)) // <- "allOf(GI.class)" => The method
                 .addEventListeners(new Ryan()).setStatus(OnlineStatus.DO_NOT_DISTURB)
                 .setActivity(Activity.playing("with school textbooks")).build();
-                jda.awaitReady();
-                RyanThread ryanThread = new RyanThread(startTime);
-                Thread thr = new Thread(ryanThread);
-                thr.start();
+        jda.awaitReady();
+        RyanThread ryanThread = new RyanThread(startTime);
+        Thread thr = new Thread(ryanThread);
+        thr.start();
     }
 
     public static long timeNow() {
