@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -53,7 +52,6 @@ import schoolbot.natives.util.StringOperations;
 public class Ryan extends ListenerAdapter {
 
     public final static String PREFIX = "++";
-    public static ArrayList<Command> test = new ArrayList<>();
     private final static String gavinID = "348235152972972042";
     private final static String damonID = "105141507996061696";
     private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
@@ -66,6 +64,7 @@ public class Ryan extends ListenerAdapter {
     public static TextChannel channel;
 
     public static void main(String[] args) throws LoginException, ClassNotFoundException {
+        long time = System.currentTimeMillis();
 
         String username = System.getProperty("user.name");
         String token = "no <3";
@@ -115,6 +114,7 @@ public class Ryan extends ListenerAdapter {
             BufferedReader fr = new BufferedReader(new FileReader(new File("schoolbot\\src\\main\\files\\token.txt")));
             token = fr.readLine();
         } catch (IOException e) {
+
         }
         ;
         // Commands initialization
