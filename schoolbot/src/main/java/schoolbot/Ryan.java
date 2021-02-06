@@ -58,14 +58,19 @@ import schoolbot.natives.util.StringOperations;
 public class Ryan extends ListenerAdapter {
 
 	public final static String PREFIX = "++";
-	private final static String gavinID = "348235152972972042";
-	private final static String damonID = "105141507996061696";
+	/**
+	 * HashMpas
+	 */
 	private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
 	public static ArrayList<String> schoolCalls = new ArrayList<String>();
 	public static HashMap<String, School> schools = new HashMap<String, School>();
 	public static HashMap<User, Student> students = new HashMap<>();
 	public static HashMap<String, Professor> professors = new HashMap<>();
 	public static HashMap<String, Classroom> classes = new HashMap<>();
+
+	/**
+	 * Varibles for thread
+	 */
 	public static long startTime = System.currentTimeMillis();
 	public static final long interval = 900; // 15 minutes
 	public static final long onehour = interval * 4;
@@ -76,10 +81,10 @@ public class Ryan extends ListenerAdapter {
 
 	public static void main(String[] args) throws LoginException, ClassNotFoundException, InterruptedException {
 
-		String username = System.getProperty("user.name");
-		String token = "no <3";
+		// String username = System.getProperty("user.name");
+		String token = "N/A";
 
-		Chousei.tasks(username);
+		// Chousei.tasks(username);
 
 		try {
 			ArrayList<File> files = FileOperations.getAllFilesWithExt(new File("schoolbot\\src\\main\\files\\"), "ser");
