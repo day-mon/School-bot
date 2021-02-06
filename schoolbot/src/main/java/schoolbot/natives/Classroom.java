@@ -25,7 +25,7 @@ public class Classroom implements Serializable {
     private HashMap<String, Assignment> assignments;
 
     public Classroom() {
-
+        
     }
 
     public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, String year,
@@ -195,11 +195,16 @@ public class Classroom implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((assignments == null) ? 0 : assignments.hashCode());
         result = prime * result + ((classID == null) ? 0 : classID.hashCode());
         result = prime * result + ((classList == null) ? 0 : classList.hashCode());
+        result = prime * result + ((className == null) ? 0 : className.hashCode());
         result = prime * result + ((classNum == null) ? 0 : classNum.hashCode());
         result = prime * result + credits;
+        result = prime * result + ((guild == null) ? 0 : guild.hashCode());
         result = prime * result + ((professor == null) ? 0 : professor.hashCode());
+        result = prime * result + ((school == null) ? 0 : school.hashCode());
+        result = prime * result + ((subject == null) ? 0 : subject.hashCode());
         result = prime * result + ((time == null) ? 0 : time.hashCode());
         result = prime * result + ((year == null) ? 0 : year.hashCode());
         return result;
@@ -214,6 +219,11 @@ public class Classroom implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Classroom other = (Classroom) obj;
+        if (assignments == null) {
+            if (other.assignments != null)
+                return false;
+        } else if (!assignments.equals(other.assignments))
+            return false;
         if (classID == null) {
             if (other.classID != null)
                 return false;
@@ -224,6 +234,11 @@ public class Classroom implements Serializable {
                 return false;
         } else if (!classList.equals(other.classList))
             return false;
+        if (className == null) {
+            if (other.className != null)
+                return false;
+        } else if (!className.equals(other.className))
+            return false;
         if (classNum == null) {
             if (other.classNum != null)
                 return false;
@@ -231,10 +246,25 @@ public class Classroom implements Serializable {
             return false;
         if (credits != other.credits)
             return false;
+        if (guild == null) {
+            if (other.guild != null)
+                return false;
+        } else if (!guild.equals(other.guild))
+            return false;
         if (professor == null) {
             if (other.professor != null)
                 return false;
         } else if (!professor.equals(other.professor))
+            return false;
+        if (school == null) {
+            if (other.school != null)
+                return false;
+        } else if (!school.equals(other.school))
+            return false;
+        if (subject == null) {
+            if (other.subject != null)
+                return false;
+        } else if (!subject.equals(other.subject))
             return false;
         if (time == null) {
             if (other.time != null)

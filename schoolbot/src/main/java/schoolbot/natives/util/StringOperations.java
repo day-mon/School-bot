@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -165,9 +168,9 @@ public class StringOperations {
         return newStr.toString();
     }
 
-    public static String formatTime(long seconds) {
+    public static String formatTime(long seconds) { // sorry again - you know who
         String out = "";
-        int mins = (int)seconds / 60;
+        int mins = (int) seconds / 60;
         seconds -= (mins * 60);
         int hours = mins / 60;
         mins -= (hours * 60);
@@ -175,9 +178,21 @@ public class StringOperations {
         hours -= (days * 24);
         int weeks = days / 7;
         days -= (weeks * 7);
-        out +=  (weeks > 0 ? weeks + " weeks, " : "") + (days > 0 ? days + " days, " : "") + (hours > 0 ? hours + " hours, " : "")
-         + (mins > 0 ? mins + " minutes and " : "") + seconds + " seconds.";
+        out += (weeks > 0 ? weeks + " weeks, " : "") + (days > 0 ? days + " days, " : "")
+                + (hours > 0 ? hours + " hours, " : "") + (mins > 0 ? mins + " minutes and " : "") + seconds
+                + " seconds.";
         return out;
+    }
+
+    public static Date formatClassTime(String input) throws ParseException { // sorry :( - Ryan
+        SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy hh:mm");
+        String time = input.split(" ")[2];
+        int mins = Integer.parseInt(time.contains(":") ? time.split(":")[1].replace("am", "").replace("pm", "") : "0");
+        int hour = Integer.parseInt(time.contains(":") ? time.split(":")[0] : time.replace("am", "").replace("pm", ""))
+                + (time.endsWith("pm") ? 12 : 0);
+        String d = Ryan.today.getMonth() + "/" + Ryan.today.getDayOfMonth() + "/" + Ryan.today.getYear() + " " + hour
+                + ":" + (mins == 0 ? "00" : mins);
+        return sdf.parse(d);
     }
 
     /*

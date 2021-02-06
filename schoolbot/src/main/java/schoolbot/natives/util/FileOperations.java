@@ -14,13 +14,11 @@ import schoolbot.Ryan;
 import schoolbot.commands.Command;
 
 public class FileOperations {
-    public static final File professor = new File("School-Bot\\schoolbot\\src\\main\\files\\professors.ser");
-    public static final File schools = new File("School-Bot\\schoolbot\\src\\main\\files\\schools.ser");
-    public static final File classes = new File("School-Bot\\schoolbot\\src\\main\\files\\classes.ser");
+    public static final File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
+    public static final File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
+    public static final File classes = new File("schoolbot\\src\\main\\files\\classes.ser");
     public static final File students = new File("schoolbot\\src\\main\\files\\students.ser");
     public static final File schoolsCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
-
-
 
     public static ArrayList<File> getAllFilesWithExt(File dir, String ext) {
         ArrayList<File> filesWithExt = new ArrayList<>();
@@ -89,7 +87,7 @@ public class FileOperations {
     public static ArrayList<String> parseDoc(Command com) {
         String className = com.getName();
         String name = className.substring(className.lastIndexOf(".") + 1);
-        String relativePath = "School-Bot\\schoolbot\\docs\\" + name + ".txt";
+        String relativePath = "schoolbot\\docs\\" + name + ".txt";
 
         File file = new File(relativePath);
         FileReader fileRead;
