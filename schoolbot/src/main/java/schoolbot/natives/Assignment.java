@@ -21,7 +21,7 @@ public class Assignment implements Serializable {
     private AssignmentType assigmentType;
     private String assignmentRef;
     private boolean expired = false;
-    private int[] intervals = new int[3];
+    private int[] intervals;
 
     public Assignment() {
 
@@ -103,6 +103,7 @@ public class Assignment implements Serializable {
     }
 
     public void setIntervals(int[] intervals) {
+        intervals = new int[intervals.length];
         this.intervals = intervals;
     }
 
@@ -127,11 +128,6 @@ public class Assignment implements Serializable {
         return "Assignment [assigmentType=" + assigmentType + ", assignedProfessor=" + assignedProfessor
                 + ", assignmentName=" + assignmentName + ", assignmentRef=" + assignmentRef + ", clazz=" + clazz
                 + ", dueDate=" + dueDate + ", pointsAmount=" + pointsAmount + "]";
-    }
-
-    @Override
-    public void run() {
-
     }
 
 }

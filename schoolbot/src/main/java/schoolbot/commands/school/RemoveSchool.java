@@ -24,6 +24,13 @@ public class RemoveSchool extends Command {
         MessageChannel channel = event.getChannel();
         Message msg = event.getMessage();
 
+        Member userTyping = event.getMember();
+
+        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
+            MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg, this);
+            return;
+        }
+
 
         if (args.length != 1) {
 
@@ -46,13 +53,7 @@ public class RemoveSchool extends Command {
                 return;
             }
 
-            Member userTyping = event.getMember();
-
-            if(userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
-                
-                return;
-            }
-            
+   
 
             String schoolreference = args[0];
 

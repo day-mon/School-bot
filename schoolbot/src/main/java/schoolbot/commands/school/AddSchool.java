@@ -4,6 +4,7 @@ import java.io.File;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -33,6 +34,7 @@ public class AddSchool extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
         GuildImpl guild = (GuildImpl) event.getGuild();
+        Message msg = event.getMessage();
         int amountOfArgs = args.length;
         Member userTyping = event.getMember();
 
@@ -41,6 +43,11 @@ public class AddSchool extends Command {
 
         if (args[0].length() < 10 || Ryan.schools.containsKey(args[2])) {
             valid = false;
+        }
+
+        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
+            MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg, this);
+            return;
         }
 
         // args[0] is full schoolname
