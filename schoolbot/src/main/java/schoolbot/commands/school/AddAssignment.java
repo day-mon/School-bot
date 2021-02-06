@@ -38,9 +38,7 @@ public class AddAssignment extends Command {
         MessageChannel channel = event.getChannel();
         SimpleDateFormat formatter = new SimpleDateFormat("M/dd/yyyy hh:mm");
         Date date = new Date();
-        File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
-        File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
-
+    
         if (args.length < 5) {
             // new invalid usgae
         } else {
@@ -76,8 +74,8 @@ public class AddAssignment extends Command {
                 classToAddAnAssignmentTo.addToAllStudents(assignmentToCreate);
                 classToAddAnAssignmentTo.addAssignment(assignmentToCreate);
 
-                FileOperations.writeToFile(professor, Ryan.professors);
-                FileOperations.writeToFile(schools, Ryan.schools);
+                FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
+                FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
                 channel.sendMessage(":white_check_mark: Assignment added :white_check_mark:").queue();
                 channel.sendMessage(assignmentName + " is due in: " + StringOperations.formatTime(date.getTime())).queue();
                 //Ryan.tc = event.getTextChannel();

@@ -66,7 +66,7 @@ public abstract class Command {
         this.enabled = true;
         this.initDocumentation();
         this.name = this.getClass().getSimpleName();
-        this.documentationFile = new File("schoolbot\\docs\\" + name + ".txt");
+        this.documentationFile = new File("School-Bot\\schoolbot\\docs\\" + name + ".txt");
         FileOperations.writeDocumentation(this);
     }
 
@@ -127,7 +127,7 @@ public abstract class Command {
     public void initDocumentation() {
         String className = this.getClass().getName();
         String name = className.substring(className.lastIndexOf(".") + 1);
-        String relativePath = "schoolbot\\docs\\" + name + ".txt";
+        String relativePath = "School-Bot\\schoolbot\\docs" + name + ".txt";
         this.documentation = schoolbot.natives.util.StringOperations.parseDoc(relativePath);
     }
 

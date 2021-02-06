@@ -124,17 +124,12 @@ public class Ryan extends ListenerAdapter {
 
 			}
 
-		} catch (IOException e) {
-		}
-		;
+		} catch (IOException e) {};
 
 		try {
-			BufferedReader fr = new BufferedReader(new FileReader(new File("schoolbot\\src\\main\\files\\token.txt")));
+			BufferedReader fr = new BufferedReader(new FileReader(new File("School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
 			token = fr.readLine();
-		} catch (IOException e) {
-
-		}
-		;
+		} catch (IOException e) {};
 		// Commands initialization
 		// Commands initialization; needs fixed. JDA threading is so remarkably
 		// ass-backwards that it can't initialize variables
@@ -202,6 +197,6 @@ public class Ryan extends ListenerAdapter {
 
 	public static HashMap<String[], ? extends Command> getCommands() {
 		return commands;
-    }
+	}
 
 }

@@ -31,8 +31,7 @@ public class AddStudent extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
-        File students = new File("schoolbot\\src\\main\\files\\students.ser");
-        File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
+
 
         GuildImpl guild = (GuildImpl) event.getGuild();
         /**
@@ -73,8 +72,8 @@ public class AddStudent extends Command {
                  * Writes to schools.ser and students.ser because we add a student to the school
                  * and we add a new student
                  */
-                FileOperations.writeToFile(schools, Ryan.schools);
-                FileOperations.writeToFile(students, Ryan.students);
+                FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
+                FileOperations.writeToFile(FileOperations.students, Ryan.students);
 
                 channel.sendMessage("Student " + studentToAddUsr.getAsMention() + " sucesfully added!").queue();
 

@@ -26,15 +26,14 @@ public class RemoveProfessor extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
 
-        File professor = new File(
-                "C:\\Users\\damon\\BotForSchool\\School-Bot\\schoolbot\\src\\main\\files\\professors.ser");
+       
         /**
          * Had to add relative path back because if I didnt it wouldnt work for some
          * reason TODO: figure out why this doesnt work with a relative path!
          */
 
         /**
-         * Args: [0] = Professor's Last Name (String) Length of args need to be 1
+         * Args: [0] = Professor's Email suffix (String) Length of args need to be 1
          *
          * To remove a professor we must first: 1) Check to see if the professor they
          * input even exist. (We will do this by checking if the hashmap contains the
@@ -49,7 +48,8 @@ public class RemoveProfessor extends Command {
              * Check to see if the professor exist
              */
             if (Ryan.professors.containsKey(args[0])) {
-                Professor prof = Ryan.professors.get(args[0]);
+                String professorsEmailSuffix = args[0];
+                Professor prof = Ryan.professors.get(professorsEmailSuffix);
                 School profsSchool = prof.getProfessorsSchool();
                 int numberOfClasses = prof.getProfessorsClasses().size();
                 /**
@@ -57,9 +57,9 @@ public class RemoveProfessor extends Command {
                  */
                 if (numberOfClasses <= 0) {
 
-                    Ryan.professors.remove(args[0]);
+                    Ryan.professors.remove(professorsEmailSuffix);
                     profsSchool.removeProfessor(prof);
-                    FileOperations.writeToFile(professor, Ryan.professors);
+                    FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
                     channel.sendMessage(":white_check_mark: Professor is sucesfully deleted! :white_check_mark:")
                             .queue();
                 } else {

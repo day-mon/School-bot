@@ -36,7 +36,8 @@ public class ListClasses extends Command {
 
         if (args.length == 1) { // check lengths first
             if (Ryan.schools.containsKey(args[0])) {
-                School schoolToGetClasses = Ryan.schools.get(args[0]);
+                String schoolreference = args[0];
+                School schoolToGetClasses = Ryan.schools.get(schoolreference);
                 int schoolsClasses = schoolToGetClasses.getListOfClasses().size();
                 if (schoolsClasses > 0) {
                     StringBuilder classes = new StringBuilder("");

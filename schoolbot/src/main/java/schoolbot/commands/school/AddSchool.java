@@ -47,14 +47,17 @@ public class AddSchool extends Command {
                     "This command only takes 3 arguments \n Arguments you entered: " + amountOfArgs + " arguments!",
                     event.getMessage(), this);
         } else if (valid) {
-            Ryan.schoolCalls.add(args[2]);
-            Ryan.schools.putIfAbsent(args[2], new School(guild, args[0], args[1]));
+            
+            String fullSchoolName = args[0];
+            String emailSuffix = args[1];
+            String schoolreference = args[2];
 
-            File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
-            File schoolsCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
+            Ryan.schoolCalls.add(schoolreference);
+            Ryan.schools.putIfAbsent(schoolreference, new School(guild, fullSchoolName, emailSuffix));
 
-            FileOperations.writeToFile(schools, Ryan.schools);
-            FileOperations.writeToFile(schoolsCalls, Ryan.schoolCalls);
+
+            FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
+            FileOperations.writeToFile(FileOperations.schoolsCalls, Ryan.schoolCalls);
 
             channel.sendMessage(":white_check_mark: School added succesfully :white_check_mark: ").queue();
         } else {

@@ -1,4 +1,4 @@
 AddAssignment
-++addassignment 
-PLACEHOLDER
-The `AddAssignment` command
+++addassignment
+class id, assignment name, date, credits, assignment type
+The `AddAssignment` command will add an assignement and alert you within a certain interval when the assignment is almost due

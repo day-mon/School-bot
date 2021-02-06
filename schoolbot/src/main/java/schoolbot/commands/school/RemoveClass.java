@@ -29,29 +29,25 @@ public class RemoveClass extends Command {
          * Args[0] = school Args[1] = Class ID
          * 
          */
-
-        File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
-        File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
-        File classes = new File("schoolboy\\src\\main\\files\\classes.ser");
-
-        MessageChannel channel = event.getChannel();
-
         if (args.length > 1) {
 
         } else {
             if (Ryan.schools.containsKey(args[0])) {
-                School schoolToRemoveClassFrom = Ryan.schools.get(args[0]);
-                if (schoolToRemoveClassFrom.getListOfClasses().containsKey(args[1])) {
-                    Classroom classToRemove = schoolToRemoveClassFrom.getListOfClasses().get(args[1]);
+                String schoolReefrence = args[0];
+                String classID = args[1];
+
+                School schoolToRemoveClassFrom = Ryan.schools.get(schoolReefrence);
+                if (schoolToRemoveClassFrom.getListOfClasses().containsKey(classID)) {
+                    Classroom classToRemove = schoolToRemoveClassFrom.getListOfClasses().get(classID);
                     int classSize = classToRemove.getClassList().size();
                     Professor classProfessor = classToRemove.getProfessor();
                     if (classSize <= 0) {
-                        Ryan.classes.remove(args[1]);
+                        Ryan.classes.remove(classID);
                         classProfessor.removeClass(classToRemove);
 
-                        FileOperations.writeToFile(professor, Ryan.professors);
-                        FileOperations.writeToFile(schools, Ryan.schools);
-                        FileOperations.writeToFile(classes, Ryan.classes);
+                        FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
+                        FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
+                        FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
                     } else {
                         MessageOperations.invalidUsageShortner("https://google.com",
                                 "This class still has students in it!", event.getMessage(), this);

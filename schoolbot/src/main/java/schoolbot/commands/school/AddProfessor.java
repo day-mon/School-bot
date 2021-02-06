@@ -66,15 +66,15 @@ public class AddProfessor extends Command {
                 }
 
                 if (!sameProfessor) {
-                    Professor prof = new Professor(guild, fName, lName, args[1], school);
-                    Ryan.professors.put(args[1], prof);
+                    String professorEmailPrefix = args[1];
+                    Professor prof = new Professor(guild, fName, lName, professorEmailPrefix, school);
+                    Ryan.professors.put(professorEmailPrefix, prof);
                     school.addProfessor(prof);
 
-                    File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
-                    File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
 
-                    FileOperations.writeToFile(professor, Ryan.professors);
-                    FileOperations.writeToFile(schools, Ryan.schools);
+
+                    FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
+                    FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
 
                     channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();
                 } else {
@@ -110,15 +110,15 @@ public class AddProfessor extends Command {
                 }
 
                 if (!sameProfessor) {
-                    Professor prof = new Professor(guild, fName, lName, args[2], school);
-                    Ryan.professors.put(args[2], prof);
+                    String professorEmailPrefix = args[2];
+                    Professor prof = new Professor(guild, fName, lName, professorEmailPrefix, school);
+                    Ryan.professors.put(professorEmailPrefix, prof);
                     school.addProfessor(prof);
 
-                    File professor = new File("schoolbot\\src\\main\\files\\professors.ser");
-                    File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
 
-                    FileOperations.writeToFile(professor, Ryan.professors);
-                    FileOperations.writeToFile(schools, Ryan.schools);
+
+                    FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
+                    FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
 
                     channel.sendMessage(":white_check_mark: Professor added succesfully :white_check_mark: ").queue();
                 } else {

@@ -38,17 +38,10 @@ public class AddClass extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
-        File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
-        File classes = new File("schoolboy\\src\\main\\files\\classes.ser");
+
         GuildImpl guild = (GuildImpl) event.getGuild();
 
-        /**
-         * Args: args[0] = ClassID ex. CS 0048 (String) args[1] = ClassNum ex. 20937
-         * (String) args[2] = Time ex. MWF @ 12pm () args[3] = Year of coursE ex.
-         * Sophmore (Year of the class) (String) args[4] = Credits ex. 3 (just the
-         * credit amount of the class) args[5] = Professor ex. weierman (professor call
-         * not the professors name) (String) args[6] = School (String)
-         */
+
 
         /**
          * Check if the School and professor are first even valid entries.
@@ -87,11 +80,16 @@ public class AddClass extends Command {
                 School schoolToAdd = Ryan.schools.get(args[7]);
 
                 if (schoolToAdd.getListOfProfessors().containsKey(args[6])) {
+                    String className = args[0];
+                    String classID = args[1];
+                    String classNum = args[2];
+                    String time = args[3];
+                    String year = args[4];
 
                     /**
                      * Making the classroom object to add to hashmaps
                      */
-                    Classroom classToAdd = new Classroom(guild, args[0], args[1], args[2], args[3], args[4], credits,
+                    Classroom classToAdd = new Classroom(guild, className, classID, classNum, time, year, credits,
                             profForClass, schoolToAdd);
 
                     /**
@@ -103,8 +101,8 @@ public class AddClass extends Command {
                     /**
                      * File writing
                      */
-                    FileOperations.writeToFile(schools, Ryan.schools);
-                    FileOperations.writeToFile(classes, Ryan.classes);
+                    FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
+                    FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
 
                     channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:" + creditsCheck)
                             .queue();

@@ -21,8 +21,7 @@ public class RemoveSchool extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
         Message msg = event.getMessage();
-        File schools = new File("schoolbot\\src\\main\\files\\schools.ser");
-        File schoolCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
+
 
         if (args.length != 1) {
 
@@ -45,10 +44,12 @@ public class RemoveSchool extends Command {
                 return;
             }
 
-            Ryan.schools.remove(args[0]);
-            Ryan.schoolCalls.remove(args[0]);
-            FileOperations.writeToFile(schoolCalls, Ryan.schoolCalls);
-            FileOperations.writeToFile(schools, Ryan.schools);
+            String schoolreference = args[0];
+
+            Ryan.schools.remove(schoolreference);
+            Ryan.schoolCalls.remove(schoolreference);
+            FileOperations.writeToFile(FileOperations.schoolsCalls, Ryan.schoolCalls);
+            FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
             channel.sendMessage(":white_check_mark: School removed :white_check_mark:").queue();
 
         }

@@ -36,8 +36,10 @@ public class JoinSchool extends Command {
 
         } else {
             if (Ryan.schools.containsKey(args[0])) {
+                String schoolreference = args[0];
+
                 // Grabs the school if it exist
-                School school = Ryan.schools.get(args[0]);
+                School school = Ryan.schools.get(schoolreference);
 
                 if (Ryan.students.containsKey(userTyping)) {
                     // Grabs student if they already exist
