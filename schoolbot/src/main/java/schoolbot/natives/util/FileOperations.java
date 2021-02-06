@@ -20,8 +20,6 @@ public class FileOperations {
     public static final File students = new File("schoolbot\\src\\main\\files\\students.ser");
     public static final File schoolsCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
 
-
-
     public static ArrayList<File> getAllFilesWithExt(File dir, String ext) {
         ArrayList<File> filesWithExt = new ArrayList<>();
         if (dir.isDirectory()) {

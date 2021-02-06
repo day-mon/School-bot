@@ -52,6 +52,7 @@ import schoolbot.natives.Professor;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
 import schoolbot.natives.util.FileOperations;
+import schoolbot.natives.util.RyanCoolThread;
 import schoolbot.natives.util.RyanThread;
 import schoolbot.natives.util.StringOperations;
 
@@ -79,7 +80,8 @@ public class Ryan extends ListenerAdapter {
 	public static HashMap<Classroom, TextChannel> alert = new HashMap<Classroom, TextChannel>();
 	public static JDA jda;
 
-	public static void main(String[] args) throws LoginException, ClassNotFoundException, InterruptedException {
+	public static void main(String[] args)
+			throws LoginException, ClassNotFoundException, InterruptedException, IOException {
 
 		// String username = System.getProperty("user.name");
 		String token = "N/A";
@@ -124,12 +126,16 @@ public class Ryan extends ListenerAdapter {
 
 			}
 
-		} catch (IOException e) {};
+		} catch (IOException e) {
+		}
+		;
 
 		try {
 			BufferedReader fr = new BufferedReader(new FileReader(new File("schoolbot\\src\\main\\files\\token.txt")));
 			token = fr.readLine();
-		} catch (IOException e) {};
+		} catch (IOException e) {
+		}
+		;
 		// Commands initialization
 		// Commands initialization; needs fixed. JDA threading is so remarkably
 		// ass-backwards that it can't initialize variables
@@ -161,9 +167,15 @@ public class Ryan extends ListenerAdapter {
 				.addEventListeners(new Ryan()).setStatus(OnlineStatus.DO_NOT_DISTURB)
 				.setActivity(Activity.playing("with school textbooks")).build();
 		jda.awaitReady();
-		RyanThread ryanThread = new RyanThread(startTime);
-		Thread thr = new Thread(ryanThread);
-		thr.start();
+
+		RyanThread ryanThread = new RyanThread();
+		Thread assignmentAlert = new Thread(ryanThread);
+		assignmentAlert.start();
+
+		RyanCoolThread ryanCoolThread = new RyanCoolThread();
+		Thread classAlert = new Thread(ryanCoolThread);
+		classAlert.start();
+
 	}
 
 	public static long timeNow() {

@@ -5,14 +5,12 @@ import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
 
 public class RyanThread implements Runnable {
-    
-    private boolean canRun = true;
-    private long time;
-    private long msWait = 5000; //5 seconds
-    private int [] intervals;
 
-    public RyanThread(long startTime) {
-        time = startTime;
+    private boolean canRun = true;
+    private long msWait = 5000; // 5 seconds
+
+    public RyanThread() {
+        // idk
     }
 
     @Override
@@ -31,11 +29,16 @@ public class RyanThread implements Runnable {
                                         a.setExpired(true);
                                         continue;
                                     }
-                                    if (a.getLdt().getDayOfYear() == Ryan.today.getDayOfYear() && timeDue <= Ryan.onehour) {
-                                        System.out.println(a.getAssignmentName() + " is due in " + timeDue + " seconds");
-                                        Ryan.jda.getTextChannelsByName("testing-grounds", true).get(0).sendMessage(a.getAssignmentName() + " is due in " + 
-                                        StringOperations.formatTime(timeDue)).queue();
-                                        //Ryan.tc.sendMessage(a.getAssignmentName() + " is due in " + formatTime(timeDue)).queue();
+                                    if (a.getLdt().getDayOfYear() == Ryan.today.getDayOfYear()
+                                            && timeDue <= Ryan.onehour) {
+                                        System.out
+                                                .println(a.getAssignmentName() + " is due in " + timeDue + " seconds");
+                                        Ryan.jda.getTextChannelsByName("testing-grounds", true).get(0)
+                                                .sendMessage(a.getAssignmentName() + " is due in "
+                                                        + StringOperations.formatTime(timeDue))
+                                                .queue();
+                                        // Ryan.tc.sendMessage(a.getAssignmentName() + " is due in " +
+                                        // formatTime(timeDue)).queue();
                                     }
                                 }
                             }
@@ -49,7 +52,7 @@ public class RyanThread implements Runnable {
 
     }
 
-    public long now(){
+    public long now() {
         return System.currentTimeMillis() / 1000;
     }
 
