@@ -20,6 +20,11 @@ public class RemoveAssignment extends Command {
          * 
          */
 
+         String school = args[0];
+         String classID = args[1];
+
+         if 
+
          
     }
     

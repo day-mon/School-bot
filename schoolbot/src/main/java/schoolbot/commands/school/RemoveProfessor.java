@@ -2,6 +2,9 @@ package schoolbot.commands.school;
 
 import java.io.File;
 
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
@@ -25,6 +28,15 @@ public class RemoveProfessor extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
+        Message msg = event.getMember();
+
+        Member userTyping = event.getMember();
+
+        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
+            MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg, this);
+            return;
+        }
+        
 
        
         /**
