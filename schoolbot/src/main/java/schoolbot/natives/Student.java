@@ -14,7 +14,7 @@ import schoolbot.natives.util.Majors;
  * 
  * @author Elsklivet#8867
  */
-public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implements Serializable {
+public class Student implements Serializable {
     /**
      *
      */
@@ -56,6 +56,12 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
      */
     private String emailPrefix;
 
+
+    /**
+     * 
+     */
+    private User studentUser;
+
     /**
      * 
      * @param guild
@@ -67,8 +73,9 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
      * @param guild Guild the student is a member of.
      * @param user  User account.
      */
-    public Student(GuildImpl guild, User user) {
-        super(guild, user);
+    public Student(User user) {
+
+        this.studentUser = user;
         this.myClasses = null;
         this.mySchool = null;
         this.GPA = -1.0;
@@ -78,8 +85,8 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
 
     }
 
-    public Student(GuildImpl guild, User user, School mySch, double GPA, Majors[] major, String realName) {
-        super(guild, user);
+    public Student(User user, School mySch, double GPA, Majors[] major, String realName) {
+        this.studentUser = user;
         this.myClasses = new HashMap<String, Classroom>();
         this.mySchool = mySch;
         this.GPA = GPA;
@@ -159,10 +166,8 @@ public class Student extends net.dv8tion.jda.internal.entities.MemberImpl implem
         return emailPrefix;
     }
 
-    @Override
-    public User getUser() {
-        // TODO Auto-generated method stub
-        return super.getUser();
+    public User getSUser() {
+        return this.studentUser;
     }
 
     public void setGPA(double gPA) {

@@ -23,6 +23,7 @@ public class Classroom implements Serializable {
     private School school;
     private HashMap<String, Student> classList;
     private HashMap<String, Assignment> assignments;
+    private int[] intervals;
 
     public Classroom() {
 
@@ -86,6 +87,10 @@ public class Classroom implements Serializable {
         return guild;
     }
 
+    public int[] getIntervals() {
+        return intervals;
+    }
+
     public Professor getProfessor() {
         return this.professor;
     }
@@ -104,6 +109,11 @@ public class Classroom implements Serializable {
 
     public void setClassList(HashMap<String, Student> classList) {
         this.classList = classList;
+    }
+
+    public void setIntervals(int[] intervals) {
+        intervals = new int[intervals.length];
+        this.intervals = intervals;
     }
 
     public void setCredits(int credits) {

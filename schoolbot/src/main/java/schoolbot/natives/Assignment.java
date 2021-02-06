@@ -21,6 +21,7 @@ public class Assignment implements Serializable {
     private AssignmentType assigmentType;
     private String assignmentRef;
     private boolean expired = false;
+    private int[] intervals = new int[3];
 
     public Assignment() {
 
@@ -99,6 +100,10 @@ public class Assignment implements Serializable {
 
     public void setAssignmentName(String assignmentName) {
         this.assignmentName = assignmentName;
+    }
+
+    public void setIntervals(int[] intervals) {
+        this.intervals = intervals;
     }
 
     public void setClazz(Classroom clazz) {

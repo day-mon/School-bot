@@ -3,6 +3,7 @@ package schoolbot.commands.school;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
@@ -57,6 +58,7 @@ public class AddClass extends Command {
             MessageOperations.invalidUsageShortner("https://google.com", "Class already exist!", event.getMessage(),
                     this);
         } else {
+
             // Regex matches to see if the 5th arg is a number
             boolean numeric = args[5].matches("-?\\d+(\\.\\d+)?");
             String creditsCheck = "";
@@ -95,7 +97,7 @@ public class AddClass extends Command {
                     /**
                      * Adding to HashMaps
                      */
-                    Ryan.classes.put(args[2], classToAdd);
+                    Ryan.classes.put(classNum, classToAdd);
                     schoolToAdd.addClazz(classToAdd);
 
                     /**

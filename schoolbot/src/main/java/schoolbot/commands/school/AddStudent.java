@@ -33,13 +33,6 @@ public class AddStudent extends Command {
         MessageChannel channel = event.getChannel();
 
 
-        GuildImpl guild = (GuildImpl) event.getGuild();
-        /**
-         * args[0] = Real Name args[1] = User args[2] = School args[3] = Major args[4] =
-         * GPA
-         * 
-         * 
-         */
 
         if (args.length != 5) {
 
@@ -64,7 +57,7 @@ public class AddStudent extends Command {
                     }
                 }
 
-                Student studentToAdd = new Student(guild, studentToAddUsr, school, num, new Majors[] { major },
+                Student studentToAdd = new Student(studentToAddUsr, school, num, new Majors[] { major },
                         args[0]);
                 school.addStudent(studentToAdd);
 

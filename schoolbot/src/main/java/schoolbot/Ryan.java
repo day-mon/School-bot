@@ -127,7 +127,7 @@ public class Ryan extends ListenerAdapter {
 		} catch (IOException e) {};
 
 		try {
-			BufferedReader fr = new BufferedReader(new FileReader(new File("School-Bot\\schoolbot\\src\\main\\files\\token.txt")));
+			BufferedReader fr = new BufferedReader(new FileReader(new File("schoolbot\\src\\main\\files\\token.txt")));
 			token = fr.readLine();
 		} catch (IOException e) {};
 		// Commands initialization

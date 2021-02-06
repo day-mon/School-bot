@@ -9,6 +9,7 @@ public class RyanThread implements Runnable {
     private boolean canRun = true;
     private long time;
     private long msWait = 5000; //5 seconds
+    private int [] intervals;
 
     public RyanThread(long startTime) {
         time = startTime;

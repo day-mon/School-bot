@@ -2,6 +2,8 @@ package schoolbot.commands.school;
 
 import java.io.File;
 
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -43,6 +45,14 @@ public class RemoveSchool extends Command {
                         "There are still **professors** at this school", msg, this);
                 return;
             }
+
+            Member userTyping = event.getMember();
+
+            if(userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
+                
+                return;
+            }
+            
 
             String schoolreference = args[0];
 

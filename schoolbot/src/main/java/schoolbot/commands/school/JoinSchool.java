@@ -66,7 +66,7 @@ public class JoinSchool extends Command {
                     }
                 } else {
                     // Declaring
-                    Student studentToAdd = new Student(guild, userTyping);
+                    Student studentToAdd = new Student(userTyping);
 
                     // Setting and adding student
                     studentToAdd.setSchool(school);

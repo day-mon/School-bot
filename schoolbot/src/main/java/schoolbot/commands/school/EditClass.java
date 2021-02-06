@@ -1,5 +1,6 @@
 package schoolbot.commands.school;
 
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
@@ -24,6 +25,7 @@ public class EditClass extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
+        Message msg = event.getMessage();
 
         /**
          * First check if the school and the class even exist;
@@ -31,7 +33,7 @@ public class EditClass extends Command {
 
         if (Ryan.classes.containsKey(args[0]) && Ryan.classes.get(args[0]).getSchool() == Ryan.schools.get(args[1])
                 && Ryan.schools.get(args[1]).getGuild() == event.getGuild()) {
-            Classroom classToEdit = Ryan.classes.get(0);
+            Classroom classToEdit = Ryan.classes.get(args[0]);
 
             switch (args[2]) {
                 case "classid":
@@ -80,13 +82,62 @@ public class EditClass extends Command {
                         classToEdit.setSchool(school);
                         channel.sendMessage("School sucessfully changed to: " + school.getSchoolName()).queue();
                     } else {
-                        MessageOperations.invalidUsageShortner("https://google.com", "School does not exist",
-                                event.getMessage(), this);
+                        MessageOperations.invalidUsageShortner("https://google.com", "School does not exist",event.getMessage(), this);
                     }
                     break;
+                case "intervals":
+                /**
+                 * args[3] = interval 1
+                 * args[4] = interval 2
+                 * args[5] = interval 3
+                 */
+                int size = 2 - args.length;
+
+                switch(size) {
+                    case 1:
+                        // 1 interval
+                        boolean num = args[3].matches("-?\\d+(\\.\\d+)?");
+                        if (num) {
+                            int [] interval_1 = {Integer.parseInt(args[3])};
+                            classToEdit.setIntervals(interval_1);
+                            channel.sendMessage("Sucessfully updated intervals!");
+                        } else {
+                            MessageOperations.invalidUsageShortner("https://google.com", args[3] + " is not a number!", msg, this);
+                        }
+                    break;
+                    case 2:
+                        boolean interv_1 = args[3].matches("-?\\d+(\\.\\d+)?");
+                        boolean interv_2 = args[4].matches("-?\\d+(\\.\\d+)?");
+
+                        if (interv_1 && interv_2) {
+                            int interval_1 = Integer.parseInt(args[3]);
+                            int interval_2 = Integer.parseInt(args[4]);
+                            int [] intervals_2 = {interval_1, interval_2};
+                            classToEdit.setIntervals(intervals_2);  
+                            channel.sendMessage("Sucessfully updated intervals!");
+                        }
+
+                    break;
+                    case 3:
+                        boolean interval_1 = args[3].matches("-?\\d+(\\.\\d+)?");
+                        boolean interval_2 = args[4].matches("-?\\d+(\\.\\d+)?");
+                        boolean interval_3 = args[5].matches("-?\\d+(\\.\\d+)?");
+
+                        if (interval_1 && interval_2 && interval_3) {
+                            int interva_1 = Integer.parseInt(args[3]);
+                            int interva_2 = Integer.parseInt(args[4]);
+                            int interva_3 = Integer.parseInt(args[5]);
+
+
+                            int [] intervals_3 = {interva_1, interva_2, interva_3};
+                            classToEdit.setIntervals(intervals_3);  
+                            channel.sendMessage("Sucessfully updated intervals!");
+                        }
+                        break;
+                }
+
                 default:
-                    MessageOperations.invalidUsageShortner("https://google.com", args[2] + " is not a valid choice!",
-                            event.getMessage(), this);
+                    MessageOperations.invalidUsageShortner("https://google.com", args[2] + " is not a valid choice!",event.getMessage(), this);
             }
         }
     }
