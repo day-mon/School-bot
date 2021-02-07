@@ -2,4 +2,4 @@ ListMajors
 ++listmajors, ++majors
 No flags
 Lists all available majors.
-PLACEHOLDER
+`++majors`

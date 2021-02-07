@@ -1,5 +1,5 @@
 EditClass
 ++editclass, ++classedit
-attribute you are making edit to, change
+`attribute you are making edit to`, `change`
 The `EditClass` command is used to edit attributes about yourself.
 PLACEHOLDER

@@ -2,7 +2,7 @@ JoinClass
 ++jclass, ++joinclass, ++classjoin
 class id
 The `JoinClass` command will allow a user to join a class without admin intervention
-PLACEHOLDER
+`++joinclass 220937`
 
 
 

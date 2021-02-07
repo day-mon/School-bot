@@ -2,4 +2,4 @@ RemoveProfessor
 ++removeprofessor, ++profremove, ++profrem
 PLACEHOLDER
 The `RemoveProfessor` command will remove a professor from the school list
-PLACEHOLDER
+`++profrem ohl`

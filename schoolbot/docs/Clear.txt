@@ -2,4 +2,4 @@ Clear
 ++clear, ++purge
 number
 The version of the clear command with no arguments with clear the last 100 messages. The other implemetnation will clear 'x' amount of messages based off of user input.
-PLACEHOLDER FOR EXAMPLE
+`++purge 50` or `purge`

@@ -12,6 +12,7 @@ import schoolbot.natives.School;
 import schoolbot.natives.Student;
 import schoolbot.natives.util.FileOperations;
 import schoolbot.natives.util.Majors;
+import schoolbot.natives.util.MessageOperations;
 
 public class AddStudent extends Command {
 
@@ -31,11 +32,12 @@ public class AddStudent extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
+        int amountOfArgs = args.length;
 
 
 
-        if (args.length != 5) {
-
+        if (amountOfArgs != 5) {
+            MessageOperations.invalidUsageShortner("https://google.com", "You used ("+ amountOfArgs+ ") argument(s) , this command takes in 5 arguments!", event.getMessage(), this);
         } else {
             if (Ryan.schools.containsKey(args[2])) {
                 School school = Ryan.schools.get(args[2]);
@@ -45,9 +47,7 @@ public class AddStudent extends Command {
 
                 try {
                     num = Double.parseDouble(args[4]);
-                } catch (NumberFormatException e) {
-                }
-                ;
+                } catch (NumberFormatException e) {};
 
                 args[3] = args[3].toUpperCase().replace(" ", "_");
                 for (Majors majors : Majors.values()) {
@@ -71,8 +71,7 @@ public class AddStudent extends Command {
                 channel.sendMessage("Student " + studentToAddUsr.getAsMention() + " sucesfully added!").queue();
 
             } else {
-                System.out.println("no school!");
-                // invalid usage goes here
+                MessageOperations.invalidUsageShortner("https://google.com", args[2] + " is not a valid school reference", event.getMessage(), this);
             }
         }
 

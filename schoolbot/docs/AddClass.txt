@@ -1,5 +1,5 @@
 AddClass
-addclass 
+`addclass` 
 `class name`, `classid`, `class number`, `time`, `credits`, `professor suffix`
 The `AddClass` command will add a class given a school and professor
 `++addclass "Discrete Mathematic Structures" "CS 0041" "220937" "MTF @ 12PM" "3" "ohl"`

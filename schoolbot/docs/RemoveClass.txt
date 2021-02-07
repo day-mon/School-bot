@@ -2,3 +2,4 @@ RemoveClass
 ++removeclass, ++classremove
 PLACEHOLDER
 The `RemoveClass` command
+PLACEHOLDER

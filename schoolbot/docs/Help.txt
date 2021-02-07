@@ -3,7 +3,6 @@
 # Third should be flags
 # Fourth should be usage
 # 
-# 
 Help
 ++h, ++help
 One argument, name of command to get docs for.
