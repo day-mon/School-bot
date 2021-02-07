@@ -10,5 +10,5 @@ This project is to improve my knowledge on the following topics:
     + Java Data Structures<br>
     + Exception Handling<br>
 
-This project would not be possible without Gavin H. and Ryan L. Thank you!
+This project would not be possible without **Gavin H.** and **Ryan L.** Thank you!
 
