@@ -1,7 +1,7 @@
 # School Bot
-SchoolGirl is a bot designed to help with school assignments by grouping Discord users together based on their institution and class.
+SchoolBot is a bot designed to help with school assignments by grouping Discord users together based on their institution and class.
 
-This project is to improve my knowledge on the following topics:
+This project is to improve my knowledge on the following topics:<br>
     + Serialization<br>
     + Reading / Writing to files<br>
     + Advanced Object Oreinted Programing concepts<br>
