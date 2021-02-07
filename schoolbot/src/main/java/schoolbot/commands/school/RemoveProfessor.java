@@ -28,7 +28,7 @@ public class RemoveProfessor extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
-        Message msg = event.getMember();
+        Message msg = event.getMessage();
 
         Member userTyping = event.getMember();
 

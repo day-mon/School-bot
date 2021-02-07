@@ -142,6 +142,7 @@ public class StringOperations {
         List<Field> fields = new ArrayList<MessageEmbed.Field>();
         fields.add(new Field("Aliases", lines.get(1), true));
         fields.add(new Field("Flags", lines.get(2), true));
+        fields.add(new Field("Example", lines.get(4), true));
 
         MessageEmbed embed = new MessageEmbed(url, title, description, type, timestamp, color, thumbnail, siteProvider,
                 author, videoInfo, footer, image, fields);
@@ -195,6 +196,10 @@ public class StringOperations {
         String d = Ryan.today.getMonth().getValue() + "/" + Ryan.today.getDayOfMonth() + "/" + Ryan.today.getYear()
                 + " " + hour + ":" + (mins == 0 ? "00" : mins);
         return sdf.parse(d);
+    }
+
+    public static boolean numericCheck(String numeric) {
+        return numeric.matches("-?\\d+(\\.\\d+)?");
     }
 
     /*

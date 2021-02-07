@@ -1,5 +1,6 @@
 package schoolbot.natives.util;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +40,6 @@ public class InvalidUsage {
         String authorOfMessage = msg.getAuthor().getName();
         EmbedType type = EmbedType.RICH;
         OffsetDateTime time = OffsetDateTime.now();
-        int color = 2;
         Thumbnail thumbnail = null;
         Provider siteProvider = null;
         AuthorInfo author = new AuthorInfo("SchoolBot", "https://github.com/tykoooo/School-bot/tree/master/schoolbot",
@@ -50,8 +50,9 @@ public class InvalidUsage {
         List<Field> fields = new ArrayList<MessageEmbed.Field>();
         fields.add(new Field("Aliases", Arrays.toString(com.getCalls()), true));
         fields.add(new Field("Flags", lines.get(2), true));
+        fields.add(new Field("Example", lines.get(4), true));
 
-        MessageEmbed embed = new MessageEmbed(urlToCommand, com.getName(), problemWithUsage, type, time, color,
+        MessageEmbed embed = new MessageEmbed(urlToCommand, com.getName(), problemWithUsage, type, time, Color.RED.getRGB(),
                 thumbnail, siteProvider, author, videoInfo, footer, image, fields);
 
         InvalidUsage = embed;

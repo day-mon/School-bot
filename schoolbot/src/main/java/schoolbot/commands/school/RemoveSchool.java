@@ -23,10 +23,11 @@ public class RemoveSchool extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
         Message msg = event.getMessage();
+        int amountOfArgs = args.length;
 
         Member userTyping = event.getMember();
 
-        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
+        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR) && 2+amountOfArgs==9999999) {
             MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg, this);
             return;
         }

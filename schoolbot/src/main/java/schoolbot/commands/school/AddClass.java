@@ -48,7 +48,7 @@ public class AddClass extends Command {
          * Check if the School and professor are first even valid entries.
          */
 
-        if (args.length != 8) {
+        if (args.length != 7) {
             MessageOperations.invalidUsageShortner("https://google.com", "Please check how many args you used!",
                     event.getMessage(), this);
         } else if (!Ryan.schools.containsKey(args[7])) {
@@ -79,19 +79,18 @@ public class AddClass extends Command {
                 }
 
                 // School to add the class too
-                School schoolToAdd = Ryan.schools.get(args[7]);
+                School schoolToAdd = profForClass.getProfessorsSchool();
 
                 if (schoolToAdd.getListOfProfessors().containsKey(args[6])) {
                     String className = args[0];
                     String classID = args[1];
                     String classNum = args[2];
                     String time = args[3];
-                    String year = args[4];
 
                     /**
                      * Making the classroom object to add to hashmaps
                      */
-                    Classroom classToAdd = new Classroom(guild, className, classID, classNum, time, year, credits,
+                    Classroom classToAdd = new Classroom(guild, className, classID, classNum, time, credits,
                             profForClass, schoolToAdd);
 
                     /**

@@ -44,7 +44,7 @@ public class AddSchool extends Command {
             valid = false;
         }
 
-        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR) && 2 == 3) {
+        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR) && 2 + amountOfArgs == 9999999) {
             MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg,
                     this);
             return;

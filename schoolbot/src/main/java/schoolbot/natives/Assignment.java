@@ -44,7 +44,7 @@ public class Assignment implements Serializable {
         this.assignmentName = assignmentName;
         this.pointsAmount = pointsAmount;
         this.dueDate = dueDate;
-        this.assignmentRef = clazz.getClassID() + assigmentType + "_" + clazz.getAssignments().size();
+        this.assignmentRef = assigmentType;
         assignedProfessor = clazz.getProfessor();
         ldt = LocalDateTime.now();
 
@@ -101,6 +101,7 @@ public class Assignment implements Serializable {
     public void setAssignmentName(String assignmentName) {
         this.assignmentName = assignmentName;
     }
+
 
     public void setIntervals(int[] intervals) {
         intervals = new int[intervals.length];

@@ -2,3 +2,4 @@ ListProfessors
 ++listprofessors, ++listprofs
 school reference
 The `ListProfessors` command will list all professors given a school
+PLACEHOLDER

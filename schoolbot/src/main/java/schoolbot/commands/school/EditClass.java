@@ -45,10 +45,6 @@ public class EditClass extends Command {
                     classToEdit.setTime(args[3]);
                     channel.sendMessage("Time sucessfully changed to: " + args[3]).queue();
                     break;
-                case "year":
-                    classToEdit.setYear(args[3]);
-                    channel.sendMessage("Year sucessfully changed to: " + args[3]).queue();
-                    break;
                 case "name":
                     classToEdit.setClassName(args[3]);
                     channel.sendMessage("Class name sucessfully changed to: " + args[3]).queue();
@@ -57,7 +53,8 @@ public class EditClass extends Command {
                     boolean numeric = args[3].matches("-?\\d+(\\.\\d+)?");
 
                     if (numeric) {
-                        Ryan.classes.get(args[0]).setYear(args[3]);
+                        int credits = Integer.parseInt(args[3]);
+                        Ryan.classes.get(args[0]).setCredits(credits);
                         channel.sendMessage("Credits sucessfully changed to: " + args[3]).queue();
                     } else {
                         // invalid usage
