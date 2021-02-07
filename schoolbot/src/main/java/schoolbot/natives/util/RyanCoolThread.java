@@ -1,8 +1,10 @@
 package schoolbot.natives.util;
 
+import java.io.Console;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 import schoolbot.Ryan;
 import schoolbot.natives.Classroom;
@@ -12,6 +14,8 @@ public class RyanCoolThread implements Runnable {
     private boolean canRun = true;
     private long msWait = 5000;
     private int[] intervals = new int[] { 30, 10, 5 };
+
+    private HashMap<Classroom, int[]> flags = new HashMap<>();
 
     public RyanCoolThread() {
         // idk
@@ -23,18 +27,29 @@ public class RyanCoolThread implements Runnable {
             do {
                 Thread.sleep(msWait);
                 for (Classroom c : Ryan.classes.values()) {
+                    if (!flags.containsKey(c)) {
+                        flags.put(c, new int[] { 0, 0, 0 });
+                    }
                     int day = Ryan.today.getDayOfWeek().getValue();
                     String classType = c.getTime().split(" ")[0].toLowerCase();
                     int chosenInterval = 0;
-                    long timeUntilClass = (StringOperations.formatClassTime(c.getTime()).getTime() / 1000) - now();
+                    int chosenIndex = 0;
+                    long getTime = (StringOperations.formatClassTime(c.getTime()).getTime()) / 1000;
+                    long _now = now();
+                    long timeUntilClass = getTime - _now;
                     if (timeUntilClass < 0) {
                         continue;
                     }
                     for (int i = 0; i < intervals.length; i++) {
-                        if (withinRange(timeUntilClass, (intervals[i] * 60) - msWait, (intervals[i] * 60) + msWait)) {
+                        if (withinRange(timeUntilClass, (intervals[i] * 60) - (msWait / 1000),
+                                (intervals[i] * 60) + (msWait / 1000))) {
                             chosenInterval = intervals[i];
+                            chosenIndex = i;
                             break;
                         }
+                    }
+                    if (chosenInterval == 0 || flags.get(c)[chosenIndex] == 1) {
+                        continue;
                     }
                     String chan = "testing-grounds";
                     switch (classType) {
@@ -80,8 +95,14 @@ public class RyanCoolThread implements Runnable {
                             }
                             break;
                         default:
+                            if (day == 6 || day == 7) {
+                                msg(chan, c, chosenInterval);
+                            }
                             break;
                     }
+                    int[] _temp = flags.get(c);
+                    _temp[chosenIndex] = 1;
+                    flags.put(c, _temp);
                 }
             } while (canRun);
         } catch (InterruptedException e) {
@@ -93,6 +114,11 @@ public class RyanCoolThread implements Runnable {
     }
 
     public void msg(String chan, Classroom c, int interval) {
+        Ryan.jda.getTextChannelsByName(chan, true).get(0)
+                .sendMessage(c.getClassName() + " starts in " + interval + " minutes!").queue();
+    }
+
+    public void msg(String chan, Classroom c, long interval) {
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
                 .sendMessage(c.getClassName() + " starts in " + interval + " minutes!").queue();
     }

@@ -187,11 +187,13 @@ public class StringOperations {
     public static Date formatClassTime(String input) throws ParseException { // sorry :( - Ryan
         SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy hh:mm");
         String time = input.split(" ")[2];
+        boolean am = time.toLowerCase().contains("am");
         int mins = Integer.parseInt(time.contains(":") ? time.split(":")[1].replace("am", "").replace("pm", "") : "0");
         int hour = Integer.parseInt(time.contains(":") ? time.split(":")[0] : time.replace("am", "").replace("pm", ""))
-                + (time.endsWith("pm") ? 12 : 0);
-        String d = Ryan.today.getMonth() + "/" + Ryan.today.getDayOfMonth() + "/" + Ryan.today.getYear() + " " + hour
-                + ":" + (mins == 0 ? "00" : mins);
+                + (am ? 0 : 12);
+        hour = (hour == 12 && am ? 0 : hour);
+        String d = Ryan.today.getMonth().getValue() + "/" + Ryan.today.getDayOfMonth() + "/" + Ryan.today.getYear()
+                + " " + hour + ":" + (mins == 0 ? "00" : mins);
         return sdf.parse(d);
     }
 

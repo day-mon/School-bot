@@ -38,15 +38,15 @@ public class AddSchool extends Command {
         int amountOfArgs = args.length;
         Member userTyping = event.getMember();
 
-
         boolean valid = true;
 
         if (args[0].length() < 10 || Ryan.schools.containsKey(args[2])) {
             valid = false;
         }
 
-        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
-            MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg, this);
+        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR) && 2 == 3) {
+            MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg,
+                    this);
             return;
         }
 
@@ -59,14 +59,13 @@ public class AddSchool extends Command {
                     "This command only takes 3 arguments \n Arguments you entered: " + amountOfArgs + " arguments!",
                     event.getMessage(), this);
         } else if (valid) {
-            
+
             String fullSchoolName = args[0];
             String emailSuffix = args[1];
             String schoolreference = args[2];
 
             Ryan.schoolCalls.add(schoolreference);
             Ryan.schools.putIfAbsent(schoolreference, new School(guild, fullSchoolName, emailSuffix));
-
 
             FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
             FileOperations.writeToFile(FileOperations.schoolsCalls, Ryan.schoolCalls);

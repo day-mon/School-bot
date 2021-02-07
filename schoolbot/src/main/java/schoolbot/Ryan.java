@@ -44,6 +44,7 @@ import schoolbot.commands.school.ListClasses;
 import schoolbot.commands.school.ListMajors;
 import schoolbot.commands.school.ListProfessors;
 import schoolbot.commands.school.ListSchools;
+import schoolbot.commands.school.RemoveClass;
 import schoolbot.commands.school.RemoveProfessor;
 import schoolbot.commands.school.RemoveSchool;
 import schoolbot.natives.Assignment;
@@ -154,6 +155,7 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "editclass", "classedit" }, new EditClass());
 		commands.put(new String[] { "classes", "listclasses" }, new ListClasses());
 		commands.put(new String[] { "joinschool", "schooljoin" }, new JoinSchool());
+		commands.put(new String[] { "removeclass", "classremove" }, new RemoveClass());
 		commands.put(new String[] { "removeschool", "schoolremove", "rschool" }, new RemoveSchool());
 		commands.put(new String[] { "removeprofessor", "profremove", "profrem" }, new RemoveProfessor());
 		commands.put(new String[] { "editself", "selfedit" }, new EditSelf());

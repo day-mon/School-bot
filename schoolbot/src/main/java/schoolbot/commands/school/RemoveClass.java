@@ -34,11 +34,11 @@ public class RemoveClass extends Command {
          * 
          */
 
-
         Member userTyping = event.getMember();
 
         if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
-            MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg, this);
+            MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg,
+                    this);
             return;
         }
 
