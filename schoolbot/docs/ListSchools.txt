@@ -2,3 +2,4 @@ ListSchools
 ++listSchools, ++schools
 No flags
 The ListSchools command will list every school and its call sign stored on the bot.
+PLACEHOLDER

@@ -2,3 +2,4 @@ ListClasses
 ++classes, ++listclasses
 Ver 1: school reference. Ver 2: school reference, department
 The `ListClasses` command will allow you to list classes from a certain department or the whole shcool!
+PLACEHOLDER

@@ -29,8 +29,7 @@ public class Classroom implements Serializable {
         
     }
 
-    public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, String year,
-            int credits, Professor professor, School school) {
+    public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, int credits, Professor professor, School school) {
         this.guild = guild;
         this.classID = classID;
         this.time = time;
@@ -38,20 +37,6 @@ public class Classroom implements Serializable {
         this.className = className;
         this.professor = professor;
         this.classNum = classNum;
-        if (!year.equalsIgnoreCase("freshman") || (!year.equalsIgnoreCase("sophomore")
-                || !year.equalsIgnoreCase("junior") || (!year.equalsIgnoreCase("senior")))) {
-            if (year.startsWith("f"))
-                year = "Freshman";
-            else if (year.startsWith("so"))
-                year = "Sophomore";
-            else if (year.startsWith("j"))
-                year = "Junior";
-            else if (year.startsWith("se"))
-                year = "Senior";
-            else
-                year = "Unknown";
-        }
-        this.year = year;
         this.credits = credits;
         classList = new HashMap<>();
         assignments = new HashMap<>();
@@ -95,9 +80,6 @@ public class Classroom implements Serializable {
         return this.professor;
     }
 
-    public String getYear() {
-        return year;
-    }
 
     public String getTime() {
         return this.time;
@@ -122,10 +104,6 @@ public class Classroom implements Serializable {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
     }
 
     public void setSchool(School school) {
@@ -167,13 +145,17 @@ public class Classroom implements Serializable {
 
     }
 
+    public boolean containsAssignment(String assignment) {
+        return assignments.containsKey(assignment);
+    } 
+
     public void addAssignment(Assignment assignemnt) {
         assignments.putIfAbsent(assignemnt.getAssignmentRef(), assignemnt);
     }
 
-    public boolean removeAssignment(Assignment assignemnt) {
-        if (assignments.containsKey(assignemnt.getAssignmentRef())) {
-            assignments.remove(assignemnt.getAssignmentRef());
+    public boolean removeAssignment(String assignemnt) {
+        if (assignments.containsKey(assignemnt)) {
+            assignments.remove(assignemnt);
             return true;
         }
         return false;
@@ -291,10 +273,15 @@ public class Classroom implements Serializable {
 
     @Override
     public String toString() {
-        return "Class Name: " + className + "\n" + "ClassID: " + classID + "\n" + "Class size: " + classList.size()
-                + "\n" + "ClassNum: " + classNum + "\n" + "Credits: " + credits + "\n" + "Professor: "
-                + professor.getLastName() + ", " + professor.getFirstName() + "\n" + "Time: " + time + "\n" + "Year: "
-                + year + "\n" + "===============================";
+        return "Class Name: " + className + "\n" + 
+                "ClassID: " + classID + "\n" + 
+                "Class size: " + classList.size() + "\n"
+                + "ClassNum: " + classNum + "\n" 
+                + "Credits: " + credits + "\n"
+                + "Professor: " + professor.getLastName() + ", " + professor.getFirstName() + "\n"
+                + "Time: " + time + "\n" +
+                "======================";
+               
     }
 
 }

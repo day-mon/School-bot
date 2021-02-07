@@ -137,8 +137,9 @@ public class FileOperations {
                     }
                     write.print(Ryan.PREFIX + aliases[i] + comma);
                 }
-                write.print("PLACEHOLDER" + "\n");
-                write.print("The `" + com.getName() + "` command");
+                write.print("PLACEHOLDER for FLAGS" + "\n");
+                write.print("The `" + com.getName() + "` command" + "\n");
+                write.print("PLACEHOLDER FOR EXAMPLE");
 
                 write.close();
             } catch (FileNotFoundException e) {

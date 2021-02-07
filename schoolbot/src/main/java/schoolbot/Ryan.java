@@ -37,6 +37,7 @@ import schoolbot.commands.school.AddClass;
 import schoolbot.commands.school.AddProfessor;
 import schoolbot.commands.school.AddSchool;
 import schoolbot.commands.school.AddStudent;
+import schoolbot.commands.school.EditAssignment;
 import schoolbot.commands.school.EditClass;
 import schoolbot.commands.school.EditSelf;
 import schoolbot.commands.school.JoinSchool;
@@ -159,6 +160,7 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "editself", "selfedit" }, new EditSelf());
 		commands.put(new String[] { "addassignment" }, new AddAssignment());
 		commands.put(new String[] { "purge", "clear" }, new Clear());
+		commands.put(new String[] { "editassignmnet", "assignmentedit"}, new EditAssignment());
 		// args[0] should be the token
 		// We only need 2 intents in this bot. We only respond to messages in guilds and
 		// private channels.

@@ -1,0 +1,5 @@
+EditAssignment
+++editassignmnet, ++assignmentedit
+PLACEHOLDER for FLAGS
+The `EditAssignment` command
+PLACEHOLDER FOR EXAMPLE

@@ -2,3 +2,4 @@ AddProfessor
 ++addprofessor, ++addprof, ++profadd
 name, email, school
 The `AddProfessor` comamnd is used to add a professor to the bot for classes.
+PLACEHOLDER FOR EXAMPLE

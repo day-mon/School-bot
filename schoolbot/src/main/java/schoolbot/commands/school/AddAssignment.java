@@ -56,7 +56,7 @@ public class AddAssignment extends Command {
                     date = formatter.parse(args[2]);
                 } catch (ParseException e) {
                     MessageOperations.invalidUsageShortner("https://google.com",
-                            "Could not parse date! Use this format next time (M/dd/yy hh5:m)", event.getMessage(), this);
+                            "Could not parse date! Use this format next time (M/dd/yy hh:m)", event.getMessage(), this);
                     return;
                 }
 
