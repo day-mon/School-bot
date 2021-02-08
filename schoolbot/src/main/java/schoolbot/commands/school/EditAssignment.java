@@ -1,5 +1,6 @@
 package schoolbot.commands.school;
 
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
@@ -26,9 +27,11 @@ public class EditAssignment extends Command {
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
+        Message msg = event.getMessage();
+        Command com = this;
 
 
-        if (args.length < 2) {
+        if (args.length > 2) {
             String classID = args[0];
             String assignmentName = args[1];
             if (Ryan.classes.containsKey(classID)) {
@@ -94,6 +97,8 @@ public class EditAssignment extends Command {
                     
                 }
             }
+        } else {
+            MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 2 arguments! ", msg, com);
         }
 
     }

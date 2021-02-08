@@ -45,9 +45,11 @@ import schoolbot.commands.school.ListClasses;
 import schoolbot.commands.school.ListMajors;
 import schoolbot.commands.school.ListProfessors;
 import schoolbot.commands.school.ListSchools;
+import schoolbot.commands.school.RemoveAssignment;
 import schoolbot.commands.school.RemoveClass;
 import schoolbot.commands.school.RemoveProfessor;
 import schoolbot.commands.school.RemoveSchool;
+import schoolbot.commands.Stop;
 import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
@@ -160,7 +162,8 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "addassignment" }, new AddAssignment());
 		commands.put(new String[] { "purge", "clear" }, new Clear());
 		commands.put(new String[] { "editassignmnet", "assignmentedit"}, new EditAssignment());
-		// args[0] should be the token
+		commands.put(new String[] { "removeassignment", "assignmentremove" }, new RemoveAssignment());
+		commands.put(new String[] { "stop" }, new Stop());
 		// We only need 2 intents in this bot. We only respond to messages in guilds and
 		// private channels.
 		// All other events will be disabled.

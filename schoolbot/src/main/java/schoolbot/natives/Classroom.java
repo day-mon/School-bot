@@ -150,7 +150,7 @@ public class Classroom implements Serializable {
     } 
 
     public void addAssignment(Assignment assignemnt) {
-        assignments.putIfAbsent(assignemnt.getAssignmentRef(), assignemnt);
+        assignments.putIfAbsent(assignemnt.getAssignmentName(), assignemnt);
     }
 
     public boolean removeAssignment(String assignemnt) {

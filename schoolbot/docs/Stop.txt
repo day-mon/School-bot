@@ -1,0 +1,5 @@
+Stop
+++stop
+PLACEHOLDER for FLAGS
+The `Stop` command
+PLACEHOLDER FOR EXAMPLE

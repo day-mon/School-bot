@@ -43,7 +43,7 @@ public class EditSelf extends Command {
                 case "name":
                     String studentName = args[0];
                     studentToEdit.setRealName(studentName);
-                    channel.sendMessage("Name successfully c")
+                    channel.sendMessage("Name successfully changed to: " + studentName);
                     break;
                 case "school":
                     /**

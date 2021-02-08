@@ -18,6 +18,10 @@ import schoolbot.natives.util.FileOperations;
 
 public class RemoveAssignment extends Command {
 
+    public RemoveAssignment() {
+        super(new String[] {"removeassignment", "assignmentremove"});
+    }
+
     @Override
     public void run(MessageReceivedEvent event) {
         // TODO Auto-generated method stub
@@ -45,7 +49,7 @@ public class RemoveAssignment extends Command {
             if (Ryan.classes.containsKey(classID)) {
                 Classroom classToRemoveAssignmentFrom = Ryan.classes.get(classID);
                 Professor classesProfessor = classToRemoveAssignmentFrom.getProfessor();
-                if (student.getSchool() == classToRemoveAssignmentFrom.getSchool() || adminCheck) {
+                if (adminCheck || student.getSchool() == classToRemoveAssignmentFrom.getSchool() ) {
                     String assignmentName = args[1];
                     if (classToRemoveAssignmentFrom.getAssignments().containsKey(assignmentName)) {
                         Assignment assignemntToRemove = classToRemoveAssignmentFrom.getAssignments().get(assignmentName);

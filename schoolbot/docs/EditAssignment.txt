@@ -1,5 +1,5 @@
 EditAssignment
 ++editassignmnet, ++assignmentedit
-PLACEHOLDER for FLAGS
-The `EditAssignment` command
-PLACEHOLDER FOR EXAMPLE
+`class id`, `assignment name`, `attribute to edit: (**name**, **professor**, **points**)` `edit`
+The `EditAssignment` command will take in an assignment and edit certain attricutes to your liking
+`++editassignmnet "220937" "Exam 1" points 100`
