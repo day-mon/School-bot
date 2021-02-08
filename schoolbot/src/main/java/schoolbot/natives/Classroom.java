@@ -26,10 +26,11 @@ public class Classroom implements Serializable {
     private int[] intervals;
 
     public Classroom() {
-        
+
     }
 
-    public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, int credits, Professor professor, School school) {
+    public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, int credits,
+            Professor professor, School school) {
         this.guild = guild;
         this.classID = classID;
         this.time = time;
@@ -54,8 +55,7 @@ public class Classroom implements Serializable {
     public String getSubject() {
         return subject;
     }
-    
-    
+
     public School getSchool() {
         return this.school;
     }
@@ -79,7 +79,6 @@ public class Classroom implements Serializable {
     public Professor getProfessor() {
         return this.professor;
     }
-
 
     public String getTime() {
         return this.time;
@@ -147,7 +146,7 @@ public class Classroom implements Serializable {
 
     public boolean containsAssignment(String assignment) {
         return assignments.containsKey(assignment);
-    } 
+    }
 
     public void addAssignment(Assignment assignemnt) {
         assignments.putIfAbsent(assignemnt.getAssignmentRef(), assignemnt);
@@ -182,7 +181,6 @@ public class Classroom implements Serializable {
     public void setClassNum(String classNum) {
         this.classNum = classNum;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -255,15 +253,11 @@ public class Classroom implements Serializable {
 
     @Override
     public String toString() {
-        return "Class Name: " + className + "\n" + 
-                "ClassID: " + classID + "\n" + 
-                "Class size: " + classList.size() + "\n"
-                + "ClassNum: " + classNum + "\n" 
-                + "Credits: " + credits + "\n"
-                + "Professor: " + professor.getLastName() + ", " + professor.getFirstName() + "\n"
-                + "Time: " + time + "\n" +
-                "======================";
-               
+        return "Class Name: " + className + "\n" + "ClassID: " + classID + "\n" + "Class size: " + classList.size()
+                + "\n" + "ClassNum: " + classNum + "\n" + "Credits: " + credits + "\n" + "Professor: "
+                + professor.getLastName() + ", " + professor.getFirstName() + "\n" + "Time: " + time + "\n"
+                + "======================";
+
     }
 
 }
