@@ -51,7 +51,7 @@ public class RyanCoolThread implements Runnable {
                     if (chosenInterval == 0 || flags.get(c)[chosenIndex] == 1) {
                         continue;
                     }
-                    String chan = "testing-grounds";
+                    String chan = "bot-test-grounds";
                     switch (classType) {
                         case "mwf":
                             if (day == 1 || day == 3 || day == 5) {

@@ -33,7 +33,7 @@ public class RyanThread implements Runnable {
                                             && timeDue <= Ryan.onehour) {
                                         System.out
                                                 .println(a.getAssignmentName() + " is due in " + timeDue + " seconds");
-                                        Ryan.jda.getTextChannelsByName("testing-grounds", true).get(0)
+                                        Ryan.jda.getTextChannelsByName("bot-test-grounds", true).get(0)
                                                 .sendMessage(a.getAssignmentName() + " is due in "
                                                         + StringOperations.formatTime(timeDue))
                                                 .queue();
