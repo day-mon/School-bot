@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutorService;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.Ryan;
@@ -33,7 +34,8 @@ public class AddClass extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        MessageOperations.invalidUsageShortner("https://google.com", "You have entered no arguments!", event.getMessage(), this);
+        MessageOperations.invalidUsageShortner("https://google.com", "You have entered no arguments!",
+                event.getMessage(), this);
 
     }
 
@@ -42,8 +44,6 @@ public class AddClass extends Command {
         MessageChannel channel = event.getChannel();
 
         GuildImpl guild = (GuildImpl) event.getGuild();
-
-
 
         /**
          * Check if the School and professor are first even valid entries.
@@ -79,39 +79,39 @@ public class AddClass extends Command {
                 // School to add the class too
                 School schoolToAdd = profForClass.getProfessorsSchool();
 
-                    String className = args[0];
-                    String classID = args[1];
-                    String classNum = args[2];
-                    String time = args[3];
+                String className = args[0];
+                String classID = args[1];
+                String classNum = args[2];
+                String time = args[3];
 
-                    /**
-                     * Making the classroom object to add to hashmaps
-                     */
-                    
-                    Classroom classToAdd = new Classroom(guild, className, classID, classNum, time, credits,
-                            profForClass, schoolToAdd);
+                /**
+                 * Making the classroom object to add to hashmaps
+                 */
 
-                    /**
-                     * Adding to HashMaps
-                     */
-                    Ryan.classes.put(classNum, classToAdd);
-                    schoolToAdd.addClazz(classToAdd);
+                Classroom classToAdd = new Classroom(guild, className, classID, classNum, time, credits, profForClass,
+                        schoolToAdd);
 
-                    /**
-                     * File writing
-                     */
-                    FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
-                    FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
+                /**
+                 * Adding to HashMaps
+                 */
+                Ryan.classes.put(classNum, classToAdd);
+                schoolToAdd.addClazz(classToAdd);
 
-                    channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:" + creditsCheck)
-                            .queue();
-                } else { 
-                    MessageOperations.invalidUsageShortner("https://google.com",
-                            "That professor does not goto this school!", event.getMessage(), this);
-                }
-            } 
+                /**
+                 * File writing
+                 */
+                FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
+                FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
 
+                channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:" + creditsCheck)
+                        .queue();
+
+            } else {
+                MessageOperations.invalidUsageShortner("https://google.com",
+                        "That professor does not goto this school!", event.getMessage(), this);
+            }
         }
 
     }
 
+}
