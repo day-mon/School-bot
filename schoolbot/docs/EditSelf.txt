@@ -2,4 +2,4 @@ EditSelf
 ++editself, ++selfedit
 attribute you are making edit to, change
 The `EditSelf` command is used to edit attributes about yourself.
-PLACEHOLDER
+`++editself 

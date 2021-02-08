@@ -39,7 +39,11 @@ public class EditSelf extends Command {
         if (Ryan.students.containsKey(usertyping)) {
             Student studentToEdit = Ryan.students.get(usertyping);
             switch (args[0]) {
+
                 case "name":
+                    String studentName = args[0];
+                    studentToEdit.setRealName(studentName);
+                    channel.sendMessage("Name successfully c")
                     break;
                 case "school":
                     /**
