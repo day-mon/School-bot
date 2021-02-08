@@ -13,7 +13,7 @@ public class RyanCoolThread implements Runnable {
 
     private boolean canRun = true;
     private long msWait = 5000;
-    private int[] intervals = new int[] { 30, 10, 5 };
+    private int[] intervals = new int[] { 30, 10, 5 }; // minutes
 
     private HashMap<Classroom, int[]> flags = new HashMap<>();
 

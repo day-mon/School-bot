@@ -38,10 +38,10 @@ public class AddAssignment extends Command {
         MessageChannel channel = event.getChannel();
         SimpleDateFormat formatter = new SimpleDateFormat("M/dd/yyyy hh:mm");
         Date date = new Date();
-    
+
         if (args.length < 5) {
-            MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 5 args!", event.getMessage(),
-            this);
+            MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 5 args!",
+                    event.getMessage(), this);
         } else {
             if (Ryan.classes.containsKey(args[0])) {
                 Classroom classToAddAnAssignmentTo = Ryan.classes.get(args[0]);
@@ -66,7 +66,6 @@ public class AddAssignment extends Command {
                 if (numeric) {
                     pointsPossible = Double.parseDouble(args[3]);
                 }
-            
 
                 Assignment assignmentToCreate = new Assignment(classToAddAnAssignmentTo, assignmentName, date,
                         pointsPossible, assignmentType);
@@ -75,13 +74,12 @@ public class AddAssignment extends Command {
                 professorInClass.addAssignment(assignmentToCreate);
                 classToAddAnAssignmentTo.addToAllStudents(assignmentToCreate);
                 classToAddAnAssignmentTo.addAssignment(assignmentToCreate);
-        
 
                 FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
                 FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
                 channel.sendMessage(":white_check_mark: Assignment added :white_check_mark:").queue();
-                channel.sendMessage(assignmentName + " is due in: " + StringOperations.formatTime(date.getTime())).queue();
-                //Ryan.tc = event.getTextChannel();
+                long timeDue = (date.getTime() / 1000) - (System.currentTimeMillis() / 1000);
+                channel.sendMessage(assignmentName + " is due in " + StringOperations.formatTime(timeDue)).queue();
 
             } else {
                 MessageOperations.invalidUsageShortner("https://google.com", "Class doesnt exist", event.getMessage(),

@@ -1,5 +1,7 @@
 package schoolbot.natives.util;
 
+import java.util.HashMap;
+
 import schoolbot.Ryan;
 import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
@@ -8,6 +10,9 @@ public class RyanThread implements Runnable {
 
     private boolean canRun = true;
     private long msWait = 5000; // 5 seconds
+    double[] intervals = new double[] { 12, 1, 0.5 }; // hours
+
+    private HashMap<Assignment, int[]> flags = new HashMap<>();
 
     public RyanThread() {
         // idk
@@ -22,24 +27,40 @@ public class RyanThread implements Runnable {
                     for (Classroom c : Ryan.classes.values()) {
                         if (c.getAssignments().size() > 0) {
                             for (Assignment a : c.getAssignments().values()) {
+                                if (!flags.containsKey(a)) {
+                                    flags.put(a, new int[] { 0, 0, 0 });
+                                }
                                 if (!a.isExpired()) {
                                     long timeDue = (a.getDueDate().getTime() / 1000) - now();
                                     if (timeDue <= 0) {
-                                        System.out.println("X is due now !!!");
+                                        Ryan.jda.getTextChannelsByName("bot-test-grounds", true).get(0)
+                                                .sendMessage(a.getAssignmentName() + " just expired");
                                         a.setExpired(true);
                                         continue;
                                     }
-                                    if (a.getLdt().getDayOfYear() == Ryan.today.getDayOfYear()
-                                            && timeDue <= Ryan.onehour) {
-                                        System.out
-                                                .println(a.getAssignmentName() + " is due in " + timeDue + " seconds");
-                                        Ryan.jda.getTextChannelsByName("bot-test-grounds", true).get(0)
-                                                .sendMessage(a.getAssignmentName() + " is due in "
-                                                        + StringOperations.formatTime(timeDue))
-                                                .queue();
-                                        // Ryan.tc.sendMessage(a.getAssignmentName() + " is due in " +
-                                        // formatTime(timeDue)).queue();
+                                    int chosenIndex = 0;
+                                    double chosenInterval = 0;
+                                    for (int i = 0; i < intervals.length; i++) {
+                                        if (withinRange(timeDue, (intervals[i] * 3600) - ((double) msWait / 1000),
+                                                (intervals[i] * 3600) + ((double) msWait / 1000))) {
+                                            chosenIndex = i;
+                                            chosenInterval = intervals[i];
+                                            break;
+                                        }
                                     }
+                                    if (chosenInterval == 0 || flags.get(a)[chosenIndex] == 1) {
+                                        continue;
+                                    }
+                                    Ryan.jda.getTextChannelsByName("bot-test-grounds",
+                                            true).get(
+                                                    0)
+                                            .sendMessage(a.getAssignmentName() + " is due in "
+                                                    + (chosenInterval == 0.5 ? "30 minutes!"
+                                                            : intervals[chosenIndex] + " hours!"))
+                                            .queue();
+                                    int[] _temp = flags.get(a);
+                                    _temp[chosenIndex] = 1;
+                                    flags.put(a, _temp);
                                 }
                             }
                         }
@@ -62,5 +83,9 @@ public class RyanThread implements Runnable {
 
     public void cancel() {
         canRun = false;
+    }
+
+    public boolean withinRange(long a, double min, double max) {
+        return (a <= max && a >= min);
     }
 }
