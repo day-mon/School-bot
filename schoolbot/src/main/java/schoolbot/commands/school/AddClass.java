@@ -33,6 +33,7 @@ public class AddClass extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
+        MessageOperations.invalidUsageShortner("https://google.com", "You have entered no arguments!", event.getMessage(), this);
 
     }
 
@@ -48,31 +49,28 @@ public class AddClass extends Command {
          * Check if the School and professor are first even valid entries.
          */
 
-        if (args.length != 7) {
+        if (args.length != 6) {
             MessageOperations.invalidUsageShortner("https://google.com", "Please check how many args you used!",
                     event.getMessage(), this);
-        } else if (!Ryan.schools.containsKey(args[7])) {
-            MessageOperations.invalidUsageShortner("https://google.com", "School doesnt exist", event.getMessage(),
-                    this);
-        } else if (Ryan.classes.containsKey(args[2])) {
+        } else if (Ryan.classes.containsKey(args[1])) {
             MessageOperations.invalidUsageShortner("https://google.com", "Class already exist!", event.getMessage(),
                     this);
         } else {
 
             // Regex matches to see if the 5th arg is a number
-            boolean numeric = args[5].matches("-?\\d+(\\.\\d+)?");
+            boolean numeric = args[4].matches("-?\\d+(\\.\\d+)?");
             String creditsCheck = "";
 
             // Stores credits in variable
             int credits = 0;
 
             // Checking if professor is a valid professor
-            if (Ryan.professors.containsKey(args[6])) {
-                Professor profForClass = Ryan.professors.get(args[6]);
+            if (Ryan.professors.containsKey(args[5])) {
+                Professor profForClass = Ryan.professors.get(args[5]);
 
                 // Checks again if its a numeric and then parses the string to an int
                 if (numeric) {
-                    credits = Integer.parseInt(args[5]);
+                    credits = Integer.parseInt(args[4]);
                 } else {
                     creditsCheck = ", you may have to reset your credits, the data you input for your credits was not a number!";
                     credits = 0;
@@ -81,7 +79,6 @@ public class AddClass extends Command {
                 // School to add the class too
                 School schoolToAdd = profForClass.getProfessorsSchool();
 
-                if (schoolToAdd.getListOfProfessors().containsKey(args[6])) {
                     String className = args[0];
                     String classID = args[1];
                     String classNum = args[2];
@@ -90,6 +87,7 @@ public class AddClass extends Command {
                     /**
                      * Making the classroom object to add to hashmaps
                      */
+                    
                     Classroom classToAdd = new Classroom(guild, className, classID, classNum, time, credits,
                             profForClass, schoolToAdd);
 
@@ -107,17 +105,13 @@ public class AddClass extends Command {
 
                     channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:" + creditsCheck)
                             .queue();
-                } else {
+                } else { 
                     MessageOperations.invalidUsageShortner("https://google.com",
                             "That professor does not goto this school!", event.getMessage(), this);
                 }
-            } else {
-                MessageOperations.invalidUsageShortner("https://google.com", "Professor doesnt exist.",
-                        event.getMessage(), this);
-            }
+            } 
 
         }
 
     }
 
-}

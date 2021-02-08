@@ -183,24 +183,6 @@ public class Classroom implements Serializable {
         this.classNum = classNum;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((assignments == null) ? 0 : assignments.hashCode());
-        result = prime * result + ((classID == null) ? 0 : classID.hashCode());
-        result = prime * result + ((classList == null) ? 0 : classList.hashCode());
-        result = prime * result + ((className == null) ? 0 : className.hashCode());
-        result = prime * result + ((classNum == null) ? 0 : classNum.hashCode());
-        result = prime * result + credits;
-        result = prime * result + ((guild == null) ? 0 : guild.hashCode());
-        result = prime * result + ((professor == null) ? 0 : professor.hashCode());
-        result = prime * result + ((school == null) ? 0 : school.hashCode());
-        result = prime * result + ((subject == null) ? 0 : subject.hashCode());
-        result = prime * result + ((time == null) ? 0 : time.hashCode());
-        result = prime * result + ((year == null) ? 0 : year.hashCode());
-        return result;
-    }
 
     @Override
     public boolean equals(Object obj) {

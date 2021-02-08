@@ -40,7 +40,8 @@ public class AddAssignment extends Command {
         Date date = new Date();
     
         if (args.length < 5) {
-            // new invalid usgae
+            MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 5 args!", event.getMessage(),
+            this);
         } else {
             if (Ryan.classes.containsKey(args[0])) {
                 Classroom classToAddAnAssignmentTo = Ryan.classes.get(args[0]);
@@ -65,6 +66,7 @@ public class AddAssignment extends Command {
                 if (numeric) {
                     pointsPossible = Double.parseDouble(args[3]);
                 }
+            
 
                 Assignment assignmentToCreate = new Assignment(classToAddAnAssignmentTo, assignmentName, date,
                         pointsPossible, assignmentType);
@@ -73,6 +75,7 @@ public class AddAssignment extends Command {
                 professorInClass.addAssignment(assignmentToCreate);
                 classToAddAnAssignmentTo.addToAllStudents(assignmentToCreate);
                 classToAddAnAssignmentTo.addAssignment(assignmentToCreate);
+        
 
                 FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
                 FileOperations.writeToFile(FileOperations.schools, Ryan.schools);

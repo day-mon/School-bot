@@ -17,6 +17,7 @@ public class Professor implements Serializable {
     private HashMap<String, Assignment> assignments;
 
     private String email;
+    private String emailPrefix;
     private transient GuildImpl guild;
     private String firstName;
     private String lastName;
@@ -32,7 +33,8 @@ public class Professor implements Serializable {
     }
 
     public Professor(GuildImpl guild, String firstName, String lastName, String email, School professorsSchool) {
-        this.email = email;
+        this.email = email + professorsSchool.getEmailSuffix();
+        this.emailPrefix = email;
         this.guild = guild;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -171,6 +173,10 @@ public class Professor implements Serializable {
      */
     public void setOfficeHours(String officeHours) {
         this.officeHours = officeHours;
+    }
+
+    public void setEmailPrefix(String emailPrefix) {
+        this.emailPrefix = emailPrefix;
     }
 
     /**

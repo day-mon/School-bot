@@ -189,7 +189,7 @@ public class StringOperations {
         SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyyy hh:mm");
         String time = input.split(" ")[2];
         boolean am = time.toLowerCase().contains("am");
-        int mins = Integer.parseInt(time.contains(":") ? time.split(":")[1].replace("am", "").replace("pm", "") : "0");
+        int mins = Integer.parseInt(time.contains(":") ? time.split(":")[1].replace("am", "").replace("pm", "") : "0"); // this line is being a fart
         int hour = Integer.parseInt(time.contains(":") ? time.split(":")[0] : time.replace("am", "").replace("pm", ""))
                 + (am ? 0 : 12);
         hour = (hour == 12 && am ? 0 : hour);
