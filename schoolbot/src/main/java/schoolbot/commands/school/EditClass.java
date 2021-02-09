@@ -2,6 +2,7 @@ package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
 import schoolbot.commands.Command;
@@ -72,6 +73,17 @@ public class EditClass extends Command {
                         MessageOperations.invalidUsageShortner("https://google.com", "Professor doesnt exist!",
                                 event.getMessage(), this);
                     }
+                    break;
+                case "channel":
+                    String textChannel = args[3];
+                    for (TextChannel channels : Ryan.jda.getTextChannels()) {
+                        if (channels.toString() == textChannel) {
+                            classToEdit.setTextChannel(channels.getName());
+                            channel.sendMessage(textChannel + " successfully assigned to this class!").queue();
+                            return;
+                        }
+                    }
+                    MessageOperations.invalidUsageShortner("https://google.com", "That is not a valid text channel in this server!", msg, this);
                     break;
                 case "school":
                     if (Ryan.schools.containsKey(args[0])) {

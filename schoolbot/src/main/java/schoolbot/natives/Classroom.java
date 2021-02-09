@@ -86,6 +86,10 @@ public class Classroom implements Serializable {
         return this.time;
     }
 
+    public String getTextChannel() {
+        return textChannel;
+    }
+
     public void setClassID(String classID) {
         this.classID = classID;
     }
@@ -105,6 +109,10 @@ public class Classroom implements Serializable {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public void setTextChannel(String textChannel) {
+        this.textChannel = textChannel;
     }
 
     public void setSchool(School school) {
@@ -261,5 +269,6 @@ public class Classroom implements Serializable {
                 + "======================";
 
     }
+
 
 }
