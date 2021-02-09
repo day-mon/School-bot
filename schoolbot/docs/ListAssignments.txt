@@ -1,5 +1,5 @@
 ListAssignments
 ++listassignments, ++assignments
-`school reference`, `class number`
-The `ListAssignments` command is intended to list every assignment given a a school reference and a class number.
-`++assignments pitt 220937`
+`class number`
+The `ListAssignments` command is intended to list every assignment given a class number or typing the command in a classes given textchannel.
+`++assignments 220937 or ++assignments`

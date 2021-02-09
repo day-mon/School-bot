@@ -20,6 +20,31 @@ public class ListAssignments extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
+        MessageChannel channel = event.getChannel();
+        String textChannel = channel.getName();
+
+        for (Classroom clazz : Ryan.classes.values()) {
+            if (clazz.getTextChannel().equals(textChannel)) {
+                if (clazz.getAssignments().size() <= 0) {
+                    MessageOperations.invalidUsageShortner("https://google.com", "There are no assignments for: " + clazz.getClassName(), event.getMessage(), this);
+                    return;
+                }
+                StringBuilder assignmentsStringBuilder = new StringBuilder("```Assignments for " + clazz.getClassName() + " (" + clazz.getClassNum() + ")" + ": \n") ;
+                for (Assignment assignments : clazz.getAssignments().values()) {
+                    assignmentsStringBuilder.append(assignments + "\n");
+
+                    if (assignmentsStringBuilder.length() >= 1750) 
+                        MessageOperations.messageExtender(assignmentsStringBuilder, channel);
+                }
+                int pendingAssignments = clazz.getAssignments().size();
+                assignmentsStringBuilder.append("You have " +pendingAssignments + " pending " + (pendingAssignments > 0 ? "assignments!":"assignment!"));
+                assignmentsStringBuilder.append("```");
+                channel.sendMessage(assignmentsStringBuilder).queue();
+                return;
+            }
+        }
+
+        MessageOperations.invalidUsageShortner("https://google.com", "This text channel is not associated with any class!", event.getMessage(), this);
 
     }
 
@@ -33,14 +58,13 @@ public class ListAssignments extends Command {
         boolean adminCheck = userTyping.hasPermission(Permission.ADMINISTRATOR);
         MessageChannel channel = event.getChannel();
 
-        if (args.length >= 2)  {
+        if (args.length >= 1)  {
             if (adminCheck) {
-                String school = args[0];
-                if (Ryan.schools.containsKey(school)) {
-                    School schoolObj = Ryan.schools.get(school);
-                    String classNumber = args[1];
+                String classNumber = args[0];
+                if (Ryan.classes.containsKey(classNumber)) {
+                    School schoolObj = Ryan.classes.get(classNumber).getSchool();
                     if (schoolObj.getListOfClasses().containsKey(classNumber)) {
-                        Classroom clazz = Ryan.classes.get(classNumber); 
+                        Classroom clazz = schoolObj.getListOfClasses().get(classNumber); 
                         /**
                          * for some reason schoolObj.getclasses.getassignments would be 0 ??
                          * 
@@ -65,7 +89,7 @@ public class ListAssignments extends Command {
                         MessageOperations.invalidUsageShortner("https://google.com", classNumber + " is not a class number at " + schoolObj.getSchoolName(), msg, com);
                     }
                 } else {
-                    MessageOperations.invalidUsageShortner("https://google.com", school + " does not exist!", msg, com);
+                    MessageOperations.invalidUsageShortner("https://google.com", "That class does not exist!", msg, com);
                 }
             } else {
                 MessageOperations.invalidUsageShortner("https://google.com", "You are not an administrator", event.getMessage(), this);
