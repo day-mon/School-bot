@@ -59,6 +59,7 @@ public class RemoveAssignment extends Command {
 
                         FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
                         FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
+                        FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
 
                         channel.sendMessage("Assignment removed!").queue();
                     } else {

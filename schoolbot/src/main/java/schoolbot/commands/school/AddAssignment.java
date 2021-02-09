@@ -50,6 +50,12 @@ public class AddAssignment extends Command {
                 double pointsPossible = 0.0;
                 String assignmentType = args[4];
 
+
+                if (classToAddAnAssignmentTo.containsAssignment(assignmentName)) {
+                    MessageOperations.invalidUsageShortner("https://google.com", "This assignment already exist!", event.getMessage(), this);
+                    return;
+                }
+
                 /**
                  * Attempting to parse date, if date cannot be parsed throw a invalid usage.
                  */
@@ -61,10 +67,11 @@ public class AddAssignment extends Command {
                     return;
                 }
 
-                boolean numeric = args[3].matches("/^[0-9]+.[0-9]+$");
+                boolean numeric = StringOperations.numericCheck(args[3]);
 
                 if (numeric) {
-                    pointsPossible = Double.parseDouble(args[3]);
+                    pointsPossible = Integer.parseInt(args[3]);
+                    pointsPossible = (double)pointsPossible;
                 }
 
                 Assignment assignmentToCreate = new Assignment(classToAddAnAssignmentTo, assignmentName, date,
@@ -72,11 +79,12 @@ public class AddAssignment extends Command {
 
                 // File Writing and saving to HashMaps
                 professorInClass.addAssignment(assignmentToCreate);
-                classToAddAnAssignmentTo.addToAllStudents(assignmentToCreate);
+                //classToAddAnAssignmentTo.addToAllStudents(assignmentToCreate);
                 classToAddAnAssignmentTo.addAssignment(assignmentToCreate);
 
                 FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
                 FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
+                FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
                 channel.sendMessage(":white_check_mark: Assignment added :white_check_mark:").queue();
                 long timeDue = (date.getTime() / 1000) - (System.currentTimeMillis() / 1000);
                 channel.sendMessage(assignmentName + " is due in " + StringOperations.formatTime(timeDue)).queue();

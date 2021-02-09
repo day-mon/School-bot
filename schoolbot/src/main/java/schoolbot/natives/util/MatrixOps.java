@@ -1,7 +1,7 @@
 package schoolbot.natives.util;
 
-public class MatrixOps {
-
+public class MatrixOps {//kk thtas lit
+// im am going to run it watch
     public static double[][] add(double[][] a, double[][] b) {
         double[][] c = a;
         if (a.length == b.length && a[0].length == b[0].length) {

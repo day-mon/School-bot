@@ -42,6 +42,7 @@ import schoolbot.commands.school.EditClass;
 import schoolbot.commands.school.EditSelf;
 import schoolbot.commands.school.JoinSchool;
 import schoolbot.commands.school.LinearAlgebra;
+import schoolbot.commands.school.ListAssignments;
 import schoolbot.commands.school.ListClasses;
 import schoolbot.commands.school.ListMajors;
 import schoolbot.commands.school.ListProfessors;
@@ -165,6 +166,7 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "editassignmnet", "assignmentedit" }, new EditAssignment());
 		commands.put(new String[] { "removeassignment", "assignmentremove" }, new RemoveAssignment());
 		commands.put(new String[] { "linearalgebra", "la" }, new LinearAlgebra());
+		commands.put(new String[] { "listassignments", "assignments" }, new ListAssignments());
 		// args[0] should be the token
 		// We only need 2 intents in this bot. We only respond to messages in guilds and
 		// private channels.

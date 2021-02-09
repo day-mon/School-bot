@@ -178,7 +178,7 @@ public class Classroom implements Serializable {
     }
 
     public HashMap<String, Assignment> getAssignments() {
-        return assignments;
+        return this.assignments;
     }
 
     public void setAssignments(HashMap<String, Assignment> assignments) {

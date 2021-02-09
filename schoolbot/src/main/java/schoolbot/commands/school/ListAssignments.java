@@ -33,21 +33,33 @@ public class ListAssignments extends Command {
         boolean adminCheck = userTyping.hasPermission(Permission.ADMINISTRATOR);
         MessageChannel channel = event.getChannel();
 
-        if (args.length > 2)  {
+        if (args.length >= 2)  {
             if (adminCheck) {
                 String school = args[0];
                 if (Ryan.schools.containsKey(school)) {
                     School schoolObj = Ryan.schools.get(school);
                     String classNumber = args[1];
                     if (schoolObj.getListOfClasses().containsKey(classNumber)) {
-                        Classroom clazz = schoolObj.getListOfClasses().get(classNumber);
-                        StringBuilder assignmentsStringBuilder = new StringBuilder("```");
+                        Classroom clazz = Ryan.classes.get(classNumber); 
+                        /**
+                         * for some reason schoolObj.getclasses.getassignments would be 0 ??
+                         * 
+                         */
+                      
+                      if (clazz.getAssignments().size() <= 0) {
+                            MessageOperations.invalidUsageShortner("https://google.com", "There are no assignments for: " + clazz.getClassName(), msg, com);
+                            return;
+                        }
+                        StringBuilder assignmentsStringBuilder = new StringBuilder("```Assignments for " + clazz.getClassName() + " (" + clazz.getClassNum() + ")" + ": \n") ;
                         for (Assignment assignments : clazz.getAssignments().values()) {
-                            assignmentsStringBuilder.append(assignments);
+                            assignmentsStringBuilder.append(assignments + "\n");
 
                             if (assignmentsStringBuilder.length() >= 1750) 
                                 MessageOperations.messageExtender(assignmentsStringBuilder, channel);
                         }
+                        int pendingAssignments = clazz.getAssignments().size();
+                        assignmentsStringBuilder.append("You have " +pendingAssignments + " pending " + (pendingAssignments > 0 ? "assignments!":"assignment!"));
+                        assignmentsStringBuilder.append("```");
                         channel.sendMessage(assignmentsStringBuilder).queue();
                     } else {
                         MessageOperations.invalidUsageShortner("https://google.com", classNumber + " is not a class number at " + schoolObj.getSchoolName(), msg, com);

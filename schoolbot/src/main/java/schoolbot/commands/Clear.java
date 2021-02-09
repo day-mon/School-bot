@@ -71,6 +71,7 @@ public class Clear extends Command {
              */
             channel.purgeMessages(msg);
 
+
             //
             channel.sendMessage("Commencing the purge").queue(response -> {
                 response.editMessage("Purge completed!")

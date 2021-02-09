@@ -1,5 +1,5 @@
 RemoveClass
 ++removeclass, ++classremove
-PLACEHOLDER
-The `RemoveClass` command
-PLACEHOLDER
+`school refernece`, `class id`
+The `RemoveClass` command will remove a class given its class id and school reference.  This action may require administrator privlages.
+`++classremove pitt 220937`
