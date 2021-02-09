@@ -202,6 +202,19 @@ public class StringOperations {
         return numeric.matches("-?\\d+(\\.\\d+)?");
     }
 
+    public static String formatMatrix(double[][] a) {
+        String s = "```";
+        for (int i = 0; i < a.length; i++) {
+            s += "[";
+            for (int j = 0; j < a[0].length; j++) {
+                s += a[i][j] + " ";
+            }
+            s = s.substring(0, s.length() - 1) + "]" + (i != a.length - 1 ? "\n" : "");
+        }
+        s += "```";
+        return s;
+    }
+
     /*
      * Add some "correctXYZ" methods here
      */
