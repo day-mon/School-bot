@@ -41,6 +41,7 @@ import schoolbot.commands.school.EditAssignment;
 import schoolbot.commands.school.EditClass;
 import schoolbot.commands.school.EditSelf;
 import schoolbot.commands.school.JoinSchool;
+import schoolbot.commands.school.LinearAlgebra;
 import schoolbot.commands.school.ListClasses;
 import schoolbot.commands.school.ListMajors;
 import schoolbot.commands.school.ListProfessors;
@@ -69,7 +70,7 @@ public class Ryan extends ListenerAdapter {
 	private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
 	public static ArrayList<String> schoolCalls = new ArrayList<String>();
 	public static HashMap<String, School> schools = new HashMap<String, School>();
-	//public static HashMap<User, StudentImpl> students = new HashMap<>();
+	// public static HashMap<User, StudentImpl> students = new HashMap<>();
 	public static HashMap<String, Professor> professors = new HashMap<>();
 	public static HashMap<String, Classroom> classes = new HashMap<>();
 
@@ -127,12 +128,15 @@ public class Ryan extends ListenerAdapter {
 
 			}
 
-		} catch (IOException e) {};
+		} catch (IOException e) {
+		}
+		;
 
 		try {
 			BufferedReader fr = new BufferedReader(new FileReader(new File("schoolbot\\src\\main\\files\\token.txt")));
 			token = fr.readLine();
-		} catch (IOException e) {}
+		} catch (IOException e) {
+		}
 		;
 		// Commands initialization
 		// Commands initialization; needs fixed. JDA threading is so remarkably
@@ -158,8 +162,9 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "editself", "selfedit" }, new EditSelf());
 		commands.put(new String[] { "addassignment" }, new AddAssignment());
 		commands.put(new String[] { "purge", "clear" }, new Clear());
-		commands.put(new String[] { "editassignmnet", "assignmentedit"}, new EditAssignment());
-		commands.put(new String[] {"removeassignment", "assignmentremove"}, new RemoveAssignment());
+		commands.put(new String[] { "editassignmnet", "assignmentedit" }, new EditAssignment());
+		commands.put(new String[] { "removeassignment", "assignmentremove" }, new RemoveAssignment());
+		commands.put(new String[] { "linearalgebra", "la" }, new LinearAlgebra());
 		// args[0] should be the token
 		// We only need 2 intents in this bot. We only respond to messages in guilds and
 		// private channels.
