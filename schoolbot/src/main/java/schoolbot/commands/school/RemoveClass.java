@@ -34,6 +34,7 @@ public class RemoveClass extends Command {
          * 
          */
 
+        MessageChannel channel = event.getChannel();
         Member userTyping = event.getMember();
 
         if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
@@ -42,7 +43,7 @@ public class RemoveClass extends Command {
             return;
         }
 
-        if (args.length > 1) {
+        if (args.length < 1) {
 
         } else {
             if (Ryan.schools.containsKey(args[0])) {
@@ -52,19 +53,24 @@ public class RemoveClass extends Command {
                 School schoolToRemoveClassFrom = Ryan.schools.get(schoolReefrence);
                 if (schoolToRemoveClassFrom.getListOfClasses().containsKey(classID)) {
                     Classroom classToRemove = schoolToRemoveClassFrom.getListOfClasses().get(classID);
-                    int classSize = classToRemove.getClassList().size();
+                   // int classSize = classToRemove.getClassList().size();
                     Professor classProfessor = classToRemove.getProfessor();
-                    if (classSize <= 0) {
+                    //if (classSize <= 0) {
                         Ryan.classes.remove(classID);
                         classProfessor.removeClass(classToRemove);
+
 
                         FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
                         FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
                         FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
-                    } else {
-                        MessageOperations.invalidUsageShortner("https://google.com",
-                                "This class still has students in it!", event.getMessage(), this);
-                    }
+
+                        channel.sendMessage(":white_check_mark: Class deleted sucessfully! :white_check_mark:").queue();
+
+
+                  //  } else {
+                   //     MessageOperations.invalidUsageShortner("https://google.com",
+                    //            "This class still has students in it!", event.getMessage(), this);
+                   // }
                 }
             } else {
                 MessageOperations.invalidUsageShortner("https://google.com", "That school doesnt exist!",

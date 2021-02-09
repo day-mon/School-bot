@@ -33,7 +33,7 @@ public class Professor implements Serializable {
     }
 
     public Professor(GuildImpl guild, String firstName, String lastName, String email, School professorsSchool) {
-        this.email = email + professorsSchool.getEmailSuffix();
+        this.email = email;
         this.emailPrefix = email;
         this.guild = guild;
         this.firstName = firstName;

@@ -83,13 +83,14 @@ public class AddClass extends Command {
                 String classID = args[1];
                 String classNum = args[2];
                 String time = args[3];
+                String textChannel = channel.getName();
 
                 /**
                  * Making the classroom object to add to hashmaps
                  */
 
                 Classroom classToAdd = new Classroom(guild, className, classID, classNum, time, credits, profForClass,
-                        schoolToAdd);
+                        schoolToAdd, textChannel);
 
                 /**
                  * Adding to HashMaps

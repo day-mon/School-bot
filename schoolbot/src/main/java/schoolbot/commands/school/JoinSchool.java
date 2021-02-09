@@ -10,6 +10,7 @@ import schoolbot.Ryan;
 import schoolbot.commands.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
+import schoolbot.natives.StudentImpl;
 import schoolbot.natives.util.FileOperations;
 import schoolbot.natives.util.MessageOperations;
 
@@ -41,9 +42,11 @@ public class JoinSchool extends Command {
                 // Grabs the school if it exist
                 School school = Ryan.schools.get(schoolreference);
 
+
+
                 if (Ryan.students.containsKey(userTyping)) {
                     // Grabs student if they already exist
-                    Student student = Ryan.students.get(userTyping);
+                    StudentImpl student = Ryan.students.get(userTyping);
 
                     if (student.getSchool() == null) {
 
@@ -66,7 +69,8 @@ public class JoinSchool extends Command {
                     }
                 } else {
                     // Declaring
-                    Student studentToAdd = new Student(userTyping);
+                    StudentImpl studentToAdd = new StudentImpl(userTyping);
+                    
 
                     // Setting and adding student
                     studentToAdd.setSchool(school);

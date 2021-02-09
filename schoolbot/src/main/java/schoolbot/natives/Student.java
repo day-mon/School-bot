@@ -14,7 +14,7 @@ import schoolbot.natives.util.Majors;
  * 
  * @author Elsklivet#8867
  */
-public class Student implements Serializable {
+public class Student {
     /**
      *
      */

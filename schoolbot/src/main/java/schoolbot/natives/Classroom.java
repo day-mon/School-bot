@@ -15,6 +15,7 @@ public class Classroom implements Serializable {
     private String classID;
     private String classNum;
     private String className;
+    private String textChannel;
     private String time;
     private String year;
     private String subject;
@@ -30,7 +31,7 @@ public class Classroom implements Serializable {
     }
 
     public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, int credits,
-            Professor professor, School school) {
+            Professor professor, School school, String textChannel) {
         this.guild = guild;
         this.classID = classID;
         this.time = time;
@@ -41,6 +42,7 @@ public class Classroom implements Serializable {
         this.credits = credits;
         classList = new HashMap<>();
         assignments = new HashMap<>();
+        this.textChannel = textChannel;
         professor.addClass(this);
     }
 

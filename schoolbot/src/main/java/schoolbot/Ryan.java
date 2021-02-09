@@ -49,12 +49,12 @@ import schoolbot.commands.school.RemoveAssignment;
 import schoolbot.commands.school.RemoveClass;
 import schoolbot.commands.school.RemoveProfessor;
 import schoolbot.commands.school.RemoveSchool;
-import schoolbot.commands.Stop;
 import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
+import schoolbot.natives.StudentImpl;
 import schoolbot.natives.util.FileOperations;
 import schoolbot.natives.util.RyanCoolThread;
 import schoolbot.natives.util.RyanThread;
@@ -69,7 +69,7 @@ public class Ryan extends ListenerAdapter {
 	private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
 	public static ArrayList<String> schoolCalls = new ArrayList<String>();
 	public static HashMap<String, School> schools = new HashMap<String, School>();
-	public static HashMap<User, Student> students = new HashMap<>();
+	//public static HashMap<User, StudentImpl> students = new HashMap<>();
 	public static HashMap<String, Professor> professors = new HashMap<>();
 	public static HashMap<String, Classroom> classes = new HashMap<>();
 
@@ -117,9 +117,6 @@ public class Ryan extends ListenerAdapter {
 					case "professors":
 						professors = (HashMap<String, Professor>) ois.readObject();
 						break;
-					case "students":
-						students = (HashMap<User, Student>) ois.readObject();
-						break;
 					case "classes":
 						classes = (HashMap<String, Classroom>) ois.readObject();
 						break;
@@ -154,7 +151,7 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "listprofessors", "listprofs" }, new ListProfessors());
 		commands.put(new String[] { "editclass", "classedit" }, new EditClass());
 		commands.put(new String[] { "classes", "listclasses" }, new ListClasses());
-		commands.put(new String[] { "joinschool", "schooljoin" }, new JoinSchool());
+		// commands.put(new String[] { "joinschool", "schooljoin" }, new JoinSchool());
 		commands.put(new String[] { "removeclass", "classremove" }, new RemoveClass());
 		commands.put(new String[] { "removeschool", "schoolremove", "rschool" }, new RemoveSchool());
 		commands.put(new String[] { "removeprofessor", "profremove", "profrem" }, new RemoveProfessor());
@@ -162,8 +159,8 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "addassignment" }, new AddAssignment());
 		commands.put(new String[] { "purge", "clear" }, new Clear());
 		commands.put(new String[] { "editassignmnet", "assignmentedit"}, new EditAssignment());
-		commands.put(new String[] { "removeassignment", "assignmentremove" }, new RemoveAssignment());
-		commands.put(new String[] { "stop" }, new Stop());
+		commands.put(new String[] {"removeassignment", "assignmentremove"}, new RemoveAssignment());
+		// args[0] should be the token
 		// We only need 2 intents in this bot. We only respond to messages in guilds and
 		// private channels.
 		// All other events will be disabled.
