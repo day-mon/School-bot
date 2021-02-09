@@ -44,7 +44,7 @@ public class RemoveClass extends Command {
         }
 
         if (args.length < 1) {
-
+            MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast one arg!", msg, this);
         } else {
             if (Ryan.schools.containsKey(args[0])) {
                 String schoolReefrence = args[0];

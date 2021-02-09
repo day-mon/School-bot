@@ -126,9 +126,10 @@ public class Assignment implements Serializable {
 
     @Override
     public String toString() {
-        return "Assignment [assigmentType=" + assigmentType + ", assignedProfessor=" + assignedProfessor
-                + ", assignmentName=" + assignmentName + ", assignmentRef=" + assignmentRef + ", clazz=" + clazz
-                + ", dueDate=" + dueDate + ", pointsAmount=" + pointsAmount + "]";
+        return  "Assignment Name: " + assignmentName + "\n" +
+                "Assignment Type: " + assigmentType + "\n" +
+                "Assignment Point Amount: " + pointsAmount + "\n" +
+                "Due Date: " + dueDate + "\n";
     }
 
 }

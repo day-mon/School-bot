@@ -1,5 +1,5 @@
 RemoveAssignment
 ++removeassignment, ++assignmentremove
-PLACEHOLDER for FLAGS
-The `RemoveAssignment` command
-PLACEHOLDER FOR EXAMPLE
+`class id`, `assignment name`
+The `RemoveAssignment` command will remove an assignment give the name and class id.
+`++removeassignment 14562  "Exam 1"`
