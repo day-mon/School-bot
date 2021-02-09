@@ -51,10 +51,10 @@ public class RyanThread implements Runnable {
                                     if (chosenInterval == 0 || flags.get(a)[chosenIndex] == 1) {
                                         continue;
                                     }
-                                    Ryan.jda.getTextChannelsByName("bot-test-grounds",
+                                    Ryan.jda.getTextChannelsByName(c.getTextChannel(),
                                             true).get(
                                                     0)
-                                            .sendMessage(a.getAssignmentName() + " is due in "
+                                            .sendMessage("@here " + a.getAssignmentName() + " is due in "
                                                     + (chosenInterval == 0.5 ? "30 minutes!"
                                                             : intervals[chosenIndex] + " hours!"))
                                             .queue();

@@ -51,7 +51,7 @@ public class RyanCoolThread implements Runnable {
                     if (chosenInterval == 0 || flags.get(c)[chosenIndex] == 1) {
                         continue;
                     }
-                    String chan = "bot-test-grounds";
+                    String chan = c.getTextChannel();
                     switch (classType) {
                         case "mwf":
                             if (day == 1 || day == 3 || day == 5) {
@@ -115,12 +115,12 @@ public class RyanCoolThread implements Runnable {
 
     public void msg(String chan, Classroom c, int interval) {
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
-                .sendMessage(c.getClassName() + " starts in " + interval + " minutes!").queue();
+                .sendMessage("@here " + c.getClassName() + " starts in " + interval + " minutes!").queue();
     }
 
     public void msg(String chan, Classroom c, long interval) {
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
-                .sendMessage(c.getClassName() + " starts in " + interval + " minutes!").queue();
+                .sendMessage("@here " + c.getClassName() + " starts in " + interval + " minutes!").queue();
     }
 
     public boolean withinRange(long a, long min, long max) {
