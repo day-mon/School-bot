@@ -71,7 +71,9 @@ public class RemoveProfessor extends Command {
 
                     Ryan.professors.remove(professorsEmailSuffix);
                     profsSchool.removeProfessor(prof);
+                    Ryan.schools.get(profsSchool.getSchoolreference()).removeProfessor(prof);
                     FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
+                    FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
                     channel.sendMessage(":white_check_mark: Professor is sucesfully deleted! :white_check_mark:")
                             .queue();
                 } else {
@@ -80,7 +82,7 @@ public class RemoveProfessor extends Command {
                 }
             } else {
                 MessageOperations.invalidUsageShortner("https://google.com",
-                        "There is no professor with that last name", event.getMessage(), this);
+                        "There is no professor with that email", event.getMessage(), this);
             }
         }
 

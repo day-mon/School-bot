@@ -48,16 +48,18 @@ public class RemoveClass extends Command {
         } else {
             if (Ryan.schools.containsKey(args[0])) {
                 String schoolReefrence = args[0];
-                String classID = args[1];
+                String classNumber = args[1];
 
                 School schoolToRemoveClassFrom = Ryan.schools.get(schoolReefrence);
-                if (schoolToRemoveClassFrom.getListOfClasses().containsKey(classID)) {
-                    Classroom classToRemove = schoolToRemoveClassFrom.getListOfClasses().get(classID);
+                if (schoolToRemoveClassFrom.getListOfClasses().containsKey(classNumber)) {
+                    Classroom classToRemove = schoolToRemoveClassFrom.getListOfClasses().get(classNumber);
                    // int classSize = classToRemove.getClassList().size();
                     Professor classProfessor = classToRemove.getProfessor();
                     //if (classSize <= 0) {
-                        Ryan.classes.remove(classID);
+                        Ryan.classes.remove(classNumber);
                         classProfessor.removeClass(classToRemove);
+                        classProfessor.getProfessorsClasses().remove(classNumber);
+                        Ryan.schools.get(schoolReefrence).removeClazz(classToRemove);
 
 
                         FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
@@ -71,6 +73,8 @@ public class RemoveClass extends Command {
                    //     MessageOperations.invalidUsageShortner("https://google.com",
                     //            "This class still has students in it!", event.getMessage(), this);
                    // }
+                } else {
+                    MessageOperations.invalidUsageShortner("https://google.com", "That class does not exist", msg, this);
                 }
             } else {
                 MessageOperations.invalidUsageShortner("https://google.com", "That school doesnt exist!",

@@ -27,7 +27,7 @@ public class RemoveSchool extends Command {
 
         Member userTyping = event.getMember();
 
-        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR) && 2+amountOfArgs==9999999) {
+        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
             MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg, this);
             return;
         }
@@ -40,15 +40,15 @@ public class RemoveSchool extends Command {
             return;
         } else {
             School school = Ryan.schools.get(args[0]);
-            if (school.getListOfProfessors().size() >= 0) {
+            if (school.getListOfProfessors().size() > 0) {
                 MessageOperations.invalidUsageShortner("https://google.com",
                         "There are still **professors** at this school", msg, this);
                 return;
-            } else if (school.getListOfClasses().size() >= 0) {
+            } else if (school.getListOfClasses().size() > 0) {
                 MessageOperations.invalidUsageShortner("https://google.com",
                         "There are still **classes** at this school", msg, this);
                 return;
-            } else if (school.getListOfStudents().size() >= 0) {
+            } else if (school.getListOfStudents().size() > 0) {
                 MessageOperations.invalidUsageShortner("https://google.com",
                         "There are still **professors** at this school", msg, this);
                 return;
@@ -62,6 +62,7 @@ public class RemoveSchool extends Command {
             Ryan.schoolCalls.remove(schoolreference);
             FileOperations.writeToFile(FileOperations.schoolsCalls, Ryan.schoolCalls);
             FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
+            FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
             channel.sendMessage(":white_check_mark: School removed :white_check_mark:").queue();
 
         }

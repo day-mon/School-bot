@@ -1,6 +1,7 @@
 package schoolbot.commands.school;
 
 import java.io.File;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
 import net.dv8tion.jda.api.Permission;
@@ -64,9 +65,12 @@ public class AddClass extends Command {
             // Stores credits in variable
             int credits = 0;
 
+
+            String professorReference = args[5];
+
             // Checking if professor is a valid professor
-            if (Ryan.professors.containsKey(args[5])) {
-                Professor profForClass = Ryan.professors.get(args[5]);
+            if (Ryan.professors.containsKey(professorReference)) {
+                Professor profForClass = Ryan.professors.get(professorReference);
 
                 // Checks again if its a numeric and then parses the string to an int
                 if (numeric) {
@@ -84,6 +88,10 @@ public class AddClass extends Command {
                 String classNum = args[2];
                 String time = args[3];
                 String textChannel = channel.getName();
+                String [] channelParsed = textChannel.split("\\-");
+
+
+  
 
                 /**
                  * Making the classroom object to add to hashmaps
@@ -95,16 +103,35 @@ public class AddClass extends Command {
                 /**
                  * Adding to HashMaps
                  */
+
+      
+          
+                for (Role roles : Ryan.jda.getRoles()) {
+                    String [] roleSplit = roles.getName().split("\s");
+                    if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
+                        classToAdd.setRole(roles);
+                        break;
+                    }
+                }
+
                 Ryan.classes.put(classNum, classToAdd);
                 schoolToAdd.addClazz(classToAdd);
+                profForClass.addClass(classToAdd);
+                Ryan.schools.get(schoolToAdd.getSchoolreference()).addClazz(classToAdd);
+                Ryan.professors.get(professorReference).addClass(classToAdd);
+
+
 
                 /**
                  * File writing
                  */
                 FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
                 FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
+                FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
 
-                channel.sendMessage(":white_check_mark: Class added sucesfully :white_check_mark:" + creditsCheck)
+                String roleAssigned = classToAdd.getRole() == null ? "None!" : classToAdd.getRole().getAsMention();
+
+                channel.sendMessage(":white_check_mark: Class added sucesfully \n Role assigned: " + roleAssigned + "\n Text channel assigned: #" + classToAdd.getTextChannel() + ":white_check_mark:" + creditsCheck)
                         .queue();
 
             } else {

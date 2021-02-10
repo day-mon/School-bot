@@ -17,6 +17,7 @@ public class School implements Serializable {
     private static final long serialVersionUID = 7699216426153116210L;
     private String schoolName;
     private Role serverRole;
+    private String schoolreference;
     private String emailSuffix;
     private transient GuildImpl guild;
     private HashMap<String, Classroom> listOfClasses;
@@ -35,10 +36,11 @@ public class School implements Serializable {
 
     }
 
-    public School(GuildImpl guild, String schoolName, String emailSuffix) {
+    public School(GuildImpl guild, String schoolName, String emailSuffix, String schoolreference) {
         this.schoolName = schoolName;
         this.guild = guild;
         this.emailSuffix = emailSuffix;
+        this.schoolreference = schoolreference;
         listOfClasses = new HashMap<>();
         listOfProfessors = new HashMap<>();
         listOfStudents = new HashMap<>();
@@ -79,6 +81,10 @@ public class School implements Serializable {
         return emailSuffix;
     }
 
+    public String getSchoolreference() {
+        return schoolreference;
+    }
+
     public GuildImpl getGuild() {
         return guild;
     }
@@ -93,6 +99,10 @@ public class School implements Serializable {
         }
 
         return avg;
+    }
+
+    public void setSchoolreference(String schoolreference) {
+        this.schoolreference = schoolreference;
     }
 
     /**

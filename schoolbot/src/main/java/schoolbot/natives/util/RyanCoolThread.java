@@ -115,27 +115,30 @@ public class RyanCoolThread implements Runnable {
     }
 
     public void msg(String chan, Classroom c, int interval) {
-        String [] channelParsed = c.toString().split("-");
+        String [] channelParsed = c.toString().split("\\-");
         if (c.getRole() == null) {
             for (Role roles : Ryan.jda.getRoles()) {
-                if (roles.toString() == channelParsed[channelParsed.length-1]) {
+                String [] roleSplit = roles.getName().split("\s");
+                if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
                     c.setRole(roles);
+                    break;
                 }
             }
         }
 
-
-
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
-                .sendMessage((c.getRole() == null ? "@here " : "@"+c.getRole().getAsMention()) + c.getClassName() + " starts in " + interval + " minutes!").queue();
+                .sendMessage((c.getRole() == null ? "@here " : c.getRole().getAsMention()) + " " + c.getClassName() + " starts in " + interval + " minutes!").queue();
+        
     }
 
     public void msg(String chan, Classroom c, long interval) {
-        String [] channelParsed = c.toString().split("-");
+        String [] channelParsed = c.toString().split("\\-");
         if (c.getRole() == null) {
-            for (Role roles : Ryan.jda.getRoles()) {
-                if (roles.toString() == channelParsed[channelParsed.length-1]) {
+            for (Role roles : c.getGuild().getRoles()) {
+                String [] roleSplit = roles.getName().split("\s");
+                if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
                     c.setRole(roles);
+                    break;
                 }
             }
         }
@@ -143,7 +146,7 @@ public class RyanCoolThread implements Runnable {
 
 
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
-                .sendMessage((c.getRole() == null ? "@here " : "@"+c.getRole().getAsMention()) + c.getClassName() + " starts in " + interval + " minutes!").queue();
+                .sendMessage((c.getRole() == null ? "@here " : c.getRole().getAsMention()) + " " +  c.getClassName() + " starts in " + interval + " minutes!").queue();
     }
     public boolean withinRange(long a, long min, long max) {
         return (a <= max && a >= min);

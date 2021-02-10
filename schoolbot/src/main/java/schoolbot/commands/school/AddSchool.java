@@ -44,7 +44,7 @@ public class AddSchool extends Command {
             valid = false;
         }
 
-        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR) && 2 + amountOfArgs == 9999999) {
+        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
             MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", msg,
                     this);
             return;
@@ -63,9 +63,13 @@ public class AddSchool extends Command {
             String fullSchoolName = args[0];
             String emailSuffix = args[1];
             String schoolreference = args[2];
+            boolean allLetters = schoolreference.chars().allMatch(Character::isLetter);
 
+            if (!allLetters) {
+                    MessageOperations.invalidUsageShortner("https://google.com", "You cannot add non-letters as a school reference", msg, this);
+        }
             Ryan.schoolCalls.add(schoolreference);
-            Ryan.schools.putIfAbsent(schoolreference, new School(guild, fullSchoolName, emailSuffix));
+            Ryan.schools.putIfAbsent(schoolreference, new School(guild, fullSchoolName, emailSuffix, schoolreference));
 
             FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
             FileOperations.writeToFile(FileOperations.schoolsCalls, Ryan.schoolCalls);

@@ -69,7 +69,7 @@ public class Classroom implements Serializable {
     }
 
     public Role getRole() {
-        return role;
+        return this.role;
     }
 
     public int getCredits() {

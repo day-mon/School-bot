@@ -201,8 +201,8 @@ public class Professor implements Serializable {
     public String toString() {
         return lastName + "'s Current University Employer: " + getProfessorsSchool().getSchoolName() + "\n" + lastName
                 + "'s Last Name: " + getLastName() + "\n" + lastName + "'s First Name: " + getFirstName() + "\n"
-                + lastName + "'s Email: " + getEmail() + "\n" + lastName + "'s Office Hours: " + getOfficeHours() + "\n"
-                + "-------------------------------------------------------------\n";
+                + lastName + "'s Email: " + getEmail() + "\n" + lastName + "'s Office Hours: " + getOfficeHours() + "\n " + "Amount of classes: " + professorsClasses.size() + "\n" +
+                "-------------------------------------------------------------\n";
     }
 
 }

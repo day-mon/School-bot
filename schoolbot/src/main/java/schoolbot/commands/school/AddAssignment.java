@@ -87,7 +87,7 @@ public class AddAssignment extends Command {
                 FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
                 channel.sendMessage(":white_check_mark: Assignment added :white_check_mark:").queue();
                 long timeDue = (date.getTime() / 1000) - (System.currentTimeMillis() / 1000);
-                channel.sendMessage(assignmentName + " is due in " + StringOperations.formatTime(timeDue)).queue();
+                channel.sendMessage(classToAddAnAssignmentTo.getRole() == null ? "" : classToAddAnAssignmentTo.getRole().getAsMention() + " " + assignmentName + " is due in " + StringOperations.formatTime(timeDue)).queue();
 
             } else {
                 MessageOperations.invalidUsageShortner("https://google.com", "Class doesnt exist", event.getMessage(),

@@ -6,7 +6,10 @@ import java.util.concurrent.TimeUnit;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import schoolbot.Ryan;
+import schoolbot.natives.Classroom;
 import schoolbot.natives.util.MessageOperations;
 
 public class Clear extends Command {
@@ -50,6 +53,8 @@ public class Clear extends Command {
 
         MessageChannel channel = event.getChannel();
 
+
+
         boolean numeric = args[0].matches("-?\\d+(\\.\\d+)?");
         if (numeric) {
             int messagesToRemove = Integer.parseInt(args[0]);
@@ -75,7 +80,7 @@ public class Clear extends Command {
             //
             channel.sendMessage("Commencing the purge").queue(response -> {
                 response.editMessage("Purge completed!")
-                        .queue(purgeMessage -> purgeMessage.delete().queueAfter(10, TimeUnit.SECONDS));
+                         .queue(purgeMessage -> purgeMessage.delete().queueAfter(10, TimeUnit.SECONDS));
                 return;
             });
 
