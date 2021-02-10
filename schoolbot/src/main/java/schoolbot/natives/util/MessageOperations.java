@@ -1,7 +1,11 @@
 package schoolbot.natives.util;
 
+import java.awt.Color;
+
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.MessageEmbed.Field;
 import schoolbot.commands.Command;
 
 public class MessageOperations {
@@ -26,5 +30,15 @@ public class MessageOperations {
     public static void invalidUsageShortner(String link, String usageIssue, Message msg, Command com) {
         msg.getChannel().sendTyping();
         msg.getChannel().sendMessage(new InvalidUsage(link, usageIssue, msg, com).getInvalidUsage()).queue();
+    }
+
+    public static void embedAsMessage(String title, Field field,  String footer, Message msg) {
+       EmbedBuilder embedBuilder = new EmbedBuilder();
+       embedBuilder.setColor(Color.BLACK);
+       embedBuilder.setTitle(title);
+       embedBuilder.addField(field);
+       embedBuilder.setFooter(footer);
+       msg.getChannel().sendMessage(embedBuilder.build()).queue();;
+
     }
 }

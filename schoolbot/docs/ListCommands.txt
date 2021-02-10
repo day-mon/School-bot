@@ -1,0 +1,5 @@
+ListCommands
+++listcommands, ++commands, ++coms, ++listcoms
+PLACEHOLDER for FLAGS
+The `ListCommands` command
+PLACEHOLDER FOR EXAMPLE

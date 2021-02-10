@@ -30,6 +30,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import schoolbot.commands.Clear;
 import schoolbot.commands.Command;
 import schoolbot.commands.Help;
+import schoolbot.commands.ListCommands;
 import schoolbot.commands.Ping;
 import schoolbot.commands.Wolfram;
 import schoolbot.commands.school.AddAssignment;
@@ -167,6 +168,7 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "removeassignment", "assignmentremove" }, new RemoveAssignment());
 		commands.put(new String[] { "linearalgebra", "la" }, new LinearAlgebra());
 		commands.put(new String[] { "listassignments", "assignments" }, new ListAssignments());
+		commands.put(new String[] {"listcommands", "commands", "coms", "listcoms"}, new ListCommands());
 		// args[0] should be the token
 		// We only need 2 intents in this bot. We only respond to messages in guilds and
 		// private channels.

@@ -3,6 +3,7 @@ package schoolbot.natives;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 
 public class Classroom implements Serializable {
@@ -15,6 +16,7 @@ public class Classroom implements Serializable {
     private String classID;
     private String classNum;
     private String className;
+    private transient Role role;
     private String textChannel;
     private String time;
     private String year;
@@ -66,6 +68,10 @@ public class Classroom implements Serializable {
         return classList;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
     public int getCredits() {
         return credits;
     }
@@ -105,6 +111,10 @@ public class Classroom implements Serializable {
 
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public void setProfessor(Professor professor) {

@@ -33,7 +33,7 @@ public class RyanThread implements Runnable {
                                 if (!a.isExpired()) {
                                     long timeDue = (a.getDueDate().getTime() / 1000) - now();
                                     if (timeDue <= 0) {
-                                        Ryan.jda.getTextChannelsByName("bot-test-grounds", true).get(0)
+                                        Ryan.jda.getTextChannelsByName(c.getTextChannel(), true).get(0)
                                                 .sendMessage(a.getAssignmentName() + " just expired");
                                         a.setExpired(true);
                                         continue;

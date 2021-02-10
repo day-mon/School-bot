@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+import net.dv8tion.jda.api.entities.Role;
 import schoolbot.Ryan;
 import schoolbot.natives.Classroom;
 
@@ -114,15 +115,36 @@ public class RyanCoolThread implements Runnable {
     }
 
     public void msg(String chan, Classroom c, int interval) {
+        String [] channelParsed = c.toString().split("-");
+        if (c.getRole() == null) {
+            for (Role roles : Ryan.jda.getRoles()) {
+                if (roles.toString() == channelParsed[channelParsed.length-1]) {
+                    c.setRole(roles);
+                }
+            }
+        }
+
+
+
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
-                .sendMessage("@here " + c.getClassName() + " starts in " + interval + " minutes!").queue();
+                .sendMessage((c.getRole() == null ? "@here " : "@"+c.getRole().getAsMention()) + c.getClassName() + " starts in " + interval + " minutes!").queue();
     }
 
     public void msg(String chan, Classroom c, long interval) {
-        Ryan.jda.getTextChannelsByName(chan, true).get(0)
-                .sendMessage("@here " + c.getClassName() + " starts in " + interval + " minutes!").queue();
-    }
+        String [] channelParsed = c.toString().split("-");
+        if (c.getRole() == null) {
+            for (Role roles : Ryan.jda.getRoles()) {
+                if (roles.toString() == channelParsed[channelParsed.length-1]) {
+                    c.setRole(roles);
+                }
+            }
+        }
 
+
+
+        Ryan.jda.getTextChannelsByName(chan, true).get(0)
+                .sendMessage((c.getRole() == null ? "@here " : "@"+c.getRole().getAsMention()) + c.getClassName() + " starts in " + interval + " minutes!").queue();
+    }
     public boolean withinRange(long a, long min, long max) {
         return (a <= max && a >= min);
     }
