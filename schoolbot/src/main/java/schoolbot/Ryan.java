@@ -40,6 +40,7 @@ import schoolbot.commands.school.AddSchool;
 import schoolbot.commands.school.AddStudent;
 import schoolbot.commands.school.EditAssignment;
 import schoolbot.commands.school.EditClass;
+import schoolbot.commands.school.EditProfessor;
 import schoolbot.commands.school.EditSelf;
 import schoolbot.commands.school.JoinSchool;
 import schoolbot.commands.school.LinearAlgebra;
@@ -159,6 +160,7 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "classes", "listclasses" }, new ListClasses());
 		// commands.put(new String[] { "joinschool", "schooljoin" }, new JoinSchool());
 		commands.put(new String[] { "removeclass", "classremove" }, new RemoveClass());
+		commands.put(new String[] { "editprofessor", "profedit"}, new EditProfessor());
 		commands.put(new String[] { "removeschool", "schoolremove", "rschool" }, new RemoveSchool());
 		commands.put(new String[] { "removeprofessor", "profremove", "profrem" }, new RemoveProfessor());
 		commands.put(new String[] { "editself", "selfedit" }, new EditSelf());
@@ -168,7 +170,9 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "removeassignment", "assignmentremove" }, new RemoveAssignment());
 		commands.put(new String[] { "linearalgebra", "la" }, new LinearAlgebra());
 		commands.put(new String[] { "listassignments", "assignments" }, new ListAssignments());
-		commands.put(new String[] {"listcommands", "commands", "coms", "listcoms"}, new ListCommands());
+		commands.put(new String[] { "listcommands", "commands", "coms", "listcoms" }, new ListCommands());
+		commands.put(new String[] { " ",  }, value)
+
 		// args[0] should be the token
 		// We only need 2 intents in this bot. We only respond to messages in guilds and
 		// private channels.
