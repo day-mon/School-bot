@@ -1,0 +1,5 @@
+EditProfessor
+++editprofessor, ++profedit
+PLACEHOLDER for FLAGS
+The `EditProfessor` command
+PLACEHOLDER FOR EXAMPLE

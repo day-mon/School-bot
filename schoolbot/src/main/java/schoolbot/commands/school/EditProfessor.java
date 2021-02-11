@@ -99,8 +99,14 @@ public class EditProfessor extends Command {
                     }
                     FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
                     FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
+                } else {
+                    MessageOperations.invalidUsageShortner("https://google.com", "Professor doesnt goto this school", msg, com);
                 }
+            } else {
+                MessageOperations.invalidUsageShortner("https://google.com", "School doesnt exist!", msg, com);
             }
+        } else {
+            MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 3 args", msg, com);
         } 
     }
     
