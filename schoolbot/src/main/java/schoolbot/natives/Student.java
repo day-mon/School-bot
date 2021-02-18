@@ -14,6 +14,7 @@ import schoolbot.natives.util.Majors;
  * 
  * @author Elsklivet#8867
  */
+@Deprecated
 public class Student {
     /**
      *

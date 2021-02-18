@@ -1,5 +1,5 @@
 EditClass
 ++editclass, ++classedit
-`attribute you are making edit to`, `change`
+`class number, `attribute you are making edit to (classid, time, name, credits, professor, channel, role, school)`, `change`
 The `EditClass` command is used to edit attributes about yourself.
-PLACEHOLDER
+`++editclass 220937 time "MTWF @ 12pm"

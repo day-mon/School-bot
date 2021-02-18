@@ -1,4 +1,4 @@
-package schoolbot.natives.util;
+package schoolbot.natives.util.operations;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -4,12 +4,15 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.Student;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class JoinClass extends Command {
+
+    @Deprecated
 
     public JoinClass() {
         super(new String[] { "jClass", "joinclass", "classjoin" });
@@ -17,7 +20,7 @@ public class JoinClass extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        //
+        MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 1 arguments!", event.getMessage(), this);
 
     }
 

@@ -1,4 +1,4 @@
-package schoolbot.natives.util;
+package schoolbot.natives.util.operations;
 
 public class MatrixOps {//kk thtas lit
 // im am going to run it watch

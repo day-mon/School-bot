@@ -2,14 +2,12 @@ package schoolbot.commands;
 
 import java.util.Date;
 
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed.Field;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.natives.util.MessageOperations;
+import schoolbot.natives.util.Command;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class ListCommands extends Command {
     
@@ -34,7 +32,7 @@ public class ListCommands extends Command {
 
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
-        // TODO Auto-generated method stub
+        MessageOperations.invalidUsageShortner("https://google.com", "This command takes in no arguments!", event.getMessage(), this);
 
     }
 

@@ -2,9 +2,9 @@ package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.util.Majors;
-import schoolbot.natives.util.StringOperations;
+import schoolbot.natives.util.operations.StringOperations;
 
 public class ListMajors extends Command {
 

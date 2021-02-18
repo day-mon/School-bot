@@ -6,7 +6,7 @@ import java.util.Date;
 
 import schoolbot.natives.util.AssignmentType;
 
-public class Assignment implements Serializable {
+public class Assignment implements Serializable, Comparable<Assignment> {
 
     /**
      *
@@ -132,4 +132,14 @@ public class Assignment implements Serializable {
                 "Due Date: " + dueDate + "\n";
     }
 
-}
+
+    @Override
+	public int compareTo(Assignment o) {
+		if (this.dueDate == o.dueDate) {
+            return 0;
+            } else if (this.dueDate.before(o.dueDate)) {
+                return -1;
+            }
+            return 1;
+        }
+	}

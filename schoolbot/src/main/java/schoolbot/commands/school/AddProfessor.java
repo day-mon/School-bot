@@ -6,11 +6,11 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
-import schoolbot.natives.util.FileOperations;
-import schoolbot.natives.util.MessageOperations;
+import schoolbot.natives.util.operations.FileOperations;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class AddProfessor extends Command {
 

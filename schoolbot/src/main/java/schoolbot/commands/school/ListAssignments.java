@@ -1,13 +1,16 @@
 package schoolbot.commands.school;
 
+import java.util.Arrays;
+
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.natives.util.MessageOperations;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.operations.MessageOperations;
+import schoolbot.natives.util.operations.StringOperations;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.School;
@@ -31,13 +34,43 @@ public class ListAssignments extends Command {
                 }
                 StringBuilder assignmentsStringBuilder = new StringBuilder("```Assignments for " + clazz.getClassName() + " (" + clazz.getClassNum() + ")" + ": \n") ;
                 for (Assignment assignments : clazz.getAssignments().values()) {
-                    assignmentsStringBuilder.append(assignments + "\n");
+                    if (!assignments.isExpired()) {
+                        assignmentsStringBuilder.append(assignments + "\n");
+                    }
 
                     if (assignmentsStringBuilder.length() >= 1750) 
                         MessageOperations.messageExtender(assignmentsStringBuilder, channel);
                 }
-                int pendingAssignments = clazz.getAssignments().size();
-                assignmentsStringBuilder.append("You have " +pendingAssignments + " pending " + (pendingAssignments > 0 ? "assignments!":"assignment!"));
+
+                int pendingAssignments = 0;
+                for (Assignment assignment : clazz.getAssignments().values()) {
+                    if (!assignment.isExpired()) {
+                        pendingAssignments += 1;
+                    }
+                }
+                
+                assignmentsStringBuilder.append("You have " + pendingAssignments + " pending " + (pendingAssignments >= 0 ? "assignments!":"assignment!") + "\n");
+                
+                
+                Assignment[] assignmentsArray = new Assignment[pendingAssignments];
+                assignmentsArray =  clazz.getAssignments().values().toArray(assignmentsArray);
+                Arrays.sort(assignmentsArray);
+                Assignment closestAssignmentDue = assignmentsArray[0];
+                int postion = 0;
+                while (assignmentsArray[postion].isExpired() && postion < assignmentsArray.length-1) {
+                    postion++;
+                }
+
+                closestAssignmentDue = assignmentsArray[postion];
+
+                long dueDate =  (closestAssignmentDue.getDueDate().getTime() / 1000) - (System.currentTimeMillis() / 1000);
+
+
+
+                assignmentsStringBuilder.append("Your closest assignment is: " + (closestAssignmentDue.isExpired() ? "Nothing" :   closestAssignmentDue.getAssignmentName()) + "\nIt is due in: " + (closestAssignmentDue.isExpired() ?  "N/A" : StringOperations.formatTime(dueDate)));
+
+                
+                
                 assignmentsStringBuilder.append("```");
                 channel.sendMessage(assignmentsStringBuilder).queue();
                 return;
@@ -53,6 +86,7 @@ public class ListAssignments extends Command {
         // For Invalid usage
         Message msg = event.getMessage();
         Command com = this;
+
 
         Member userTyping = event.getMember();
         boolean adminCheck = userTyping.hasPermission(Permission.ADMINISTRATOR);
@@ -76,13 +110,39 @@ public class ListAssignments extends Command {
                         }
                         StringBuilder assignmentsStringBuilder = new StringBuilder("```Assignments for " + clazz.getClassName() + " (" + clazz.getClassNum() + ")" + ": \n") ;
                         for (Assignment assignments : clazz.getAssignments().values()) {
-                            assignmentsStringBuilder.append(assignments + "\n");
+                            if (!assignments.isExpired()) {
+                                assignmentsStringBuilder.append(assignments + "\n");
+                            }
 
                             if (assignmentsStringBuilder.length() >= 1750) 
                                 MessageOperations.messageExtender(assignmentsStringBuilder, channel);
                         }
-                        int pendingAssignments = clazz.getAssignments().size();
-                        assignmentsStringBuilder.append("You have " +pendingAssignments + " pending " + (pendingAssignments > 0 ? "assignments!":"assignment!"));
+                        int pendingAssignments = 0;
+                        for (Assignment assignment : clazz.getAssignments().values()) {
+                            if (!assignment.isExpired()) {
+                                pendingAssignments += 1;
+                            }
+                        }
+                        assignmentsStringBuilder.append("You have " + pendingAssignments + " pending " + (pendingAssignments >= 0 ? "assignments!":"assignment!") + "\n");
+                        
+                        Assignment[] assignmentsArray = new Assignment[pendingAssignments];
+                        assignmentsArray = clazz.getAssignments().values().toArray(assignmentsArray);
+                        Arrays.sort(assignmentsArray);
+                        int postion = 0;
+                        Assignment closestAssignmentDue = assignmentsArray[0];
+
+                        while (assignmentsArray[postion].isExpired() && postion < assignmentsArray.length-1) {
+                            postion++;
+                        }
+
+                        closestAssignmentDue = assignmentsArray[postion];
+
+                        long dueDate =  (closestAssignmentDue.getDueDate().getTime() / 1000) - (System.currentTimeMillis() / 1000);
+
+
+                        assignmentsStringBuilder.append("Your closest assignment is: " + (closestAssignmentDue.isExpired() ? "Nothing" :   closestAssignmentDue.getAssignmentName()) + "\nIt is due in: " + (closestAssignmentDue.isExpired() ?  "N/A" : 
+                        StringOperations.formatTime(dueDate)));
+                        
                         assignmentsStringBuilder.append("```");
                         channel.sendMessage(assignmentsStringBuilder).queue();
                     } else {
@@ -100,3 +160,4 @@ public class ListAssignments extends Command {
     }
 
 }
+

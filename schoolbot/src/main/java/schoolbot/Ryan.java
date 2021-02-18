@@ -6,14 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.Date;
-import java.lang.Thread;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import javax.security.auth.login.LoginException;
 
@@ -23,12 +20,10 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import schoolbot.commands.Clear;
-import schoolbot.commands.Command;
 import schoolbot.commands.Help;
 import schoolbot.commands.ListCommands;
 import schoolbot.commands.Ping;
@@ -41,8 +36,8 @@ import schoolbot.commands.school.AddStudent;
 import schoolbot.commands.school.EditAssignment;
 import schoolbot.commands.school.EditClass;
 import schoolbot.commands.school.EditProfessor;
+import schoolbot.commands.school.EditSchool;
 import schoolbot.commands.school.EditSelf;
-import schoolbot.commands.school.JoinSchool;
 import schoolbot.commands.school.LinearAlgebra;
 import schoolbot.commands.school.ListAssignments;
 import schoolbot.commands.school.ListClasses;
@@ -53,16 +48,15 @@ import schoolbot.commands.school.RemoveAssignment;
 import schoolbot.commands.school.RemoveClass;
 import schoolbot.commands.school.RemoveProfessor;
 import schoolbot.commands.school.RemoveSchool;
-import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
-import schoolbot.natives.Student;
-import schoolbot.natives.StudentImpl;
-import schoolbot.natives.util.FileOperations;
-import schoolbot.natives.util.RyanCoolThread;
-import schoolbot.natives.util.RyanThread;
-import schoolbot.natives.util.StringOperations;
+import schoolbot.natives.util.Command;
+import schoolbot.natives.util.Event;
+import schoolbot.natives.util.operations.FileOperations;
+import schoolbot.natives.util.threading.RyanCoolThread;
+import schoolbot.natives.util.threading.RyanThread;
+import schoolbot.natives.util.operations.StringOperations;
 
 public class Ryan extends ListenerAdapter {
 
@@ -70,10 +64,10 @@ public class Ryan extends ListenerAdapter {
 	/**
 	 * HashMpas
 	 */
-	private static HashMap<String[], Command> commands; // we'll do the init for this later on line 64
+	private static HashMap<String[], Command> commands; 
+	private static HashMap<String[], Event> events;
 	public static ArrayList<String> schoolCalls = new ArrayList<String>();
 	public static HashMap<String, School> schools = new HashMap<String, School>();
-	// public static HashMap<User, StudentImpl> students = new HashMap<>();
 	public static HashMap<String, Professor> professors = new HashMap<>();
 	public static HashMap<String, Classroom> classes = new HashMap<>();
 
@@ -87,7 +81,9 @@ public class Ryan extends ListenerAdapter {
 	public static TextChannel tc;
 	public static HashMap<Classroom, TextChannel> alert = new HashMap<Classroom, TextChannel>();
 	public static JDA jda;
+	private static int GUNGACOUNT;
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args)
 			throws LoginException, ClassNotFoundException, InterruptedException, IOException {
 
@@ -113,7 +109,7 @@ public class Ryan extends ListenerAdapter {
 
 				switch (fileName) {
 					case "schools":
-						schools = (HashMap<String, School>) ois.readObject();
+					schools = (HashMap<String, School>) ois.readObject();
 						break;
 					case "schoolCalls":
 						schoolCalls = (ArrayList<String>) ois.readObject();
@@ -123,6 +119,9 @@ public class Ryan extends ListenerAdapter {
 						break;
 					case "classes":
 						classes = (HashMap<String, Classroom>) ois.readObject();
+						break;
+					case "gunga":
+						GUNGACOUNT = (Integer) ois.readObject();
 						break;
 					default:
 						System.out.println(fileName + ".ser could not be loaded.");
@@ -158,7 +157,6 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "listprofessors", "listprofs" }, new ListProfessors());
 		commands.put(new String[] { "editclass", "classedit" }, new EditClass());
 		commands.put(new String[] { "classes", "listclasses" }, new ListClasses());
-		// commands.put(new String[] { "joinschool", "schooljoin" }, new JoinSchool());
 		commands.put(new String[] { "removeclass", "classremove" }, new RemoveClass());
 		commands.put(new String[] { "editprofessor", "profedit"}, new EditProfessor());
 		commands.put(new String[] { "removeschool", "schoolremove", "rschool" }, new RemoveSchool());
@@ -166,12 +164,12 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "editself", "selfedit" }, new EditSelf());
 		commands.put(new String[] { "addassignment" }, new AddAssignment());
 		commands.put(new String[] { "purge", "clear" }, new Clear());
-		commands.put(new String[] { "editassignmnet", "assignmentedit" }, new EditAssignment());
+		commands.put(new String[] { "editassignment", "assignmentedit" }, new EditAssignment());
 		commands.put(new String[] { "removeassignment", "assignmentremove" }, new RemoveAssignment());
 		commands.put(new String[] { "linearalgebra", "la" }, new LinearAlgebra());
 		commands.put(new String[] { "listassignments", "assignments" }, new ListAssignments());
 		commands.put(new String[] { "listcommands", "commands", "coms", "listcoms" }, new ListCommands());
-		commands.put(new String[] { " ",  }, value)
+		commands.put(new String [] {"editschool", "schooledit", "schoole"}, new EditSchool());
 
 		// args[0] should be the token
 		// We only need 2 intents in this bot. We only respond to messages in guilds and
@@ -203,6 +201,18 @@ public class Ryan extends ListenerAdapter {
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
 		Message msg = event.getMessage();
+		
+
+		/**
+		 * Gunga
+		 */
+		if (msg.getContentRaw().toLowerCase().contains("gunga") && !msg.getAuthor().isBot() && msg.getChannel().getName().equals("gunga-farming")) {
+			GUNGACOUNT++;
+			event.getChannel().sendMessage("Gunga count: " + GUNGACOUNT).queue();
+			FileOperations.writeToFile(FileOperations.gunga, GUNGACOUNT);
+		}
+
+
 		if (!msg.getContentRaw().startsWith(PREFIX))
 			return;
 		String comCall = StringOperations.removePrefix(msg.getContentRaw());

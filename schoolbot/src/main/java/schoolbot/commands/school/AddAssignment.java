@@ -8,13 +8,13 @@ import java.util.Date;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
-import schoolbot.natives.util.FileOperations;
-import schoolbot.natives.util.MessageOperations;
-import schoolbot.natives.util.StringOperations;
+import schoolbot.natives.util.operations.FileOperations;
+import schoolbot.natives.util.operations.MessageOperations;
+import schoolbot.natives.util.operations.StringOperations;
 
 public class AddAssignment extends Command {
 
@@ -24,8 +24,7 @@ public class AddAssignment extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        // new invalid usage
-
+        MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 5 arguments!", event.getMessage(), this);
     }
 
     @Override
@@ -87,7 +86,8 @@ public class AddAssignment extends Command {
                 FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
                 channel.sendMessage(":white_check_mark: Assignment added :white_check_mark:").queue();
                 long timeDue = (date.getTime() / 1000) - (System.currentTimeMillis() / 1000);
-                channel.sendMessage(classToAddAnAssignmentTo.getRole() == null ? "" : classToAddAnAssignmentTo.getRole().getAsMention() + " " + assignmentName + " is due in " + StringOperations.formatTime(timeDue)).queue();
+                boolean roleCheck = classToAddAnAssignmentTo.getAssignments() == null;
+                channel.sendMessage(roleCheck ? "" : classToAddAnAssignmentTo.getRole().getAsMention() + " " + assignmentName + " is due in " + StringOperations.formatTime(timeDue)).queue();
 
             } else {
                 MessageOperations.invalidUsageShortner("https://google.com", "Class doesnt exist", event.getMessage(),

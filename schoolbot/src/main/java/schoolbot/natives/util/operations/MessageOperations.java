@@ -1,4 +1,4 @@
-package schoolbot.natives.util;
+package schoolbot.natives.util.operations;
 
 import java.awt.Color;
 
@@ -6,7 +6,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed.Field;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
+import schoolbot.natives.util.InvalidUsage;
 
 public class MessageOperations {
 

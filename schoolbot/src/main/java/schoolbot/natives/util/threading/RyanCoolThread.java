@@ -1,16 +1,18 @@
-package schoolbot.natives.util;
+package schoolbot.natives.util.threading;
 
-import java.io.Console;
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import net.dv8tion.jda.api.entities.Role;
 import schoolbot.Ryan;
 import schoolbot.natives.Classroom;
+import schoolbot.natives.util.operations.StringOperations;
 
 public class RyanCoolThread implements Runnable {
+
+    /**
+     * RyanCoolThread is the thread responsible for alerting students
+     */
 
     private boolean canRun = true;
     private long msWait = 5000;
@@ -19,7 +21,6 @@ public class RyanCoolThread implements Runnable {
     private HashMap<Classroom, int[]> flags = new HashMap<>();
 
     public RyanCoolThread() {
-        // idk
     }
 
     @Override
@@ -35,6 +36,7 @@ public class RyanCoolThread implements Runnable {
                     String classType = c.getTime().split(" ")[0].toLowerCase();
                     int chosenInterval = 0;
                     int chosenIndex = 0;
+                
                     long getTime = (StringOperations.formatClassTime(c.getTime()).getTime()) / 1000;
                     long _now = now();
                     long timeUntilClass = getTime - _now;
@@ -115,10 +117,10 @@ public class RyanCoolThread implements Runnable {
     }
 
     public void msg(String chan, Classroom c, int interval) {
-        String [] channelParsed = c.toString().split("\\-");
+        String [] channelParsed = c.getTextChannel().split("\\-");
         if (c.getRole() == null) {
             for (Role roles : Ryan.jda.getRoles()) {
-                String [] roleSplit = roles.getName().split("\s");
+                String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\s");
                 if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
                     c.setRole(roles);
                     break;
@@ -132,10 +134,10 @@ public class RyanCoolThread implements Runnable {
     }
 
     public void msg(String chan, Classroom c, long interval) {
-        String [] channelParsed = c.toString().split("\\-");
+        String [] channelParsed = c.getTextChannel().split("\\-");
         if (c.getRole() == null) {
-            for (Role roles : c.getGuild().getRoles()) {
-                String [] roleSplit = roles.getName().split("\s");
+            for (Role roles : Ryan.jda.getRoles()) {
+                String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\s");
                 if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
                     c.setRole(roles);
                     break;

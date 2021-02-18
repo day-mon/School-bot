@@ -1,4 +1,4 @@
-package schoolbot.natives.util;
+package schoolbot.natives.util.threading;
 
 import java.util.HashMap;
 
@@ -34,7 +34,7 @@ public class RyanThread implements Runnable {
                                     long timeDue = (a.getDueDate().getTime() / 1000) - now();
                                     if (timeDue <= 0) {
                                         Ryan.jda.getTextChannelsByName(c.getTextChannel(), true).get(0)
-                                                .sendMessage(c.getRole()==null ? c.getRole().getAsMention() : "" + " " + a.getAssignmentName() + " just expired");
+                                                .sendMessage(c.getRole()==null ?  "@here" : c.getRole().getAsMention() + " " + a.getAssignmentName() + " just expired");
                                         a.setExpired(true);
                                         continue;
                                     }
@@ -54,7 +54,7 @@ public class RyanThread implements Runnable {
                                     Ryan.jda.getTextChannelsByName(c.getTextChannel(),
                                             true).get(
                                                     0)
-                                            .sendMessage(c.getRole()==null ? c.getRole().getAsMention() : " "  + " " + a.getAssignmentName() + " is due in "
+                                            .sendMessage( "@here " + a.getAssignmentName() + " is due in "
                                                     + (chosenInterval == 0.5 ? "30 minutes!"
                                                             : intervals[chosenIndex] + " hours!"))
                                             .queue();

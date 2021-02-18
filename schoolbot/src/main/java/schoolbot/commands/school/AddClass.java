@@ -1,22 +1,15 @@
 package schoolbot.commands.school;
 
-import java.io.File;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
-import schoolbot.natives.util.FileOperations;
-import schoolbot.natives.util.InvalidUsage;
-import schoolbot.natives.util.MessageOperations;
+import schoolbot.natives.util.Command;
+import schoolbot.natives.util.operations.FileOperations;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class AddClass extends Command {
 
@@ -89,6 +82,7 @@ public class AddClass extends Command {
                 String time = args[3];
                 String textChannel = channel.getName();
                 String [] channelParsed = textChannel.split("\\-");
+                long
 
 
   
@@ -105,14 +99,14 @@ public class AddClass extends Command {
                  */
 
       
-          
+                /*
                 for (Role roles : Ryan.jda.getRoles()) {
-                    String [] roleSplit = roles.getName().split("\s");
+                    String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\s");
                     if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
                         classToAdd.setRole(roles);
                         break;
                     }
-                }
+                }*/
 
                 Ryan.classes.put(classNum, classToAdd);
                 schoolToAdd.addClazz(classToAdd);

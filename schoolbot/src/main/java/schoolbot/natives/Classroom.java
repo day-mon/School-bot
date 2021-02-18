@@ -3,6 +3,8 @@ package schoolbot.natives;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import javax.management.relation.RoleList;
+
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 
@@ -16,8 +18,9 @@ public class Classroom implements Serializable {
     private String classID;
     private String classNum;
     private String className;
-    private transient Role role;
+    private transient Role role = null;
     private String textChannel;
+    private long textChannelID;
     private String time;
     private String year;
     private String subject;
@@ -33,7 +36,7 @@ public class Classroom implements Serializable {
     }
 
     public Classroom(GuildImpl guild, String className, String classID, String classNum, String time, int credits,
-            Professor professor, School school, String textChannel) {
+            Professor professor, School school, String textChannel, long textChannelID) {
         this.guild = guild;
         this.classID = classID;
         this.time = time;
@@ -41,6 +44,7 @@ public class Classroom implements Serializable {
         this.className = className;
         this.professor = professor;
         this.classNum = classNum;
+        this.textChannelID = textChannelID;
         this.credits = credits;
         classList = new HashMap<>();
         assignments = new HashMap<>();
@@ -273,12 +277,15 @@ public class Classroom implements Serializable {
 
     @Override
     public String toString() {
-        return "Class Name: " + className + "\n" + "ClassID: " + classID + "\n" + "Class size: " + classList.size()
-                + "\n" + "ClassNum: " + classNum + "\n" + "Credits: " + credits + "\n" + "Professor: "
-                + professor.getLastName() + ", " + professor.getFirstName() + "\n" + "Time: " + time + "\n"
+        return "Class Name: " + className + "\n" 
+                + "ClassID: " + classID + "\n" 
+                + "Class size: " + classList.size() + "\n" 
+                + "ClassNum: " + classNum + "\n" 
+                + "Credits: " + credits + "\n" 
+                + "Professor: "+ professor.getLastName() + ", " + professor.getFirstName() + "\n" 
+                + "Time: " + time + "\n"
                 + "======================";
 
     }
-
 
 }

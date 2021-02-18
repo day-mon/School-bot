@@ -1,16 +1,14 @@
-package schoolbot.commands;
+package schoolbot.natives.util;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.natives.util.FileOperations;
+import schoolbot.natives.util.operations.FileOperations;
+import schoolbot.natives.util.operations.StringOperations;
 
 /**
  * Command interface for all commands to implement.
@@ -111,7 +109,7 @@ public abstract class Command {
      * @see schoolbot.natives.util.StringOperations#parseDoc(String)
      */
     public void initDocumentation(String relativePath) {
-        this.documentation = schoolbot.natives.util.StringOperations.parseDoc(relativePath);
+        this.documentation = StringOperations.parseDoc(relativePath);
     }
 
     /**
@@ -129,7 +127,7 @@ public abstract class Command {
         String className = this.getClass().getName();
         String name = className.substring(className.lastIndexOf(".") + 1);
         String relativePath = "schoolbot\\docs\\" + name + ".txt";
-        this.documentation = schoolbot.natives.util.StringOperations.parseDoc(relativePath);
+        this.documentation = StringOperations.parseDoc(relativePath);
     }
 
     /**

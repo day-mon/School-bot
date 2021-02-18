@@ -1,0 +1,5 @@
+EditSchool
+++editschool, ++schooledit, ++schoole
+`school reference`, `class number`, `attribute to edit (name, email)`
+'The `EditSchool` command will edit a schools attributes to your liking
+`++schooledit pitt 220937 name Pitt"

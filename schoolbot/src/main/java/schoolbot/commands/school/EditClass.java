@@ -1,15 +1,17 @@
 package schoolbot.commands.school;
 
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
-import schoolbot.natives.util.MessageOperations;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class EditClass extends Command {
 
@@ -19,52 +21,50 @@ public class EditClass extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        // TODO Auto-generated method stub
-
+        MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 3 arguments!", event.getMessage(), this);
     }
 
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
-        MessageChannel channel = event.getChannel();
+       MessageChannel channel = event.getChannel();
         Message msg = event.getMessage();
 
         /**
          * First check if the school and the class even exist;
          */
 
-        if (Ryan.classes.containsKey(args[0]) && Ryan.classes.get(args[0]).getSchool() == Ryan.schools.get(args[1])
-                && Ryan.schools.get(args[1]).getGuild() == event.getGuild()) {
+        if (Ryan.classes.containsKey(args[0])) {
             Classroom classToEdit = Ryan.classes.get(args[0]);
 
-            switch (args[2]) {
+            switch (args[1]) {
                 case "classid":
 
-                    classToEdit.setClassID(args[3]);
-                    channel.sendMessage("Class ID sucessfully changed to: " + args[3]).queue();
+                    classToEdit.setClassID(args[2]);
+                    channel.sendMessage("Class ID sucessfully changed to: " + args[2]).queue();
                     break;
                 case "time":
-                    classToEdit.setTime(args[3]);
-                    channel.sendMessage("Time sucessfully changed to: " + args[3]).queue();
+                    classToEdit.setTime(args[2]);
+                    channel.sendMessage("Time sucessfully changed to: " + args[2]).queue();
                     break;
                 case "name":
-                    classToEdit.setClassName(args[3]);
-                    channel.sendMessage("Class name sucessfully changed to: " + args[3]).queue();
+                    classToEdit.setClassName(args[2]);
+                    channel.sendMessage("Class name sucessfully changed to: " + args[2]).queue();
                     break;
                 case "credits":
-                    boolean numeric = args[3].matches("-?\\d+(\\.\\d+)?");
+                    boolean numeric = args[2].matches("-?\\d+(\\.\\d+)?");
 
                     if (numeric) {
-                        int credits = Integer.parseInt(args[3]);
+                        int credits = Integer.parseInt(args[2]);
                         Ryan.classes.get(args[0]).setCredits(credits);
-                        channel.sendMessage("Credits sucessfully changed to: " + args[3]).queue();
+                        channel.sendMessage("Credits sucessfully changed to: " + args[2]).queue();
                     } else {
                         // invalid usage
                     }
                     break;
                 case "professor":
 
-                    if (Ryan.professors.containsKey(args[3])) {
-                        Professor prof = Ryan.professors.get(args[3]);
+                    if (Ryan.professors.containsKey(args[2])) {
+                        Professor prof = Ryan.professors.get(args[2]);
                         classToEdit.setProfessor(prof);
                         channel.sendMessage(
                                 "Credits sucessfully changed to: " + prof.getLastName() + ", " + prof.getFirstName())
@@ -75,7 +75,7 @@ public class EditClass extends Command {
                     }
                     break;
                 case "channel":
-                    String textChannel = args[3];
+                    String textChannel = args[2];
                     for (TextChannel channels : Ryan.jda.getTextChannels()) {
                         if (channels.toString() == textChannel) {
                             classToEdit.setTextChannel(channels.getName());
@@ -85,6 +85,18 @@ public class EditClass extends Command {
                     }
                     MessageOperations.invalidUsageShortner("https://google.com", "That is not a valid text channel in this server!", msg, this);
                     break;
+                case "role":
+                String roleToAdd = args[2];
+                roleToAdd = roleToAdd.replaceAll("\\D+","");
+                for (Role role : Ryan.jda.getRoles()) {
+                    if (roleToAdd.equals(role.getId())) {
+                        classToEdit.setRole(role);
+                        channel.sendMessage("Role found... Setting role!").queue();
+                        return;
+                    }
+                }
+                channel.sendMessage("Role not found!").queue();;
+                break;    
                 case "school":
                     if (Ryan.schools.containsKey(args[0])) {
                         School school = Ryan.schools.get(args[0]);
@@ -105,9 +117,14 @@ public class EditClass extends Command {
                 switch(size) {
                     case 1:
                         // 1 interval
+
+                        /**
+                         * pitt --> 42;
+                         * arr[hasOf(key)] = Univers;
+                         */
                         boolean num = args[3].matches("-?\\d+(\\.\\d+)?");
                         if (num) {
-                            int [] interval_1 = {Integer.parseInt(args[3])};
+                            int [] interval_1 = {Integer.parseInt(args[2])};
                             classToEdit.setIntervals(interval_1);
                             channel.sendMessage("Sucessfully updated intervals!");
                         } else {
@@ -143,6 +160,7 @@ public class EditClass extends Command {
                             channel.sendMessage("Sucessfully updated intervals!");
                         }
                         break;
+                        
                 }
 
                 default:

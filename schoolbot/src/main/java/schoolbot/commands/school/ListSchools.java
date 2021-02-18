@@ -3,7 +3,8 @@ package schoolbot.commands.school;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class ListSchools extends Command {
 
@@ -30,6 +31,7 @@ public class ListSchools extends Command {
 
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
+        MessageOperations.invalidUsageShortner("https://google.com", "This command takes in no arguments", event.getMessage(), this);
 
     }
 

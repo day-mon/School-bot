@@ -1,11 +1,6 @@
 package schoolbot.natives.util;
 
 import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +16,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed.ImageInfo;
 import net.dv8tion.jda.api.entities.MessageEmbed.Provider;
 import net.dv8tion.jda.api.entities.MessageEmbed.Thumbnail;
 import net.dv8tion.jda.api.entities.MessageEmbed.VideoInfo;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.operations.FileOperations;
 
 public class InvalidUsage {
 

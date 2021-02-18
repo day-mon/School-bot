@@ -1,27 +1,31 @@
 package schoolbot.commands.school;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
-import schoolbot.natives.util.FileOperations;
-import schoolbot.natives.util.MessageOperations;
-import schoolbot.natives.util.StringOperations;
+import schoolbot.natives.util.operations.FileOperations;
+import schoolbot.natives.util.operations.MessageOperations;
+import schoolbot.natives.util.operations.StringOperations;
 
 public class EditAssignment extends Command {
 
     public EditAssignment() {
-        super(new String[] { "editassignmnet", "assignmentedit"});
+        super(new String[] { "editassignment", "assignmentedit"});
     }
 
     @Override
     public void run(MessageReceivedEvent event) {
-
-
+        MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 2 arguments!", event.getMessage(), this);
     }
 
     @Override
@@ -86,6 +90,22 @@ public class EditAssignment extends Command {
                                 MessageOperations.invalidUsageShortner("https://google.com", args[3] + " is not a numeric value!", event.getMessage(), this);
                             }
                             break;
+                        case "date":
+                            Date date;
+                            SimpleDateFormat formatter = new SimpleDateFormat("M/dd/yyyy hh:mm");
+
+                            try {
+                                date = formatter.parse(args[3]);
+                                assignmentToEdit.setDueDate(date);
+                                if (date.before(new Date())) assignmentToEdit.setExpired(false);
+                                channel.sendMessage(assignmentToEdit.getAssignmentName() + " due date successfully changed to: " + date).queue();;
+                            } catch (ParseException e) {
+                                MessageOperations.invalidUsageShortner("https://google.com",
+                                        "Could not parse date! Use this format next time (M/dd/yy hh:m)", event.getMessage(), this);
+                                return;
+                            }
+                        break;
+                            
                         default:
                             MessageOperations.invalidUsageShortner("https://google.com", attributeToEdit + " is not a valid entry!", event.getMessage(), this);
                     }

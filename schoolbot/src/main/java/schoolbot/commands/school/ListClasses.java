@@ -3,10 +3,10 @@ package schoolbot.commands.school;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.School;
-import schoolbot.natives.util.MessageOperations;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class ListClasses extends Command {
 
@@ -20,7 +20,7 @@ public class ListClasses extends Command {
 
     @Override
     public void run(MessageReceivedEvent event) {
-        System.out.println("School doesnt exit");
+        MessageOperations.invalidUsageShortner("https://google.com", "This command takes in atleast 1 argument!", event.getMessage(), this);
 
     }
 

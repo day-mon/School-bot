@@ -1,22 +1,20 @@
 package schoolbot.commands.school;
 
-import java.io.File;
-
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
-import schoolbot.commands.StudentImpl;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
-import schoolbot.natives.util.FileOperations;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.util.Majors;
-import schoolbot.natives.util.MessageOperations;
+import schoolbot.natives.util.operations.FileOperations;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class AddStudent extends Command {
 
+    @Deprecated
+    
     public AddStudent() {
         super(new String[] { "addstudent" });
     }
@@ -58,7 +56,7 @@ public class AddStudent extends Command {
                     }
                 }
 
-                StudentImpl studentToAdd = new StudentImpl(studentToAddUsr, school, num, new Majors[] { major },
+                Student studentToAdd = new Student(studentToAddUsr, school, num, new Majors[] { major },
                         args[0]);
                 school.addStudent(studentToAdd);
 

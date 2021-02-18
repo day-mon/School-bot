@@ -1,17 +1,13 @@
 package schoolbot.commands;
 
-import java.util.concurrent.TimeUnit;
-
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
-import schoolbot.natives.util.MessageOperations;
-import schoolbot.natives.util.StringOperations;
+import schoolbot.natives.util.Command;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class Stop extends Command {
 

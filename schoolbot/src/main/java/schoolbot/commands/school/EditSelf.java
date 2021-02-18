@@ -4,13 +4,14 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.commands.Command;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.School;
 import schoolbot.natives.Student;
-import schoolbot.natives.util.MessageOperations;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class EditSelf extends Command {
 
+    @Deprecated
     public EditSelf() {
         super(new String[] { "editself", "selfedit" });
 

@@ -1,16 +1,13 @@
 package schoolbot.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.Ryan;
-import schoolbot.natives.Classroom;
-import schoolbot.natives.util.MessageOperations;
+import schoolbot.natives.util.Command;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class Clear extends Command {
 
