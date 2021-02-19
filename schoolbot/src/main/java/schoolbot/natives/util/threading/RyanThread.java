@@ -57,13 +57,7 @@ public class RyanThread implements Runnable {
                                     }
                                     MessageOperations.roleCheck(c);
 
-                                    Ryan.jda.getTextChannelsByName(c.getTextChannel(),
-                                            true).get(
-                                                    0)
-                                            .sendMessage( "@here " + a.getAssignmentName() + " is due in "
-                                                    + (chosenInterval == 0.5 ? "30 minutes!"
-                                                            : intervals[chosenIndex] + " hours!"))
-                                            .queue();
+                                    Ryan.jda.getTextChannelsByName(c.getTextChannel(),true).get(0).sendMessage(c.getRole()==null ?  "@here" : c.getRole().getAsMention() + " " + a.getAssignmentName() + " is due in " + (chosenInterval == 0.5 ? "30 minutes!": intervals[chosenIndex] + " hours!")).queue();
                                     int[] _temp = flags.get(a);
                                     _temp[chosenIndex] = 1;
                                     flags.put(a, _temp);
