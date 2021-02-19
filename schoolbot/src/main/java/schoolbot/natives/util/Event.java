@@ -13,7 +13,7 @@ public abstract class Event {
             this.triggers[i] = triggers[i];
         this.name = this.getClass().getSimpleName();
     }
-
+ 
     public abstract void run(MessageReceivedEvent event);
 
     public String[] getTriggers() {

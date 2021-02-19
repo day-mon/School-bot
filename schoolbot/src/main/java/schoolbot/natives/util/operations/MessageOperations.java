@@ -5,7 +5,10 @@ import java.awt.Color;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.MessageEmbed.Field;
+import schoolbot.Ryan;
+import schoolbot.natives.Classroom;
 import schoolbot.natives.util.Command;
 import schoolbot.natives.util.InvalidUsage;
 
@@ -15,7 +18,7 @@ public class MessageOperations {
         s.append("```");
         channel.sendMessage(s).queue();
         s.setLength(0);
-        s.append("````"); // should there be four ticks here?
+        s.append("```"); // should there be four ticks here?
     }
 
     /**
@@ -41,5 +44,19 @@ public class MessageOperations {
        embedBuilder.setFooter(footer);
        msg.getChannel().sendMessage(embedBuilder.build()).queue();;
 
+    }
+
+    public static boolean roleCheck (Classroom c) {
+        String [] channelParsed = c.getTextChannel().split("\\-");
+        if (c.getRole() == null) {
+            for (Role roles : Ryan.jda.getRoles()) {
+                String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\s");
+                if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
+                    c.setRole(roles);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

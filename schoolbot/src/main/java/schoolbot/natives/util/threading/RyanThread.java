@@ -2,9 +2,11 @@ package schoolbot.natives.util.threading;
 
 import java.util.HashMap;
 
+import net.dv8tion.jda.api.entities.Role;
 import schoolbot.Ryan;
 import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
+import schoolbot.natives.util.operations.MessageOperations;
 
 public class RyanThread implements Runnable {
 
@@ -33,6 +35,8 @@ public class RyanThread implements Runnable {
                                 if (!a.isExpired()) {
                                     long timeDue = (a.getDueDate().getTime() / 1000) - now();
                                     if (timeDue <= 0) {
+                                        MessageOperations.roleCheck(c);
+                                
                                         Ryan.jda.getTextChannelsByName(c.getTextChannel(), true).get(0)
                                                 .sendMessage(c.getRole()==null ?  "@here" : c.getRole().getAsMention() + " " + a.getAssignmentName() + " just expired");
                                         a.setExpired(true);
@@ -51,6 +55,8 @@ public class RyanThread implements Runnable {
                                     if (chosenInterval == 0 || flags.get(a)[chosenIndex] == 1) {
                                         continue;
                                     }
+                                    MessageOperations.roleCheck(c);
+
                                     Ryan.jda.getTextChannelsByName(c.getTextChannel(),
                                             true).get(
                                                     0)

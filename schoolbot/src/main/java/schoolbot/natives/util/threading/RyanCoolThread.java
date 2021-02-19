@@ -6,6 +6,7 @@ import java.util.HashMap;
 import net.dv8tion.jda.api.entities.Role;
 import schoolbot.Ryan;
 import schoolbot.natives.Classroom;
+import schoolbot.natives.util.operations.MessageOperations;
 import schoolbot.natives.util.operations.StringOperations;
 
 public class RyanCoolThread implements Runnable {
@@ -16,7 +17,7 @@ public class RyanCoolThread implements Runnable {
 
     private boolean canRun = true;
     private long msWait = 5000;
-    private int[] intervals = new int[] { 30, 10, 5 }; // minutes
+    private int[] intervals = new int[] { 60, 30, 10, 5, 1 }; // minutes
 
     private HashMap<Classroom, int[]> flags = new HashMap<>();
 
@@ -30,7 +31,7 @@ public class RyanCoolThread implements Runnable {
                 Thread.sleep(msWait);
                 for (Classroom c : Ryan.classes.values()) {
                     if (!flags.containsKey(c)) {
-                        flags.put(c, new int[] { 0, 0, 0 });
+                        flags.put(c, new int[] { 0, 0, 0, 0, 0});
                     }
                     int day = Ryan.today.getDayOfWeek().getValue();
                     String classType = c.getTime().split(" ")[0].toLowerCase();
@@ -117,16 +118,7 @@ public class RyanCoolThread implements Runnable {
     }
 
     public void msg(String chan, Classroom c, int interval) {
-        String [] channelParsed = c.getTextChannel().split("\\-");
-        if (c.getRole() == null) {
-            for (Role roles : Ryan.jda.getRoles()) {
-                String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\s");
-                if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
-                    c.setRole(roles);
-                    break;
-                }
-            }
-        }
+        MessageOperations.roleCheck(c);
 
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
                 .sendMessage((c.getRole() == null ? "@here " : c.getRole().getAsMention()) + " " + c.getClassName() + " starts in " + interval + " minutes!").queue();
@@ -134,18 +126,7 @@ public class RyanCoolThread implements Runnable {
     }
 
     public void msg(String chan, Classroom c, long interval) {
-        String [] channelParsed = c.getTextChannel().split("\\-");
-        if (c.getRole() == null) {
-            for (Role roles : Ryan.jda.getRoles()) {
-                String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\s");
-                if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
-                    c.setRole(roles);
-                    break;
-                }
-            }
-        }
-
-
+        MessageOperations.roleCheck(c);
 
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
                 .sendMessage((c.getRole() == null ? "@here " : c.getRole().getAsMention()) + " " +  c.getClassName() + " starts in " + interval + " minutes!").queue();

@@ -1,6 +1,9 @@
 package schoolbot.commands.school;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
@@ -26,6 +29,7 @@ public class ListAssignments extends Command {
         MessageChannel channel = event.getChannel();
         String textChannel = channel.getName();
 
+
         for (Classroom clazz : Ryan.classes.values()) {
             if (clazz.getTextChannel().equals(textChannel)) {
                 if (clazz.getAssignments().size() <= 0) {
@@ -33,7 +37,7 @@ public class ListAssignments extends Command {
                     return;
                 }
                 StringBuilder assignmentsStringBuilder = new StringBuilder("```Assignments for " + clazz.getClassName() + " (" + clazz.getClassNum() + ")" + ": \n") ;
-                for (Assignment assignments : clazz.getAssignments().values()) {
+                for (Assignment assignments : clazz.getAssignments().values().stream().sorted().collect(Collectors.toList())) {
                     if (!assignments.isExpired()) {
                         assignmentsStringBuilder.append(assignments + "\n");
                     }
