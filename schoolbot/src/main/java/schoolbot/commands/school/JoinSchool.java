@@ -7,10 +7,8 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.Ryan;
-import schoolbot.natives.util.Command;
 import schoolbot.natives.School;
-import schoolbot.natives.Student;
-import schoolbot.natives.StudentImpl;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.util.operations.FileOperations;
 import schoolbot.natives.util.operations.MessageOperations;
 
@@ -47,7 +45,7 @@ public class JoinSchool extends Command {
 
                 if (Ryan.students.containsKey(userTyping)) {
                     // Grabs student if they already exist
-                    StudentImpl student = Ryan.students.get(userTyping);
+                    Student student = Ryan.students.get(userTyping);
 
                     if (student.getSchool() == null) {
 

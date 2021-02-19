@@ -1,7 +1,5 @@
 package schoolbot.commands.school;
 
-import java.io.File;
-
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -42,7 +40,6 @@ public class RemoveProfessor extends Command {
        
         /**
          * Had to add relative path back because if I didnt it wouldnt work for some
-         * reason TODO: figure out why this doesnt work with a relative path!
          */
 
         /**

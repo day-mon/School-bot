@@ -2,7 +2,6 @@ package schoolbot.natives.util.threading;
 
 import java.util.HashMap;
 
-import net.dv8tion.jda.api.entities.Role;
 import schoolbot.Ryan;
 import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;

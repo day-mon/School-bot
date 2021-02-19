@@ -1,7 +1,5 @@
 package schoolbot.commands.school;
 
-import java.io.File;
-
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;

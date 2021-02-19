@@ -11,6 +11,7 @@ import schoolbot.natives.util.Command;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
+import schoolbot.natives.util.operations.FileOperations;
 import schoolbot.natives.util.operations.MessageOperations;
 
 public class EditClass extends Command {
@@ -75,27 +76,47 @@ public class EditClass extends Command {
                     }
                     break;
                 case "channel":
+                    boolean foundChannel = false;
                     String textChannel = args[2];
                     for (TextChannel channels : Ryan.jda.getTextChannels()) {
                         if (channels.toString() == textChannel) {
                             classToEdit.setTextChannel(channels.getName());
                             channel.sendMessage(textChannel + " successfully assigned to this class!").queue();
+                            foundChannel = true;
                             return;
                         }
                     }
-                    MessageOperations.invalidUsageShortner("https://google.com", "That is not a valid text channel in this server!", msg, this);
+                    if (!foundChannel) MessageOperations.invalidUsageShortner("https://google.com", "That is not a valid text channel in this server!", msg, this);
                     break;
+                case "channelID":
+                boolean foundID = false;
+                if (args[2].chars().allMatch(Character::isDigit)) {
+                    long id = Long.parseLong(args[2]);
+                for (TextChannel channels : Ryan.jda.getTextChannels()) {
+                    if (channels.getIdLong() == id) {
+                            classToEdit.setTextChannel(channel.getName());
+                            classToEdit.setTextChannelID(id);
+                            channel.sendMessage(id + " sucessfully assigned to this class!").queue();
+                            foundID = true;
+                            break;
+                       }
+                    }
+                }
+                if (!foundID) MessageOperations.invalidUsageShortner("https://google.com", "Channel id not found", event.getMessage(), this);
+                break;
                 case "role":
                 String roleToAdd = args[2];
+                boolean found = false;
                 roleToAdd = roleToAdd.replaceAll("\\D+","");
                 for (Role role : Ryan.jda.getRoles()) {
                     if (roleToAdd.equals(role.getId())) {
                         classToEdit.setRole(role);
                         channel.sendMessage("Role found... Setting role!").queue();
-                        return;
+                        found = true;
+                        break;
                     }
                 }
-                channel.sendMessage("Role not found!").queue();;
+               if(!found) channel.sendMessage("Role not found!").queue();
                 break;    
                 case "school":
                     if (Ryan.schools.containsKey(args[0])) {
@@ -166,6 +187,9 @@ public class EditClass extends Command {
                 default:
                     MessageOperations.invalidUsageShortner("https://google.com", args[2] + " is not a valid choice!",event.getMessage(), this);
             }
+            FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
+            FileOperations.writeToFile(FileOperations.classes, Ryan.classes);
+            FileOperations.writeToFile(FileOperations.professor, Ryan.professors);
         }
     }
 

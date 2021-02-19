@@ -2,15 +2,25 @@ package schoolbot.natives.util.operations;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
+
+import net.dv8tion.jda.api.entities.User;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 import schoolbot.Ryan;
+import schoolbot.natives.Classroom;
+import schoolbot.natives.Professor;
+import schoolbot.natives.School;
 import schoolbot.natives.util.Command;
 
 public class FileOperations {
@@ -64,7 +74,7 @@ public class FileOperations {
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
 
                 oos.writeObject(objToWrite);
-                System.out.println(objToWrite.getClass().getSimpleName() + " sucessfully written!");
+                System.out.println(objToWrite.getClass().getPackageName()+ " sucessfully written!");
 
                 if (i == dir.length - 1) {
                     fos.close();
@@ -102,7 +112,6 @@ public class FileOperations {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -148,6 +157,54 @@ public class FileOperations {
             }
 
         }
+    }
+
+	@SuppressWarnings("unchecked")
+    public static void loadFiles() {
+        try {
+            ArrayList<File> files = FileOperations.getAllFilesWithExt(new File("schoolbot\\src\\main\\files\\"), "ser");
+            int serFiles = 0;
+            try {
+                serFiles = files.size();
+            } catch (NullPointerException npex) {
+                System.out.println("No files exist and serializer input failed.");
+            }
+
+            for (int i = 0; i < serFiles; i++) {
+                FileInputStream fis = new FileInputStream(files.get(i).getAbsolutePath());
+                ObjectInputStream ois = new ObjectInputStream(fis);
+
+                String fileName = files.get(i).getName().split("\\.")[0];
+
+                switch (fileName) {
+                    case "schools":
+                        Ryan.schools = (HashMap<String, School>) ois.readObject();
+                        break;
+                    case "schoolCalls":
+                        Ryan.schoolCalls = (ArrayList<String>) ois.readObject();
+                        break;
+                    case "professors":
+                        Ryan.professors = (HashMap<String, Professor>) ois.readObject();
+                        break;
+                    case "classes":
+                        Ryan.classes = (HashMap<String, Classroom>) ois.readObject();
+						break;
+					case "gunga":
+						Ryan.GUNGACOUNT = (Integer) ois.readObject();
+						break;
+					default:
+						System.out.println(fileName + ".ser could not be loaded.");
+
+				}
+
+			}
+
+		} catch (IOException | ClassNotFoundException e) {
+        }
+        ;
+
+
+     
     }
 
 }

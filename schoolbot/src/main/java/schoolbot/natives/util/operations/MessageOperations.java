@@ -43,8 +43,23 @@ public class MessageOperations {
        embedBuilder.addField(field);
        embedBuilder.setFooter(footer);
        msg.getChannel().sendMessage(embedBuilder.build()).queue();;
-
     }
+
+    
+    public static void embedAsMessage(String title, String url,  Field[] fields,  String footer, Message msg) {
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+        embedBuilder.setColor(Color.GREEN);
+        embedBuilder.setTitle(title);
+
+        for (Field field : fields)
+            embedBuilder.addField(field);
+
+        embedBuilder.setFooter(footer);
+        embedBuilder.setAuthor("SchoolBot", "https://github.com/tykoooo/School-bot");
+        msg.getChannel().sendMessage(embedBuilder.build()).queue();;
+ 
+     }
+ 
 
     public static boolean roleCheck (Classroom c) {
         String [] channelParsed = c.getTextChannel().split("\\-");

@@ -184,6 +184,14 @@ public class Classroom implements Serializable {
         return false;
     }
 
+    public long getTextChannelID() {
+        return textChannelID;
+    }
+
+    public void setTextChannelID(long textChannelID) {
+        this.textChannelID = textChannelID;
+    }
+
     /**
      * @return String return the classNum
      */

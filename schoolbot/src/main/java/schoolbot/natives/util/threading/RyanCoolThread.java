@@ -3,7 +3,6 @@ package schoolbot.natives.util.threading;
 import java.text.ParseException;
 import java.util.HashMap;
 
-import net.dv8tion.jda.api.entities.Role;
 import schoolbot.Ryan;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.util.operations.MessageOperations;
@@ -120,16 +119,21 @@ public class RyanCoolThread implements Runnable {
     public void msg(String chan, Classroom c, int interval) {
         MessageOperations.roleCheck(c);
 
+        String toSendZoomLink = (interval == 1 ? interval + " minute! \n\t Zoom Link: " + Ryan.jda.getTextChannelById(c.getTextChannelID()).getTopic() : interval + " minutes");
+
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
-                .sendMessage((c.getRole() == null ? "@here " : c.getRole().getAsMention()) + " " + c.getClassName() + " starts in " + interval + " minutes!").queue();
+        .sendMessage((c.getRole() == null ? "@here " : c.getRole().getAsMention()) + " " +  c.getClassName() + " starts in " + toSendZoomLink).queue();
         
     }
 
     public void msg(String chan, Classroom c, long interval) {
-        MessageOperations.roleCheck(c);
+        MessageOperations.roleCheck(c); 
+
+        String toSendZoomLink = (interval == 1 ? interval + " minute! \n\t Zoom Link: " + Ryan.jda.getTextChannelById(c.getTextChannelID()).getTopic() : interval +  "minutes");
+
 
         Ryan.jda.getTextChannelsByName(chan, true).get(0)
-                .sendMessage((c.getRole() == null ? "@here " : c.getRole().getAsMention()) + " " +  c.getClassName() + " starts in " + interval + " minutes!").queue();
+                .sendMessage((c.getRole() == null ? "@here " : c.getRole().getAsMention()) + " " +  c.getClassName() + " starts in " + toSendZoomLink).queue();
     }
     public boolean withinRange(long a, long min, long max) {
         return (a <= max && a >= min);

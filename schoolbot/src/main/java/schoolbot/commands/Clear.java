@@ -46,7 +46,6 @@ public class Clear extends Command {
 
     @Override
     public void run(MessageReceivedEvent event, String[] args) {
-        // TODO Auto-generated method stub
 
         MessageChannel channel = event.getChannel();
 

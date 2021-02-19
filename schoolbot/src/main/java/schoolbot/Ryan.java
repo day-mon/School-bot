@@ -2,15 +2,15 @@ package schoolbot;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import javax.security.auth.login.LoginException;
 
@@ -20,6 +20,7 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -32,12 +33,10 @@ import schoolbot.commands.school.AddAssignment;
 import schoolbot.commands.school.AddClass;
 import schoolbot.commands.school.AddProfessor;
 import schoolbot.commands.school.AddSchool;
-import schoolbot.commands.school.AddStudent;
 import schoolbot.commands.school.EditAssignment;
 import schoolbot.commands.school.EditClass;
 import schoolbot.commands.school.EditProfessor;
 import schoolbot.commands.school.EditSchool;
-import schoolbot.commands.school.EditSelf;
 import schoolbot.commands.school.LinearAlgebra;
 import schoolbot.commands.school.ListAssignments;
 import schoolbot.commands.school.ListClasses;
@@ -54,9 +53,9 @@ import schoolbot.natives.School;
 import schoolbot.natives.util.Command;
 import schoolbot.natives.util.Event;
 import schoolbot.natives.util.operations.FileOperations;
+import schoolbot.natives.util.operations.StringOperations;
 import schoolbot.natives.util.threading.RyanCoolThread;
 import schoolbot.natives.util.threading.RyanThread;
-import schoolbot.natives.util.operations.StringOperations;
 
 public class Ryan extends ListenerAdapter {
 
@@ -70,6 +69,8 @@ public class Ryan extends ListenerAdapter {
 	public static HashMap<String, School> schools = new HashMap<String, School>();
 	public static HashMap<String, Professor> professors = new HashMap<>();
 	public static HashMap<String, Classroom> classes = new HashMap<>();
+	public static HashMap<User, Boolean> memify = new HashMap<>();
+
 
 	/**
 	 * Varibles for thread
@@ -80,59 +81,23 @@ public class Ryan extends ListenerAdapter {
 	public static LocalDateTime today = LocalDateTime.now();
 	public static TextChannel tc;
 	public static HashMap<Classroom, TextChannel> alert = new HashMap<Classroom, TextChannel>();
-	public static JDA jda;
-	private static int GUNGACOUNT;
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * Other
+	 */
+	public static JDA jda;
+	public static int GUNGACOUNT;
+	public static LinkedHashMap<User, Date> lastMessages = new LinkedHashMap<>();
+
 	public static void main(String[] args)
 			throws LoginException, ClassNotFoundException, InterruptedException, IOException {
 
-		// String username = System.getProperty("user.name");
 		String token = "N/A";
 
-		// Chousei.tasks(username);
+		
 
-		try {
-			ArrayList<File> files = FileOperations.getAllFilesWithExt(new File("schoolbot\\src\\main\\files\\"), "ser");
-			int serFiles = 0;
-			try {
-				serFiles = files.size();
-			} catch (NullPointerException npex) {
-				System.out.println("No files exist and serializer input failed.");
-			}
-
-			for (int i = 0; i < serFiles; i++) {
-				FileInputStream fis = new FileInputStream(files.get(i).getAbsolutePath());
-				ObjectInputStream ois = new ObjectInputStream(fis);
-
-				String fileName = files.get(i).getName().split("\\.")[0];
-
-				switch (fileName) {
-					case "schools":
-					schools = (HashMap<String, School>) ois.readObject();
-						break;
-					case "schoolCalls":
-						schoolCalls = (ArrayList<String>) ois.readObject();
-						break;
-					case "professors":
-						professors = (HashMap<String, Professor>) ois.readObject();
-						break;
-					case "classes":
-						classes = (HashMap<String, Classroom>) ois.readObject();
-						break;
-					case "gunga":
-						GUNGACOUNT = (Integer) ois.readObject();
-						break;
-					default:
-						System.out.println(fileName + ".ser could not be loaded.");
-
-				}
-
-			}
-
-		} catch (IOException e) {
-		}
-		;
+		FileOperations.loadFiles();
+	
 
 		try {
 			BufferedReader fr = new BufferedReader(new FileReader(new File("schoolbot\\src\\main\\files\\token.txt")));
@@ -149,7 +114,6 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "h", "help" }, new Help());
 		commands.put(new String[] { "wolf", "wolframe" }, new Wolfram());
 		commands.put(new String[] { "addschool", "as" }, new AddSchool());
-		commands.put(new String[] { "addstudent" }, new AddStudent());
 		commands.put(new String[] { "listmajors", "majors" }, new ListMajors());
 		commands.put(new String[] { "listschools", "schools" }, new ListSchools());
 		commands.put(new String[] { "addprofessor", "addprof", "profadd" }, new AddProfessor());
@@ -161,7 +125,6 @@ public class Ryan extends ListenerAdapter {
 		commands.put(new String[] { "editprofessor", "profedit"}, new EditProfessor());
 		commands.put(new String[] { "removeschool", "schoolremove", "rschool" }, new RemoveSchool());
 		commands.put(new String[] { "removeprofessor", "profremove", "profrem" }, new RemoveProfessor());
-		commands.put(new String[] { "editself", "selfedit" }, new EditSelf());
 		commands.put(new String[] { "addassignment" }, new AddAssignment());
 		commands.put(new String[] { "purge", "clear" }, new Clear());
 		commands.put(new String[] { "editassignment", "assignmentedit" }, new EditAssignment());
@@ -177,7 +140,7 @@ public class Ryan extends ListenerAdapter {
 		// All other events will be disabled.
 		jda = JDABuilder.createLight(token, EnumSet.allOf(GatewayIntent.class)) // <- "allOf(GI.class)" => The method
 				.addEventListeners(new Ryan()).setStatus(OnlineStatus.DO_NOT_DISTURB)
-				.setActivity(Activity.playing("with school textbooks")).build();
+				.setActivity(Activity.playing("type ++help for help!")).build();
 		jda.awaitReady();
 
 		RyanThread ryanThread = new RyanThread();
@@ -187,6 +150,7 @@ public class Ryan extends ListenerAdapter {
 		RyanCoolThread ryanCoolThread = new RyanCoolThread();
 		Thread classAlert = new Thread(ryanCoolThread);
 		classAlert.start();
+
 
 	}
 
@@ -201,8 +165,14 @@ public class Ryan extends ListenerAdapter {
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
 		Message msg = event.getMessage();
-		
+		User user = event.getAuthor();
 
+		/*
+		if (memify.get(user)) {
+			memify(msg);
+		}
+				
+		*/
 		/**
 		 * Gunga
 		 */
@@ -230,6 +200,8 @@ public class Ryan extends ListenerAdapter {
 			}
 		}
 	}
+
+
 
 	public static HashMap<String[], ? extends Command> getCommands() {
 		return commands;

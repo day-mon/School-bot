@@ -1,18 +1,14 @@
 package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
-import schoolbot.natives.util.Command;
 import schoolbot.natives.Assignment;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
-import schoolbot.natives.School;
-import schoolbot.natives.Student;
+import schoolbot.natives.util.Command;
 import schoolbot.natives.util.operations.FileOperations;
 import schoolbot.natives.util.operations.MessageOperations;
 

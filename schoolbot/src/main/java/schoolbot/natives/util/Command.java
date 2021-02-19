@@ -6,7 +6,6 @@ import java.util.function.Consumer;
 
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import schoolbot.Ryan;
 import schoolbot.natives.util.operations.FileOperations;
 import schoolbot.natives.util.operations.StringOperations;
 

@@ -1,6 +1,7 @@
 package schoolbot.commands.school;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.Ryan;
@@ -82,7 +83,7 @@ public class AddClass extends Command {
                 String time = args[3];
                 String textChannel = channel.getName();
                 String [] channelParsed = textChannel.split("\\-");
-                long
+                long channelID = channel.getIdLong();
 
 
   
@@ -92,21 +93,21 @@ public class AddClass extends Command {
                  */
 
                 Classroom classToAdd = new Classroom(guild, className, classID, classNum, time, credits, profForClass,
-                        schoolToAdd, textChannel);
+                        schoolToAdd, textChannel, channelID);
 
                 /**
                  * Adding to HashMaps
                  */
 
       
-                /*
+                
                 for (Role roles : Ryan.jda.getRoles()) {
                     String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\s");
                     if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
                         classToAdd.setRole(roles);
                         break;
                     }
-                }*/
+                }
 
                 Ryan.classes.put(classNum, classToAdd);
                 schoolToAdd.addClazz(classToAdd);

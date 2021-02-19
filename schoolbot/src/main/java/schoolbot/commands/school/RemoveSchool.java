@@ -23,8 +23,6 @@ public class RemoveSchool extends Command {
     public void run(MessageReceivedEvent event, String[] args) {
         MessageChannel channel = event.getChannel();
         Message msg = event.getMessage();
-        int amountOfArgs = args.length;
-
         Member userTyping = event.getMember();
 
         if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
