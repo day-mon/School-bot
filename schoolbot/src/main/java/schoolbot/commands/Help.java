@@ -1,5 +1,7 @@
 package schoolbot.commands;
 
+import java.util.HashMap;
+
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.Ryan;
@@ -25,20 +27,24 @@ public class Help extends Command {
         // MessageChannel channel = event.getChannel();
         // Send generic help, we'll deal with later.
         StringBuilder s = new StringBuilder();
+        
         for (Command coms : Ryan.getCommands().values()) {
             s.append("`" + coms.getName() + "`, ");
         }
         s.deleteCharAt(s.length()-2);
-        
-        long time = System.currentTimeMillis() - Ryan.startTime;
+
+        long now = (System.currentTimeMillis() / 1000);
+        long time = now - (Ryan.startTime / 1000);
+
         String uptime =  StringOperations.formatTime(time);
 
-        Field field0 = new Field("Uptime", "`" + uptime + "`", true);
-        Field field1 = new Field("Bot prefix", Ryan.PREFIX, true);
-        Field field2 = new Field("Commands", s.toString(), true);
-        Field fields [] = {field2, field1, field0};
+        Field field0 = new Field("Uptime", "`" + uptime + "`", false);
+        Field field1 = new Field("Bot prefix", Ryan.PREFIX, false);
+        Field field2 = new Field("Commands", s.toString(), false);
+        Field field3 = new Field("Github Repo", "https://github.com/tykoooo/School-bot", false);
+        Field fields [] = {field2, field1, field0, field3};
 
-        MessageOperations.embedAsMessage("Help", "https://google.com", fields, "Test", event.getMessage());
+        MessageOperations.embedAsMessage("Help", "https://github.com/tykoooo/School-bot", fields, "General help for schoolbot", event.getMessage());
     
     }
 

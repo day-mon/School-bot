@@ -30,6 +30,7 @@ public class FileOperations {
     public static final File students = new File("schoolbot\\src\\main\\files\\students.ser");
     public static final File schoolsCalls = new File("schoolbot\\src\\main\\files\\schoolCalls.ser");
     public static final File gunga = new File("schoolbot\\src\\main\\files\\gunga.ser");
+    public static final File gungaLeadeboard = new File("schoolbot\\src\\main\\files\\gungaleaderboard.ser");
 
     public static ArrayList<File> getAllFilesWithExt(File dir, String ext) {
         ArrayList<File> filesWithExt = new ArrayList<>();
@@ -190,8 +191,11 @@ public class FileOperations {
                         Ryan.classes = (HashMap<String, Classroom>) ois.readObject();
 						break;
 					case "gunga":
-						Ryan.GUNGACOUNT = (Integer) ois.readObject();
+						Ryan.GUNGA_COUNT = (Integer) ois.readObject();
 						break;
+                    case "gungaleaderboard":
+                        Ryan.gunga =  (HashMap<String, Integer>) ois.readObject();
+                        break;
 					default:
 						System.out.println(fileName + ".ser could not be loaded.");
 

@@ -289,6 +289,7 @@ public class Classroom implements Serializable {
                 + "ClassID: " + classID + "\n" 
                 + "Class size: " + classList.size() + "\n" 
                 + "ClassNum: " + classNum + "\n" 
+                + "Channel: " + textChannel + "\n"
                 + "Credits: " + credits + "\n" 
                 + "Professor: "+ professor.getLastName() + ", " + professor.getFirstName() + "\n" 
                 + "Time: " + time + "\n"

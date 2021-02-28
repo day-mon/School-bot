@@ -16,7 +16,8 @@ public class RyanCoolThread implements Runnable {
 
     private boolean canRun = true;
     private long msWait = 5000;
-    private int[] intervals = new int[] { 60, 30, 10, 5, 1 }; // minutes
+    private int[] intervals = new int[] { 30, 10, 1 }; // minutes
+    private int i = 0;
 
     private HashMap<Classroom, int[]> flags = new HashMap<>();
 
@@ -29,8 +30,9 @@ public class RyanCoolThread implements Runnable {
             do {
                 Thread.sleep(msWait);
                 for (Classroom c : Ryan.classes.values()) {
+                    if (i<8) MessageOperations.roleCheck(c);
                     if (!flags.containsKey(c)) {
-                        flags.put(c, new int[] { 0, 0, 0, 0, 0});
+                        flags.put(c, new int[] { 0, 0, 0});
                     }
                     int day = Ryan.today.getDayOfWeek().getValue();
                     String classType = c.getTime().split(" ")[0].toLowerCase();
@@ -107,6 +109,7 @@ public class RyanCoolThread implements Runnable {
                     _temp[chosenIndex] = 1;
                     flags.put(c, _temp);
                 }
+                i++;
             } while (canRun);
         } catch (InterruptedException e) {
 
@@ -115,7 +118,7 @@ public class RyanCoolThread implements Runnable {
             e.printStackTrace();
         }
     }
-
+    
     public void msg(String chan, Classroom c, int interval) {
         MessageOperations.roleCheck(c);
 

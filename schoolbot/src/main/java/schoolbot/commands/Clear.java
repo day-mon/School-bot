@@ -1,13 +1,18 @@
 package schoolbot.commands;
 
+
 import java.util.List;
+import schoolbot.natives.util.operations.MessageOperations;
+
 import java.util.concurrent.TimeUnit;
 
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import schoolbot.natives.util.Command;
-import schoolbot.natives.util.operations.MessageOperations;
 
 public class Clear extends Command {
 
@@ -19,6 +24,7 @@ public class Clear extends Command {
     public void run(MessageReceivedEvent event) {
         MessageChannel channel = event.getChannel();
         int messagesToRemove = 99;
+        Member userTyping = event.getMember();
 
         /**
          * Retrives the last 100 messages
@@ -28,6 +34,12 @@ public class Clear extends Command {
         /**
          * Purges chats with delay?
          */
+
+        if (!userTyping.getPermissions().contains(Permission.ADMINISTRATOR)) {
+            MessageOperations.invalidUsageShortner("https://google.com", "You don't have the wrong permissions!", event.getMessage(),
+                    this);
+            return;
+        }
 
         if (actualMessagesInList <= 1) {
             channel.sendMessage("There is nothing to purge silly..").queue();
