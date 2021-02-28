@@ -102,7 +102,7 @@ public class AddClass extends Command {
       
                 
                 for (Role roles : Ryan.jda.getRoles()) {
-                    String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\s");
+                    String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\\s");
                     if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
                         classToAdd.setRole(roles);
                         break;

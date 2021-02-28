@@ -62,6 +62,7 @@ import schoolbot.events.Gunga;
 import schoolbot.natives.Classroom;
 import schoolbot.natives.Professor;
 import schoolbot.natives.School;
+import schoolbot.natives.Student;
 import schoolbot.natives.util.Command;
 import schoolbot.natives.util.Event;
 import schoolbot.natives.util.operations.FileOperations;
@@ -85,6 +86,7 @@ public class Ryan extends ListenerAdapter {
 	public static HashMap<String, Classroom> classes = new HashMap<>();
 	public static HashMap<User, Boolean> memify = new HashMap<>();
 	public static HashMap<User, Date> messageSpamFix = new HashMap<>(5);
+	public static HashMap<User, Student> students = new HashMap<>();
 
 
 	/**

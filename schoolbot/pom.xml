@@ -1,96 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
 
-  <groupId>tykoooo</groupId>
-  <artifactId>schoolbot</artifactId>
-  <version>1.0.0</version>
+<groupId>tykoooo</groupId>
+<artifactId>schoolbot</artifactId>
+<version>1.0</version>
 
-  <name>schoolbot</name>
-  <url>https://github.com/tykoooo/School-bot</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>15</maven.compiler.source>
-    <maven.compiler.target>15</maven.compiler.target>
-  </properties>
+<name>schoolbot</name>
+<url>https://github.com/tykoooo/School-bot</url>
 
-  <dependencies>
-        <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>4.2.0_214</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
-      <dependency>
-          <groupId>org.jsoup</groupId>
-          <artifactId>jsoup</artifactId>
-          <version>1.13.1</version>
-      </dependency>
 
-      <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+<properties>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+</properties>
+
+<repositories>
+<repository>
+   <id>jcenter</id>
+   <name>jcenter</name>
+   <url>https://jcenter.bintray.com/</url>
+</repository>
+</repositories>
+
+<dependencies>
 <dependency>
-  <groupId>org.seleniumhq.selenium</groupId>
-  <artifactId>selenium-java</artifactId>
-  <version>4.0.0-beta-1</version>
+   <groupId>net.dv8tion</groupId>
+   <artifactId>JDA</artifactId>
+   <version>4.2.0_229</version>
 </dependency>
+<dependency>
+ <groupId>org.jsoup</groupId>
+ <artifactId>jsoup</artifactId>
+ <version>1.13.1</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+<dependency>
+<groupId>org.seleniumhq.selenium</groupId>
+<artifactId>selenium-java</artifactId>
+<version>4.0.0-beta-1</version>
+</dependency>
+</dependencies>
 
-
-  </dependencies>
-
-    <repositories>
-        <repository>
-            <id>jcenter</id>
-            <name>jcenter-bintray</name>
-            <url>https://jcenter.bintray.com</url>
-        </repository>
-    </repositories>
-
-  <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-      <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+<build>
+<plugins>
+   <plugin>
+       <artifactId>maven-compiler-plugin</artifactId>
+       <version>3.8.1</version>
+       <configuration>
+           <source>1.8</source>
+           <target>1.8</target>
+       </configuration>
+   </plugin>
+   <plugin>
+       <artifactId>maven-shade-plugin</artifactId>
+       <version>3.2.4</version>
+       <configuration>
+           <transformers>
+               <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                   <mainClass>schoolbot.Ryan</mainClass> <!-- You have to replace this with a path to your main class like my.path.Main -->
+               </transformer>
+           </transformers>
+           <createDependencyReducedPom>false</createDependencyReducedPom>
+       </configuration>
+       <executions>
+           <execution>
+               <phase>package</phase>
+                   <goals>
+                       <goal>shade</goal>
+                   </goals>
+           </execution>
+       </executions>
+   </plugin>
+</plugins>
+</build>
 </project>

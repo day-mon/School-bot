@@ -30,8 +30,7 @@ public class Annoy extends Command {
              if (memifyList.size() > 0) {
                  for (User users : memifyList) {
                     if (Ryan.memify.containsKey(user)) {
-                        boolean check = Ryan.memify.get(user);
-                        check ? Ryan.memify.replace(user, true, false) : Ryan.memify.replace(user, false, true); 
+
                     } else {
                         Ryan.memify.put(user, true);
 
