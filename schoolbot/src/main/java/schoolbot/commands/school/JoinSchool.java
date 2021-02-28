@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import schoolbot.Ryan;
 import schoolbot.natives.School;
+import schoolbot.natives.Student;
 import schoolbot.natives.util.Command;
 import schoolbot.natives.util.operations.FileOperations;
 import schoolbot.natives.util.operations.MessageOperations;
@@ -68,7 +69,7 @@ public class JoinSchool extends Command {
                     }
                 } else {
                     // Declaring
-                    StudentImpl studentToAdd = new StudentImpl(userTyping);
+                    Student studentToAdd = new Student(userTyping);
                     
 
                     // Setting and adding student

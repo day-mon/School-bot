@@ -93,7 +93,7 @@ public class MessageOperations {
         String [] channelParsed = c.getTextChannel().split("\\-");
         if (c.getRole() == null) {
             for (Role roles : Ryan.jda.getRoles()) {
-                String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\s");
+                String [] roleSplit = roles.getName().contains("-") ? roles.getName().split("-") : roles.getName().split("\\s");
                 if (roleSplit[roleSplit.length-1].equals(channelParsed[channelParsed.length-1])) {
                     c.setRole(roles);
                     break;
