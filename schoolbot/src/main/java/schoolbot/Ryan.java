@@ -244,8 +244,11 @@ public class Ryan extends ListenerAdapter {
 		Field[] fields = {userField, serverField, description};
 		
 		MessageChannel channel = event.getJDA().getTextChannelById(mainChannel);
-		MessageOperations.embedAsMessage(title, url, fields,  footer, Color.PINK, channel);
-
+		MessageOperations.embedAsMessage(title, url, fields,  footer, Color.BLUE, channel);
+		
+		if(user.isBot()) {
+			server.addRoleToMember(user.getId(), Ryan.jda.getRoleById("764285262418935808"));
+		}
 
 	}
 

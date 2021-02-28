@@ -55,17 +55,17 @@ public class AddStudent extends Command {
                         break;
                     }
                 }
-
+                /*
                 Student studentToAdd = new Student(studentToAddUsr, school, num, new Majors[] { major },
                         args[0]);
                 school.addStudent(studentToAdd);
-
+                */
                 /**
                  * Writes to schools.ser and students.ser because we add a student to the school
                  * and we add a new student
                  */
                 FileOperations.writeToFile(FileOperations.schools, Ryan.schools);
-                FileOperations.writeToFile(FileOperations.students, Ryan.students);
+                // FileOperations.writeToFile(FileOperations.students, Ryan.students);
 
                 channel.sendMessage("Student " + studentToAddUsr.getAsMention() + " sucesfully added!").queue();
 
